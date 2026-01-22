@@ -323,7 +323,7 @@
             <div class="max-w-4xl mx-auto">
                 <!-- Text Content -->
                 <div class="space-y-6 lg:space-y-8">
-                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-[#1B4F72]">
+                    <h1 id="mainHeroTitle" class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-[#1B4F72]">
                         We secure IT jobs for expats within a month
                     </h1>
                     
@@ -2106,6 +2106,21 @@
                         behavior: 'smooth'
                     });
                 });
+            }
+        });
+        
+        // Dynamic H1 text based on URL query parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroTitle = document.getElementById('mainHeroTitle');
+            if (heroTitle) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const audience = urlParams.get('audience');
+                
+                if (audience === 'general') {
+                    // Change text for general audience
+                    heroTitle.textContent = 'We secure IT jobs in the US within a month';
+                }
+                // If parameter is missing, keep original text (already set in HTML)
             }
         });
     </script>
