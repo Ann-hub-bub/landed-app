@@ -1671,43 +1671,41 @@
                 
                 // Phone is optional, so no validation needed
                     
-                    // Get error message element
-                    const errorMsg = document.getElementById('paymentErrorMsg');
+                    // Get step elements
+                    const contactFormStep = document.getElementById('contactFormStep');
+                    const redirectingStep = document.getElementById('redirectingStep');
+                    const redirectingStatusText = document.getElementById('redirectingStatusText');
                     
-                    // Set loading state
-                    proceedToPaymentBtn.disabled = true;
-                    const originalButtonText = proceedToPaymentBtn.innerHTML;
-                    proceedToPaymentBtn.innerHTML = `
-                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Processing Payment...
-                    `;
-                    proceedToPaymentBtn.classList.add('opacity-75', 'cursor-not-allowed');
-                    
-                    // Hide any previous error message
-                    if (errorMsg) {
-                        errorMsg.classList.add('hidden');
+                    // Step 1 → Step 2: Hide contact form, show redirecting state
+                    if (contactFormStep) {
+                        contactFormStep.classList.add('hidden');
+                    }
+                    if (redirectingStep) {
+                        redirectingStep.classList.remove('hidden');
+                    }
+                    if (redirectingStatusText) {
+                        redirectingStatusText.textContent = 'Connecting to secure payment gateway...';
+                        redirectingStatusText.classList.remove('text-red-600');
+                        redirectingStatusText.classList.add('text-gray-700');
                     }
                     
-                    // Simulate payment processing delay (2-3 seconds)
+                    // Disable button to prevent double submission
+                    proceedToPaymentBtn.disabled = true;
+                    
+                    // Step 2: Wait 2-3 seconds (using 2500ms)
                     await new Promise(resolve => setTimeout(resolve, 2500));
                     
-                    // Show error message
-                    if (errorMsg) {
-                        errorMsg.classList.remove('hidden');
+                    // Step 3: Show connection error
+                    if (redirectingStatusText) {
+                        redirectingStatusText.textContent = 'Error: Payment Gateway Unreachable';
+                        redirectingStatusText.classList.remove('text-gray-700');
+                        redirectingStatusText.classList.add('text-red-600');
                     }
                     
-                    // Wait 1 second with error message visible
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    // Wait 1-2 seconds with error visible (using 1500ms)
+                    await new Promise(resolve => setTimeout(resolve, 1500));
                     
-                    // Hide error message
-                    if (errorMsg) {
-                        errorMsg.classList.add('hidden');
-                    }
-                    
-                    // Save to Firebase Firestore
+                    // Step 4: Save to Firebase and transition to errorModal
                     try {
                         // Check if Firebase is initialized
                         if (!window.firebaseDb) {
@@ -1726,7 +1724,6 @@
                         
                         console.log('Data saved to Firestore successfully:', { email, phone });
                         
-                        // Only proceed to Calendly screen if save succeeds
                         // Close purchase modal
                         closePurchaseModal();
                         
@@ -1738,18 +1735,19 @@
                         }
                     } catch (error) {
                         console.error('Error saving to Firestore:', error);
-                        // Show error alert and prevent proceeding
+                        // Show error alert and reset to contact form
                         alert('Something went wrong, please try again');
                         
-                        // Re-enable button on error
-                        proceedToPaymentBtn.disabled = false;
-                        proceedToPaymentBtn.innerHTML = originalButtonText;
-                        proceedToPaymentBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-                        
-                        // Hide error message
-                        if (errorMsg) {
-                            errorMsg.classList.add('hidden');
+                        // Reset to Step 1: Show contact form, hide redirecting step
+                        if (contactFormStep) {
+                            contactFormStep.classList.remove('hidden');
                         }
+                        if (redirectingStep) {
+                            redirectingStep.classList.add('hidden');
+                        }
+                        
+                        // Re-enable button
+                        proceedToPaymentBtn.disabled = false;
                     }
             }
             
@@ -1817,62 +1815,70 @@
                 </div>
             </div>
             
-            <!-- Contact Information Form -->
-            <div class="mb-6">
-                <h3 class="font-body text-lg font-bold text-black mb-4">Contact Information</h3>
-            <form id="purchaseForm" class="space-y-4">
-                <div>
-                    <input 
-                        type="email" 
-                        id="purchaseEmail" 
-                        name="email"
-                        autocomplete="email"
-                        required
-                            placeholder="name@example.com"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 font-body text-base"
-                    >
+            <!-- Step 1: Contact Information Form -->
+            <div id="contactFormStep">
+                <div class="mb-6">
+                    <h3 class="font-body text-lg font-bold text-black mb-4">Contact Information</h3>
+                <form id="purchaseForm" class="space-y-4">
+                    <div>
+                        <input 
+                            type="email" 
+                            id="purchaseEmail" 
+                            name="email"
+                            autocomplete="email"
+                            required
+                                placeholder="name@example.com"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 font-body text-base"
+                        >
+                    </div>
+                    
+                    <div>
+                        <input 
+                            type="tel" 
+                            id="purchasePhone" 
+                            name="phone"
+                            autocomplete="tel"
+                                placeholder="+1 (555) 000-0000"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 font-body text-base"
+                        >
+                    </div>
+                    
+                        <p class="font-body text-xs text-gray-500 mt-2">
+                            We will send your login credentials and receipt to this email.
+                        </p>
+                    </form>
                 </div>
                 
-                <div>
-                    <input 
-                        type="tel" 
-                        id="purchasePhone" 
-                        name="phone"
-                        autocomplete="tel"
-                            placeholder="+1 (555) 000-0000"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 font-body text-base"
+                <!-- Proceed Button -->
+                    <button 
+                    type="button"
+                    id="proceedToPayment"
+                    class="w-full py-4 px-6 bg-[#FF9933] hover:bg-[#FF9933]/90 text-white font-body font-semibold text-base rounded-lg transition-colors flex items-center justify-center gap-2"
                     >
-                </div>
-                
-                    <p class="font-body text-xs text-gray-500 mt-2">
-                        We will send your login credentials and receipt to this email.
-                    </p>
-                </form>
-            </div>
-            
-            <!-- Proceed Button -->
-                <button 
-                type="button"
-                id="proceedToPayment"
-                class="w-full py-4 px-6 bg-[#FF9933] hover:bg-[#FF9933]/90 text-white font-body font-semibold text-base rounded-lg transition-colors flex items-center justify-center gap-2"
-                >
-                Proceed to Payment
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-                </button>
-                
-            <!-- Error Message (initially hidden) -->
-            <div id="paymentErrorMsg" class="hidden mt-4 text-center">
-                <p class="font-body text-sm font-semibold text-red-600 transition-opacity duration-300">
-                    Transaction Failed
+                    Proceed to Payment
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    </button>
+                    
+                <!-- Trust Footer -->
+                <p class="text-center font-body text-xs text-gray-500 mt-4">
+                    🔒 256-bit SSL Encrypted. You can cancel anytime inside the app.
                 </p>
             </div>
-                
-            <!-- Trust Footer -->
-            <p class="text-center font-body text-xs text-gray-500 mt-4">
-                🔒 256-bit SSL Encrypted. You can cancel anytime inside the app.
-            </p>
+            
+            <!-- Step 2 & 3: Redirecting/Error State -->
+            <div id="redirectingStep" class="hidden flex flex-col items-center justify-center py-12 min-h-[300px]">
+                <div class="flex flex-col items-center gap-4">
+                    <svg class="animate-spin h-12 w-12 text-[#2E86C1]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <p id="redirectingStatusText" class="font-body text-base text-gray-700 text-center">
+                        Connecting to secure payment gateway...
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     
