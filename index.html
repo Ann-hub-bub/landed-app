@@ -2117,8 +2117,8 @@
                 const audience = urlParams.get('audience');
                 
                 if (audience === 'general') {
-                    // Change text for general audience
-                    heroTitle.textContent = 'We secure IT jobs in the US within a month';
+                    // Remove "for expats" for general audience
+                    heroTitle.textContent = 'We secure IT jobs within a month';
                 }
                 // If parameter is missing, keep original text (already set in HTML)
             }
