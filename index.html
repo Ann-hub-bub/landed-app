@@ -6,6 +6,16 @@
     <meta name="description" content="Find your dream job while others are sleeping. Be the first on the recruiter's list with AI-powered job detection.">
     <title>Dream Job - Find Your Perfect Job in Seconds</title>
     
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDD9RBBW48"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LDD9RBBW48');
+    </script>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -263,9 +273,14 @@
         
         /* Mobile-specific Calendly widget styles */
         @media (max-width: 640px) {
+            .calendly-inline-widget {
+                height: 1200px !important;
+                min-height: 1200px !important;
+            }
             .calendly-inline-widget iframe {
                 width: 100% !important;
-                min-height: 800px !important;
+                height: 1200px !important;
+                min-height: 1200px !important;
             }
         }
     </style>
@@ -1883,10 +1898,15 @@
             </div>
             
             <!-- Calendly Widget Section -->
-            <div class="w-full max-w-5xl px-0 sm:px-4 mb-8">
+            <div class="w-full max-w-5xl px-0 sm:px-4 mb-8 overflow-visible">
+                <!-- Safety Net Button (Mobile Only) -->
+                <a href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener noreferrer" class="block md:hidden w-full py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg text-center mb-4 border border-gray-300 hover:bg-gray-200 transition-colors">
+                    Trouble booking? Open Calendar in new window ↗
+                </a>
+                
                 <!-- Calendly inline widget begin -->
                 <div class="calendly-inline-widget" data-url="https://calendly.com/aboytsova9/coffee-break" style="min-width:100%;min-height:800px;height:1000px;"></div>
-                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async defer></script>
                 <!-- Calendly inline widget end -->
             </div>
         </div>
