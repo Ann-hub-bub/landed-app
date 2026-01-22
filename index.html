@@ -1671,6 +1671,9 @@
                 
                 // Phone is optional, so no validation needed
                     
+                    // Get error message element
+                    const errorMsg = document.getElementById('paymentErrorMsg');
+                    
                     // Set loading state
                     proceedToPaymentBtn.disabled = true;
                     const originalButtonText = proceedToPaymentBtn.innerHTML;
@@ -1679,9 +1682,30 @@
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Processing...
+                        Processing Payment...
                     `;
                     proceedToPaymentBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                    
+                    // Hide any previous error message
+                    if (errorMsg) {
+                        errorMsg.classList.add('hidden');
+                    }
+                    
+                    // Simulate payment processing delay (2-3 seconds)
+                    await new Promise(resolve => setTimeout(resolve, 2500));
+                    
+                    // Show error message
+                    if (errorMsg) {
+                        errorMsg.classList.remove('hidden');
+                    }
+                    
+                    // Wait 1 second with error message visible
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // Hide error message
+                    if (errorMsg) {
+                        errorMsg.classList.add('hidden');
+                    }
                     
                     // Save to Firebase Firestore
                     try {
@@ -1721,6 +1745,11 @@
                         proceedToPaymentBtn.disabled = false;
                         proceedToPaymentBtn.innerHTML = originalButtonText;
                         proceedToPaymentBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                        
+                        // Hide error message
+                        if (errorMsg) {
+                            errorMsg.classList.add('hidden');
+                        }
                     }
             }
             
@@ -1832,6 +1861,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
                 </button>
+                
+            <!-- Error Message (initially hidden) -->
+            <div id="paymentErrorMsg" class="hidden mt-4 text-center">
+                <p class="font-body text-sm font-semibold text-red-600 transition-opacity duration-300">
+                    Transaction Failed
+                </p>
+            </div>
                 
             <!-- Trust Footer -->
             <p class="text-center font-body text-xs text-gray-500 mt-4">
