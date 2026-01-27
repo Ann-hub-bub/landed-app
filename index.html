@@ -301,7 +301,7 @@
                         Get your US Tech job<br>in 30 days
                     </h1>
                     
-                    <p class="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-[#2E86C1] leading-relaxed">
+                    <p id="heroSubtitle" class="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-[#2E86C1] leading-relaxed">
                         We help expats secure roles in Product, Engineering, and Design without the stress.
                     </p>
                     
@@ -890,7 +890,7 @@
                                     </div>
                                     
                                     <!-- Visa Question -->
-                                    <div class="mb-3">
+                                    <div id="visaQuestionStep4" class="mb-3">
                                         <label class="text-black/60 mb-2 block text-xs">Will you now or in the future require sponsorship?</label>
                                         <div class="flex items-center gap-2">
                                             <input type="radio" id="visa-yes-step4" name="visa-step4" checked class="w-4 h-4 text-[#FF9933] border-gray-300 focus:ring-[#FF9933]">
@@ -1515,7 +1515,7 @@
             </div>
             
             <!-- FAQ Item 5 -->
-            <div class="border-b border-gray-200 py-4">
+            <div id="visaFAQItem" class="border-b border-gray-200 py-4">
                 <button id="faq-toggle-5" class="flex justify-between items-center w-full text-left text-lg font-medium text-gray-900 focus:outline-none hover:text-orange-500 transition-colors">
                     <span>Is this effective for visa sponsorship roles?</span>
                     <svg id="faq-icon-5" class="w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1537,7 +1537,7 @@
                 <!-- Column 1: Brand & Mission -->
                 <div>
                     <h3 class="font-heading text-3xl font-bold text-white mb-4">Landed.</h3>
-                    <p class="font-body text-sm text-gray-400 mb-6">
+                    <p id="footerDescription" class="font-body text-sm text-gray-400 mb-6">
                         The automated job search pipeline for expats. We secure offers, not just interviews.
                     </p>
                     <!-- Social Icons -->
@@ -2452,19 +2452,43 @@
             }
         });
         
-        // Dynamic H1 text based on URL query parameter
+        // Dynamic content based on URL query parameter
         document.addEventListener('DOMContentLoaded', function() {
-            const heroTitle = document.getElementById('mainHeroTitle');
-            if (heroTitle) {
-                const urlParams = new URLSearchParams(window.location.search);
-                const audience = urlParams.get('audience');
-                
-                if (audience === 'general') {
-                    // Remove "for expats" for general audience and put "in 30 days" on second line
+            const urlParams = new URLSearchParams(window.location.search);
+            const audience = urlParams.get('audience');
+            
+            if (audience === 'general') {
+                // Update Hero Title
+                const heroTitle = document.getElementById('mainHeroTitle');
+                if (heroTitle) {
                     heroTitle.innerHTML = 'Get your US Tech job<br>in 30 days';
                 }
-                // If parameter is missing, keep original text (already set in HTML)
+                
+                // Update Hero Subtitle
+                const heroSubtitle = document.getElementById('heroSubtitle');
+                if (heroSubtitle) {
+                    heroSubtitle.textContent = 'We help professionals secure roles in Product, Engineering, and Design without the stress.';
+                }
+                
+                // Hide Visa Question in Step 4 Form
+                const visaQuestionStep4 = document.getElementById('visaQuestionStep4');
+                if (visaQuestionStep4) {
+                    visaQuestionStep4.style.display = 'none';
+                }
+                
+                // Hide FAQ Question about Visa Sponsorship
+                const visaFAQItem = document.getElementById('visaFAQItem');
+                if (visaFAQItem) {
+                    visaFAQItem.style.display = 'none';
+                }
+                
+                // Update Footer Text
+                const footerDescription = document.getElementById('footerDescription');
+                if (footerDescription) {
+                    footerDescription.textContent = 'The automated job search pipeline. We secure offers, not just interviews.';
+                }
             }
+            // If parameter is missing, keep original text (already set in HTML)
         });
     </script>
 </body>
