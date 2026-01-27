@@ -145,42 +145,16 @@
             overflow: hidden;
         }
         
-        .step-card-header {
-            position: relative;
-            padding: 20px 24px 16px;
-            border-radius: 24px 24px 0 0;
-            margin: -24px -24px 20px -24px;
+        /* Override absolute positioning for numbers inside circles */
+        .flex-shrink-0 .step-number-header {
+            position: static !important;
+            top: auto;
+            right: auto;
+            opacity: 1;
         }
-        
-        .step-card-header.step-1 { background: #EBF5FB; }
-        .step-card-header.step-2 { background: #EBF5FB; }
-        .step-card-header.step-3 { background: #EBF5FB; }
-        .step-card-header.step-4 { background: #EBF5FB; }
-        .step-card-header.step-5 { background: #EBF5FB; }
-        .step-card-header.step-6 { background: #EBF5FB; }
-        
-        .step-number-header {
-            position: absolute;
-            top: -8px;
-            right: 16px;
-            font-size: 48px;
-            font-weight: bold;
-            line-height: 1;
-            opacity: 0.9;
-        }
-        
-        .step-number-header.step-1 { color: #1B4F72; }
-        .step-number-header.step-2 { color: #C91F37; }
-        .step-number-header.step-3 { color: #1B4F72; }
-        .step-number-header.step-4 { color: #C91F37; }
-        .step-number-header.step-5 { color: #1B4F72; }
-        .step-number-header.step-6 { color: #C91F37; }
         
         .step-card-title {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            margin-top: 8px;
+            /* Title styling handled by Tailwind classes */
         }
         
         .step-card-content {
@@ -324,8 +298,12 @@
                 <!-- Text Content -->
                 <div class="space-y-6 lg:space-y-8">
                     <h1 id="mainHeroTitle" class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-[#1B4F72]">
-                        We secure IT jobs for expats within a month
+                        Get your US Tech job<br>in 30 days
                     </h1>
+                    
+                    <p class="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-[#2E86C1] leading-relaxed">
+                        We help expats secure roles in Product, Engineering, and Design without the stress.
+                    </p>
                     
                     <p class="font-body text-lg sm:text-xl lg:text-xl leading-relaxed text-black/80 max-w-xl">
                         The app finds fresh, high-match roles and auto-applies, saving you hours of manual work every day
@@ -354,7 +332,7 @@
                             </div>
                             <h3 class="font-heading text-xl lg:text-2xl font-semibold mb-3 tracking-tight text-[#1B4F72]">Fresh Vacancies</h3>
                             <p class="font-body text-sm lg:text-base text-black/70 leading-relaxed">
-                                Apply to positions posted 30 minutes ago
+                                Get instant alerts and apply first
                             </p>
                         </div>
                         
@@ -411,157 +389,113 @@
                 </h2>
                 
                 <!-- Steps Container -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
+                <div class="flex flex-col gap-16 mb-8">
                     <!-- Step 1: Smart Onboarding -->
-                    <div class="step-card bg-white border-2 border-[#2E86C1]/30 rounded-3xl p-6 lg:p-8 cursor-pointer fade-in" data-step="1">
-                        <div class="step-card-header step-1">
-                            <span class="step-number-header step-1 font-heading">1</span>
-                            <h3 class="step-card-title font-heading text-xl lg:text-2xl font-semibold tracking-tight text-[#1B4F72]">Smart Onboarding</h3>
-                        </div>
-                        <div class="step-card-content space-y-3 text-black/80 font-medium">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Upload Resume</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Add a Cover Letter Sample</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Set Search Criteria</p>
+                    <div class="flex flex-col md:flex-row gap-8 items-start w-full">
+                        <!-- Element 1: Number Circle -->
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full border-4 border-[#FF9933] shadow-md flex items-center justify-center">
+                                <span class="font-heading text-2xl md:text-3xl font-bold text-[#FF9933]">1</span>
                             </div>
                         </div>
                         
-                        <!-- Expanded Content -->
-                        <div class="step-expanded-content hidden mt-2 pt-2 border-t border-[#2E86C1]/20">
-                            <div class="space-y-4">
-                                <div class="bg-light-blue/50 rounded-xl overflow-hidden -mx-8 -my-6">
-                                    <img 
-                                        src="Resume.jpg" 
-                                        alt="Resume" 
-                                        class="w-full h-auto rounded-lg shadow-xl"
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 2: Vacancy Analysis -->
-                    <div class="step-card bg-white border-2 border-[#2E86C1]/30 rounded-3xl p-6 lg:p-8 cursor-pointer fade-in" data-step="2">
-                        <div class="step-card-header step-2">
-                            <span class="step-number-header step-2 font-heading">2</span>
-                            <h3 class="step-card-title font-heading text-xl lg:text-2xl font-semibold tracking-tight text-[#1B4F72]">Vacancy Analysis</h3>
-                        </div>
-                        <div class="step-card-content space-y-3 text-black/80 font-medium">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Scans the entire web</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Filters by your experience</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Finds fresh, high-match roles</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Expanded Content -->
-                        <div class="step-expanded-content hidden mt-6 pt-6 border-t border-[#2E86C1]/20">
-                            <div class="space-y-4">
-                                <div class="bg-light-blue/50 rounded-xl p-4">
-                                    <ul class="space-y-2 text-sm">
-                                        <li class="flex items-start gap-2">
-                                            <span class="text-[#FF9933] mt-1">✓</span>
-                                            <span>Real-time vacancy detection</span>
-                                        </li>
-                                        <li class="flex items-start gap-2">
-                                            <span class="text-[#FF9933] mt-1">✓</span>
-                                            <span>Multi-source aggregation</span>
-                                        </li>
-                                        <li class="flex items-start gap-2">
-                                            <span class="text-[#FF9933] mt-1">✓</span>
-                                            <span>Intelligent filtering</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 3: Fresh, High-Match Roles -->
-                    <div class="step-card bg-white border-2 border-[#2E86C1]/30 rounded-3xl p-6 lg:p-8 cursor-pointer fade-in" data-step="3">
-                        <div class="step-card-header step-3">
-                            <span class="step-number-header step-3 font-heading">3</span>
-                            <h3 class="step-card-title font-heading text-xl lg:text-2xl font-semibold tracking-tight text-[#1B4F72]">Fresh, High-Match Roles</h3>
-                        </div>
-                        <div class="step-card-content space-y-3 text-black/80 font-medium">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Matches meaning, not just keywords</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Shows reply rates</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Unlocks contacts of HR & future colleagues</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Expanded Content -->
-                        <div class="step-expanded-content hidden mt-6 pt-6 border-t border-[#2E86C1]/20">
-                            <div class="space-y-4">
-                                <!-- Job Example -->
-                                <div class="bg-light-blue/50 rounded-xl p-4">
-                                    <div class="flex items-center justify-between mb-3">
-                                        <h4 class="font-heading font-semibold text-lg">Product Manager</h4>
-                                        <span class="bg-[#C91F37]/10 text-[#2E86C1] text-xs font-semibold px-2 py-1 rounded">Posted 30 min ago</span>
+                        <!-- Element 2: White Text Card -->
+                        <div class="bg-orange-50 border-l-4 border-orange-500 shadow-lg rounded-2xl p-8 w-full md:min-w-[480px] md:w-[500px] transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                            <h3 class="font-heading text-2xl font-bold tracking-tight text-gray-900 mb-4 text-left">Smart Onboarding</h3>
+                            <div class="space-y-4 text-gray-700 font-medium">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                        </svg>
                                     </div>
-                                    <p class="text-bright-orange font-semibold mb-3">$70k-110k • Remote • Full-time</p>
+                                    <p class="font-body text-sm lg:text-base">Upload Resume</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Analyzes your unique writing style</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Set Search Criteria</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Element 3: Profile Image - Always Visible -->
+                        <div class="w-full md:flex-1 mt-4 md:mt-0">
+                            <div class="rounded-xl overflow-hidden shadow-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                                <img 
+                                    src="Resume.jpg" 
+                                    alt="Resume" 
+                                    class="w-full h-auto rounded-lg"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Fresh, High-Match Roles -->
+                    <div class="flex flex-col md:flex-row items-start gap-8 w-full">
+                        <!-- Element 1: Number Circle -->
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full border-4 border-[#FF9933] shadow-md flex items-center justify-center">
+                                <span class="font-heading text-2xl md:text-3xl font-bold text-[#FF9933]">2</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Element 2: White Text Card -->
+                        <div class="bg-orange-50 border-l-4 border-orange-500 shadow-lg rounded-2xl p-8 w-full md:min-w-[480px] md:w-[500px] h-64 flex flex-col justify-center transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                            <h3 class="font-heading text-2xl font-bold tracking-tight text-gray-900 mb-4 text-left">Fresh, High-Match Roles</h3>
+                            <div class="space-y-4 text-gray-700 font-medium">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Scans the entire web</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Matches meaning, not just keywords</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Shows reply rates</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Element 3: Job Card Visual - Collapsible -->
+                        <div class="w-full md:flex-1 mt-4 md:mt-0">
+                            <div id="step2JobCard" class="bg-white shadow-lg rounded-2xl p-6 relative overflow-hidden h-64 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                                <!-- Visible Content (Top) -->
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-heading font-bold text-xl">Product Manager</h4>
+                                        <span class="text-gray-400 text-xs font-medium">Posted 30 min ago</span>
+                                    </div>
+                                    <p class="text-bright-orange font-semibold mb-4">$70k-110k • Remote • Full-time</p>
                                     
-                                    <!-- Match Card -->
-                                    <div class="bg-white rounded-xl p-3 shadow-sm mb-3">
+                                    <!-- Match Analysis Section -->
+                                    <div class="mb-4">
+                                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">Match Analysis</h5>
                                         <div class="flex items-center gap-4">
                                             <!-- Percentage Gauge Icon (Left) -->
                                             <div class="flex flex-col items-center flex-shrink-0">
@@ -573,13 +507,13 @@
                                             </div>
                                             <!-- Match Tags (Right) -->
                                             <div class="flex flex-wrap gap-2 flex-1 items-center">
-                                                <span class="bg-[#C91F37]/10 text-[#2E86C1] text-xs px-3 py-1.5 rounded-full">Visa Sponsorship</span>
-                                                <span class="bg-[#C91F37]/10 text-[#2E86C1] text-xs px-3 py-1.5 rounded-full">Remote</span>
-                                                <span class="bg-[#C91F37]/10 text-[#2E86C1] text-xs px-3 py-1.5 rounded-full">&gt; $40/hr</span>
-                                                <span class="bg-[#C91F37]/10 text-[#2E86C1] text-xs px-3 py-1.5 rounded-full">5+ Years Exp</span>
+                                                <span class="bg-green-50 text-green-700 text-xs px-3 py-1.5 rounded-full border border-green-100">Visa Sponsorship</span>
+                                                <span class="bg-green-50 text-green-700 text-xs px-3 py-1.5 rounded-full border border-green-100">Remote</span>
+                                                <span class="bg-green-50 text-green-700 text-xs px-3 py-1.5 rounded-full border border-green-100">&gt; $40/hr</span>
+                                                <span class="bg-green-50 text-green-700 text-xs px-3 py-1.5 rounded-full border border-green-100">5+ Years Exp</span>
                                                 <div class="flex items-center gap-1">
-                                                    <span class="bg-[#C91F37]/10 text-[#2E86C1] text-xs px-3 py-1.5 rounded-full">Focus: 0-to-1 Launch</span>
-                                                    <svg class="w-4 h-4 text-[#2E86C1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <span class="bg-green-50 text-green-700 text-xs px-3 py-1.5 rounded-full border border-green-100">Focus: 0-to-1 Launch</span>
+                                                    <svg class="w-4 h-4 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                                     </svg>
                                                 </div>
@@ -587,18 +521,21 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- Anti-Ghosting Zone Card -->
-                                    <div class="bg-white rounded-xl p-4 shadow-sm mb-3 border border-slate-200">
-                                        <div class="flex items-center gap-2 mb-4">
-                                            <svg class="w-4 h-4 text-[#2E86C1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                            </svg>
-                                            <h5 class="font-heading font-bold text-black text-sm">Anti-Ghosting Zone</h5>
-                                        </div>
-                                        <div class="flex flex-col gap-3">
+                                    <!-- Anti-Ghosting Zone Header (Teaser - Always Visible) -->
+                                    <div class="pt-4 mt-4 border-t border-gray-100">
+                                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">Anti-Ghosting Zone</h5>
+                                    </div>
+                                </div>
+                                
+                                <!-- Hidden Content (Bottom) - Shown when expanded -->
+                                <div id="step2ExpandedContent" class="hidden">
+                                    <!-- Anti-Ghosting Zone Content (2-Column Grid) -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                                        <!-- Column 1: Metrics -->
+                                        <div class="flex flex-col gap-4">
                                             <!-- Reply Rate -->
-                                            <div class="flex items-start gap-6">
-                                                <p class="text-xs font-semibold text-black/70 uppercase tracking-wide">Reply Rate</p>
+                                            <div>
+                                                <p class="text-xs font-semibold text-black/70 uppercase tracking-wide mb-2">Reply Rate</p>
                                                 <div class="flex items-center gap-3">
                                                     <p class="text-3xl font-extrabold text-[#2E86C1] leading-none">90%</p>
                                                     <p class="text-xs text-black/50">Usually responds within 3 days</p>
@@ -606,15 +543,18 @@
                                             </div>
                                             
                                             <!-- Competition -->
-                                            <div class="flex items-start gap-6">
-                                                <p class="text-xs font-semibold text-black/70 uppercase tracking-wide">Competition</p>
+                                            <div>
+                                                <p class="text-xs font-semibold text-black/70 uppercase tracking-wide mb-2">Competition</p>
                                                 <div class="flex items-center gap-3">
                                                     <p class="text-xs text-black/50">Hurry up!</p>
                                                     <p class="text-3xl font-extrabold text-[#2E86C1] leading-none">50</p>
                                                     <p class="text-xs text-black/50">applicants</p>
                                                 </div>
                                             </div>
-                                            
+                                        </div>
+                                        
+                                        <!-- Column 2: People -->
+                                        <div class="flex flex-col gap-4">
                                             <!-- Hiring Manager -->
                                             <div class="flex items-start gap-2">
                                                 <img src="HR.jpg" alt="Emily Hayes" class="w-8 h-8 rounded-full object-cover flex-shrink-0">
@@ -649,250 +589,281 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- Job Description Card -->
-                                    <div class="bg-white rounded-xl p-4 shadow-sm mb-3">
-                                        <p class="text-xs font-semibold text-black mb-2">Job Description</p>
-                                        <p class="text-xs text-black/70 line-clamp-2">
+                                    <!-- Job Description Section -->
+                                    <div class="pt-4 mt-4 border-t border-gray-100">
+                                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">Job Description</h5>
+                                        <p class="text-xs text-black/70 line-clamp-2 mb-2">
                                             We are looking for a Senior Product Manager to lead a new product initiative from 0 to 1. You won't just manage a backlog; you will act as a "Mini-CEO," turning raw user insights into a scalable revenue engine.
                                         </p>
-                                        <span class="text-xs text-[#2E86C1] font-medium mt-1 inline-block">Read more</span>
+                                        <span class="text-xs text-[#2E86C1] font-medium inline-block">Read more</span>
                                     </div>
                                     
-                                    <div class="flex gap-2">
-                                        <button id="applyButton" type="button" class="bg-bright-orange text-white text-xs font-semibold px-3 py-1 rounded hover:bg-bright-orange/90 transition-colors">Apply on Website</button>
-                                        <button class="bg-sky-blue/20 text-black text-xs font-semibold px-3 py-1 rounded">Save</button>
+                                    <!-- Action Buttons -->
+                                    <div class="pt-4 mt-4 border-t border-gray-100">
+                                        <div class="flex gap-2">
+                                            <button id="applyButton" type="button" class="bg-bright-orange text-white text-xs font-semibold px-3 py-1 rounded hover:bg-bright-orange/90 transition-colors">Apply on Website</button>
+                                            <button class="bg-sky-blue/20 text-black text-xs font-semibold px-3 py-1 rounded">Save</button>
+                                        </div>
                                     </div>
+                                </div>
+                                
+                                <!-- Gradient Overlay (only shown when collapsed) -->
+                                <div id="step2GradientOverlay" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-white via-white to-transparent pt-10 pb-4 pointer-events-none"></div>
+                                
+                                <!-- See More/Less Toggle (Minimalist) -->
+                                <div id="step2ToggleButton" class="absolute bottom-0 left-0 w-full flex justify-end pr-6 pb-4">
+                                    <button id="step2ToggleBtn" class="text-gray-500 hover:text-gray-800 font-medium flex items-center gap-2 cursor-pointer transition-colors text-sm">
+                                        <span id="step2ToggleText">See more...</span>
+                                        <svg id="step2ToggleIcon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Step 4: Smart Auto-Tailoring -->
-                    <div class="step-card bg-white border-2 border-[#2E86C1]/30 rounded-3xl p-6 lg:p-8 cursor-pointer fade-in" data-step="4">
-                        <div class="step-card-header step-4">
-                            <span class="step-number-header step-4 font-heading">4</span>
-                            <h3 class="step-card-title font-heading text-xl lg:text-2xl font-semibold tracking-tight text-[#1B4F72]">Smart Auto-Tailoring</h3>
-                        </div>
-                        <div class="step-card-content space-y-3 text-black/80 font-medium">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Merges Resume, CL Template & Job</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Injects keywords to pass ATS filters</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Generates editable, authentic docs</p>
+                    <!-- Step 3: Smart Auto-Tailoring -->
+                    <div class="flex flex-col md:flex-row items-start gap-8 w-full">
+                        <!-- Element 1: Number Circle -->
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full border-4 border-[#FF9933] shadow-md flex items-center justify-center">
+                                <span class="font-heading text-2xl md:text-3xl font-bold text-[#FF9933]">3</span>
                             </div>
                         </div>
                         
-                        <!-- Expanded Content -->
-                        <div class="step-expanded-content hidden mt-6 pt-6 border-t border-[#2E86C1]/20">
-                            <div class="bg-light-blue/50 rounded-xl p-6">
-                                <div class="space-y-5">
-                                    <!-- Step 1: Deep Analysis -->
-                                    <div class="flex items-start gap-3">
-                                        <div class="w-10 h-10 bg-sky-blue/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-6 h-6 text-sky-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-1">
-                                            <p class="font-semibold text-sm text-black mb-6">Deep Analysis</p>
-                                            <div class="space-y-1">
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <!-- Element 2: White Text Card -->
+                        <div class="bg-orange-50 border-l-4 border-orange-500 shadow-lg rounded-2xl p-8 w-full md:min-w-[480px] md:w-[500px] h-72 flex flex-col justify-center transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                            <h3 class="font-heading text-2xl font-bold tracking-tight text-gray-900 mb-4 text-left">Smart Auto-Tailoring</h3>
+                            <div class="space-y-4 text-gray-700 font-medium">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Synthesizes your rich personal context</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Optimizes keywords for ATS</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Writes in your exact voice & tone</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Element 3: Detailed Content Card - Collapsible -->
+                        <div class="w-full md:flex-1 mt-4 md:mt-0">
+                            <div id="step3JobCard" class="bg-white shadow-lg rounded-2xl p-6 pb-8 relative overflow-hidden h-72 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                                <!-- 2-Column Grid Layout -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                                    <!-- Left Column -->
+                                    <div class="flex flex-col gap-8 md:border-r md:border-gray-200 md:pr-8">
+                                        <!-- Deep Analysis Section -->
+                                        <div>
+                                            <h5 class="text-base font-bold text-gray-900 uppercase tracking-wide mb-4">Deep Analysis</h5>
+                                            <div class="space-y-4">
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                     </svg>
-                                                    <p class="text-xs text-black/70">Analyzed Job Requirements</p>
+                                                    <p class="text-base text-black/70">Analyzed Job Requirements</p>
                                                 </div>
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                     </svg>
-                                                    <p class="text-xs text-black/70">Scanned Your Resume</p>
+                                                    <p class="text-base text-black/70">Scanned Your Resume</p>
                                                 </div>
-                                                <div class="group relative flex items-center gap-2">
+                                                <div class="group relative flex items-center gap-3">
                                                     <div class="relative">
-                                                        <svg class="w-4 h-4 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                                                         </svg>
                                                         <!-- Tooltip -->
                                                         <div class="absolute left-0 bottom-full mb-2 hidden group-hover:block z-10">
-                                                            <div class="bg-black text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                                                            <div class="bg-black text-white text-sm rounded px-3 py-2 whitespace-nowrap shadow-lg">
                                                                 No CL sample found. Upload CL.
-                                                                <div class="absolute left-2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+                                                                <div class="absolute left-3 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <p class="text-xs text-black/60">Scanned Your CL</p>
+                                                    <p class="text-base text-black/60">Scanned Your CL</p>
                                                 </div>
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                                     </svg>
-                                                    <p class="text-xs text-gray-400">Identified Tone & Gaps</p>
+                                                    <p class="text-base text-gray-400">Identified Tone & Gaps</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- The Synthesis Section (Hidden when collapsed) -->
+                                        <div id="step3ExpandedContent" class="hidden">
+                                            <h5 class="text-base font-bold text-gray-900 uppercase tracking-wide mb-4">The Synthesis</h5>
+                                            <div class="space-y-4">
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <p class="text-base text-black/70">Injected ATS Keywords</p>
+                                                </div>
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <p class="text-base text-black/70">Generated Tailored Resume</p>
+                                                </div>
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                    </svg>
+                                                    <p class="text-base text-gray-400">Matched Your Writing Style</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <!-- Step 2: The Synthesis -->
-                                    <div class="flex items-start gap-3">
-                                        <div class="w-10 h-10 bg-[#2E86C1]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-6 h-6 text-[#2E86C1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-1">
-                                            <p class="font-semibold text-sm text-black mb-4">The Synthesis</p>
-                                            <div class="space-y-1">
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <!-- Right Column -->
+                                    <div class="flex flex-col gap-8">
+                                        <!-- Reality Check Section -->
+                                        <div>
+                                            <h5 class="text-base font-bold text-gray-900 uppercase tracking-wide mb-4">Reality Check</h5>
+                                            <div class="space-y-4">
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                     </svg>
-                                                    <p class="text-xs text-black/70">Injected ATS Keywords</p>
+                                                    <p class="text-base text-black/70">Verified Company Domain</p>
                                                 </div>
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                     </svg>
-                                                    <p class="text-xs text-black/70">Generated Tailored Resume</p>
+                                                    <p class="text-base text-black/70">Analyzed Digital Footprint</p>
                                                 </div>
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                     </svg>
-                                                    <p class="text-xs text-gray-400">Matched Your Writing Style</p>
+                                                    <p class="text-base text-black/70">Validated Hiring Contacts</p>
+                                                </div>
+                                                <div class="flex items-center gap-3">
+                                                    <svg class="w-5 h-5 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <p class="text-base text-black/70">Scanned for Scam Patterns</p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <!-- Step 3: Reality Check -->
-                                    <div class="flex items-start gap-3">
-                                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                                            </svg>
-                                        </div>
-                                        <div class="flex-1">
-                                            <p class="font-semibold text-sm text-black mb-6">Reality Check</p>
-                                            <div class="space-y-1">
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                                    </svg>
-                                                    <p class="text-xs text-black/70">Verified Company Domain</p>
+                                        
+                                        <!-- Yellow Status Box (Hidden when collapsed) -->
+                                        <div id="step3YellowBox" class="hidden">
+                                            <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                                                <div class="flex flex-col space-y-3">
+                                                    <div class="flex items-center gap-3">
+                                                        <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                        </svg>
+                                                        <p class="text-base text-gray-800 font-medium">Resume is ready.</p>
+                                                    </div>
+                                                    <div class="flex items-center gap-3">
+                                                        <svg class="w-5 h-5 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                                        </svg>
+                                                        <p class="text-base text-gray-800 font-medium">CL template is missing.</p>
+                                                    </div>
                                                 </div>
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                                    </svg>
-                                                    <p class="text-xs text-black/70">Analyzed Digital Footprint</p>
-                                                </div>
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                                    </svg>
-                                                    <p class="text-xs text-black/70">Validated Hiring Contacts</p>
-                                                </div>
-                                                <div class="flex items-center gap-2">
-                                                    <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                                    </svg>
-                                                    <p class="text-xs text-black/70">Scanned for Scam Patterns</p>
+                                                <div class="mt-4 pt-4 border-t border-yellow-200">
+                                                    <p class="font-bold text-lg text-gray-900 text-center mb-2">You are 70% ready to apply.</p>
+                                                    <p class="text-sm text-gray-600 text-center">CL is optional. You can apply now, but a cover letter increases your chances.</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <!-- Step 4: Final Verdict (The Footer) -->
-                                <div class="mt-5 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                                    <div class="flex flex-col space-y-1">
-                                        <div class="flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-[#2E86C1] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                            </svg>
-                                            <p class="text-sm text-[#2E86C1] font-medium">Resume is ready.</p>
-                                        </div>
-                                        <div class="flex items-center gap-2">
-                                            <svg class="w-4 h-4 text-yellow-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                                            </svg>
-                                            <p class="text-sm text-yellow-700 font-medium">CL template is missing.</p>
-                                        </div>
-                                    </div>
-                                    <div class="mt-2 pt-2 border-t border-yellow-200">
-                                        <p class="font-semibold text-sm text-[#2E86C1] text-center mb-1">You are 70% ready to apply.</p>
-                                        <p class="text-xs text-black/60">CL is optional. You can apply now, but a cover letter increases your chances.</p>
-                                    </div>
+                                <!-- Gradient Overlay (only shown when collapsed) -->
+                                <div id="step3GradientOverlay" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-white via-white to-transparent pt-16 pb-6 pointer-events-none"></div>
+                                
+                                <!-- See More/Less Toggle (Minimalist) -->
+                                <div id="step3ToggleButton" class="absolute bottom-4 right-6 flex justify-end">
+                                    <button id="step3ToggleBtn" class="text-gray-500 hover:text-gray-800 font-medium flex items-center gap-2 cursor-pointer transition-colors text-sm">
+                                        <span id="step3ToggleText">See more...</span>
+                                        <svg id="step3ToggleIcon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Step 5: 1-Click Apply -->
-                    <div class="step-card bg-white border-2 border-[#2E86C1]/30 rounded-3xl p-6 lg:p-8 cursor-pointer fade-in" data-step="5">
-                        <div class="step-card-header step-5">
-                            <span class="step-number-header step-5 font-heading">5</span>
-                            <h3 class="step-card-title font-heading text-xl lg:text-2xl font-semibold tracking-tight text-[#1B4F72]">1-Click Apply</h3>
-                        </div>
-                        <div class="step-card-content space-y-3 text-black/80 font-medium">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Auto-fills repetitive ATS forms</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Connects via APIs to major portals</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.239 7.188l2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Submits applications in 1 click</p>
+                    <!-- Step 4: 1-Click Apply -->
+                    <div class="flex flex-col md:flex-row items-start gap-8 w-full">
+                        <!-- Element 1: Number Circle -->
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full border-4 border-[#FF9933] shadow-md flex items-center justify-center">
+                                <span class="font-heading text-2xl md:text-3xl font-bold text-[#FF9933]">4</span>
                             </div>
                         </div>
                         
-                        <!-- Expanded Content -->
-                        <div class="step-expanded-content hidden mt-6 pt-6 border-t border-[#2E86C1]/20">
-                            <div class="bg-light-blue/50 rounded-xl p-6 w-full">
-                                <!-- Form Simulation Section -->
-                                <div class="bg-white rounded-lg p-4 border border-[#2E86C1]/20 w-full">
+                        <!-- Element 2: White Text Card -->
+                        <div class="bg-orange-50 border-l-4 border-orange-500 shadow-lg rounded-2xl p-8 w-full md:min-w-[480px] md:w-[500px] h-64 flex flex-col justify-center transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                            <h3 class="font-heading text-2xl font-bold tracking-tight text-gray-900 mb-4 text-left">1-Click Apply</h3>
+                            <div class="space-y-4 text-gray-700 font-medium">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Auto-fills application forms</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Connects directly to company site</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.239 7.188l2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Submits applications in 1 click</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Element 3: Form Visual Card - Collapsible -->
+                        <div class="w-full md:flex-1 mt-4 md:mt-0">
+                            <div id="step4JobCard" class="bg-white shadow-lg rounded-2xl p-8 relative overflow-hidden h-64 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                                <!-- Visible Content (Top) -->
+                                <div>
                                     <p class="font-semibold text-sm text-black mb-4">Ready to Submit: Product Manager</p>
                                     <div class="space-y-3 text-xs">
                                         <!-- Resume/CV Field -->
                                         <div>
                                             <label class="text-black/60 mb-1 block">Resume/CV</label>
-                                            <div class="flex items-center gap-2 bg-[#EBF5FB] px-3 py-2 rounded border border-[#2E86C1]/30">
+                                            <div class="flex items-center gap-2 bg-gray-50 px-3 py-2 rounded border border-gray-200">
                                                 <span>📎</span>
-                                                <span class="text-[#2E86C1]">Ananya_Sharma_PM_Resume.pdf</span>
+                                                <span class="text-gray-700">Ananya_Sharma_PM_Resume.pdf</span>
                                             </div>
                                         </div>
                                         
@@ -900,121 +871,147 @@
                                         <div>
                                             <label class="text-black/60 mb-1 block">Full name</label>
                                             <div class="relative">
-                                                <input type="text" value="Ananya Sharma" readonly class="w-full border border-[#2E86C1]/20 rounded px-2 py-1.5 text-xs text-[#2E86C1] font-medium pr-8">
+                                                <input type="text" value="Ananya Sharma" readonly class="w-full border border-gray-200 rounded px-2 py-1.5 text-xs text-gray-700 font-medium pr-8 bg-gray-50">
                                                 <span class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs">✨</span>
                                             </div>
-                                        </div>
-                                        
-                                        <!-- Email Field -->
-                                        <div>
-                                            <label class="text-black/60 mb-1 block">Email</label>
-                                            <div class="relative">
-                                                <input type="email" value="ananya.sharma@example.com" readonly class="w-full border border-[#2E86C1]/20 rounded px-2 py-1.5 text-xs text-[#2E86C1] pr-8">
-                                                <span class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs">✨</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Visa Question -->
-                                        <div>
-                                            <label class="text-black/60 mb-2 block">Will you now or in the future require sponsorship?</label>
-                                            <div class="flex items-center gap-2">
-                                                <input type="radio" id="visa-yes" name="visa" checked class="w-4 h-4 text-[#2E86C1] border-gray-300 focus:ring-forest-green">
-                                                <label for="visa-yes" class="text-black/70">Yes</label>
-                                                <input type="radio" id="visa-no" name="visa" class="w-4 h-4 text-[#2E86C1] border-gray-300 focus:ring-forest-green ml-4">
-                                                <label for="visa-no" class="text-black/70">No</label>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Submit Button -->
-                                        <div class="pt-2">
-                                            <button type="button" id="submitApplicationBtn" class="w-full bg-bright-orange hover:bg-bright-orange/90 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors">
-                                                Submit Application
-                                            </button>
                                         </div>
                                     </div>
+                                </div>
+                                
+                                <!-- Hidden Content (Bottom) - Shown when expanded -->
+                                <div id="step4ExpandedContent" class="hidden mt-4">
+                                    <!-- Email Field -->
+                                    <div class="mb-3">
+                                        <label class="text-black/60 mb-1 block text-xs">Email</label>
+                                        <div class="relative">
+                                            <input type="email" value="ananya.sharma@example.com" readonly class="w-full border border-gray-200 rounded px-2 py-1.5 text-xs text-gray-700 pr-8 bg-gray-50">
+                                            <span class="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs">✨</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Visa Question -->
+                                    <div class="mb-3">
+                                        <label class="text-black/60 mb-2 block text-xs">Will you now or in the future require sponsorship?</label>
+                                        <div class="flex items-center gap-2">
+                                            <input type="radio" id="visa-yes-step4" name="visa-step4" checked class="w-4 h-4 text-[#FF9933] border-gray-300 focus:ring-[#FF9933]">
+                                            <label for="visa-yes-step4" class="text-black/70 text-xs">Yes</label>
+                                            <input type="radio" id="visa-no-step4" name="visa-step4" class="w-4 h-4 text-[#FF9933] border-gray-300 focus:ring-[#FF9933] ml-4">
+                                            <label for="visa-no-step4" class="text-black/70 text-xs">No</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Submit Button -->
+                                    <div class="pt-2">
+                                        <button type="button" id="submitApplicationBtn" class="w-full bg-bright-orange hover:bg-bright-orange/90 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors text-xs">
+                                            Submit Application
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Gradient Overlay (only shown when collapsed) -->
+                                <div id="step4GradientOverlay" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-white via-white to-transparent pt-12 pb-4 pointer-events-none"></div>
+                                
+                                <!-- See More/Less Toggle (Minimalist) -->
+                                <div id="step4ToggleButton" class="absolute bottom-0 left-0 w-full flex justify-end pr-8 pb-4">
+                                    <button id="step4ToggleBtn" class="text-gray-500 hover:text-gray-800 font-medium flex items-center gap-2 cursor-pointer transition-colors text-sm">
+                                        <span id="step4ToggleText">See more...</span>
+                                        <svg id="step4ToggleIcon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Step 6: Dashboard -->
-                    <div class="step-card bg-white border-2 border-[#2E86C1]/30 rounded-3xl p-6 lg:p-8 cursor-pointer fade-in" data-step="6">
-                        <div class="step-card-header step-6">
-                            <span class="step-number-header step-6 font-heading">6</span>
-                            <h3 class="step-card-title font-heading text-xl lg:text-2xl font-semibold tracking-tight text-[#1B4F72]">Post-Apply Control</h3>
-                        </div>
-                        <div class="step-card-content space-y-3 text-black/80 font-medium">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Tracks status automatically</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Sends smart follow-up emails</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-[#C91F37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                                <p class="font-body text-sm lg:text-base">Signals when to reach out</p>
+                    <!-- Step 5: Post-Apply Control -->
+                    <div class="flex flex-col md:flex-row items-stretch gap-8 w-full">
+                        <!-- Element 1: Number Circle -->
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full border-4 border-[#FF9933] shadow-md flex items-center justify-center">
+                                <span class="font-heading text-2xl md:text-3xl font-bold text-[#FF9933]">5</span>
                             </div>
                         </div>
                         
-                        <!-- Expanded Content -->
-                        <div class="step-expanded-content hidden mt-6 pt-6 border-t border-[#2E86C1]/20">
-                            <div class="space-y-6">
-                                <div class="bg-light-blue/50 rounded-xl p-6">
-                                    <!-- Visual Analytics - Funnel Chart -->
-                                    <div class="mb-6">
-                                        <h4 class="text-sm font-semibold mb-4 text-black">Application Status</h4>
-                                        <div class="bg-white rounded-xl p-5">
-                            <div class="space-y-4">
+                        <!-- Element 2: White Text Card -->
+                        <div class="bg-orange-50 border-l-4 border-orange-500 shadow-lg rounded-2xl p-8 w-full md:min-w-[480px] md:w-[500px] h-64 flex flex-col justify-center transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                            <h3 class="font-heading text-2xl font-bold tracking-tight text-gray-900 mb-4 text-left">Post-Apply Control</h3>
+                            <div class="space-y-4 text-gray-700 font-medium">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Tracks status automatically</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Sends smart follow-up emails</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-[#EBF5FB] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#FF9933]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="font-body text-sm lg:text-base">Signals when to reach out</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Element 3: Dashboard Card - Collapsible -->
+                        <div class="w-full md:flex-1 mt-4 md:mt-0">
+                            <div id="step5JobCard" class="bg-white shadow-lg rounded-2xl p-6 pb-8 relative overflow-hidden h-64 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-default">
+                                <!-- 2-Column Grid Layout -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                                    <!-- Left Column: Application Pipeline -->
+                                    <div class="flex flex-col gap-6 md:border-r md:border-gray-200 md:pr-8">
+                                        <div>
+                                            <h5 class="text-base font-bold text-gray-900 uppercase tracking-wide mb-4">Application Pipeline</h5>
+                                            <div class="space-y-4">
                                                 <!-- Submitted Bar -->
                                                 <div class="flex items-center gap-4">
-                                                    <span class="text-sm font-medium text-black/70 w-36 flex-shrink-0">Submitted</span>
-                                                    <div class="flex-1 relative bg-sky-blue/5 rounded-lg h-11">
-                                                        <div class="absolute left-0 top-0 bg-gradient-to-r from-sky-blue/30 to-sky-blue/50 rounded-lg h-11 flex items-center justify-end pr-4" style="width: 100%;">
-                                                            <span class="text-sm font-semibold text-black">55</span>
+                                                    <span class="text-base font-medium text-black/70 w-32 flex-shrink-0">Submitted</span>
+                                                    <div class="flex-1 relative bg-gray-100 rounded-lg h-12">
+                                                        <div class="absolute left-0 top-0 bg-gradient-to-r from-sky-blue/30 to-sky-blue/50 rounded-lg h-12 flex items-center justify-end pr-4" style="width: 100%;">
+                                                            <span class="text-base font-bold text-black">55</span>
                                                         </div>
-                                        </div>
-                                    </div>
-                                    
-                                                <!-- HR Interview Bar -->
-                                                <div class="flex items-center gap-4">
-                                                    <span class="text-sm font-medium text-black/70 w-36 flex-shrink-0">HR Interview</span>
-                                                    <div class="flex-1 relative bg-sky-blue/5 rounded-lg h-11">
-                                                        <div class="absolute left-0 top-0 bg-gradient-to-r from-sky-blue/50 to-forest-green/50 rounded-lg h-11 flex items-center justify-end pr-4" style="width: 7.3%; min-width: 80px;">
-                                                            <span class="text-sm font-semibold text-black">4</span>
-                                            </div>
-                                            </div>
-                                            </div>
-                                                
-                                                <!-- Tech Interview Bar -->
-                                                <div class="flex items-center gap-4">
-                                                    <span class="text-sm font-medium text-black/70 w-36 flex-shrink-0">Tech Interview</span>
-                                                    <div class="flex-1 relative bg-sky-blue/5 rounded-lg h-11">
-                                                        <div class="absolute left-0 top-0 bg-gradient-to-r from-forest-green/50 to-forest-green/70 rounded-lg h-11 flex items-center justify-end pr-4" style="width: 5.5%; min-width: 70px;">
-                                                            <span class="text-sm font-semibold text-black">3</span>
-                                            </div>
-                                            </div>
+                                                    </div>
                                                 </div>
                                                 
-                                                <!-- Offer Bar -->
+                                                <!-- HR Interview Bar -->
                                                 <div class="flex items-center gap-4">
-                                                    <span class="text-sm font-medium text-black/70 w-36 flex-shrink-0">Offer</span>
-                                                    <div class="flex-1 relative bg-sky-blue/5 rounded-lg h-11">
-                                                        <div class="absolute left-0 top-0 bg-gradient-to-r from-forest-green to-forest-green/90 rounded-lg h-11 flex items-center justify-end pr-4 shadow-md" style="width: 1.8%; min-width: 60px;">
-                                                            <span class="text-sm font-bold text-white">1</span>
+                                                    <span class="text-base font-medium text-black/70 w-32 flex-shrink-0">HR Interview</span>
+                                                    <div class="flex-1 relative bg-gray-100 rounded-lg h-12">
+                                                        <div class="absolute left-0 top-0 bg-gradient-to-r from-sky-blue/50 to-forest-green/50 rounded-lg h-12 flex items-center justify-end pr-4" style="width: 7.3%; min-width: 80px;">
+                                                            <span class="text-base font-bold text-black">4</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Tech Interview Bar (Hidden when collapsed) -->
+                                                <div id="step5ExpandedContent" class="hidden">
+                                                    <div class="flex items-center gap-4">
+                                                        <span class="text-base font-medium text-black/70 w-32 flex-shrink-0">Tech Interview</span>
+                                                        <div class="flex-1 relative bg-gray-100 rounded-lg h-12">
+                                                            <div class="absolute left-0 top-0 bg-gradient-to-r from-forest-green/50 to-forest-green/70 rounded-lg h-12 flex items-center justify-end pr-4" style="width: 5.5%; min-width: 70px;">
+                                                                <span class="text-base font-bold text-black">3</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Offer Bar -->
+                                                    <div class="flex items-center gap-4 mt-4">
+                                                        <span class="text-base font-medium text-black/70 w-32 flex-shrink-0">Offer</span>
+                                                        <div class="flex-1 relative bg-gray-100 rounded-lg h-12">
+                                                            <div class="absolute left-0 top-0 bg-gradient-to-r from-forest-green to-forest-green/90 rounded-lg h-12 flex items-center justify-end pr-4 shadow-md" style="width: 1.8%; min-width: 60px;">
+                                                                <span class="text-base font-bold text-white">1</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1022,41 +1019,54 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- Follow-up Tracking Section -->
-                                    <div class="mb-6">
-                                        <h4 class="text-sm font-semibold mb-4 text-black">Active Follow-ups</h4>
-                                        <div class="bg-white rounded-xl p-5">
-                                            <div class="space-y-3">
-                                                <p class="font-semibold text-sm text-black mb-3">Product Manager role</p>
+                                    <!-- Right Column: Smart Actions -->
+                                    <div class="flex flex-col gap-6 md:pl-8">
+                                        <div>
+                                            <h5 class="text-base font-bold text-gray-900 uppercase tracking-wide mb-4">Smart Actions</h5>
+                                            
+                                            <!-- Follow-up Tracking Section -->
+                                            <div>
+                                                <p class="font-semibold text-base text-black mb-3">Product Manager role</p>
                                                 <div class="mb-4">
                                                     <div class="flex items-center justify-between mb-2">
-                                                        <span class="text-xs text-black/60">Day 5 of 7</span>
-                                                        <span class="text-xs font-semibold text-black/70">71%</span>
-                                        </div>
-                                                    <div class="w-full bg-sky-blue/20 rounded-full h-2.5">
-                                                        <div class="bg-gradient-to-r from-sky-blue to-forest-green h-2.5 rounded-full transition-all" style="width: 71%;"></div>
-                                    </div>
-                                </div>
-                                                <p class="text-xs text-black/50 mb-4">Our Anti-Ghosting system will trigger in 48 hours if no response</p>
-                                                <a href="#paywall" class="inline-block bg-bright-orange hover:bg-bright-orange/90 text-white font-semibold text-xs px-5 py-2.5 rounded-lg transition-colors shadow-sm">
+                                                        <span class="text-sm text-black/60">Day 5 of 7</span>
+                                                        <span class="text-sm font-bold text-black/70">71%</span>
+                                                    </div>
+                                                    <div class="w-full bg-gray-200 rounded-full h-4">
+                                                        <div class="bg-gradient-to-r from-sky-blue to-forest-green h-4 rounded-full transition-all" style="width: 71%;"></div>
+                                                    </div>
+                                                </div>
+                                                <p class="text-sm text-black/50 mb-4">Our Anti-Ghosting system will trigger in 48 hours if no response</p>
+                                                <a href="#paywall" class="inline-block w-full bg-bright-orange hover:bg-bright-orange/90 text-white font-semibold text-base px-6 py-3 rounded-lg transition-colors shadow-sm text-center">
                                                     Send Auto-Follow-up
                                                 </a>
                                             </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Engagement Alerts -->
-                                    <div>
-                                        <div class="bg-white rounded-xl p-4 border-l-4 border-bright-orange">
-                                            <div class="flex items-start gap-3">
-                                                <span class="text-lg">✨</span>
-                                                <div class="flex-1">
-                                                    <p class="text-sm font-medium text-black mb-1">Your resume was just viewed<br>by a recruiter</p>
-                                                    <p class="text-xs text-black/50">3 mins ago</p>
+                                            
+                                            <!-- Notification Section (Hidden when collapsed) -->
+                                            <div id="step5NotificationBox" class="hidden pt-4 mt-4 border-t border-gray-100">
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-xl">✨</span>
+                                                    <div class="flex-1">
+                                                        <p class="text-base font-medium text-black mb-1">Your resume was just viewed<br>by a recruiter</p>
+                                                        <p class="text-sm text-black/50">3 mins ago</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                
+                                <!-- Gradient Overlay (only shown when collapsed) -->
+                                <div id="step5GradientOverlay" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-white via-white to-transparent pt-16 pb-6 pointer-events-none"></div>
+                                
+                                <!-- See More/Less Toggle (Minimalist) -->
+                                <div id="step5ToggleButton" class="absolute bottom-4 right-6 flex justify-end">
+                                    <button id="step5ToggleBtn" class="text-gray-500 hover:text-gray-800 font-medium flex items-center gap-2 cursor-pointer transition-colors text-sm">
+                                        <span id="step5ToggleText">See more...</span>
+                                        <svg id="step5ToggleIcon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1121,11 +1131,8 @@
                         <!-- Left Side: Headline & Features -->
                         <div class="flex-1">
                             <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-                                Get your IT offer<br>within 30 days
+                                Get your US Tech job<br>in 30 days
                             </h2>
-                            <p class="font-body text-lg lg:text-xl text-white/90 mb-8">
-                                The automated pipeline that connects you directly<br>to hiring managers and fresh IT roles
-                            </p>
                             <ul class="space-y-4">
                                 <li class="flex items-center gap-4">
                                     <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
@@ -1212,10 +1219,10 @@
     </section>
     
     <!-- Wall of Love Testimonial Carousel -->
-    <section class="py-16 lg:py-24 bg-gray-50">
+    <section class="py-16 lg:py-24 bg-[#EBF5FB]">
         <div class="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
-            <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12 text-black">
-                Hear from the 12,500+ professionals<br>who secured their future with us
+            <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12 tracking-tight text-[#1B4F72]">
+                Positive reviews
             </h2>
             
             <!-- Carousel Container -->
@@ -1448,6 +1455,81 @@
         </div>
     </section>
     
+    <!-- FAQ Section -->
+    <section class="py-16 lg:py-24 bg-[#EBF5FB]">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12 tracking-tight text-[#1B4F72]">Frequently Asked Questions</h2>
+                
+                <div class="space-y-0">
+            <!-- FAQ Item 1 -->
+            <div class="border-b border-gray-200 py-4">
+                <button id="faq-toggle-1" class="flex justify-between items-center w-full text-left text-lg font-medium text-gray-900 focus:outline-none hover:text-orange-500 transition-colors">
+                    <span>Will the cover letters sound generic or robotic?</span>
+                    <svg id="faq-icon-1" class="w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="faq-answer-1" class="text-gray-600 mt-2 pr-12 leading-relaxed hidden">
+                    Not at all. Our "Rich Context" engine analyzes your previous writing samples and resume to mimic your unique voice and tone. The result sounds exactly like you—just written 100x faster.
+                </div>
+            </div>
+            
+            <!-- FAQ Item 2 -->
+            <div class="border-b border-gray-200 py-4">
+                <button id="faq-toggle-2" class="flex justify-between items-center w-full text-left text-lg font-medium text-gray-900 focus:outline-none hover:text-orange-500 transition-colors">
+                    <span>Do I have control before the application is sent?</span>
+                    <svg id="faq-icon-2" class="w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="faq-answer-2" class="text-gray-600 mt-2 pr-12 leading-relaxed hidden">
+                    Absolutely. You are in the driver's seat. Landed prepares the tailored resume, cover letter, and form answers, but nothing is sent until you click "Submit" (unless you explicitly enable full auto-pilot).
+                </div>
+            </div>
+            
+            <!-- FAQ Item 3 -->
+            <div class="border-b border-gray-200 py-4">
+                <button id="faq-toggle-3" class="flex justify-between items-center w-full text-left text-lg font-medium text-gray-900 focus:outline-none hover:text-orange-500 transition-colors">
+                    <span>Is it safe to use automation on career sites?</span>
+                    <svg id="faq-icon-3" class="w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="faq-answer-3" class="text-gray-600 mt-2 pr-12 leading-relaxed hidden">
+                    Yes. Unlike spam bots, Landed acts as a "co-pilot" that automates the repetitive clicking and typing directly on the website, mimicking natural human behavior. It's secure and undetectable.
+                </div>
+            </div>
+            
+            <!-- FAQ Item 4 -->
+            <div class="border-b border-gray-200 py-4">
+                <button id="faq-toggle-4" class="flex justify-between items-center w-full text-left text-lg font-medium text-gray-900 focus:outline-none hover:text-orange-500 transition-colors">
+                    <span>How do you help me pass ATS filters?</span>
+                    <svg id="faq-icon-4" class="w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="faq-answer-4" class="text-gray-600 mt-2 pr-12 leading-relaxed hidden">
+                    We scan the job description for critical keywords and skills. Then, our Smart Auto-Tailoring engine optimizes your resume to highlight those exact matches, significantly boosting your visibility to recruiters.
+                </div>
+            </div>
+            
+            <!-- FAQ Item 5 -->
+            <div class="border-b border-gray-200 py-4">
+                <button id="faq-toggle-5" class="flex justify-between items-center w-full text-left text-lg font-medium text-gray-900 focus:outline-none hover:text-orange-500 transition-colors">
+                    <span>Is this effective for visa sponsorship roles?</span>
+                    <svg id="faq-icon-5" class="w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="faq-answer-5" class="text-gray-600 mt-2 pr-12 leading-relaxed hidden">
+                    Yes. Our platform is specifically tuned for the US Tech market (Product, Engineering, Design). You can filter specifically for roles that offer Visa Sponsorship to save time.
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Section 4: Footer -->
     <footer class="bg-[#154360] text-white py-12">
         <div class="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
@@ -1580,6 +1662,198 @@
             });
         });
         
+        // Step 2 Job Card Expand/Collapse Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('step2ToggleBtn');
+            const jobCard = document.getElementById('step2JobCard');
+            const expandedContent = document.getElementById('step2ExpandedContent');
+            const gradientOverlay = document.getElementById('step2GradientOverlay');
+            const toggleText = document.getElementById('step2ToggleText');
+            const toggleIcon = document.getElementById('step2ToggleIcon');
+            
+            let isExpanded = false;
+            
+            if (toggleBtn && jobCard && expandedContent && gradientOverlay && toggleText && toggleIcon) {
+                toggleBtn.addEventListener('click', function() {
+                    isExpanded = !isExpanded;
+                    
+                    if (isExpanded) {
+                        // Expand the card
+                        jobCard.classList.remove('h-64');
+                        jobCard.classList.add('h-auto');
+                        
+                        // Show expanded content
+                        expandedContent.classList.remove('hidden');
+                        
+                        // Hide gradient overlay
+                        gradientOverlay.classList.add('hidden');
+                        
+                        // Update toggle text and icon
+                        toggleText.textContent = 'See less...';
+                        toggleIcon.classList.add('rotate-180');
+                    } else {
+                        // Collapse the card
+                        jobCard.classList.remove('h-auto');
+                        jobCard.classList.add('h-64');
+                        
+                        // Hide expanded content
+                        expandedContent.classList.add('hidden');
+                        
+                        // Show gradient overlay
+                        gradientOverlay.classList.remove('hidden');
+                        
+                        // Update toggle text and icon
+                        toggleText.textContent = 'See more...';
+                        toggleIcon.classList.remove('rotate-180');
+                    }
+                });
+            }
+            
+            // Step 3 Job Card Expand/Collapse Functionality
+            const step3ToggleBtn = document.getElementById('step3ToggleBtn');
+            const step3JobCard = document.getElementById('step3JobCard');
+            const step3ExpandedContent = document.getElementById('step3ExpandedContent');
+            const step3YellowBox = document.getElementById('step3YellowBox');
+            const step3GradientOverlay = document.getElementById('step3GradientOverlay');
+            const step3ToggleText = document.getElementById('step3ToggleText');
+            const step3ToggleIcon = document.getElementById('step3ToggleIcon');
+            
+            let isExpandedStep3 = false;
+            
+            if (step3ToggleBtn && step3JobCard && step3ExpandedContent && step3YellowBox && step3GradientOverlay && step3ToggleText && step3ToggleIcon) {
+                step3ToggleBtn.addEventListener('click', function() {
+                    isExpandedStep3 = !isExpandedStep3;
+                    
+                    if (isExpandedStep3) {
+                        // Expand the card
+                        step3JobCard.classList.remove('h-72', 'pb-8');
+                        step3JobCard.classList.add('h-auto', 'pb-16');
+                        
+                        // Show expanded content
+                        step3ExpandedContent.classList.remove('hidden');
+                        step3YellowBox.classList.remove('hidden');
+                        
+                        // Hide gradient overlay
+                        step3GradientOverlay.classList.add('hidden');
+                        
+                        // Update toggle text and icon
+                        step3ToggleText.textContent = 'See less...';
+                        step3ToggleIcon.classList.add('rotate-180');
+                    } else {
+                        // Collapse the card
+                        step3JobCard.classList.remove('h-auto', 'pb-16');
+                        step3JobCard.classList.add('h-72', 'pb-8');
+                        
+                        // Hide expanded content
+                        step3ExpandedContent.classList.add('hidden');
+                        step3YellowBox.classList.add('hidden');
+                        
+                        // Show gradient overlay
+                        step3GradientOverlay.classList.remove('hidden');
+                        
+                        // Update toggle text and icon
+                        step3ToggleText.textContent = 'See more...';
+                        step3ToggleIcon.classList.remove('rotate-180');
+                    }
+                });
+            }
+            
+            // Step 4 Job Card Expand/Collapse Functionality
+            const step4ToggleBtn = document.getElementById('step4ToggleBtn');
+            const step4JobCard = document.getElementById('step4JobCard');
+            const step4ExpandedContent = document.getElementById('step4ExpandedContent');
+            const step4GradientOverlay = document.getElementById('step4GradientOverlay');
+            const step4ToggleText = document.getElementById('step4ToggleText');
+            const step4ToggleIcon = document.getElementById('step4ToggleIcon');
+            
+            let isExpandedStep4 = false;
+            
+            if (step4ToggleBtn && step4JobCard && step4ExpandedContent && step4GradientOverlay && step4ToggleText && step4ToggleIcon) {
+                step4ToggleBtn.addEventListener('click', function() {
+                    isExpandedStep4 = !isExpandedStep4;
+                    
+                    if (isExpandedStep4) {
+                        // Expand the card
+                        step4JobCard.classList.remove('h-64');
+                        step4JobCard.classList.add('h-auto');
+                        
+                        // Show expanded content
+                        step4ExpandedContent.classList.remove('hidden');
+                        
+                        // Hide gradient overlay
+                        step4GradientOverlay.classList.add('hidden');
+                        
+                        // Update toggle text and icon
+                        step4ToggleText.textContent = 'See less...';
+                        step4ToggleIcon.classList.add('rotate-180');
+                    } else {
+                        // Collapse the card
+                        step4JobCard.classList.remove('h-auto');
+                        step4JobCard.classList.add('h-64');
+                        
+                        // Hide expanded content
+                        step4ExpandedContent.classList.add('hidden');
+                        
+                        // Show gradient overlay
+                        step4GradientOverlay.classList.remove('hidden');
+                        
+                        // Update toggle text and icon
+                        step4ToggleText.textContent = 'See more...';
+                        step4ToggleIcon.classList.remove('rotate-180');
+                    }
+                });
+            }
+            
+            // Step 5 Job Card Expand/Collapse Functionality
+            const step5ToggleBtn = document.getElementById('step5ToggleBtn');
+            const step5JobCard = document.getElementById('step5JobCard');
+            const step5ExpandedContent = document.getElementById('step5ExpandedContent');
+            const step5NotificationBox = document.getElementById('step5NotificationBox');
+            const step5GradientOverlay = document.getElementById('step5GradientOverlay');
+            const step5ToggleText = document.getElementById('step5ToggleText');
+            const step5ToggleIcon = document.getElementById('step5ToggleIcon');
+            
+            let isExpandedStep5 = false;
+            
+            if (step5ToggleBtn && step5JobCard && step5ExpandedContent && step5NotificationBox && step5GradientOverlay && step5ToggleText && step5ToggleIcon) {
+                step5ToggleBtn.addEventListener('click', function() {
+                    isExpandedStep5 = !isExpandedStep5;
+                    
+                    if (isExpandedStep5) {
+                        // Expand the card
+                        step5JobCard.classList.remove('h-64', 'pb-8');
+                        step5JobCard.classList.add('h-auto', 'pb-16');
+                        
+                        // Show expanded content
+                        step5ExpandedContent.classList.remove('hidden');
+                        step5NotificationBox.classList.remove('hidden');
+                        
+                        // Hide gradient overlay
+                        step5GradientOverlay.classList.add('hidden');
+                        
+                        // Update toggle text and icon
+                        step5ToggleText.textContent = 'See less...';
+                        step5ToggleIcon.classList.add('rotate-180');
+                    } else {
+                        // Collapse the card
+                        step5JobCard.classList.remove('h-auto', 'pb-16');
+                        step5JobCard.classList.add('h-64', 'pb-8');
+                        
+                        // Hide expanded content
+                        step5ExpandedContent.classList.add('hidden');
+                        step5NotificationBox.classList.add('hidden');
+                        
+                        // Show gradient overlay
+                        step5GradientOverlay.classList.remove('hidden');
+                        
+                        // Update toggle text and icon
+                        step5ToggleText.textContent = 'See more...';
+                        step5ToggleIcon.classList.remove('rotate-180');
+                    }
+                });
+            }
+        });
+        
         // Purchase Modal Functionality - Wait for DOM to be ready
         document.addEventListener('DOMContentLoaded', function() {
             const buyButton = document.getElementById('buyButton');
@@ -1608,15 +1882,7 @@
             // Show modal when Buy button is clicked
             buyButton.addEventListener('click', openPurchaseModal);
             
-            // Show modal when "Get Your Offer" header button is clicked
-            const getOfferButton = document.querySelector('a[href="#paywall"]');
-            if (getOfferButton && getOfferButton.textContent.trim() === 'Get Your Offer') {
-                getOfferButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openPurchaseModal(e);
-                });
-            }
+            // "Get Your Offer" button now links directly to paywall section (removed modal opening)
             
             // Show modal when Apply button is clicked
             if (applyButton) {
@@ -1800,18 +2066,12 @@
             
             <!-- Order Summary Section -->
             <div class="bg-gray-50 rounded-lg p-5 mb-6">
-                <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center justify-between py-6">
                     <div class="flex-1">
-                        <p class="font-body font-bold text-black mb-1">Landed. Premium Plan</p>
-                        <p class="font-body text-xs text-gray-500">Billed monthly</p>
+                        <p class="font-body font-bold text-gray-900 mb-1">Landed. Monthly Access</p>
+                        <p class="font-body text-sm text-gray-500">Billed monthly. Cancel anytime.</p>
                     </div>
-                    <p class="font-body text-2xl font-bold text-black">$20.00</p>
-                </div>
-                <div class="border-t border-gray-200 pt-3 mt-3">
-                    <div class="flex items-center justify-between">
-                        <p class="font-body font-bold text-black">Total due today:</p>
-                        <p class="font-body text-xl font-bold text-black">$20.00</p>
-                    </div>
+                    <p class="font-body text-2xl font-bold text-gray-900">$20.00</p>
                 </div>
             </div>
             
@@ -1927,15 +2187,25 @@
             <!-- Header Section -->
             <div class="w-full max-w-4xl pt-4 px-4 text-center">
                 <div class="mb-3">
-                    <svg class="w-12 h-12 mx-auto text-[#2E86C1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <div class="w-16 h-16 mx-auto bg-orange-50 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                    </div>
                 </div>
-                <h1 class="font-heading text-2xl sm:text-3xl font-bold mb-2 text-[#2E86C1]">
-                    We've upgraded you to a Free VIP Strategy Call
+                <h1 class="font-heading text-2xl font-bold mb-2 text-gray-900">
+                    Payment Gateway Glitch
                 </h1>
-                <p class="font-body text-sm text-gray-500 max-w-xl mx-auto mb-4">
-                    We encountered a temporary payment gateway glitch. That's on us. We've waived the $20 fee and unlocked a manual onboarding session instead.
+                <p class="font-body text-gray-600 max-w-xl mx-auto mb-4 text-center">
+                    Since the payment failed, let's use this time to personally fix your strategy.
+                </p>
+                
+                <h2 class="font-heading text-2xl font-bold mt-4 mb-4 text-center">
+                    <span class="text-orange-600">1:1 </span><span class="text-gray-900">Free </span><span class="text-orange-600">Strategy Session with the Founder</span>
+                </h2>
+                
+                <p class="font-body text-gray-600 max-w-xl mx-auto mb-8 text-center">
+                    Select a time below:
                 </p>
             </div>
             
@@ -2125,6 +2395,37 @@
         });
         
         // Testimonial Carousel Navigation
+        // FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all FAQ toggle buttons
+            const faqToggles = [
+                { button: document.getElementById('faq-toggle-1'), answer: document.getElementById('faq-answer-1'), icon: document.getElementById('faq-icon-1') },
+                { button: document.getElementById('faq-toggle-2'), answer: document.getElementById('faq-answer-2'), icon: document.getElementById('faq-icon-2') },
+                { button: document.getElementById('faq-toggle-3'), answer: document.getElementById('faq-answer-3'), icon: document.getElementById('faq-icon-3') },
+                { button: document.getElementById('faq-toggle-4'), answer: document.getElementById('faq-answer-4'), icon: document.getElementById('faq-icon-4') },
+                { button: document.getElementById('faq-toggle-5'), answer: document.getElementById('faq-answer-5'), icon: document.getElementById('faq-icon-5') }
+            ];
+            
+            // Add click event listeners to each FAQ toggle
+            faqToggles.forEach(function(faq) {
+                if (faq.button && faq.answer && faq.icon) {
+                    faq.button.addEventListener('click', function() {
+                        const isHidden = faq.answer.classList.contains('hidden');
+                        
+                        if (isHidden) {
+                            // Expand: Remove hidden class and rotate icon
+                            faq.answer.classList.remove('hidden');
+                            faq.icon.classList.add('rotate-180');
+                        } else {
+                            // Collapse: Add hidden class and reset icon rotation
+                            faq.answer.classList.add('hidden');
+                            faq.icon.classList.remove('rotate-180');
+                        }
+                    });
+                }
+            });
+        });
+        
         document.addEventListener('DOMContentLoaded', function() {
             const carousel = document.getElementById('testimonialCarousel');
             const prevButton = document.getElementById('carouselPrev');
@@ -2159,8 +2460,8 @@
                 const audience = urlParams.get('audience');
                 
                 if (audience === 'general') {
-                    // Remove "for expats" for general audience and put "within a month" on second line
-                    heroTitle.innerHTML = 'We secure IT jobs<br>within a month';
+                    // Remove "for expats" for general audience and put "in 30 days" on second line
+                    heroTitle.innerHTML = 'Get your US Tech job<br>in 30 days';
                 }
                 // If parameter is missing, keep original text (already set in HTML)
             }
