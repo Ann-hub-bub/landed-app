@@ -312,22 +312,20 @@
             >
             <!-- Overlay for text readability -->
             <div class="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-transparent lg:from-white/90 lg:via-white/70 lg:to-transparent"></div>
+            <!-- Very subtle dark overlay for text sharpness -->
+            <div class="absolute inset-0 bg-black/10"></div>
         </div>
         
         <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 pt-24 pb-12 lg:pt-28 lg:pb-24">
             <div class="max-w-4xl mx-auto">
                 <!-- Text Content -->
                 <div class="space-y-6 lg:space-y-8">
-                    <h1 id="mainHeroTitle" class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-[#1B4F72]">
-                        Get your US Tech job<br>in 30 days
+                    <h1 id="mainHeroTitle" class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-[#1B4F72] drop-shadow-md">
+                        Get your US Tech job<br>in 30 days <span class="text-orange-500 drop-shadow-md">Or It's Free</span>
                     </h1>
                     
-                    <p id="heroSubtitle" class="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-[#2E86C1] leading-relaxed">
-                        We help expats secure roles in Product, Engineering, and Design without the stress.
-                    </p>
-                    
-                    <p class="font-body text-lg sm:text-xl lg:text-xl leading-relaxed text-black/80 max-w-xl">
-                        The app finds fresh, high-match roles and auto-applies, saving you hours of manual work every day
+                    <p id="heroSubtitle" class="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-[#2E86C1] leading-relaxed mb-8 drop-shadow-md">
+                        We help expats secure roles in Product,<br>Engineering, and Design without the stress
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
@@ -342,10 +340,11 @@
                 </div>
                 
                 <!-- Feature Cards -->
-                <div class="mt-12 lg:mt-16">
-                    <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
+                <div class="mt-12 lg:mt-16 space-y-6 lg:space-y-8">
+                    <!-- Row 1: First Three Cards in 3-Column Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                         <!-- Feature Card 1: Fresh Vacancies -->
-                        <div class="bg-white/95 backdrop-blur-sm border-2 border-[#2E86C1]/30 rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
+                        <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
                             <div class="w-14 h-14 bg-[#FFF3E0] rounded-full flex items-center justify-center mb-4">
                                 <svg class="w-7 h-7 text-[#C91F37]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -353,12 +352,12 @@
                             </div>
                             <h3 class="font-heading text-xl lg:text-2xl font-semibold mb-3 tracking-tight text-[#1B4F72]">Fresh Vacancies</h3>
                             <p class="font-body text-sm lg:text-base text-black/70 leading-relaxed">
-                                Get instant alerts and apply first
+                                Get instant alerts<br>and apply first
                             </p>
                         </div>
                         
                         <!-- Feature Card 2: First Apply -->
-                        <div class="bg-white/95 backdrop-blur-sm border-2 border-[#2E86C1]/30 rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
+                        <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
                             <div class="w-14 h-14 bg-[#FFF3E0] rounded-full flex items-center justify-center mb-4">
                                 <svg class="w-7 h-7 text-[#C91F37]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -371,7 +370,7 @@
                         </div>
                         
                         <!-- Feature Card 3: High-Match Roles -->
-                        <div class="bg-white/95 backdrop-blur-sm border-2 border-[#2E86C1]/30 rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
+                        <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
                             <div class="w-14 h-14 bg-[#FFF3E0] rounded-full flex items-center justify-center mb-4">
                                 <svg class="w-7 h-7 text-[#C91F37]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
@@ -379,21 +378,26 @@
                             </div>
                             <h3 class="font-heading text-xl lg:text-2xl font-semibold mb-3 tracking-tight text-[#1B4F72]">High-Match Roles</h3>
                             <p class="font-body text-sm lg:text-base text-black/70 leading-relaxed">
-                                Only positions where you are the "perfect person"
+                                Only positions where<br>you are the "perfect person"
                             </p>
                         </div>
-                        
-                        <!-- Feature Card 4: Anti-Ghosting -->
-                        <div class="bg-white/95 backdrop-blur-sm border-2 border-[#2E86C1]/30 rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
-                            <div class="w-14 h-14 bg-[#FFF3E0] rounded-full flex items-center justify-center mb-4">
-                                <svg class="w-7 h-7 text-[#C91F37]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                                </svg>
+                    </div>
+                    
+                    <!-- Row 2: Full-Width Guarantee Card -->
+                    <div class="bg-white/90 backdrop-blur-sm shadow-xl shadow-blue-900/20 rounded-3xl p-6 lg:p-8 hover:shadow-xl transition-all duration-300 fade-in">
+                        <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+                            <!-- Left Column: Badge -->
+                            <div class="flex-shrink-0 flex items-center justify-center">
+                                <img src="Guarantee.png" alt="100% Money Back Guarantee Seal" class="w-32 lg:w-40 h-auto">
                             </div>
-                            <h3 class="font-heading text-xl lg:text-2xl font-semibold mb-3 tracking-tight text-[#1B4F72]">Anti-Ghosting</h3>
-                            <p class="font-body text-sm lg:text-base text-black/70 leading-relaxed">
-                                Contact hiring managers directly
-                            </p>
+                            
+                            <!-- Right Column: Text -->
+                            <div class="flex-1 text-center lg:text-left">
+                                <h3 class="font-heading text-2xl lg:text-3xl font-semibold mb-4 tracking-tight text-[#1B4F72]">Risk-Free Guarantee</h3>
+                                <p class="font-body text-base lg:text-lg text-black leading-relaxed">
+                                    We know every dollar counts when you're job hunting. If you don't land a job within 30 days, we'll refund 100% of your money
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1147,8 +1151,8 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 relative z-50">
             <div class="max-w-6xl mx-auto">
                 <!-- Wide Horizontal Pricing Card -->
-                <div class="bg-gradient-to-br from-[#2E86C1] to-[#1B4F72] rounded-3xl p-8 lg:p-12 shadow-2xl shadow-black/50 mb-8 relative z-50">
-                    <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12">
+                <div class="bg-gradient-to-br from-[#2E86C1] to-[#1B4F72] rounded-3xl p-8 lg:p-12 shadow-2xl shadow-black/50 mb-8 relative z-50 overflow-hidden">
+                    <div class="flex flex-col lg:flex-row items-start lg:items-start gap-8 lg:gap-12 relative z-10 lg:justify-between">
                         <!-- Left Side: Headline & Features -->
                         <div class="flex-1">
                             <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
@@ -1195,16 +1199,24 @@
                                     </div>
                                     <span class="font-body text-lg lg:text-xl text-white font-medium">Track your pipeline to the offer</span>
                             </li>
+                                <li class="flex items-center gap-4">
+                                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                    </div>
+                                    <span class="font-body text-lg lg:text-xl text-white font-medium">Get hired in 30 days or get a full refund</span>
+                            </li>
                         </ul>
                         </div>
                         
-                        <!-- Right Side: Pricing & CTA -->
-                        <div class="lg:w-80 flex-shrink-0 text-center lg:text-left">
+                        <!-- Centered on Stamp: Pricing & CTA -->
+                        <div class="lg:w-80 flex-shrink-0 text-center lg:text-center lg:absolute lg:top-1/2 lg:right-1/4 lg:-translate-y-1/2 lg:translate-x-1/2 relative z-10">
                             <div class="mb-6">
-                                <span class="font-heading text-5xl lg:text-6xl font-bold text-white leading-none">$20</span>
-                                <span class="font-body text-2xl text-white/90 ml-2">/month</span>
+                                <span class="font-heading text-5xl lg:text-7xl font-bold text-white leading-none">$20</span>
+                                <span class="font-body text-3xl lg:text-4xl text-white/90 ml-2">/month</span>
                             </div>
-                            <button type="button" id="buyButton" class="w-full lg:w-auto px-10 py-4 bg-[#FF9933] text-white rounded-xl font-body font-bold text-lg hover:bg-[#FF9933]/90 hover:brightness-110 transition-all duration-300 shadow-lg transform hover:scale-105 hover:shadow-xl">
+                            <button type="button" id="buyButton" class="w-full lg:w-auto px-12 py-5 bg-[#FF9933] text-white rounded-xl font-body font-bold text-xl lg:text-2xl hover:bg-[#FF9933]/90 hover:brightness-110 transition-all duration-300 shadow-lg transform hover:scale-105 hover:shadow-xl">
                             Buy Now
                         </button>
                         </div>
