@@ -274,6 +274,25 @@
                 min-height: 1200px !important;
             }
         }
+        
+        /* "Or It's Free" underline with rotation */
+        .free-highlight {
+            position: relative;
+            display: inline-block;
+            padding: 0 4px 4px 4px;
+        }
+        
+        .free-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background-color: #FF9933;
+            z-index: -1;
+            transform: rotate(-2deg);
+        }
     </style>
 </head>
 <body class="bg-white text-black">
@@ -313,7 +332,7 @@
             <!-- Overlay for text readability -->
             <div class="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-transparent lg:from-white/90 lg:via-white/70 lg:to-transparent"></div>
             <!-- Very subtle dark overlay for text sharpness -->
-            <div class="absolute inset-0 bg-black/10"></div>
+            <div class="absolute inset-0 bg-black/20"></div>
         </div>
         
         <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 pt-24 pb-12 lg:pt-28 lg:pb-24">
@@ -321,85 +340,97 @@
                 <!-- Text Content -->
                 <div class="space-y-6 lg:space-y-8">
                     <h1 id="mainHeroTitle" class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-[#1B4F72] drop-shadow-md">
-                        Get your US Tech job<br>in 30 days <span class="text-white drop-shadow-md">Or It's Free</span>
+                        Get your US Tech job<br>in 30 days <span class="text-white drop-shadow-md free-highlight">Or It's Free</span>
                     </h1>
-                    
-                    <p id="heroSubtitle" class="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-[#2E86C1] leading-relaxed mb-8 drop-shadow-md">
-                        We help expats secure roles in Product,<br>Engineering, and Design without the stress
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                        <a href="#paywall" class="bg-[#FF9933] hover:bg-[#FF9933]/90 hover:brightness-110 text-white font-heading font-bold text-xl sm:text-2xl px-8 py-4 rounded-[28px] uppercase transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg inline-block text-center">
-                            Find a Job Now
-                        </a>
+                </div>
+                
+                <!-- Feature List Section -->
+                <div class="flex flex-col lg:flex-row gap-6 items-center max-w-4xl">
+                    <!-- Left Card: Feature List -->
+                    <div class="w-full lg:w-2/3">
+                        <!-- Feature List -->
+                        <div class="flex flex-col gap-6 my-20">
+                            <!-- Item 1 -->
+                            <div class="flex flex-row items-center gap-4">
+                                <!-- Icon -->
+                                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <!-- Text -->
+                                <p class="font-body text-lg text-[#1B4F72] leading-relaxed">
+                                    Finds <strong>fresh, highly relevant positions</strong>
+                                </p>
+                            </div>
+                            
+                            <!-- Item 2 -->
+                            <div class="flex flex-row items-center gap-4">
+                                <!-- Icon -->
+                                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                    </svg>
+                                </div>
+                                <!-- Text -->
+                                <p class="font-body text-lg text-[#1B4F72] leading-relaxed">
+                                    Rewrites your CL, preserving <strong>your tone of voice</strong>
+                                </p>
+                            </div>
+                            
+                            <!-- Item 3 -->
+                            <div class="flex flex-row items-center gap-4">
+                                <!-- Icon -->
+                                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <!-- Text -->
+                                <p class="font-body text-lg text-[#1B4F72] leading-relaxed">
+                                    <strong>Fills forms</strong> on job sites via API
+                                </p>
+                            </div>
+                        </div>
                         
-                        <p class="font-body text-sm sm:text-base text-black/70 mt-2 sm:mt-0">
-                            We use open data. Your chances increase by <span class="font-semibold">80%</span>.
+                        <!-- CTA Button -->
+                        <div class="flex justify-start relative mb-8">
+                            <a href="#paywall" class="bg-[#FF9933] hover:bg-[#FF9933]/90 hover:brightness-110 text-white font-heading font-bold text-xl sm:text-2xl px-8 py-4 rounded-[28px] uppercase transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg inline-block text-center relative z-10">
+                                Find a Job Now
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Card: Trust Badge -->
+                    <div class="w-full lg:w-1/3 bg-white/20 backdrop-blur-md border-2 border-white rounded-3xl shadow-xl p-6 flex flex-col items-center justify-center">
+                        <!-- Shield Icon -->
+                        <div class="w-16 h-16 flex items-center justify-center mb-4">
+                            <svg class="w-12 h-12 text-[#1B4F72] drop-shadow-lg" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <!-- Headline -->
+                        <h3 class="text-[#1B4F72] text-xl font-bold mb-3 text-center drop-shadow-lg">
+                            Full Control
+                        </h3>
+                        <!-- Text -->
+                        <p class="font-body text-sm text-[#1B4F72] text-center leading-relaxed drop-shadow-md">
+                            You <strong>review every step</strong><br>Nothing is sent without your approval
                         </p>
                     </div>
                 </div>
                 
-                <!-- Feature Cards -->
-                <div class="mt-12 lg:mt-16 space-y-6 lg:space-y-8">
-                    <!-- Row 1: First Three Cards in 3-Column Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                        <!-- Feature Card 1: Fresh Vacancies -->
-                        <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
-                            <div class="w-14 h-14 bg-[#FFF3E0] rounded-full flex items-center justify-center mb-4">
-                                <svg class="w-7 h-7 text-[#C91F37]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="font-heading text-xl lg:text-2xl font-semibold mb-3 tracking-tight text-[#1B4F72]">Fresh Vacancies</h3>
-                            <p class="font-body text-sm lg:text-base text-black/70 leading-relaxed">
-                                Get instant alerts<br>and apply first
-                            </p>
-                        </div>
-                        
-                        <!-- Feature Card 2: First Apply -->
-                        <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
-                            <div class="w-14 h-14 bg-[#FFF3E0] rounded-full flex items-center justify-center mb-4">
-                                <svg class="w-7 h-7 text-[#C91F37]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="font-heading text-xl lg:text-2xl font-semibold mb-3 tracking-tight text-[#1B4F72]">First Apply</h3>
-                            <p class="font-body text-sm lg:text-base text-black/70 leading-relaxed">
-                                Be among the first to apply
-                            </p>
-                        </div>
-                        
-                        <!-- Feature Card 3: High-Match Roles -->
-                        <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-5 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
-                            <div class="w-14 h-14 bg-[#FFF3E0] rounded-full flex items-center justify-center mb-4">
-                                <svg class="w-7 h-7 text-[#C91F37]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="font-heading text-xl lg:text-2xl font-semibold mb-3 tracking-tight text-[#1B4F72]">High-Match Roles</h3>
-                            <p class="font-body text-sm lg:text-base text-black/70 leading-relaxed">
-                                Only positions where<br>you are the "perfect person"
-                            </p>
-                        </div>
+                <!-- Social Proof Section -->
+                <div class="w-full mt-6 relative">
+                    <!-- Company Logos Row -->
+                    <div class="flex justify-between items-center w-full px-4 gap-12">
+                        <img src="spotify.png" alt="Spotify" class="h-16 w-auto object-contain brightness-50">
+                        <img src="lyft.png" alt="Lyft" class="h-24 w-auto object-contain brightness-50">
+                        <img src="canva.png" alt="Canva" class="h-16 w-auto object-contain">
+                        <img src="arbnb.png" alt="Airbnb" class="h-[100px] w-auto object-contain brightness-50">
+                        <img src="miro.png" alt="Miro" class="h-16 w-auto object-contain">
                     </div>
-                    
-                    <!-- Row 2: Full-Width Guarantee Card -->
-                    <div class="bg-white/90 backdrop-blur-sm shadow-xl shadow-blue-900/20 rounded-3xl p-6 lg:p-8 hover:shadow-xl transition-all duration-300 fade-in">
-                        <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
-                            <!-- Left Column: Badge -->
-                            <div class="flex-shrink-0 flex items-center justify-center">
-                                <img src="Guarantee.png" alt="100% Money Back Guarantee Seal" class="w-32 lg:w-40 h-auto">
-                            </div>
-                            
-                            <!-- Right Column: Text -->
-                            <div class="flex-1 text-center lg:text-left">
-                                <h3 class="font-heading text-2xl lg:text-3xl font-semibold mb-4 tracking-tight text-[#1B4F72]">Risk-Free Guarantee</h3>
-                                <p class="font-body text-base lg:text-lg text-black leading-relaxed">
-                                    We know every dollar counts when you're job hunting. If you don't land a job within 30 days, we'll refund 100% of your money
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -2495,12 +2526,6 @@
                 const heroTitle = document.getElementById('mainHeroTitle');
                 if (heroTitle) {
                     heroTitle.innerHTML = 'Get your US Tech job<br>in 30 days';
-                }
-                
-                // Update Hero Subtitle
-                const heroSubtitle = document.getElementById('heroSubtitle');
-                if (heroSubtitle) {
-                    heroSubtitle.textContent = 'We help professionals secure roles in Product, Engineering, and Design without the stress.';
                 }
                 
                 // Hide Visa Question in Step 4 Form
