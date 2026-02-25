@@ -23,6 +23,22 @@
 
       gtag('config', 'G-QN2NL0W57G');
     </script>
+
+    <!-- Google tag (gtag.js) event - delayed navigation helper -->
+    <script>
+      function gtagSendEvent(url) {
+        var callback = function () {
+          if (typeof url === 'string') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'ProceedPayment', {
+          'event_callback': callback,
+          'event_timeout': 2000,
+        });
+        return false;
+      }
+    </script>
     
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
@@ -436,6 +452,134 @@
         </div>
     </section>
     
+    <!-- Section 2: Interactive Demo -->
+    <section id="demo" class="py-16 lg:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
+            <div class="max-w-5xl mx-auto">
+
+                <!-- Header -->
+                <div class="text-center mb-10">
+                    <span class="inline-block bg-[#FF9933]/10 text-[#FF9933] font-semibold text-sm uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">Free Preview</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B4F72] mb-4">
+                        See what Landed finds for you
+                    </h2>
+                    <p class="font-body text-lg text-gray-500 max-w-xl mx-auto">
+                        Enter your position and upload your resume — we'll match you with live openings in seconds
+                    </p>
+                </div>
+
+                <!-- STATE 1: FORM -->
+                <div id="demoForm" class="max-w-lg mx-auto">
+                    <div class="mb-4">
+                        <label class="block font-body text-sm font-medium text-gray-700 mb-1.5">Your job title</label>
+                        <input id="demoJobTitle" type="text" placeholder="e.g. Product Manager, Software Engineer..."
+                            class="w-full border-2 border-gray-200 focus:border-[#2E86C1] rounded-xl px-4 py-3 font-body text-base text-gray-800 outline-none transition-colors">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block font-body text-sm font-medium text-gray-700 mb-1.5">Your resume</label>
+                        <label id="demoUploadLabel" class="flex items-center gap-3 border-2 border-dashed border-gray-300 hover:border-[#2E86C1] rounded-xl px-4 py-3 cursor-pointer transition-colors group">
+                            <input id="demoResumeFile" type="file" accept=".pdf,.doc,.docx" class="hidden">
+                            <div class="w-8 h-8 bg-[#EBF5FB] rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-[#2E86C1]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <p id="demoFileName" class="font-body text-sm text-gray-500 group-hover:text-[#2E86C1] transition-colors">Upload PDF or Word — max 5MB</p>
+                            </div>
+                            <div id="demoFileCheck" class="hidden w-6 h-6 bg-green-100 rounded-full items-center justify-center">
+                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </label>
+                    </div>
+                    <button id="demoSubmitBtn" onclick="runDemoSearch()"
+                        class="w-full bg-[#FF9933] hover:bg-[#FF9933]/90 text-white font-heading font-bold text-lg px-8 py-4 rounded-[28px] uppercase transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg shadow-md">
+                        Analyze My Resume
+                    </button>
+                    <p class="text-center font-body text-xs text-gray-400 mt-3">No account needed. Takes 3 seconds.</p>
+                </div>
+
+                <!-- STATE 2: LOADING -->
+                <div id="demoLoading" class="hidden max-w-sm mx-auto py-8">
+                    <div class="space-y-5">
+                        <div id="demoStep1" class="flex items-center gap-3 opacity-0 transition-opacity duration-500">
+                            <div id="demoStep1Icon" class="w-6 h-6 flex-shrink-0 flex items-center justify-center">
+                                <svg class="animate-spin w-6 h-6 text-[#2E86C1]" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </div>
+                            <span class="font-body text-base text-gray-700">Parsing resume...</span>
+                        </div>
+                        <div id="demoStep2" class="flex items-center gap-3 opacity-0 transition-opacity duration-500">
+                            <div id="demoStep2Icon" class="w-6 h-6 flex-shrink-0 flex items-center justify-center">
+                                <svg class="animate-spin w-6 h-6 text-[#2E86C1]" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </div>
+                            <span class="font-body text-base text-gray-700">Indexing skills &amp; experience...</span>
+                        </div>
+                        <div id="demoStep3" class="flex items-center gap-3 opacity-0 transition-opacity duration-500">
+                            <div id="demoStep3Icon" class="w-6 h-6 flex-shrink-0 flex items-center justify-center">
+                                <svg class="animate-spin w-6 h-6 text-[#2E86C1]" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </div>
+                            <span class="font-body text-base text-gray-700">Scanning 2,847 active positions...</span>
+                        </div>
+                        <div id="demoStep4" class="flex items-center gap-3 opacity-0 transition-opacity duration-500">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="font-body text-base font-semibold text-green-700">6 perfect matches found!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STATE 3: RESULTS -->
+                <div id="demoResults" class="hidden">
+                    <!-- Top info bar -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-2">
+                        <div>
+                            <p class="font-body text-sm text-gray-500">Analyzed: <span id="demoResultFileName" class="font-medium text-gray-700">your-resume.pdf</span></p>
+                            <div id="demoRoleBadge" class="hidden mt-1.5">
+                                <span class="inline-flex items-center gap-1.5 bg-[#EBF5FB] text-[#1B4F72] text-xs font-semibold px-2.5 py-1 rounded-full">
+                                    <svg class="w-3 h-3 text-[#2E86C1]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    Role from resume: <span id="demoRoleBadgeText" class="text-[#2E86C1]"></span>
+                                </span>
+                            </div>
+                            <p class="font-body text-xs text-gray-400 mt-1"><span id="demoSearchCount">24</span> people searched for this role today</p>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-sm font-semibold px-3 py-1.5 rounded-full border border-green-100">
+                            <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5" fill="#22c55e"/></svg>
+                            6 matches found
+                        </span>
+                    </div>
+
+                    <!-- Job cards grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6" id="demoJobGrid"></div>
+
+                    <!-- Unlock CTA -->
+                    <div class="bg-[#EBF5FB] rounded-2xl p-6 sm:p-8 text-center border border-[#2E86C1]/20 mt-2">
+                        <p class="font-heading text-xl font-bold text-[#1B4F72] mb-1">🔒 Unlock full access</p>
+                        <p class="font-body text-sm text-gray-600 mb-5">Apply to all 6 matches + 200+ new jobs per day, auto-filled by AI</p>
+                        <a href="#paywall" class="inline-block bg-[#FF9933] hover:bg-[#FF9933]/90 text-white font-heading font-bold text-lg px-8 py-3.5 rounded-[28px] uppercase transition-all duration-300 hover:scale-[1.02] hover:shadow-lg shadow-md">
+                            Start Applying Now
+                        </a>
+                        <p class="font-body text-xs text-gray-400 mt-3">$20/month · Cancel anytime · 30-day money-back guarantee</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- Section 3: How It Works -->
     <section class="py-16 lg:py-24 bg-[#EBF5FB]">
         <div class="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
@@ -1942,7 +2086,9 @@
                 purchaseModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden'; // Prevent background scrolling
             }
-            
+            // Expose globally so onclick="openPurchaseModal()" in demo section can call it
+            window.openPurchaseModal = openPurchaseModal;
+
             // Show modal when Buy button is clicked
             buyButton.addEventListener('click', openPurchaseModal);
             
@@ -2093,6 +2239,7 @@
             if (proceedToPaymentBtn) {
                 proceedToPaymentBtn.addEventListener('click', async function(e) {
                     e.preventDefault();
+                    gtagSendEvent();
                     await handlePurchaseSubmission();
                 });
             }
@@ -2548,6 +2695,302 @@
             }
             // If parameter is missing, keep original text (already set in HTML)
         });
+    </script>
+
+    <!-- Demo Section Script -->
+    <script>
+        // File upload handler
+        document.addEventListener('DOMContentLoaded', function() {
+            var resumeInput = document.getElementById('demoResumeFile');
+            if (!resumeInput) return;
+            resumeInput.addEventListener('change', function() {
+                var file = this.files[0];
+                if (file) {
+                    var nameEl = document.getElementById('demoFileName');
+                    nameEl.textContent = file.name;
+                    nameEl.classList.remove('text-gray-500');
+                    nameEl.classList.add('text-[#2E86C1]', 'font-medium');
+                    var checkEl = document.getElementById('demoFileCheck');
+                    checkEl.classList.remove('hidden');
+                    checkEl.classList.add('flex');
+                }
+            });
+        });
+
+        // Extract job role from resume filename
+        function extractRoleFromFilename(filename) {
+            var clean = filename
+                .replace(/\.(pdf|doc|docx|txt)$/i, '')
+                .replace(/[_\-\.]/g, ' ')
+                .replace(/\b(resume|cv|curriculum|vitae|my|new|updated|final|v\d+|\d{4})\b/gi, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            var knownTitles = [
+                'Software Engineer', 'Frontend Engineer', 'Backend Engineer', 'Full Stack Engineer',
+                'Full Stack Developer', 'Frontend Developer', 'Backend Developer',
+                'Product Manager', 'Project Manager', 'Program Manager',
+                'Data Scientist', 'Data Analyst', 'Data Engineer',
+                'UX Designer', 'UI Designer', 'Product Designer',
+                'DevOps Engineer', 'Cloud Engineer', 'Site Reliability Engineer',
+                'Mobile Developer', 'iOS Developer', 'Android Developer',
+                'Machine Learning Engineer', 'ML Engineer', 'AI Engineer',
+                'QA Engineer', 'QA Analyst', 'Test Engineer',
+                'Engineering Manager', 'Tech Lead', 'CTO',
+                'Marketing Manager', 'Growth Manager', 'Sales Manager',
+                'Business Analyst', 'Systems Analyst', 'Scrum Master',
+                'Security Engineer', 'Cybersecurity Analyst',
+                'React Developer', 'Node Developer', 'Python Developer',
+                'Java Developer', 'iOS Engineer', 'Android Engineer'
+            ];
+
+            var lower = clean.toLowerCase();
+            for (var i = 0; i < knownTitles.length; i++) {
+                if (lower.indexOf(knownTitles[i].toLowerCase()) !== -1) {
+                    return knownTitles[i];
+                }
+            }
+            return null;
+        }
+
+        // Safely escape user-provided text before inserting into HTML
+        function escapeHTML(str) {
+            var d = document.createElement('div');
+            d.appendChild(document.createTextNode(str));
+            return d.innerHTML;
+        }
+
+        // Mock job data (6 entries — mix of real and fictional companies)
+        var mockJobsData = [
+            {
+                company: 'Shopify',
+                initial: 'S',
+                color: 'bg-green-600',
+                prefix: 'Senior',
+                salary: '$130k–$180k',
+                location: 'Remote · Full-time',
+                posted: '2h ago',
+                match: 97,
+                tags: ['Visa Sponsorship', 'Remote-First', 'Top 10% Pay'],
+                blurred: false
+            },
+            {
+                company: 'Helio Systems',
+                initial: 'H',
+                color: 'bg-blue-500',
+                prefix: '',
+                salary: '$110k–$150k',
+                location: 'Remote · Full-time',
+                posted: '4h ago',
+                match: 95,
+                tags: ['Stock Options', 'Fast Reply', 'Series B'],
+                blurred: false
+            },
+            {
+                company: 'Meridian Labs',
+                initial: 'M',
+                color: 'bg-indigo-500',
+                prefix: 'Lead',
+                salary: '$120k–$160k',
+                location: 'Hybrid · Austin, TX',
+                posted: '1d ago',
+                match: 93,
+                tags: ['Visa Sponsorship', 'Remote Option', 'High Growth'],
+                blurred: true
+            },
+            {
+                company: 'Orbit Platform',
+                initial: 'O',
+                color: 'bg-teal-500',
+                prefix: 'Principal',
+                salary: '$115k–$155k',
+                location: 'Remote · Full-time',
+                posted: '6h ago',
+                match: 92,
+                tags: ['No Sponsorship Needed', 'Async-First', 'Series C'],
+                blurred: true
+            },
+            {
+                company: 'Velo Technologies',
+                initial: 'V',
+                color: 'bg-violet-600',
+                prefix: 'Staff',
+                salary: '$125k–$165k',
+                location: 'Remote · Full-time',
+                posted: '3h ago',
+                match: 91,
+                tags: ['Top Match', 'Stock Options', 'Remote'],
+                blurred: true
+            },
+            {
+                company: 'Cascade AI',
+                initial: 'C',
+                color: 'bg-orange-500',
+                prefix: 'Senior',
+                salary: '$105k–$140k',
+                location: 'Remote · Full-time',
+                posted: '5h ago',
+                match: 90,
+                tags: ['Equity Package', 'Fast-Moving', 'Seed Stage'],
+                blurred: true
+            }
+        ];
+
+        function runDemoSearch() {
+            var jobTitle = document.getElementById('demoJobTitle').value.trim();
+            var fileInput = document.getElementById('demoResumeFile');
+            var fileName = fileInput.files[0] ? fileInput.files[0].name : null;
+
+            // Validate job title
+            if (!jobTitle) {
+                var titleInput = document.getElementById('demoJobTitle');
+                titleInput.classList.add('border-red-400');
+                titleInput.placeholder = 'Please enter your job title first';
+                titleInput.focus();
+                setTimeout(function() {
+                    titleInput.classList.remove('border-red-400');
+                    titleInput.placeholder = 'e.g. Product Manager, Software Engineer...';
+                }, 2500);
+                return;
+            }
+
+            // Validate resume
+            if (!fileName) {
+                var uploadLabel = document.getElementById('demoUploadLabel');
+                uploadLabel.classList.add('border-red-400');
+                document.getElementById('demoFileName').textContent = 'Please upload your resume first';
+                document.getElementById('demoFileName').classList.add('text-red-500');
+                setTimeout(function() {
+                    uploadLabel.classList.remove('border-red-400');
+                    document.getElementById('demoFileName').textContent = 'Upload PDF or Word — max 5MB';
+                    document.getElementById('demoFileName').classList.remove('text-red-500');
+                }, 2500);
+                return;
+            }
+
+            // Detect role from resume filename, fall back to user's typed title
+            var detectedRole = extractRoleFromFilename(fileName);
+            var effectiveTitle = detectedRole || jobTitle;
+
+            // Transition to loading state
+            document.getElementById('demoForm').classList.add('hidden');
+            var loadingEl = document.getElementById('demoLoading');
+            loadingEl.classList.remove('hidden');
+
+            // Scroll loading into view
+            setTimeout(function() {
+                loadingEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+
+            var checkIconHTML = '<div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center"><svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg></div>';
+
+            var steps = [
+                { id: 'demoStep1', iconId: 'demoStep1Icon', delay: 200, checkDelay: 700 },
+                { id: 'demoStep2', iconId: 'demoStep2Icon', delay: 1000, checkDelay: 1500 },
+                { id: 'demoStep3', iconId: 'demoStep3Icon', delay: 1800, checkDelay: 2300 },
+                { id: 'demoStep4', iconId: null,            delay: 2600, checkDelay: null }
+            ];
+
+            steps.forEach(function(step) {
+                setTimeout(function() {
+                    var el = document.getElementById(step.id);
+                    el.classList.remove('opacity-0');
+                    el.classList.add('opacity-100');
+                }, step.delay);
+
+                if (step.iconId && step.checkDelay) {
+                    setTimeout(function() {
+                        var iconEl = document.getElementById(step.iconId);
+                        if (iconEl) iconEl.innerHTML = checkIconHTML;
+                        // After step 1 check — show detected role if found
+                        if (step.id === 'demoStep1' && detectedRole) {
+                            var step1Span = document.querySelector('#demoStep1 span');
+                            if (step1Span) {
+                                step1Span.innerHTML = 'Resume parsed &nbsp;&middot;&nbsp; <span style="color:#2E86C1;font-weight:600;">Role detected: ' + escapeHTML(detectedRole) + '</span>';
+                            }
+                        }
+                    }, step.checkDelay);
+                }
+            });
+
+            // Show results
+            setTimeout(function() {
+                showDemoResults(effectiveTitle, fileName, detectedRole);
+            }, 3300);
+        }
+
+        function showDemoResults(jobTitle, fileName, detectedRole) {
+            document.getElementById('demoLoading').classList.add('hidden');
+            var resultsEl = document.getElementById('demoResults');
+            resultsEl.classList.remove('hidden');
+
+            document.getElementById('demoResultFileName').textContent = fileName;
+            document.getElementById('demoSearchCount').textContent = Math.floor(Math.random() * 17) + 18;
+
+            // Show "Role from resume" badge if role was detected from filename
+            if (detectedRole) {
+                var badge = document.getElementById('demoRoleBadge');
+                var badgeText = document.getElementById('demoRoleBadgeText');
+                badge.classList.remove('hidden');
+                badgeText.textContent = detectedRole;
+            }
+
+            var grid = document.getElementById('demoJobGrid');
+            grid.innerHTML = '';
+
+            mockJobsData.forEach(function(job, i) {
+                var capitalizedTitle = jobTitle.charAt(0).toUpperCase() + jobTitle.slice(1);
+                var titleParts = [];
+                if (job.prefix) titleParts.push(job.prefix);
+                titleParts.push(capitalizedTitle);
+                var fullTitle = escapeHTML(titleParts.join(' '));
+
+                var card = document.createElement('div');
+                card.className = 'bg-white border border-gray-100 shadow-md rounded-2xl p-5 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:-translate-y-0.5';
+
+                var blurOverlay = job.blurred
+                    ? '<div class="absolute inset-0 backdrop-blur-[3px] bg-white/30 z-10 rounded-2xl flex items-end justify-center pb-4"><a href="#paywall" class="bg-[#1B4F72] hover:bg-[#2E86C1] text-white text-xs font-semibold px-4 py-2 rounded-full transition-colors">🔒 Unlock to view</a></div>'
+                    : '';
+
+                var tagsHTML = job.tags.map(function(tag) {
+                    return '<span class="bg-[#EBF5FB] text-[#1B4F72] text-xs px-2.5 py-1 rounded-full">' + tag + '</span>';
+                }).join('');
+
+                var applyBtn = !job.blurred
+                    ? '<a href="#paywall" class="block w-full bg-[#2E86C1] hover:bg-[#1B4F72] text-white font-semibold text-sm py-2.5 rounded-xl transition-colors mt-1 text-center">Apply with Landed</a>'
+                    : '';
+
+                card.innerHTML = blurOverlay +
+                    '<div class="flex items-start justify-between mb-3">' +
+                        '<div class="flex items-center gap-3">' +
+                            '<div class="w-10 h-10 ' + job.color + ' rounded-xl flex items-center justify-center text-white font-bold text-base flex-shrink-0">' + job.initial + '</div>' +
+                            '<div>' +
+                                '<p class="font-heading font-bold text-base text-gray-900 leading-tight">' + fullTitle + '</p>' +
+                                '<p class="font-body text-sm text-gray-500">' + job.company + ' · Posted ' + job.posted + '</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<span class="bg-green-50 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full border border-green-100 flex-shrink-0">' + job.match + '%</span>' +
+                    '</div>' +
+                    '<p class="font-body text-sm font-semibold text-[#FF9933] mb-3">' + job.salary + ' · ' + job.location + '</p>' +
+                    '<div class="flex flex-wrap gap-1.5 mb-3">' + tagsHTML + '</div>' +
+                    applyBtn;
+
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(16px)';
+                card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                grid.appendChild(card);
+
+                setTimeout(function() {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, i * 130);
+            });
+
+            // Scroll to results
+            setTimeout(function() {
+                resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
     </script>
 </body>
 </html>
