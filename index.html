@@ -329,7 +329,7 @@
                     <span class="font-heading text-3xl font-extrabold text-gray-900">Landed.</span>
                 </div>
                 <!-- CTA Button (Right) -->
-                <a href="#paywall" class="bg-[#FF9933] hover:bg-[#FF9933]/90 text-white px-8 h-12 rounded-lg font-semibold transition-colors flex items-center">
+                <a href="#paywall" onclick="gtag('event', 'click_offer_start');" class="bg-[#FF9933] hover:bg-[#FF9933]/90 text-white px-8 h-12 rounded-lg font-semibold transition-colors flex items-center">
                     Get Your Offer
                 </a>
             </div>
@@ -411,7 +411,7 @@
                         
                         <!-- CTA Button -->
                         <div class="flex justify-start relative mb-4 md:mb-8">
-                            <a href="#paywall" class="bg-[#FF9933] hover:bg-[#FF9933]/90 hover:brightness-110 text-white font-heading font-bold text-xl sm:text-2xl px-8 py-4 rounded-[28px] uppercase transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg inline-block text-center relative z-10">
+                            <a href="#paywall" onclick="gtag('event', 'click_offer_start');" class="bg-[#FF9933] hover:bg-[#FF9933]/90 hover:brightness-110 text-white font-heading font-bold text-xl sm:text-2xl px-8 py-4 rounded-[28px] uppercase transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg inline-block text-center relative z-10">
                                 Find a Job Now
                             </a>
                         </div>
@@ -1391,7 +1391,7 @@
                                 <span class="font-heading text-5xl lg:text-7xl font-bold text-white leading-none">$20</span>
                                 <span class="font-body text-3xl lg:text-4xl text-white/90 ml-2">/month</span>
                             </div>
-                            <button type="button" id="buyButton" class="w-full lg:w-auto px-12 py-5 bg-[#FF9933] text-white rounded-xl font-body font-bold text-xl lg:text-2xl hover:bg-[#FF9933]/90 hover:brightness-110 transition-all duration-300 shadow-lg transform hover:scale-105 hover:shadow-xl">
+                            <button type="button" id="buyButton" onclick="gtag('event', 'click_buy_now');" class="w-full lg:w-auto px-12 py-5 bg-[#FF9933] text-white rounded-xl font-body font-bold text-xl lg:text-2xl hover:bg-[#FF9933]/90 hover:brightness-110 transition-all duration-300 shadow-lg transform hover:scale-105 hover:shadow-xl">
                             Buy Now
                         </button>
                         </div>
@@ -2292,25 +2292,27 @@
                     <h3 class="font-body text-lg font-bold text-black mb-4">Contact Information</h3>
                 <form id="purchaseForm" class="space-y-4">
                     <div>
-                        <input 
-                            type="email" 
-                            id="purchaseEmail" 
+                        <input
+                            type="email"
+                            id="purchaseEmail"
                             name="email"
                             autocomplete="email"
                             required
                                 placeholder="name@example.com"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 font-body text-base"
+                            onfocus="gtag('event', 'input_email');"
                         >
                     </div>
                     
                     <div>
-                        <input 
-                            type="tel" 
-                            id="purchasePhone" 
+                        <input
+                            type="tel"
+                            id="purchasePhone"
                             name="phone"
                             autocomplete="tel"
                                 placeholder="+1 (555) 000-0000"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 font-body text-base"
+                            onfocus="gtag('event', 'input_phone');"
                         >
                     </div>
                     
@@ -2321,9 +2323,10 @@
                 </div>
                 
                 <!-- Proceed Button -->
-                    <button 
+                    <button
                     type="button"
                     id="proceedToPayment"
+                    onclick="gtag('event', 'click_proceed_payment');"
                     class="w-full py-4 px-6 bg-[#FF9933] hover:bg-[#FF9933]/90 text-white font-body font-semibold text-base rounded-lg transition-colors flex items-center justify-center gap-2"
                     >
                     Proceed to Payment
@@ -2990,6 +2993,401 @@
             setTimeout(function() {
                 resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 300);
+        }
+    </script>
+
+    <!-- ============================================================
+         CHAT WIDGET
+         TODO: Replace N8N_WEBHOOK_URL with your actual n8n webhook URL
+               Example: https://your-n8n-instance.com/webhook/abc123
+    ============================================================ -->
+    <style>
+        /* Chat Widget Styles */
+        #chat-widget-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #FF9933;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 153, 51, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #chat-widget-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 28px rgba(255, 153, 51, 0.55);
+        }
+        #chat-widget-btn .chat-icon,
+        #chat-widget-btn .close-icon {
+            position: absolute;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        #chat-widget-btn .close-icon { opacity: 0; transform: rotate(-90deg) scale(0.7); }
+        #chat-widget-btn.open .chat-icon { opacity: 0; transform: rotate(90deg) scale(0.7); }
+        #chat-widget-btn.open .close-icon { opacity: 1; transform: rotate(0deg) scale(1); }
+
+        #chat-widget-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            z-index: 9998;
+            width: 360px;
+            max-width: calc(100vw - 40px);
+            height: 520px;
+            max-height: calc(100vh - 130px);
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(27, 79, 114, 0.22);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.92) translateY(16px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), opacity 0.2s ease;
+            transform-origin: bottom right;
+        }
+        #chat-widget-panel.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Header */
+        #chat-widget-header {
+            background: #1B4F72;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        #chat-widget-header .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #FF9933;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Titillium Web', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        #chat-widget-header .title {
+            flex: 1;
+            min-width: 0;
+        }
+        #chat-widget-header .title h3 {
+            font-family: 'Titillium Web', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+            margin: 0;
+            line-height: 1.2;
+        }
+        #chat-widget-header .title p {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #EBF5FB;
+            margin: 0;
+            opacity: 0.8;
+        }
+        .chat-online-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Messages area */
+        #chat-widget-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            scroll-behavior: smooth;
+        }
+        #chat-widget-messages::-webkit-scrollbar { width: 4px; }
+        #chat-widget-messages::-webkit-scrollbar-track { background: transparent; }
+        #chat-widget-messages::-webkit-scrollbar-thumb { background: #EBF5FB; border-radius: 2px; }
+
+        .chat-msg {
+            display: flex;
+            flex-direction: column;
+            max-width: 82%;
+            animation: chatMsgIn 0.22s ease;
+        }
+        @keyframes chatMsgIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .chat-msg.bot { align-self: flex-start; }
+        .chat-msg.user { align-self: flex-end; }
+
+        .chat-msg .bubble {
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .chat-msg.bot .bubble {
+            background: #EBF5FB;
+            color: #1B4F72;
+            border-bottom-left-radius: 4px;
+        }
+        .chat-msg.user .bubble {
+            background: #1B4F72;
+            color: #fff;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Typing indicator */
+        .chat-typing .bubble {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            padding: 12px 16px;
+        }
+        .chat-typing .dot {
+            width: 7px;
+            height: 7px;
+            background: #2E86C1;
+            border-radius: 50%;
+            animation: typingBounce 1.2s infinite;
+        }
+        .chat-typing .dot:nth-child(2) { animation-delay: 0.2s; }
+        .chat-typing .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-5px); opacity: 1; }
+        }
+
+        /* Input area */
+        #chat-widget-footer {
+            padding: 12px 14px;
+            border-top: 1px solid #EBF5FB;
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+            flex-shrink: 0;
+            background: #fff;
+        }
+        #chat-widget-input {
+            flex: 1;
+            border: 1.5px solid #d1d5db;
+            border-radius: 12px;
+            padding: 9px 13px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            color: #1B4F72;
+            outline: none;
+            resize: none;
+            min-height: 40px;
+            max-height: 100px;
+            line-height: 1.45;
+            transition: border-color 0.2s;
+            overflow-y: auto;
+        }
+        #chat-widget-input:focus { border-color: #2E86C1; }
+        #chat-widget-input::placeholder { color: #9ca3af; }
+
+        #chat-widget-send {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #FF9933;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.15s;
+            flex-shrink: 0;
+        }
+        #chat-widget-send:hover { background: #e8881f; transform: scale(1.05); }
+        #chat-widget-send:disabled { background: #d1d5db; cursor: default; transform: none; }
+        #chat-widget-send svg { pointer-events: none; }
+    </style>
+
+    <!-- Chat Widget HTML -->
+    <button id="chat-widget-btn" aria-label="Open chat" onclick="chatWidgetToggle()">
+        <svg class="chat-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <svg class="close-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </button>
+
+    <div id="chat-widget-panel" role="dialog" aria-label="Landed chat assistant">
+        <div id="chat-widget-header">
+            <div class="avatar">L</div>
+            <div class="title">
+                <h3>Landed Assistant</h3>
+                <p>AI-powered job search help</p>
+            </div>
+            <div class="chat-online-dot"></div>
+        </div>
+        <div id="chat-widget-messages"></div>
+        <div id="chat-widget-footer">
+            <textarea
+                id="chat-widget-input"
+                placeholder="Message..."
+                rows="1"
+                onkeydown="chatWidgetKeydown(event)"
+                oninput="chatWidgetAutoResize(this)"
+            ></textarea>
+            <button id="chat-widget-send" onclick="chatWidgetSend()" aria-label="Send message">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // CHAT WIDGET — n8n Integration
+        // TODO: Replace with your actual n8n webhook URL
+        // ============================================================
+        var CHAT_WEBHOOK_URL = 'YOUR_N8N_WEBHOOK_URL_HERE';
+
+        var chatIsOpen = false;
+        var chatIsWaiting = false;
+        var chatSessionId = 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+        var chatGreeted = false;
+
+        function chatWidgetToggle() {
+            chatIsOpen = !chatIsOpen;
+            var btn = document.getElementById('chat-widget-btn');
+            var panel = document.getElementById('chat-widget-panel');
+            btn.classList.toggle('open', chatIsOpen);
+            panel.classList.toggle('open', chatIsOpen);
+            if (chatIsOpen) {
+                if (!chatGreeted) {
+                    chatGreeted = true;
+                    setTimeout(function() {
+                        chatAddMessage('bot', "Hey, you good? Fed up with job hunting?! I get it, that's why I'm here. Ask me anything.");
+                    }, 300);
+                }
+                setTimeout(function() {
+                    document.getElementById('chat-widget-input').focus();
+                }, 350);
+            } else {
+                btn.focus();
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && chatIsOpen) chatWidgetToggle();
+        });
+
+        function chatWidgetKeydown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                chatWidgetSend();
+            }
+        }
+
+        function chatWidgetAutoResize(el) {
+            el.style.height = 'auto';
+            el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+        }
+
+        function chatAddMessage(role, text) {
+            var messages = document.getElementById('chat-widget-messages');
+            var div = document.createElement('div');
+            div.className = 'chat-msg ' + role;
+            div.innerHTML = '<div class="bubble">' + chatEscapeHTML(text) + '</div>';
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function chatShowTyping() {
+            var messages = document.getElementById('chat-widget-messages');
+            var div = document.createElement('div');
+            div.className = 'chat-msg bot chat-typing';
+            div.id = 'chat-typing-indicator';
+            div.innerHTML = '<div class="bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function chatHideTyping() {
+            var el = document.getElementById('chat-typing-indicator');
+            if (el) el.remove();
+        }
+
+        function chatEscapeHTML(str) {
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\n/g, '<br>');
+        }
+
+        async function chatWidgetSend() {
+            if (chatIsWaiting) return;
+            var input = document.getElementById('chat-widget-input');
+            var text = input.value.trim();
+            if (!text) return;
+
+            input.value = '';
+            input.style.height = 'auto';
+            chatAddMessage('user', text);
+            chatIsWaiting = true;
+            document.getElementById('chat-widget-send').disabled = true;
+            chatShowTyping();
+
+            try {
+                var controller = new AbortController();
+                var timeoutId = setTimeout(function() { controller.abort(); }, 15000);
+
+                var response = await fetch(CHAT_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: text,
+                        sessionId: chatSessionId
+                    }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+
+                var data = await response.json();
+                // n8n can return: { reply: "..." } or { output: "..." } or { message: "..." } or plain string
+                var reply = data.reply || data.output || data.message || data.text || (typeof data === 'string' ? data : null);
+                if (!reply) reply = "Got your message! Let me think...";
+                chatHideTyping();
+                chatAddMessage('bot', reply);
+            } catch (err) {
+                chatHideTyping();
+                chatAddMessage('bot', "Hmm, something went wrong on my end. Try again in a sec!");
+                console.error('[ChatWidget] Error:', err);
+            }
+
+            chatIsWaiting = false;
+            document.getElementById('chat-widget-send').disabled = false;
+            input.focus();
         }
     </script>
 </body>
