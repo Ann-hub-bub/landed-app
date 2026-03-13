@@ -3070,8 +3070,8 @@
             flex-shrink: 0;
         }
         #chat-widget-header .avatar {
-            width: 36px;
-            height: 36px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             background: #FF9933;
             display: flex;
@@ -3081,6 +3081,7 @@
             font-weight: 700;
             font-size: 16px;
             color: #fff;
+            overflow: hidden;
             flex-shrink: 0;
         }
         #chat-widget-header .title {
@@ -3237,10 +3238,10 @@
 
     <div id="chat-widget-panel" role="dialog" aria-label="Landed chat assistant">
         <div id="chat-widget-header">
-            <div class="avatar">L</div>
+            <div class="avatar"><img src="PirateAvatar.png" alt="Assistant" style="width:100%;height:100%;object-fit:cover;"></div>
             <div class="title">
-                <h3>Landed Assistant</h3>
-                <p>AI-powered job search help</p>
+                <h3>Old Bony Joe</h3>
+                <p>Digital Navigator & Pirate from the Future</p>
             </div>
             <div class="chat-online-dot"></div>
         </div>
@@ -3267,12 +3268,19 @@
         // CHAT WIDGET — n8n Integration
         // TODO: Replace with your actual n8n webhook URL
         // ============================================================
-        var CHAT_WEBHOOK_URL = 'YOUR_N8N_WEBHOOK_URL_HERE';
+        var CHAT_WEBHOOK_URL = 'https://annaboytsova.app.n8n.cloud/webhook/38e153b8-ebd7-4c70-8b17-ca656da5c577';
 
         var chatIsOpen = false;
         var chatIsWaiting = false;
         var chatSessionId = 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
         var chatGreeted = false;
+
+        // Persistent user ID — survives page refreshes and new sessions
+        var chatUserId = localStorage.getItem('landed_chat_uid');
+        if (!chatUserId) {
+            chatUserId = 'user_' + Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 4);
+            localStorage.setItem('landed_chat_uid', chatUserId);
+        }
 
         function chatWidgetToggle() {
             chatIsOpen = !chatIsOpen;
@@ -3284,7 +3292,7 @@
                 if (!chatGreeted) {
                     chatGreeted = true;
                     setTimeout(function() {
-                        chatAddMessage('bot', "Hey, you good? Fed up with job hunting?! I get it, that's why I'm here. Ask me anything.");
+                        chatAddMessage('bot', "Blast it, landlubber!\n\nThis job market is a rotting whale carcass and I am here to help you gut it.\n\nWhat tech role are you hunting so we can start the assault?");
                     }, 300);
                 }
                 setTimeout(function() {
@@ -3358,14 +3366,15 @@
 
             try {
                 var controller = new AbortController();
-                var timeoutId = setTimeout(function() { controller.abort(); }, 15000);
+                var timeoutId = setTimeout(function() { controller.abort(); }, 60000);
 
                 var response = await fetch(CHAT_WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         message: text,
-                        sessionId: chatSessionId
+                        sessionId: chatSessionId,
+                        userId: chatUserId
                     }),
                     signal: controller.signal
                 });
@@ -3374,8 +3383,9 @@
                 if (!response.ok) throw new Error('HTTP ' + response.status);
 
                 var data = await response.json();
-                // n8n can return: { reply: "..." } or { output: "..." } or { message: "..." } or plain string
-                var reply = data.reply || data.output || data.message || data.text || (typeof data === 'string' ? data : null);
+                // n8n often returns an array: [{ output: "..." }] — unwrap it
+                var item = Array.isArray(data) ? data[0] : data;
+                var reply = item.reply || item.output || item.message || item.text || (typeof item === 'string' ? item : null);
                 if (!reply) reply = "Got your message! Let me think...";
                 chatHideTyping();
                 chatAddMessage('bot', reply);
