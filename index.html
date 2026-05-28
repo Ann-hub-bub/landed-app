@@ -149,20 +149,13 @@
   .nochar .stamp{ display:none;}
   .nochar .floating-offer{ position:static; transform:none; box-shadow: 0 30px 60px -20px rgba(0,0,0,.7);}
 
-  /* ── Live ticker ── */
-  .ticker-bar{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding: 16px 0; overflow:hidden; font-size:13.5px; color: var(--mute);}
-  .ticker-bar .tk-inner{ display:flex; gap:48px; align-items:center; white-space:nowrap; animation: tk 60s linear infinite;}
-  @keyframes tk{ from{ transform: translateX(0);} to{ transform: translateX(-50%);} }
-  .ticker-bar b{ color: var(--bone); font-weight:600;}
-  .ticker-bar .hot{ color: var(--orange);}
-  .ticker-bar .pulse{ width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 0 4px rgba(94,240,168,.18); display:inline-block; vertical-align:middle; margin-right:8px;}
-
-  /* ── Trust strip ── */
-  .trust{ padding: 48px 0; border-bottom: 1px solid var(--line);}
-  .trust .row{ display:flex; align-items:center; justify-content:space-between; gap:32px;}
-  .trust .lbl{ font-size:12px; color: var(--mute); letter-spacing:.16em; text-transform:uppercase; flex:0 0 auto;}
-  .trust .logos{ display:flex; gap:48px; align-items:center; opacity:.55; filter: grayscale(1) brightness(2);}
-  .trust .logos img{ height: 26px; width:auto; object-fit:contain;}
+  /* ── Logos ticker ── */
+  .logos-ticker{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding: 20px 0; display:flex; align-items:center;}
+  .logos-ticker .lt-label{ font-size:12px; color: var(--mute); letter-spacing:.16em; text-transform:uppercase; flex:0 0 auto; padding: 0 48px;}
+  .logos-ticker .lt-track{ flex:1; overflow:hidden;}
+  .logos-ticker .lt-inner{ display:flex; gap:56px; align-items:center; white-space:nowrap; animation: lt 35s linear infinite;}
+  @keyframes lt{ from{ transform: translateX(0);} to{ transform: translateX(-50%);} }
+  .logos-ticker .lt-inner img{ height:26px; width:auto; object-fit:contain; opacity:.55; filter: grayscale(1) brightness(2);}
 
   /* ── Section heads ── */
   section.block{ padding: 96px 0; border-top:1px solid var(--line);}
@@ -1410,7 +1403,7 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">F<span class="bleep-nav"></span>Q</a>
     </div>
-    <a href="#pricing" class="cta">Start →</a>
+    <a href="#pricing" class="cta">Get me hired →</a>
   </div>
 </nav>
 
@@ -1425,7 +1418,7 @@
         <p class="lede">We chase recruiters when they ghost.</p>
         <p class="lede"><b>You sign the offer.</b></p>
         <div class="actions">
-          <a class="btn-primary" href="#demo">Paste resume <span class="ar">→</span></a>
+          <a class="btn-primary" href="#demo">Drop your resume <span class="ar">→</span></a>
           <div class="btn-ghost">30 days. <b>Or full refund.</b><br/>No forms.</div>
         </div>
         <div class="stats">
@@ -1444,50 +1437,35 @@
   </div>
 </section>
 
-<!-- LIVE TICKER -->
-<div class="ticker-bar">
-  <div class="tk-inner">
-    <span><span class="pulse"></span><b class="hot">Live</b></span>
-    <span><b>Ananya S.</b> — Senior PM @ Stripe — 4 min ago</span>
-    <span>·</span>
-    <span><b>Arjun S.</b> — Backend @ Ramp — 28 min ago</span>
-    <span>·</span>
-    <span><b>Maria G.</b> — UX @ Notion — 1 h ago</span>
-    <span>·</span>
-    <span><b>David L.</b> — Data @ Linear — 3 h ago</span>
-    <span>·</span>
-    <span><b>Priya N.</b> — PM @ Airbnb — 5 h ago</span>
-    <span>·</span>
-    <span><b>Jordan R.</b> — Eng Mgr @ Spotify — 8 h ago</span>
-    <!-- duplicate for loop -->
-    <span><span class="pulse"></span><b class="hot">Live</b></span>
-    <span><b>Ananya S.</b> — Senior PM @ Stripe — 4 min ago</span>
-    <span>·</span>
-    <span><b>Arjun S.</b> — Backend @ Ramp — 28 min ago</span>
-    <span>·</span>
-    <span><b>Maria G.</b> — UX @ Notion — 1 h ago</span>
-    <span>·</span>
-    <span><b>David L.</b> — Data @ Linear — 3 h ago</span>
-    <span>·</span>
-    <span><b>Priya N.</b> — PM @ Airbnb — 5 h ago</span>
-    <span>·</span>
-    <span><b>Jordan R.</b> — Eng Mgr @ Spotify — 8 h ago</span>
-  </div>
-</div>
-
-<!-- TRUST STRIP -->
-<section class="trust">
-  <div class="wrap row">
-    <div class="lbl">Crew signed on at</div>
-    <div class="logos">
+<!-- LOGOS TICKER -->
+<div class="logos-ticker">
+  <div class="lt-label">Crew signed on at</div>
+  <div class="lt-track">
+    <div class="lt-inner">
       <img src="./spotify.png" alt="Spotify"/>
       <img src="./lyft.png" alt="Lyft"/>
       <img src="./canva.png" alt="Canva"/>
       <img src="./arbnb.png" alt="Airbnb"/>
       <img src="./miro.png" alt="Miro"/>
+      <img src="./gitlab.png" alt="GitLab"/>
+      <img src="./zapier-round-logo-thumbnail-tech-companies-thumbnail.png" alt="Zapier"/>
+      <img src="./automattic.png" alt="Automattic"/>
+      <img src="./linear-app-icon-logo-png_seeklogo-586481.png" alt="Linear"/>
+      <img src="./supabase.png" alt="Supabase"/>
+      <!-- duplicate for seamless loop -->
+      <img src="./spotify.png" alt="Spotify"/>
+      <img src="./lyft.png" alt="Lyft"/>
+      <img src="./canva.png" alt="Canva"/>
+      <img src="./arbnb.png" alt="Airbnb"/>
+      <img src="./miro.png" alt="Miro"/>
+      <img src="./gitlab.png" alt="GitLab"/>
+      <img src="./zapier-round-logo-thumbnail-tech-companies-thumbnail.png" alt="Zapier"/>
+      <img src="./automattic.png" alt="Automattic"/>
+      <img src="./linear-app-icon-logo-png_seeklogo-586481.png" alt="Linear"/>
+      <img src="./supabase.png" alt="Supabase"/>
     </div>
   </div>
-</section>
+</div>
 
 <!-- FIVE MOVES · merged demo + how-it-works walkthrough -->
 <section class="block" id="demo">
@@ -1891,7 +1869,7 @@
         <h2 class="display">Stop asking.<br/>Start <span class="hot">taking</span> seats.</h2>
         <div class="lede">$<span data-tweak-price-3>20</span>. Thirty days. One offer — or your money back. <b>Jack's waiting.</b></div>
         <div class="actions">
-          <a class="btn-primary" href="#demo">Paste resume <span class="ar">→</span></a>
+          <a class="btn-primary" href="#demo">Drop your resume <span class="ar">→</span></a>
           <div class="btn-ghost" style="text-align:left">No forms. <b>No call with sales.</b> Just the work.</div>
         </div>
       </div>
