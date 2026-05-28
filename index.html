@@ -925,6 +925,10 @@
   .booking .slot.selected .n{ color: var(--orange);}
   .booking .cal .btn-primary{ width:100%; justify-content:center; padding: 20px 28px; font-size:17px;}
 
+  /* ── Bleep bar ── */
+  .bleep{ display:inline-block; background:#111; color:#111; border-radius:3px; padding:0 6px; margin:0 4px; font-size:.85em; letter-spacing:.1em; vertical-align:middle; user-select:none; cursor:default;}
+  .bleep-nav{ display:inline-block; background: var(--fg); border-radius:2px; width:14px; height:.65em; vertical-align:middle; margin:0 1px;}
+
   /* ── FAQ ── */
   .faq{ display:grid; grid-template-columns: 1fr; gap: 0; max-width: 880px;}
   .faq .q{ border-top:1px solid var(--line); padding: 0; cursor:pointer;}
@@ -1403,7 +1407,7 @@
       <a href="#how">How it works</a>
       <a href="#wall">Wall of offers</a>
       <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
+      <a href="#faq">F<span class="bleep-nav"></span>Q</a>
     </div>
     <a href="#pricing" class="cta">Start →</a>
   </div>
@@ -1841,7 +1845,7 @@
   <div class="wrap">
     <div class="head">
       <div>
-        <div class="l">Honest answers</div>
+        <div class="l">F<span class="bleep">▓▓▓▓▓▓</span>Questions</div>
         <h2>The questions you'd ask at 2 a.m.</h2>
       </div>
     </div>
