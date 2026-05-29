@@ -1386,6 +1386,10 @@
     .fm-job .pay, .fm-job .match{ grid-column: 1 / -1;}
     .fm-job .pay{ text-align:left;}
   }
+
+  /* Stage 1 — fade out when replaced by Stage 2 */
+  .fm-stage[data-stage-num="1"][data-state="exit"] { opacity: 0; pointer-events: none; }
+  .fm-stage[data-stage-num="1"][data-state="hidden"] { display: none; }
 </style>
 </head>
 <body>
@@ -1956,7 +1960,58 @@
       }
     });
 
-    // Realistic job templates
+    // Startup job pool — shown when "startup" (or similar) appears in keywords
+    const STARTUP_JOBS = [
+      { role:'Senior PM, Core Product', co:'Brex', loc:'SF · remote OK', logo:'B',
+        pay:'$185k–$240k', base:210000, match:95, age:'3h ago', visa:true, level:'senior',
+        tags:['Startup','Remote OK','Fintech','Series D'],
+        why:'Brex is scaling spend management for startups — your product instincts and 0→1 experience are a strong match for their growth phase.',
+        reqs:['5+ yrs PM in B2B or fintech','0→1 product experience','Comfort working close to engineering'],
+        perks:['Competitive base + equity','H1B & OPT sponsor','Remote-flexible'],
+        recruiter:{ name:'Sasha Kim', title:'Talent Lead · Brex', avatar:'SK', seen:'last seen 1h ago' } },
+
+      { role:'PM, Developer Experience', co:'Vercel', loc:'Remote · US preferred', logo:'Ve',
+        pay:'$195k–$250k', base:215000, match:92, age:'5h ago', visa:false, level:'senior',
+        tags:['Startup','Remote-first','Dev Tools','Series C'],
+        why:'Vercel is redefining how the web is deployed — great fit for a PM who loves fast iteration on developer-facing products.',
+        reqs:['5+ yrs PM','Dev tools or platform experience','Strong empathy for engineering workflows'],
+        perks:['Generous equity at high valuation','Fully remote','$1.5k home-office budget'],
+        recruiter:{ name:'Taylor Moore', title:'PM Recruiter · Vercel', avatar:'TM', seen:'last seen 3h ago' } },
+
+      { role:'Senior PM, Growth & Activation', co:'Rippling', loc:'SF · hybrid', logo:'Ri',
+        pay:'$180k–$230k', base:200000, match:90, age:'1d ago', visa:true, level:'senior',
+        tags:['Startup','Hybrid','HR Tech','Series E'],
+        why:'Rippling is expanding into new verticals — a growth PM comfortable with multi-product complexity will have outsized impact here.',
+        reqs:['4+ yrs PM in B2B SaaS','Activation funnel or growth experience','Data-driven mindset'],
+        perks:['Series E equity with upside','H1B & TN sponsor','SF hybrid with great office'],
+        recruiter:{ name:'Mei Chen', title:'Recruiter · Rippling', avatar:'MC', seen:'last seen 52m ago' } },
+
+      { role:'PM, Integrations Platform', co:'Merge', loc:'NYC · remote OK', logo:'M',
+        pay:'$170k–$210k', base:185000, match:87, age:'2d ago', visa:true, level:'senior',
+        tags:['Startup','Remote OK','B2B SaaS','Series B'],
+        why:'Merge builds the integration layer for hundreds of SaaS products — platform-minded PMs with API experience are their ideal hire.',
+        reqs:['4+ yrs PM','API or integration platform experience','Strong prioritization under constraints'],
+        perks:['Series B equity','H1B sponsor','Flexible remote policy'],
+        recruiter:{ name:'James Park', title:'Head of Product · Merge', avatar:'JP', seen:'last seen 2h ago' } },
+
+      { role:'Senior PM, Identity & Onboarding', co:'Persona', loc:'SF · hybrid', logo:'Pe',
+        pay:'$175k–$215k', base:190000, match:85, age:'3d ago', visa:true, level:'senior',
+        tags:['Startup','Hybrid','Identity','Series C'],
+        why:'Persona is the leading identity verification platform for startups — great for a PM with onboarding, fraud, or compliance experience.',
+        reqs:['3+ yrs PM','Identity, fraud or compliance a plus','Fast learner in regulated spaces'],
+        perks:['Series C equity','H1B & OPT sponsor','SF hybrid 3 days/week'],
+        recruiter:{ name:'Diana Wu', title:'PM Recruiting · Persona', avatar:'DW', seen:'last seen 6h ago' } },
+
+      { role:'Senior PM, Compliance Automation', co:'Vanta', loc:'Remote · US only', logo:'Va',
+        pay:'$180k–$225k', base:198000, match:82, age:'4d ago', visa:false, level:'senior',
+        tags:['Startup','Remote-first','Security','Series B'],
+        why:'Vanta is the fastest-growing compliance SaaS — great for a mission-driven PM who wants high impact at a lean, ambitious team.',
+        reqs:['4+ yrs PM','Security or compliance background a plus','Strong written communication'],
+        perks:['Series B equity','Fully remote US','$2k annual learning budget'],
+        recruiter:{ name:'Alex Rivera', title:'Recruiting Manager · Vanta', avatar:'AR', seen:'last seen 1d ago' } },
+    ];
+
+    // Big-tech / late-stage job pool (default)
     const ALL_JOBS = [
       { role:'Senior Product Manager, Payments', co:'Stripe', loc:'SF · hybrid', logo:'S',
         pay:'$220k–$280k', base:252000, match:96, age:'4h ago', visa:true, level:'senior',
@@ -2021,6 +2076,14 @@
       return false;
     }
 
+    function getRelevantJobs(){
+      const searchText = (position + ' ' + keywords).toLowerCase();
+      const wantsStartup = /\bstartup\b|early[\s-]stage|series [a-e]\b|\bseed\b/.test(searchText);
+      const pool = wantsStartup ? STARTUP_JOBS : ALL_JOBS;
+      const filtered = pool.filter(passesFilters);
+      return filtered.length >= 3 ? filtered : pool.slice(0, 6);
+    }
+
     function describeFilters(){
       const lvlMap = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
       const lvl = [...levels].map(v => lvlMap[v] || v).join(', ');
@@ -2080,17 +2143,24 @@
       fnEcho.textContent = f ? f.name : 'sample-resume.pdf';
       filtersEcho.textContent = describeFilters();
 
-      // Reveal Stage 2 and scroll to it
       const stagesWrap = document.getElementById('fmStages');
       const stage2 = document.querySelector('.fm-stage[data-stage-num="2"]');
+      const stage1El = document.querySelector('.fm-stage[data-stage-num="1"]');
+
+      // Prepare Stage 2 content before it becomes visible
+      resEl.classList.remove('active');
+      loadEl.classList.add('active');
+      const steps = loadEl.querySelectorAll('.step');
+      steps.forEach(s => { s.classList.remove('show', 'done'); s.querySelector('.ic').innerHTML = '<div class="spinner"></div>'; });
+
+      // Fade Stage 1 out, wait for fade, then swap to Stage 2 in-place
+      if (stage1El) stage1El.dataset.state = 'exit';
+      await new Promise(r => setTimeout(r, 580));
+      if (stage1El) stage1El.dataset.state = 'hidden';
       if (stagesWrap) stagesWrap.classList.add('fm-revealed');
       if (stage2) stage2.dataset.state = 'active';
 
-      // Make sure results UI starts hidden, loading starts visible
-      resEl.classList.remove('active');
-      loadEl.classList.add('active');
-
-      // Smooth-scroll to Stage 2
+      // Scroll to Stage 2 (now at the top of fm-stages)
       if (stage2){
         setTimeout(() => {
           const y = stage2.getBoundingClientRect().top + window.scrollY - 80;
@@ -2098,9 +2168,6 @@
         }, 60);
       }
 
-      const steps = loadEl.querySelectorAll('.step');
-      // reset step UI in case of re-submit
-      steps.forEach(s => { s.classList.remove('show', 'done'); s.querySelector('.ic').innerHTML = '<div class="spinner"></div>'; });
       const check = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="5 13 9 17 19 7"/></svg>';
       for (let i = 0; i < steps.length; i++){
         steps[i].classList.add('show');
@@ -2114,8 +2181,7 @@
       steps[steps.length-1].querySelector('.ic').innerHTML = check;
       await new Promise(r => setTimeout(r, 320));
 
-      const filtered = ALL_JOBS.filter(passesFilters);
-      const final = filtered.length >= 3 ? filtered : ALL_JOBS.slice(0, 6);
+      const final = getRelevantJobs();
 
       // Funnel numbers (decreasing): Found > Wide fit > Suitable > Super suitable.
       // Use match-score bins from the filtered set, scaled up to a believable pool.
