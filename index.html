@@ -1516,7 +1516,7 @@
                     <label>Resume</label>
                     <label class="demo-upload" id="demoUpload">
                       <input type="file" id="demoFile" accept=".pdf,.doc,.docx" hidden />
-                      <div class="fn" id="demoFn">PDF, Word, max 5MB</div>
+                      <div class="fn" id="demoFn">pdf, word, max 5mb</div>
                       <div class="ok">✓</div>
                     </label>
                   </div>
@@ -1908,7 +1908,7 @@
 
     // criteria state
     let position = '';
-    let level    = 'senior';
+    let levels   = new Set(['senior']);
     let salary   = 180000;            // dollars
     let visa     = false;
     let loc      = new Set(['usa', 'remote', 'hybrid']);
@@ -1943,7 +1943,7 @@
         }
       });
     }
-    bindChips('fmLevel',  'single', (v) => { level = v; }, null);
+    bindChips('fmLevel',  'multi',  null, levels);
     bindChips('fmLoc',    'multi',  null, loc);
 
     const visaInput = document.getElementById('fmVisa');
@@ -2024,7 +2024,8 @@
     }
 
     function describeFilters(){
-      const lvl = ({intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'})[level] || level;
+      const lvlMap = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
+      const lvl = [...levels].map(v => lvlMap[v] || v).join(', ');
       const locLabels = {worldwide:'Worldwide', usa:'USA', americas:'Americas', canada:'Canada', remote:'Remote', hybrid:'Hybrid', onsite:'In-office'};
       const locs = [...loc].map(l => locLabels[l]).filter(Boolean).join(' / ');
       const kw = keywords ? ' · ' + keywords.split(/\s*,\s*/).filter(Boolean).slice(0,3).join(', ') : '';
