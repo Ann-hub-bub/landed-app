@@ -1598,7 +1598,7 @@
             <!-- Loading -->
             <div class="demo-loading" id="demoLoading">
               <div class="step" data-step="1"><div class="ic"><div class="spinner"></div></div><span class="lbl">Parsing your résumé…</span></div>
-              <div class="step" data-step="2"><div class="ic"><div class="spinner"></div></div><span class="lbl">Matching against your criteria…</span></div>
+              <div class="step" data-step="2"><div class="ic"><div class="spinner"></div></div><span class="lbl">Detecting your profile &amp; key skills…</span></div>
               <div class="step" data-step="3"><div class="ic"><div class="spinner"></div></div><span class="lbl">Scanning <b id="fmScanCount">2,847</b> live postings (last 24h)…</span></div>
               <div class="step" data-step="4"><div class="ic"><div class="spinner"></div></div><span class="lbl">Ranking by reply rate &amp; fit…</span></div>
             </div>
@@ -1853,6 +1853,8 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
 <script>
   // ── Five Moves merged controller ─────────────────────────
   (function fiveMoves(){
@@ -1920,128 +1922,447 @@
       }
     });
 
-    // Startup job pool — shown when "startup" (or similar) appears in keywords
-    const STARTUP_JOBS = [
-      { role:'Senior PM, Core Product', co:'Brex', loc:'SF · remote OK', logo:'B',
-        pay:'$185k–$240k', base:210000, match:95, age:'3h ago', visa:true, level:'senior',
-        tags:['Startup','Remote OK','Fintech','Series D'],
-        why:'Brex is scaling spend management for startups — your product instincts and 0→1 experience are a strong match for their growth phase.',
-        reqs:['5+ yrs PM in B2B or fintech','0→1 product experience','Comfort working close to engineering'],
-        perks:['Competitive base + equity','H1B & OPT sponsor','Remote-flexible'],
-        recruiter:{ name:'Sasha Kim', title:'Talent Lead · Brex', avatar:'SK', seen:'last seen 1h ago' } },
-
-      { role:'PM, Developer Experience', co:'Vercel', loc:'Remote · US preferred', logo:'Ve',
-        pay:'$195k–$250k', base:215000, match:92, age:'5h ago', visa:false, level:'senior',
-        tags:['Startup','Remote-first','Dev Tools','Series C'],
-        why:'Vercel is redefining how the web is deployed — great fit for a PM who loves fast iteration on developer-facing products.',
-        reqs:['5+ yrs PM','Dev tools or platform experience','Strong empathy for engineering workflows'],
-        perks:['Generous equity at high valuation','Fully remote','$1.5k home-office budget'],
-        recruiter:{ name:'Taylor Moore', title:'PM Recruiter · Vercel', avatar:'TM', seen:'last seen 3h ago' } },
-
-      { role:'Senior PM, Growth & Activation', co:'Rippling', loc:'SF · hybrid', logo:'Ri',
-        pay:'$180k–$230k', base:200000, match:90, age:'1d ago', visa:true, level:'senior',
-        tags:['Startup','Hybrid','HR Tech','Series E'],
-        why:'Rippling is expanding into new verticals — a growth PM comfortable with multi-product complexity will have outsized impact here.',
-        reqs:['4+ yrs PM in B2B SaaS','Activation funnel or growth experience','Data-driven mindset'],
-        perks:['Series E equity with upside','H1B & TN sponsor','SF hybrid with great office'],
-        recruiter:{ name:'Mei Chen', title:'Recruiter · Rippling', avatar:'MC', seen:'last seen 52m ago' } },
-
-      { role:'PM, Integrations Platform', co:'Merge', loc:'NYC · remote OK', logo:'M',
-        pay:'$170k–$210k', base:185000, match:87, age:'2d ago', visa:true, level:'senior',
-        tags:['Startup','Remote OK','B2B SaaS','Series B'],
-        why:'Merge builds the integration layer for hundreds of SaaS products — platform-minded PMs with API experience are their ideal hire.',
-        reqs:['4+ yrs PM','API or integration platform experience','Strong prioritization under constraints'],
-        perks:['Series B equity','H1B sponsor','Flexible remote policy'],
-        recruiter:{ name:'James Park', title:'Head of Product · Merge', avatar:'JP', seen:'last seen 2h ago' } },
-
-      { role:'Senior PM, Identity & Onboarding', co:'Persona', loc:'SF · hybrid', logo:'Pe',
-        pay:'$175k–$215k', base:190000, match:85, age:'3d ago', visa:true, level:'senior',
-        tags:['Startup','Hybrid','Identity','Series C'],
-        why:'Persona is the leading identity verification platform for startups — great for a PM with onboarding, fraud, or compliance experience.',
-        reqs:['3+ yrs PM','Identity, fraud or compliance a plus','Fast learner in regulated spaces'],
-        perks:['Series C equity','H1B & OPT sponsor','SF hybrid 3 days/week'],
-        recruiter:{ name:'Diana Wu', title:'PM Recruiting · Persona', avatar:'DW', seen:'last seen 6h ago' } },
-
-      { role:'Senior PM, Compliance Automation', co:'Vanta', loc:'Remote · US only', logo:'Va',
-        pay:'$180k–$225k', base:198000, match:82, age:'4d ago', visa:false, level:'senior',
-        tags:['Startup','Remote-first','Security','Series B'],
-        why:'Vanta is the fastest-growing compliance SaaS — great for a mission-driven PM who wants high impact at a lean, ambitious team.',
-        reqs:['4+ yrs PM','Security or compliance background a plus','Strong written communication'],
-        perks:['Series B equity','Fully remote US','$2k annual learning budget'],
-        recruiter:{ name:'Alex Rivera', title:'Recruiting Manager · Vanta', avatar:'AR', seen:'last seen 1d ago' } },
-    ];
-
-    // Big-tech / late-stage job pool (default)
-    const ALL_JOBS = [
-      { role:'Senior Product Manager, Payments', co:'Stripe', loc:'SF · hybrid', logo:'S',
-        pay:'$220k–$280k', base:252000, match:96, age:'4h ago', visa:true, level:'senior',
-        tags:['H1B sponsor','Hybrid','Fintech','6+ yrs'],
-        why:'Your 6 years at fintech + 0→1 launch experience matches the IRIS team\'s 2026 mandate exactly.',
-        reqs:['6+ yrs PM in payments / fintech','Shipped at least one 0→1 product','Comfort writing SQL & reading code'],
-        perks:['Top-of-market base + RSU','Sponsors H1B & green-card','7-year exercise window'],
-        recruiter:{ name:'Priya Menon', title:'Talent Partner · Stripe', avatar:'PM', seen:'last seen 32m ago' } },
-
-      { role:'Staff PM, Platform', co:'Ramp', loc:'NYC · remote OK', logo:'R',
-        pay:'$240k–$310k', base:265000, match:94, age:'1d ago', visa:true, level:'staff',
-        tags:['Sponsor OPT/H1B','Remote','Fintech','API'],
-        why:'Two of your ex-managers already at Ramp — Cap\'n Jack can warm-intro on day one.',
-        reqs:['8+ yrs PM','Platform or dev-tools experience','Strong on API design'],
-        perks:['Top base + equity refresh','TN / OPT / H1B sponsor','Unlimited PTO'],
-        recruiter:{ name:'Marcus Tan', title:'Head of Talent · Ramp', avatar:'MT', seen:'last seen 4h ago' } },
-
-      { role:'Group PM, Growth', co:'Notion', loc:'SF · hybrid', logo:'N',
-        pay:'$230k–$290k', base:248000, match:92, age:'2d ago', visa:true, level:'staff',
-        tags:['H1B sponsor','Hybrid','PLG','Consumer'],
-        why:'PLG funnel is your wheelhouse — your D7 retention story will land hard.',
-        reqs:['5+ yrs growth PM','PLG experience','Activation funnel ownership'],
-        perks:['Stock at last $10B round','Hybrid 3/2','$2.5k mental-health stipend'],
-        recruiter:{ name:'Hana Park', title:'Recruiting Lead · Notion', avatar:'HP', seen:'last seen 1h ago' } },
-
-      { role:'Principal PM, Developer Infra', co:'Linear', loc:'Remote · global', logo:'L',
-        pay:'$240k–$310k', base:268000, match:89, age:'3d ago', visa:false, level:'principal',
-        tags:['Remote-first','SaaS','Senior IC'],
-        why:'Your platform thesis from the IRIS doc reads like the Linear roadmap.',
-        reqs:['10+ yrs PM','Deep dev-tools background','Strong writing'],
-        perks:['Async-first culture','3 weeks min PTO','$2k home-office stipend'],
-        recruiter:{ name:'Felix Wood', title:'Founder & CEO · Linear', avatar:'FW', seen:'last seen 19m ago' } },
-
-      { role:'Lead PM, Subscriptions', co:'Anthropic', loc:'SF · hybrid', logo:'A',
-        pay:'$235k–$295k', base:260000, match:87, age:'5h ago', visa:true, level:'senior',
-        tags:['H1B sponsor','Hybrid','AI','Billing'],
-        why:'Subscription monetization at consumer-AI scale — the bridge from Spotify to AI you wanted.',
-        reqs:['7+ yrs PM','Subscription or billing experience','Comfort with research-led teams'],
-        perks:['Top base + equity','Visa sponsor','Quarterly all-hands retreat'],
-        recruiter:{ name:'Owen Reyes', title:'PM Recruiter · Anthropic', avatar:'OR', seen:'last seen 2h ago' } },
-
-      { role:'Senior PM, Trust & Safety', co:'Airbnb', loc:'SF · hybrid', logo:'A',
-        pay:'$215k–$275k', base:240000, match:85, age:'8h ago', visa:true, level:'senior',
-        tags:['H1B sponsor','Hybrid','Marketplace','Trust'],
-        why:'Your fraud-signal patents map cleanly to the host-trust team\'s 2026 roadmap.',
-        reqs:['5+ yrs PM','Trust / safety or fraud background','Comfort partnering with ML PMs'],
-        perks:['Travel credit $2k / yr','Hybrid 3/2','RSU refresh'],
-        recruiter:{ name:'Lena Cho', title:'Recruiter, T&S · Airbnb', avatar:'LC', seen:'last seen 6h ago' } },
-    ];
-
-    function passesFilters(j){
-      if (visa && !j.visa) return false;
-      if (j.base < salary) return false;
-      if (loc.size === 0 || loc.has('worldwide')) return true;
-      const jl = j.loc.toLowerCase();
-      if (loc.has('remote') && /remote/.test(jl)) return true;
-      if (loc.has('hybrid') && /hybrid/.test(jl)) return true;
-      if (loc.has('onsite') && !/remote|hybrid/.test(jl)) return true;
-      // region matches — both USA & Americas accept US cities; Canada matches "canada"/"toronto"
-      if ((loc.has('usa') || loc.has('americas')) && /sf|nyc|us|new york|seattle|austin|boston/.test(jl)) return true;
-      if (loc.has('canada') && /canada|toronto|vancouver|montreal/.test(jl)) return true;
-      return false;
+    // ── Resume parsing ────────────────────────────────────────
+    async function extractResumeText(file) {
+      if (!file) return '';
+      if (file.type === 'text/plain') {
+        return new Promise(res => {
+          const r = new FileReader();
+          r.onload = e => res(e.target.result || '');
+          r.onerror = () => res('');
+          r.readAsText(file);
+        });
+      }
+      if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+        try {
+          const buf = await file.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+          let text = '';
+          for (let i = 1; i <= Math.min(pdf.numPages, 4); i++) {
+            const pg = await pdf.getPage(i);
+            const ct = await pg.getTextContent();
+            text += ct.items.map(x => x.str).join(' ') + ' ';
+          }
+          return text;
+        } catch(e) { return ''; }
+      }
+      return '';
     }
 
-    function getRelevantJobs(){
-      const searchText = (position + ' ' + keywords).toLowerCase();
-      const wantsStartup = /\bstartup\b|early[\s-]stage|series [a-e]\b|\bseed\b/.test(searchText);
-      const pool = wantsStartup ? STARTUP_JOBS : ALL_JOBS;
-      const filtered = pool.filter(passesFilters);
-      return filtered.length >= 3 ? filtered : pool.slice(0, 6);
+    // ── Profile detection ─────────────────────────────────────
+    function detectDomain(resumeText, posText, kwText) {
+      const t = (resumeText + ' ' + posText + ' ' + kwText).toLowerCase();
+      const scores = {
+        swe:       (t.match(/\b(engineer|developer|software|frontend|backend|full.?stack|react|vue|angular|javascript|typescript|python|java|golang|rust|node\.?js|kubernetes|aws|gcp|devops|ios|android|flutter)\b/g)||[]).length,
+        pm:        (t.match(/\b(product manager|pm\b|roadmap|sprint|user stor|okr|go.to.market|product strateg|product lead|head of product|apm\b|associate pm)\b/g)||[]).length,
+        marketing: (t.match(/\b(marketing|seo|sem|content|social media|campaign|brand|email|demand gen|paid|acquisition|copywriting|influencer|growth hacker|cmo)\b/g)||[]).length,
+        data:      (t.match(/\b(data scientist|data analyst|analytics|sql\b|tableau|looker|machine learning|\bml\b|statistics|pandas|spark|dbt\b|bigquery|snowflake|jupyter)\b/g)||[]).length,
+        design:    (t.match(/\b(design|ux\b|ui\b|figma|wireframe|prototype|user research|interaction design|visual design|design system|accessibility|sketch)\b/g)||[]).length,
+        sales:     (t.match(/\b(account executive|\bae\b|\bsdr\b|\bbdr\b|sales\b|quota|pipeline|outreach|gong|salesforce|enterprise sales|closing|prospecting)\b/g)||[]).length,
+        finance:   (t.match(/\b(finance|accounting|financial analyst|fp.?a|investment|banking|cfa|financial model|valuation|dcf|equity|audit|controller)\b/g)||[]).length,
+      };
+      const top = Object.entries(scores).sort((a,b) => b[1]-a[1])[0];
+      return (top && top[1] > 0) ? top[0] : 'pm';
+    }
+
+    function detectSeniority(resumeText, posText, levelsSet) {
+      const t = (resumeText + ' ' + posText).toLowerCase();
+      if (levelsSet.has('intern')   || /\bjunior\b|\bjr\.?\b|\bentry.level\b|\bnew grad\b/.test(t)) return 'junior';
+      if (levelsSet.has('director') || /\bdirector\b|\bvp\b|\bhead of\b|\b1[0-9]\+?\s*yr/.test(t)) return 'director';
+      if (levelsSet.has('staff') || levelsSet.has('principal') || /\bstaff\b|\bprincipal\b|\b[89]\+?\s*yr/.test(t)) return 'staff';
+      if (levelsSet.has('senior')   || /\bsenior\b|\bsr\.?\b|\blead\b|\b[567]\+?\s*yr/.test(t)) return 'senior';
+      if (levelsSet.has('mid')      || /\b[34]\+?\s*yr/.test(t)) return 'mid';
+      return 'senior';
+    }
+
+    function extractKeywords(resumeText, kwText, domain) {
+      const manual = kwText.split(/[\s,;|\/]+/).map(s=>s.trim()).filter(s=>s.length>2);
+      const pools = {
+        swe:       ['React','TypeScript','Python','Node.js','AWS','GraphQL','Docker','Kubernetes','PostgreSQL','Redis','Next.js','Go','Terraform','CI/CD'],
+        pm:        ['0→1','A/B testing','OKRs','growth','B2B SaaS','API','activation','retention','PLG','fintech','marketplace','SQL','Figma'],
+        marketing: ['SEO','SEM','paid social','content strategy','demand gen','HubSpot','lifecycle','CRM','email','conversion','GTM'],
+        data:      ['SQL','Python','dbt','Tableau','Looker','A/B testing','BigQuery','Snowflake','ETL','pandas','Spark','machine learning'],
+        design:    ['Figma','user research','prototyping','design systems','wireframes','accessibility','usability testing','motion design'],
+        sales:     ['enterprise','Salesforce','Outreach','Gong','pipeline','discovery','ACV','expansion','cold outreach'],
+        finance:   ['FP&A','Excel','financial modeling','DCF','budgeting','forecasting','GAAP','P&L','due diligence'],
+      };
+      const tl = resumeText.toLowerCase();
+      const found = (pools[domain]||pools.pm).filter(k => tl.includes(k.toLowerCase())).slice(0,5);
+      return [...new Set([...manual, ...found])].filter(k => k.length > 1).slice(0,6);
+    }
+
+    // ── Domain data ───────────────────────────────────────────
+    const DOMAIN_DATA = {
+      swe: {
+        scanCount: '51,240',
+        companies: [
+          {name:'Stripe',   logo:'St', tags:['Fintech','Hybrid'],        loc:'SF · hybrid',           visa:true  },
+          {name:'Vercel',   logo:'Ve', tags:['Dev Tools','Remote-first'], loc:'Remote · global',       visa:false },
+          {name:'Linear',   logo:'Li', tags:['SaaS','Remote-first'],      loc:'Remote · global',       visa:false },
+          {name:'Figma',    logo:'Fi', tags:['Design Tools','Hybrid'],    loc:'SF · hybrid',           visa:true  },
+          {name:'Retool',   logo:'Re', tags:['Dev Tools','Series C'],     loc:'SF · hybrid',           visa:true  },
+          {name:'Supabase', logo:'Su', tags:['Open Source','Remote'],     loc:'Remote · global',       visa:false },
+          {name:'Railway',  logo:'Ra', tags:['Infrastructure','Remote'],  loc:'Remote · US preferred', visa:false },
+          {name:'Clerk',    logo:'Cl', tags:['Auth','Series B'],          loc:'Remote · US preferred', visa:false },
+        ],
+        roles: {
+          junior:   ['Software Engineer','Frontend Engineer','Backend Engineer'],
+          mid:      ['Software Engineer II','Full-Stack Engineer','Backend Engineer'],
+          senior:   ['Senior Software Engineer','Senior Full-Stack Engineer','Senior Backend Engineer'],
+          staff:    ['Staff Engineer','Principal Engineer','Engineering Lead'],
+          director: ['Director of Engineering','VP of Engineering','Head of Engineering'],
+        },
+        salaryByLevel: { junior:[110,150], mid:[150,190], senior:[190,265], staff:[240,325], director:[280,390] },
+        why: [
+          '{co} is scaling their core engineering infrastructure — your {k1} and {k2} background maps directly to what their team is hiring for.',
+          'The {co} eng team is rebuilding critical systems — {k1} expertise and strong {k2} skills make you a standout at this level.',
+          '{co} needs engineers who can own {k1} end-to-end — your track record with {k2} and {k3} is exactly the T-shape they source for.',
+        ],
+        reqs: {
+          junior:   ['{k1} proficiency', 'CS degree or equivalent', 'Eagerness to learn fast in production'],
+          mid:      ['{k1} & {k2} experience', '2–4 yrs in production systems', 'Strong code-review habits'],
+          senior:   ['{k1} & {k2} expertise', '5+ yrs production experience', 'Mentorship track record'],
+          staff:    ['{k1} at scale', '8+ yrs in distributed systems', 'Cross-team technical leadership'],
+          director: ['Engineering org leadership', '10+ yrs building teams', 'Technical strategy ownership'],
+        },
+        perks: [
+          ['Competitive base + equity', 'Remote-flexible', '$2k home-office budget'],
+          ['Top-of-market RSU refresh', 'H1B & OPT sponsor', 'Unlimited PTO'],
+          ['Series equity + upside', 'Async-first culture', '$1.5k learning budget'],
+        ],
+        recruiters: [
+          {name:'Alex Chen',    title:'Engineering Recruiter'},
+          {name:'Sarah Kim',    title:'Technical Recruiter'},
+          {name:'Marcus Patel', title:'Head of Engineering Talent'},
+          {name:'Jess Liu',     title:'Talent Partner · Engineering'},
+        ],
+      },
+
+      pm: {
+        scanCount: '6,190',
+        companies: [
+          {name:'Stripe',    logo:'S',  tags:['Fintech','Hybrid'],         loc:'SF · hybrid',           visa:true  },
+          {name:'Brex',      logo:'B',  tags:['Startup','Fintech'],        loc:'SF · remote OK',        visa:true  },
+          {name:'Notion',    logo:'N',  tags:['PLG','Hybrid'],             loc:'SF · hybrid',           visa:true  },
+          {name:'Ramp',      logo:'R',  tags:['Fintech','Remote OK'],      loc:'NYC · remote OK',       visa:true  },
+          {name:'Linear',    logo:'Li', tags:['SaaS','Remote-first'],      loc:'Remote · global',       visa:false },
+          {name:'Anthropic', logo:'An', tags:['AI','Hybrid'],              loc:'SF · hybrid',           visa:true  },
+          {name:'Rippling',  logo:'Ri', tags:['HR Tech','Series E'],       loc:'SF · hybrid',           visa:true  },
+          {name:'Vercel',    logo:'Ve', tags:['Dev Tools','Remote-first'], loc:'Remote · US preferred', visa:false },
+        ],
+        roles: {
+          junior:   ['Associate PM','APM','Product Analyst'],
+          mid:      ['Product Manager','PM II','Product Manager, Growth'],
+          senior:   ['Senior PM','Senior Product Manager','Senior PM, Platform'],
+          staff:    ['Staff PM','Principal PM','Group PM'],
+          director: ['Director of Product','VP of Product','Head of Product'],
+        },
+        salaryByLevel: { junior:[120,160], mid:[160,200], senior:[195,265], staff:[240,325], director:[290,400] },
+        why: [
+          '{co} is scaling its product org — your {k1} experience and {k2} background map directly to their 2026 roadmap priorities.',
+          'The {co} product team needs someone who can own {k1} — your {k2} track record and cross-functional leadership put you in their top tier.',
+          '{co} needs PMs who can operate in {k1} end-to-end — your {k2} and stakeholder experience make you a strong candidate here.',
+        ],
+        reqs: {
+          junior:   ['{k1} curiosity', 'Strong written communication', 'Data-literate mindset'],
+          mid:      ['{k1} & {k2} experience', '2–4 yrs PM', 'Shipped at least one product'],
+          senior:   ['{k1} ownership', '5+ yrs PM', '0→1 launch experience a plus'],
+          staff:    ['{k1} at platform scale', '8+ yrs PM', 'Cross-org influence'],
+          director: ['Product org leadership', 'Executive communication', 'Portfolio roadmap ownership'],
+        },
+        perks: [
+          ['Competitive base + equity', 'H1B & OPT sponsor', 'Remote-flexible'],
+          ['Top-of-market RSU', 'Visa sponsor', '$2k home-office stipend'],
+          ['Series equity with upside', 'Hybrid 3/2', 'Quarterly PM off-sites'],
+        ],
+        recruiters: [
+          {name:'Sasha Kim',    title:'Talent Lead'},
+          {name:'Priya Menon',  title:'PM Recruiter'},
+          {name:'Taylor Moore', title:'Product Talent Partner'},
+          {name:'Mei Chen',     title:'Senior Recruiter · Product'},
+        ],
+      },
+
+      marketing: {
+        scanCount: '22,410',
+        companies: [
+          {name:'HubSpot',     logo:'Hu', tags:['SaaS','Hybrid'],         loc:'Boston · hybrid',       visa:true  },
+          {name:'Klaviyo',     logo:'Kl', tags:['E-commerce','Hybrid'],   loc:'Boston · hybrid',       visa:true  },
+          {name:'Attentive',   logo:'At', tags:['SMS Mktg','Remote OK'],  loc:'NYC · remote OK',       visa:true  },
+          {name:'Braze',       logo:'Bz', tags:['MarTech','Hybrid'],      loc:'NYC · hybrid',          visa:true  },
+          {name:'Iterable',    logo:'It', tags:['Email','Remote OK'],     loc:'SF · remote OK',        visa:true  },
+          {name:'Buffer',      logo:'Bu', tags:['Social Media','Remote'], loc:'Remote · global',       visa:false },
+          {name:'Customer.io', logo:'Ci', tags:['Email','Remote-first'],  loc:'Remote · global',       visa:false },
+          {name:'Canva',       logo:'Ca', tags:['Design','Remote OK'],    loc:'Remote · US preferred', visa:false },
+        ],
+        roles: {
+          junior:   ['Marketing Coordinator','Content Marketing Associate','Growth Analyst'],
+          mid:      ['Marketing Manager','Content Marketing Manager','Growth Manager'],
+          senior:   ['Senior Marketing Manager','Head of Content','Senior Growth Manager'],
+          staff:    ['Director of Marketing','VP of Growth','Head of Demand Generation'],
+          director: ['CMO','VP of Marketing','Head of Brand'],
+        },
+        salaryByLevel: { junior:[62,85], mid:[85,120], senior:[120,162], staff:[160,215], director:[200,285] },
+        why: [
+          '{co} is scaling their marketing engine — your {k1} and {k2} experience matches the gaps they\'re urgently filling.',
+          'The {co} growth team needs someone who owns {k1} — your background in {k2} at scale makes you a natural fit.',
+          '{co} is doubling down on {k1} in 2026 — your track record in {k2} and channel strategy is exactly what they\'re sourcing.',
+        ],
+        reqs: {
+          junior:   ['{k1} basics', 'Strong writing & communication', 'Comfort with analytics tools'],
+          mid:      ['{k1} & {k2} experience', '2–4 yrs B2B or B2C marketing', 'Metrics-oriented mindset'],
+          senior:   ['{k1} strategy ownership', '5+ yrs marketing', 'Cross-functional leadership'],
+          staff:    ['Marketing org leadership', 'Budget ownership ($1M+)', 'Brand and demand gen strategy'],
+          director: ['CMO-track experience', 'P&L ownership', 'Board-level reporting'],
+        },
+        perks: [
+          ['Competitive base + bonus', 'Remote-flexible', 'Learning & development budget'],
+          ['Equity + strong bonus', 'H1B sponsor', 'Flexible PTO'],
+          ['Series equity', 'Remote-first culture', 'Marketing conference budget'],
+        ],
+        recruiters: [
+          {name:'Olivia Grant', title:'Marketing Recruiter'},
+          {name:'Tyler Shaw',   title:'Talent Partner · Marketing'},
+          {name:'Nina Patel',   title:'Head of People'},
+          {name:'James Wu',     title:'Senior Recruiter'},
+        ],
+      },
+
+      data: {
+        scanCount: '17,830',
+        companies: [
+          {name:'Databricks',  logo:'Da', tags:['Data Platform','Hybrid'],    loc:'SF · hybrid',       visa:true  },
+          {name:'dbt Labs',    logo:'db', tags:['Analytics Eng','Remote'],    loc:'Remote · global',   visa:false },
+          {name:'Hex',         logo:'He', tags:['Data Notebooks','Remote OK'],loc:'SF · remote OK',    visa:false },
+          {name:'Fivetran',    logo:'Fv', tags:['ELT','Hybrid'],              loc:'Oakland · hybrid',  visa:true  },
+          {name:'Monte Carlo', logo:'Mo', tags:['Data Obs.','Remote OK'],     loc:'SF · remote OK',    visa:true  },
+          {name:'Hightouch',   logo:'Hi', tags:['Reverse ETL','Remote'],      loc:'Remote · US pref.', visa:false },
+          {name:'Census',      logo:'Ce', tags:['Data Activation','Remote'],  loc:'SF · remote OK',    visa:false },
+          {name:'Metabase',    logo:'Mb', tags:['BI','Remote-first'],         loc:'Remote · global',   visa:false },
+        ],
+        roles: {
+          junior:   ['Data Analyst','Junior Data Scientist','Analytics Associate'],
+          mid:      ['Data Scientist','Analytics Engineer','Data Analyst II'],
+          senior:   ['Senior Data Scientist','Senior Analytics Engineer','Lead Data Analyst'],
+          staff:    ['Staff Data Scientist','Principal Data Engineer','Head of Analytics'],
+          director: ['Director of Data Science','VP of Analytics','Head of Data'],
+        },
+        salaryByLevel: { junior:[90,125], mid:[125,165], senior:[165,225], staff:[210,285], director:[260,345] },
+        why: [
+          '{co} is building the next layer of data infrastructure — your {k1} and {k2} experience fits their core team profile perfectly.',
+          'The {co} data team is scaling fast — your background in {k1} and comfort with {k2} at production scale is what they\'re sourcing.',
+          '{co} needs someone who can own the full {k1} pipeline — your {k2} work demonstrates that capability clearly.',
+        ],
+        reqs: {
+          junior:   ['{k1} fundamentals', 'SQL & basic Python', 'Comfort with BI tools'],
+          mid:      ['{k1} & {k2} experience', '2–4 yrs in data roles', 'Strong analytical mindset'],
+          senior:   ['{k1} at scale', '5+ yrs data experience', 'Stakeholder-facing communication'],
+          staff:    ['{k1} org-wide strategy', '8+ yrs in data', 'Team leadership & mentorship'],
+          director: ['Data org leadership', 'Executive communication', 'Data strategy & roadmap'],
+        },
+        perks: [
+          ['Competitive base + equity', 'Remote-flexible', '$2k data conference budget'],
+          ['Top-of-market RSU', 'H1B & OPT sponsor', 'Unlimited PTO'],
+          ['Series equity', 'Async-first culture', 'Learning stipend $1.5k'],
+        ],
+        recruiters: [
+          {name:'Priya Sharma', title:'Data Talent Recruiter'},
+          {name:'Kevin Park',   title:'Technical Recruiter · Data'},
+          {name:'Lisa Chen',    title:'Head of Talent · Data'},
+          {name:'Omar Rivera',  title:'Senior Recruiter'},
+        ],
+      },
+
+      design: {
+        scanCount: '9,560',
+        companies: [
+          {name:'Figma',   logo:'Fi', tags:['Design Tools','Hybrid'],   loc:'SF · hybrid',           visa:true  },
+          {name:'Framer',  logo:'Fr', tags:['Web Design','Remote'],     loc:'Remote · global',       visa:false },
+          {name:'Canva',   logo:'Ca', tags:['Design Platform','Remote'],loc:'Remote · US preferred', visa:false },
+          {name:'Webflow', logo:'Wf', tags:['No-Code','Remote'],        loc:'Remote · US preferred', visa:false },
+          {name:'Notion',  logo:'No', tags:['Productivity','Hybrid'],   loc:'NYC · hybrid',          visa:true  },
+          {name:'Loom',    logo:'Lo', tags:['Video','Hybrid'],          loc:'SF · hybrid',           visa:true  },
+          {name:'Pitch',   logo:'Pi', tags:['Presentations','Remote'],  loc:'Remote · global',       visa:false },
+          {name:'Coda',    logo:'Co', tags:['Productivity','Hybrid'],   loc:'SF · hybrid',           visa:true  },
+        ],
+        roles: {
+          junior:   ['Product Designer','UI/UX Designer','Junior Visual Designer'],
+          mid:      ['Product Designer II','UX Designer','UI Designer'],
+          senior:   ['Senior Product Designer','Senior UX Designer','Lead Product Designer'],
+          staff:    ['Staff Designer','Principal Designer','Design Lead'],
+          director: ['Design Director','VP of Design','Head of Design'],
+        },
+        salaryByLevel: { junior:[85,120], mid:[120,162], senior:[160,215], staff:[200,265], director:[240,325] },
+        why: [
+          '{co} is rebuilding core product surfaces — your {k1} portfolio and {k2} experience are a direct match for their hiring bar.',
+          'The {co} design team is scaling — your {k1} work and depth in {k2} puts you in the top 5% of applicants they\'re seeing.',
+          '{co} values designers who do both craft and research — your {k1} and {k2} background is exactly the T-shape they want.',
+        ],
+        reqs: {
+          junior:   ['{k1} portfolio', 'Figma proficiency', 'Strong visual instincts'],
+          mid:      ['{k1} & {k2} in your portfolio', '2–4 yrs product design', 'Research-informed practice'],
+          senior:   ['{k1} end-to-end ownership', '5+ yrs product design', 'Cross-functional design leadership'],
+          staff:    ['Design systems ownership', '8+ yrs design', 'Mentoring junior designers'],
+          director: ['Design org leadership', 'Executive communication', 'Hiring & building design culture'],
+        },
+        perks: [
+          ['Competitive base + equity', 'Hybrid 3/2', '$1.5k design budget'],
+          ['Top-of-market RSU', 'H1B & OPT sponsor', 'Premium design tool subscriptions'],
+          ['Series equity', 'Remote-first', 'Annual design conference attendance'],
+        ],
+        recruiters: [
+          {name:'Maya Torres',  title:'Design Recruiter'},
+          {name:'Sam Liu',      title:'Talent Partner · Design'},
+          {name:'Chris Park',   title:'Head of Design Recruiting'},
+          {name:'Ava Williams', title:'Senior Recruiter · Product'},
+        ],
+      },
+
+      sales: {
+        scanCount: '33,700',
+        companies: [
+          {name:'Gong',     logo:'Go', tags:['Sales Intel','Hybrid'],   loc:'SF · hybrid',       visa:true  },
+          {name:'Outreach', logo:'Ou', tags:['Sales Eng','Remote OK'],  loc:'Seattle · rem. OK', visa:true  },
+          {name:'Rippling', logo:'Ri', tags:['HR+Sales','Hybrid'],      loc:'SF · hybrid',       visa:true  },
+          {name:'Brex',     logo:'Bx', tags:['Fintech','Hybrid'],       loc:'SF · hybrid',       visa:true  },
+          {name:'Ramp',     logo:'Rp', tags:['Fintech','Remote OK'],    loc:'NYC · remote OK',   visa:true  },
+          {name:'Apollo',   logo:'Ap', tags:['Sales Intel','Remote'],   loc:'Remote · US pref.', visa:false },
+          {name:'Lattice',  logo:'La', tags:['HR Tech','Hybrid'],       loc:'SF · hybrid',       visa:true  },
+          {name:'Ironclad', logo:'Ir', tags:['Legal Tech','Hybrid'],    loc:'SF · hybrid',       visa:false },
+        ],
+        roles: {
+          junior:   ['Sales Development Rep','BDR','Inside Sales Rep'],
+          mid:      ['Account Executive','SMB Account Executive','Mid-Market AE'],
+          senior:   ['Senior Account Executive','Enterprise AE','Strategic AE'],
+          staff:    ['Sales Manager','Regional Sales Manager','Director of Sales'],
+          director: ['VP of Sales','Head of Sales','Chief Revenue Officer'],
+        },
+        salaryByLevel: { junior:[55,80], mid:[80,120], senior:[120,185], staff:[160,225], director:[210,305] },
+        why: [
+          '{co} is expanding into new verticals — your {k1} track record and experience with {k2} gives you a strong edge in their pipeline.',
+          'The {co} sales team is hiring aggressively — your {k1} close rate and {k2} background aligns with what their team needs to hit quota.',
+          '{co} needs closers who understand {k1} buyers — your {k2} background and quota history make you a compelling candidate.',
+        ],
+        reqs: {
+          junior:   ['{k1} basics', 'Strong communication & hustle', 'CRM familiarity'],
+          mid:      ['{k1} & {k2} experience', '1–3 yrs AE', '100%+ quota attainment'],
+          senior:   ['{k1} enterprise deals', '3–5 yrs AE', 'Complex sales cycle ownership'],
+          staff:    ['Team management', '{k1} sales org leadership', 'Forecast accuracy'],
+          director: ['VP-track experience', 'Sales org building', 'Executive relationships'],
+        },
+        perks: [
+          ['Base + uncapped commission', 'H1B & OPT sponsor', "President's Club travel"],
+          ['Strong OTE + equity', 'Remote-flexible', 'Monthly sales contests'],
+          ['Series equity + commission', 'Hybrid 3/2', '$500/mo wellness stipend'],
+        ],
+        recruiters: [
+          {name:'Jordan Lee',   title:'Sales Recruiter'},
+          {name:'Mia Ross',     title:'Talent Partner · Revenue'},
+          {name:'Blake Turner', title:'Head of Sales Recruiting'},
+          {name:'Riley Kim',    title:'Senior Recruiter · GTM'},
+        ],
+      },
+
+      finance: {
+        scanCount: '11,950',
+        companies: [
+          {name:'Stripe',  logo:'St', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
+          {name:'Brex',    logo:'Bx', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
+          {name:'Ramp',    logo:'Rp', tags:['Fintech','Remote OK'],  loc:'NYC · remote OK',   visa:true  },
+          {name:'Mercury', logo:'My', tags:['Banking','Remote'],     loc:'Remote · US pref.', visa:false },
+          {name:'Carta',   logo:'Ct', tags:['Cap Table','Hybrid'],   loc:'SF · hybrid',       visa:true  },
+          {name:'Plaid',   logo:'Pl', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
+          {name:'Pulley',  logo:'Pu', tags:['Equity Mgmt','Remote'], loc:'Remote · US pref.', visa:false },
+          {name:'Pipe',    logo:'Pp', tags:['Rev Finance','Remote'], loc:'Miami · remote OK', visa:false },
+        ],
+        roles: {
+          junior:   ['Financial Analyst','Finance Associate','Junior FP&A Analyst'],
+          mid:      ['Senior Financial Analyst','FP&A Manager','Finance Manager'],
+          senior:   ['Senior FP&A Manager','Finance Lead','Senior Finance Manager'],
+          staff:    ['Director of Finance','Head of FP&A','Senior Director of Finance'],
+          director: ['VP of Finance','CFO','Head of Corporate Finance'],
+        },
+        salaryByLevel: { junior:[85,115], mid:[115,155], senior:[155,205], staff:[190,255], director:[240,345] },
+        why: [
+          '{co} is scaling its finance function — your {k1} background and {k2} experience map directly to the gaps they\'re filling.',
+          'The {co} FP&A team needs someone who can own {k1} end-to-end — your {k2} track record is exactly what they\'re sourcing.',
+          '{co} is building out enterprise finance infrastructure — your {k1} and {k2} skills put you at the top of their candidate list.',
+        ],
+        reqs: {
+          junior:   ['{k1} fundamentals', 'Excel & financial modeling basics', 'Strong analytical skills'],
+          mid:      ['{k1} & {k2} experience', '2–4 yrs FP&A or finance', 'Advanced Excel & data skills'],
+          senior:   ['{k1} ownership', '5+ yrs finance experience', 'Executive-level communication'],
+          staff:    ['{k1} org leadership', '8+ yrs finance', 'Cross-functional influence'],
+          director: ['Finance org leadership', 'Board reporting', 'M&A and capital markets experience'],
+        },
+        perks: [
+          ['Competitive base + bonus', 'H1B & OPT sponsor', 'Equity package'],
+          ['Top-of-market comp + RSU', 'Hybrid 3/2', 'CPA/CFA sponsorship'],
+          ['Series equity', 'Remote-flexible', '$2k professional development'],
+        ],
+        recruiters: [
+          {name:'Diana Tan',    title:'Finance Recruiter'},
+          {name:'Michael Chen', title:'Talent Partner · Finance'},
+          {name:'Laura Kim',    title:'Head of Finance Recruiting'},
+          {name:'Eric Liu',     title:'Senior Recruiter · G&A'},
+        ],
+      },
+    };
+
+    // ── Job generator ─────────────────────────────────────────
+    function generateJobs(domain, seniority, kws, visaRequired, salaryMin, locSet) {
+      const d = DOMAIN_DATA[domain] || DOMAIN_DATA.pm;
+      let cos = [...d.companies];
+      const seed = (Date.now() % 97) + 1;
+      cos.sort((a,b) => ((a.name.charCodeAt(0)*seed)%97) - ((b.name.charCodeAt(0)*seed)%97));
+      if (visaRequired) cos = cos.filter(c => c.visa !== false);
+      cos = cos.slice(0, 6);
+
+      const roles  = d.roles[seniority]    || d.roles.senior;
+      const reqTpl = d.reqs[seniority]     || d.reqs.senior;
+      const [sLo, sHi] = d.salaryByLevel[seniority] || [150, 200];
+      const k = kws.length >= 2 ? kws : ['your background', 'cross-functional work', 'your domain expertise'];
+      const ages = ['1h ago','3h ago','5h ago','1d ago','2d ago','3d ago'];
+
+      const jobs = cos.map((co, i) => {
+        const k1 = k[0]||'your background', k2 = k[1]||'cross-functional work', k3 = k[2]||'your domain expertise';
+        const baseK = Math.round((sLo*1000) + (sHi-sLo)*1000*(1 - i*0.09));
+        const payLo = Math.round(baseK/1000);
+        const payHi = payLo + 40 + i*3;
+        const match = 97 - i*3;
+
+        const why  = (d.why[i % d.why.length])
+          .replace(/{co}/g,co.name).replace(/{k1}/g,k1).replace(/{k2}/g,k2).replace(/{k3}/g,k3);
+        const reqs = reqTpl.map(r => r.replace(/{k1}/g,k1).replace(/{k2}/g,k2));
+        const perks = d.perks[i % d.perks.length];
+        const rec   = d.recruiters[i % d.recruiters.length];
+        const recTitle = rec.title.includes('·') ? rec.title : rec.title + ' · ' + co.name;
+        const avatar   = rec.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+        const visaTag  = co.visa ? 'H1B & OPT sponsor' : null;
+        const tags     = [...(co.tags||[]), ...(visaTag?[visaTag]:[])].slice(0,4);
+
+        return {
+          role: roles[i % roles.length], co: co.name, loc: co.loc, logo: co.logo,
+          pay: '$'+payLo+'k–$'+payHi+'k', base: baseK, match, age: ages[i % ages.length],
+          visa: !!co.visa, level: seniority, tags, why, reqs, perks,
+          recruiter: { name: rec.name, title: recTitle, avatar,
+            seen: i===0?'last seen just now':i===1?'last seen 1h ago':'last seen '+(i*2)+'h ago' }
+        };
+      });
+
+      const filtered = jobs.filter(j => {
+        if (visaRequired && !j.visa) return false;
+        if (j.base < salaryMin) return false;
+        if (!locSet || locSet.size===0 || locSet.has('worldwide')) return true;
+        const jl = j.loc.toLowerCase();
+        if (locSet.has('remote')  && /remote/.test(jl))  return true;
+        if (locSet.has('hybrid')  && /hybrid/.test(jl))  return true;
+        if (locSet.has('onsite')  && !/remote|hybrid/.test(jl)) return true;
+        if ((locSet.has('usa')||locSet.has('americas')) && /sf|nyc|us|new york|seattle|austin|boston|miami|oakland/.test(jl)) return true;
+        if (locSet.has('canada')  && /canada|toronto|vancouver|montreal/.test(jl)) return true;
+        return false;
+      });
+      return filtered.length >= 3 ? filtered : jobs.slice(0, 6);
     }
 
     function describeFilters(){
@@ -2141,7 +2462,13 @@
       steps[steps.length-1].querySelector('.ic').innerHTML = check;
       await new Promise(r => setTimeout(r, 320));
 
-      const final = getRelevantJobs();
+      const resumeText = await extractResumeText(fileInput.files[0]);
+      const domain     = detectDomain(resumeText, position, keywords);
+      const seniority  = detectSeniority(resumeText, position, levels);
+      const kws        = extractKeywords(resumeText, keywords, domain);
+      const scanEl     = document.getElementById('fmScanCount');
+      if (scanEl) scanEl.textContent = (DOMAIN_DATA[domain]||DOMAIN_DATA.pm).scanCount;
+      const final = generateJobs(domain, seniority, kws, visa, salary, loc);
 
       // Funnel numbers (decreasing): Found > Wide fit > Suitable > Super suitable.
       // Use match-score bins from the filtered set, scaled up to a believable pool.
