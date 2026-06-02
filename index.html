@@ -1992,8 +1992,8 @@
     }
 
     // ── Profile detection ─────────────────────────────────────
-    function detectDomain(resumeText, posText, kwText) {
-      // Position field is the strongest signal — if it matches, trust it immediately
+    function detectDomain(resumeText, posText, kwText, filename) {
+      // 1. Position field — strongest signal
       const pos = posText.toLowerCase();
       if (/\b(product manager|product lead|group pm|staff pm|principal pm|head of product|associate pm|apm\b|vp of product|director of product)\b/.test(pos)) return 'pm';
       if (/\b(pm)\b/.test(pos) && !/program manager/.test(pos)) return 'pm';
@@ -2004,19 +2004,31 @@
       if (/\b(account executive|sales manager|sdr|bdr|revenue)\b/.test(pos)) return 'sales';
       if (/\b(financial analyst|fp&a|finance manager|cfo|controller)\b/.test(pos)) return 'finance';
 
-      // Fall back to resume + keyword scoring
+      // 2. Filename — reliable when position is blank or file can't be read
+      const fn = (filename || '').toLowerCase().replace(/[_\-().\d]/g, ' ');
+      if (/\b(engineer|developer|software|backend|frontend|fullstack|full stack|devops|mobile)\b/.test(fn)) return 'swe';
+      if (/\b(product manager|pm\b|product lead)\b/.test(fn)) return 'pm';
+      if (/\b(market|growth|seo|content marketing)\b/.test(fn)) return 'marketing';
+      if (/\b(data scientist|data analyst|analytics|machine learning)\b/.test(fn)) return 'data';
+      if (/\b(designer|ux|ui design)\b/.test(fn)) return 'design';
+      if (/\b(sales|account executive|revenue)\b/.test(fn)) return 'sales';
+      if (/\b(financ|fp&a|accounting)\b/.test(fn)) return 'finance';
+
+      // 3. Resume body + keyword scoring (only when file was readable)
       const t = (resumeText + ' ' + posText + ' ' + kwText).toLowerCase();
       const scores = {
         swe:       (t.match(/\b(engineer|developer|software|frontend|backend|full.?stack|react|vue|angular|javascript|typescript|python|java|golang|rust|node\.?js|kubernetes|aws|gcp|devops|ios|android|flutter)\b/g)||[]).length,
-        pm:        (t.match(/\b(product manager|product lead|product owner|roadmap|sprint|user stor|okr|go.to.market|product strateg|head of product|apm\b|associate pm|backlog|stakeholder|epics|feature flag|go.to.market)\b/g)||[]).length,
+        pm:        (t.match(/\b(product manager|product lead|product owner|roadmap|sprint|user stor|okr|go.to.market|product strateg|head of product|apm\b|associate pm|backlog|stakeholder|epics|feature flag)\b/g)||[]).length,
         marketing: (t.match(/\b(marketing|seo|sem|social media|campaign|brand|demand gen|paid|acquisition|copywriting|influencer|growth hacker|cmo)\b/g)||[]).length,
         data:      (t.match(/\b(data scientist|data analyst|analytics|sql\b|tableau|looker|machine learning|\bml\b|statistics|pandas|spark|dbt\b|bigquery|snowflake|jupyter)\b/g)||[]).length,
-        design:    (t.match(/\b(ux\b|ui\b|wireframe|interaction design|visual design|design system|motion design|ux designer|ui designer|product designer|design thinking|figma\b.*designer|designer.*figma)\b/g)||[]).length,
+        design:    (t.match(/\b(ux\b|ui\b|wireframe|interaction design|visual design|design system|motion design|ux designer|ui designer|product designer|design thinking)\b/g)||[]).length,
         sales:     (t.match(/\b(account executive|\bae\b|\bsdr\b|\bbdr\b|quota|closing|prospecting|enterprise sales|cold call|outreach)\b/g)||[]).length,
         finance:   (t.match(/\b(financial analyst|fp.?a|investment|banking|cfa|financial model|valuation|dcf|audit|controller)\b/g)||[]).length,
       };
       const top = Object.entries(scores).sort((a,b) => b[1]-a[1])[0];
-      return (top && top[1] > 0) ? top[0] : 'pm';
+      // Only use score result if at least 2 signals matched — otherwise fall back to swe
+      // (swe is the most common undetected case; pm was causing false positives)
+      return (top && top[1] >= 2) ? top[0] : 'swe';
     }
 
     function detectSeniority(resumeText, posText, levelsSet) {
@@ -2658,12 +2670,16 @@
       steps[steps.length-1].querySelector('.ic').innerHTML = check;
       await new Promise(r => setTimeout(r, 320));
 
-      const resumeText = await extractResumeText(fileInput.files[0]);
-      const domain     = detectDomain(resumeText, position, keywords);
+      const resumeFile = fileInput.files[0];
+      const resumeText = await extractResumeText(resumeFile);
+      const domain     = detectDomain(resumeText, position, keywords, resumeFile ? resumeFile.name : '');
       const seniority  = detectSeniority(resumeText, position, levels);
       const kws        = extractKeywords(resumeText, keywords, domain);
-      const scanEl     = document.getElementById('fmScanCount');
-      if (scanEl) scanEl.textContent = (DOMAIN_DATA[domain]||DOMAIN_DATA.pm).scanCount;
+      const domainScanCount = (DOMAIN_DATA[domain]||DOMAIN_DATA.pm).scanCount;
+      const scanEl  = document.getElementById('fmScanCount');
+      const scanEl2 = document.getElementById('fmTotalScanned');
+      if (scanEl)  scanEl.textContent  = domainScanCount;
+      if (scanEl2) scanEl2.textContent = domainScanCount;
       const final = generateJobs(domain, seniority, kws, visa, salary, loc);
 
       // Funnel numbers (decreasing): Found > Wide fit > Suitable > Super suitable.
