@@ -1559,7 +1559,7 @@
                       <button type="button" class="fm-chip" data-v="intern">Intern</button>
                       <button type="button" class="fm-chip" data-v="junior">Junior</button>
                       <button type="button" class="fm-chip" data-v="mid">Mid</button>
-                      <button type="button" class="fm-chip on" data-v="senior">Senior</button>
+                      <button type="button" class="fm-chip" data-v="senior">Senior</button>
                       <button type="button" class="fm-chip" data-v="staff">Staff</button>
                       <button type="button" class="fm-chip" data-v="principal">Principal</button>
                       <button type="button" class="fm-chip" data-v="lead">Lead</button>
@@ -1580,11 +1580,11 @@
                     <label>Location</label>
                     <div class="chips" id="fmLoc">
                       <button type="button" class="fm-chip" data-v="worldwide">Worldwide</button>
-                      <button type="button" class="fm-chip on" data-v="usa">USA</button>
+                      <button type="button" class="fm-chip" data-v="usa">USA</button>
                       <button type="button" class="fm-chip" data-v="americas">Americas</button>
                       <button type="button" class="fm-chip" data-v="canada">Canada</button>
-                      <button type="button" class="fm-chip on" data-v="remote">Remote</button>
-                      <button type="button" class="fm-chip on" data-v="hybrid">Hybrid</button>
+                      <button type="button" class="fm-chip" data-v="remote">Remote</button>
+                      <button type="button" class="fm-chip" data-v="hybrid">Hybrid</button>
                       <button type="button" class="fm-chip" data-v="onsite">In-office</button>
                     </div>
                   </div>
@@ -1914,10 +1914,10 @@
 
     // criteria state
     let position = '';
-    let levels   = new Set(['senior']);
+    let levels   = new Set();
     let salary   = 180000;            // dollars
     let visa     = false;
-    let loc      = new Set(['usa', 'remote', 'hybrid']);
+    let loc      = new Set();
     let keywords = '';
 
     const positionInput = document.getElementById('fmPosition');
