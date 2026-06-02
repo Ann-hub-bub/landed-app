@@ -1571,7 +1571,7 @@
                     <label>Minimum base salary</label>
                     <div class="fm-prefix-input">
                       <span class="prefix">$</span>
-                      <input type="text" id="fmSalary" placeholder="180,000" inputmode="numeric" autocomplete="off" />
+                      <input type="text" id="fmSalary" placeholder="e.g. 120,000" inputmode="numeric" autocomplete="off" />
                       <span class="suffix">/ year</span>
                     </div>
                   </div>
@@ -1915,7 +1915,7 @@
     // criteria state
     let position = '';
     let levels   = new Set();
-    let salary   = 180000;            // dollars
+    let salary   = 0;                 // dollars — 0 means no minimum
     let visa     = false;
     let loc      = new Set();
     let keywords = '';
@@ -2178,7 +2178,7 @@
         perks: [
           ['Competitive base + equity', 'H1B & OPT sponsor', 'Remote-flexible'],
           ['Top-of-market RSU', 'Visa sponsor', '$2k home-office stipend'],
-          ['Series equity with upside', 'Hybrid 3/2', 'Quarterly PM off-sites'],
+          ['Series equity with upside', 'Flexible work schedule', 'Quarterly PM off-sites'],
         ],
         recruiters: [
           {name:'Sasha Kim',    title:'Talent Lead'},
@@ -2371,7 +2371,7 @@
           ],
         },
         perks: [
-          ['Competitive base + equity', 'Hybrid 3/2', '$1.5k design budget'],
+          ['Competitive base + equity', 'Flexible work arrangement', '$1.5k design budget'],
           ['Top-of-market RSU', 'H1B & OPT sponsor', 'Premium design tool subscriptions'],
           ['Series equity', 'Remote-first', 'Annual design conference attendance'],
         ],
@@ -2438,7 +2438,7 @@
         perks: [
           ['Base + uncapped commission', 'H1B & OPT sponsor', "President's Club travel"],
           ['Strong OTE + equity', 'Remote-flexible', 'Monthly sales contests'],
-          ['Series equity + commission', 'Hybrid 3/2', '$500/mo wellness stipend'],
+          ['Series equity + commission', 'Flexible schedule', '$500/mo wellness stipend'],
         ],
         recruiters: [
           {name:'Jordan Lee',   title:'Sales Recruiter'},
@@ -2502,7 +2502,7 @@
         },
         perks: [
           ['Competitive base + bonus', 'H1B & OPT sponsor', 'Equity package'],
-          ['Top-of-market comp + RSU', 'Hybrid 3/2', 'CPA/CFA sponsorship'],
+          ['Top-of-market comp + RSU', 'Flexible work schedule', 'CPA/CFA sponsorship'],
           ['Series equity', 'Remote-flexible', '$2k professional development'],
         ],
         recruiters: [
@@ -2557,19 +2557,33 @@
         };
       });
 
-      const filtered = jobs.filter(j => {
+      function locMatches(j, ignoreSalary) {
         if (visaRequired && !j.visa) return false;
-        if (j.base < salaryMin) return false;
-        if (!locSet || locSet.size===0 || locSet.has('worldwide')) return true;
+        if (!ignoreSalary && j.base < salaryMin) return false;
+        if (!locSet || locSet.size === 0 || locSet.has('worldwide')) return true;
         const jl = j.loc.toLowerCase();
-        if (locSet.has('remote')  && /remote/.test(jl))  return true;
-        if (locSet.has('hybrid')  && /hybrid/.test(jl))  return true;
-        if (locSet.has('onsite')  && !/remote|hybrid/.test(jl)) return true;
-        if ((locSet.has('usa')||locSet.has('americas')) && /sf|nyc|us|new york|seattle|austin|boston|miami|oakland/.test(jl)) return true;
-        if (locSet.has('canada')  && /canada|toronto|vancouver|montreal/.test(jl)) return true;
-        return false;
-      });
-      return filtered.length >= 3 ? filtered : jobs.slice(0, 6);
+        // Work-type check (remote / hybrid / in-office)
+        const hasTypeFilter = locSet.has('remote') || locSet.has('hybrid') || locSet.has('onsite');
+        const typeOk = !hasTypeFilter ||
+          (locSet.has('remote') && /remote/.test(jl)) ||
+          (locSet.has('hybrid') && /hybrid/.test(jl)) ||
+          (locSet.has('onsite') && !/remote|hybrid/.test(jl));
+        // Region check (USA / Americas / Canada)
+        const hasRegionFilter = locSet.has('usa') || locSet.has('americas') || locSet.has('canada');
+        const regionOk = !hasRegionFilter ||
+          ((locSet.has('usa') || locSet.has('americas')) && /sf|nyc|us |new york|seattle|austin|boston|miami|oakland/.test(jl)) ||
+          (locSet.has('canada') && /canada|toronto|vancouver|montreal/.test(jl));
+        return typeOk && regionOk;
+      }
+
+      const filtered = jobs.filter(j => locMatches(j, false));
+      // If salary is too strict and removes too many results, relax it — keep location & visa
+      const withoutSalary = salaryMin > 0 && filtered.length < 3
+        ? jobs.filter(j => locMatches(j, true))
+        : null;
+      return filtered.length >= 3 ? filtered
+           : withoutSalary && withoutSalary.length >= 3 ? withoutSalary
+           : jobs.slice(0, 6);
     }
 
     function describeFilters(){
