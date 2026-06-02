@@ -1993,15 +1993,27 @@
 
     // ── Profile detection ─────────────────────────────────────
     function detectDomain(resumeText, posText, kwText) {
+      // Position field is the strongest signal — if it matches, trust it immediately
+      const pos = posText.toLowerCase();
+      if (/\b(product manager|product lead|group pm|staff pm|principal pm|head of product|associate pm|apm\b|vp of product|director of product)\b/.test(pos)) return 'pm';
+      if (/\b(pm)\b/.test(pos) && !/program manager/.test(pos)) return 'pm';
+      if (/\b(software engineer|frontend engineer|backend engineer|full.?stack|developer|devops|mobile engineer)\b/.test(pos)) return 'swe';
+      if (/\b(marketing manager|growth manager|demand gen|content strateg|seo specialist|brand manager|cmo)\b/.test(pos)) return 'marketing';
+      if (/\b(data scientist|data analyst|analytics engineer|ml engineer|machine learning engineer)\b/.test(pos)) return 'data';
+      if (/\b(product designer|ux designer|ui designer|visual designer|design lead|ux\/ui)\b/.test(pos)) return 'design';
+      if (/\b(account executive|sales manager|sdr|bdr|revenue)\b/.test(pos)) return 'sales';
+      if (/\b(financial analyst|fp&a|finance manager|cfo|controller)\b/.test(pos)) return 'finance';
+
+      // Fall back to resume + keyword scoring
       const t = (resumeText + ' ' + posText + ' ' + kwText).toLowerCase();
       const scores = {
         swe:       (t.match(/\b(engineer|developer|software|frontend|backend|full.?stack|react|vue|angular|javascript|typescript|python|java|golang|rust|node\.?js|kubernetes|aws|gcp|devops|ios|android|flutter)\b/g)||[]).length,
-        pm:        (t.match(/\b(product manager|pm\b|roadmap|sprint|user stor|okr|go.to.market|product strateg|product lead|head of product|apm\b|associate pm)\b/g)||[]).length,
-        marketing: (t.match(/\b(marketing|seo|sem|content|social media|campaign|brand|email|demand gen|paid|acquisition|copywriting|influencer|growth hacker|cmo)\b/g)||[]).length,
+        pm:        (t.match(/\b(product manager|product lead|product owner|roadmap|sprint|user stor|okr|go.to.market|product strateg|head of product|apm\b|associate pm|backlog|stakeholder|epics|feature flag|go.to.market)\b/g)||[]).length,
+        marketing: (t.match(/\b(marketing|seo|sem|social media|campaign|brand|demand gen|paid|acquisition|copywriting|influencer|growth hacker|cmo)\b/g)||[]).length,
         data:      (t.match(/\b(data scientist|data analyst|analytics|sql\b|tableau|looker|machine learning|\bml\b|statistics|pandas|spark|dbt\b|bigquery|snowflake|jupyter)\b/g)||[]).length,
-        design:    (t.match(/\b(design|ux\b|ui\b|figma|wireframe|prototype|user research|interaction design|visual design|design system|accessibility|sketch)\b/g)||[]).length,
-        sales:     (t.match(/\b(account executive|\bae\b|\bsdr\b|\bbdr\b|sales\b|quota|pipeline|outreach|gong|salesforce|enterprise sales|closing|prospecting)\b/g)||[]).length,
-        finance:   (t.match(/\b(finance|accounting|financial analyst|fp.?a|investment|banking|cfa|financial model|valuation|dcf|equity|audit|controller)\b/g)||[]).length,
+        design:    (t.match(/\b(ux\b|ui\b|wireframe|interaction design|visual design|design system|motion design|ux designer|ui designer|product designer|design thinking|figma\b.*designer|designer.*figma)\b/g)||[]).length,
+        sales:     (t.match(/\b(account executive|\bae\b|\bsdr\b|\bbdr\b|quota|closing|prospecting|enterprise sales|cold call|outreach)\b/g)||[]).length,
+        finance:   (t.match(/\b(financial analyst|fp.?a|investment|banking|cfa|financial model|valuation|dcf|audit|controller)\b/g)||[]).length,
       };
       const top = Object.entries(scores).sort((a,b) => b[1]-a[1])[0];
       return (top && top[1] > 0) ? top[0] : 'pm';
