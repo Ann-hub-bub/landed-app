@@ -3432,13 +3432,68 @@
       const chipToLevel = {intern:'intern',volunteer:'intern',junior:'junior',mid:'mid',
                            lead:'senior',senior:'senior',staff:'staff',principal:'staff',director:'director'};
 
-      // Build the level cycle.
-      // Multiple chips → primary level (from resume) first, then others in descending order.
-      // Single chip or no chip → only that one level.
+      // Detect location context for Rules 1 & 2
+      const isWorldwide  = !!(locSet && locSet.has('worldwide'));
+      const isRemoteOnly = !!(locSet && locSet.has('remote') && !locSet.has('hybrid') && !locSet.has('onsite'));
+      const isGlobalRemote = isWorldwide || isRemoteOnly;
+      const isHybrid = !!(locSet && locSet.has('hybrid'));
+
+      // Rule 1 — Salary benchmarks keyed by domain × location context.
+      // These override DOMAIN_DATA so the numbers match real market rates.
+      const SAL = {
+        pm: {
+          intern:   [45,  65],
+          junior:   [60,  90],
+          mid:      [100, 140],
+          senior:   [130, 210],
+          staff:    [190, 270],
+          director: [230, 320],
+        },
+        swe_global: {    // worldwide / remote-only filter
+          intern:   [35,  60],
+          junior:   [60,  95],
+          mid:      [85,  130],
+          senior:   [90,  150],
+          staff:    [130, 195],
+          director: [155, 240],
+        },
+        swe_local: {     // US / Americas / no geo filter
+          intern:   [70,  100],
+          junior:   [110, 160],
+          mid:      [155, 200],
+          senior:   [160, 240],
+          staff:    [230, 320],
+          director: [270, 380],
+        },
+        data: {          // data analyst / data science
+          intern:   [40,  60],
+          junior:   [50,  85],
+          mid:      [75,  120],
+          senior:   [110, 160],
+          staff:    [150, 210],
+          director: [190, 280],
+        },
+      };
+
+      function getSalBench(lvl) {
+        let table;
+        if (domain === 'pm')        table = SAL.pm;
+        else if (domain === 'swe')  table = isGlobalRemote ? SAL.swe_global : SAL.swe_local;
+        else if (domain === 'data') table = SAL.data;
+        else return d.salaryByLevel[lvl] || [100, 150];
+        return table[lvl] || table.senior || [100, 150];
+      }
+
+      // Rule 3 — Match % ceilings that scale with seniority.
+      // Junior roles can't show 97% unless skills are nearly perfect.
+      const MATCH_CEIL = {
+        intern: 80, junior: 84, mid: 90, senior: 94, staff: 92, director: 88,
+      };
+
+      // Build the level cycle (unchanged logic)
       let activeLevels;
       if (levelsSet && levelsSet.size > 1) {
         const mapped = [...new Set([...levelsSet].map(c => chipToLevel[c]).filter(Boolean))];
-        // Sort highest-first so levels closest to resume level appear first in the cycle
         const sorted = mapped.sort((a,b) => LEVEL_ORDER.indexOf(b) - LEVEL_ORDER.indexOf(a));
         const primary = sorted.includes(seniority) ? seniority : sorted[0];
         activeLevels = [primary, ...sorted.filter(l => l !== primary)];
@@ -3449,41 +3504,72 @@
       let cos = [...d.companies];
       const seed = (Date.now() % 97) + 1;
       cos.sort((a,b) => ((a.name.charCodeAt(0)*seed)%97) - ((b.name.charCodeAt(0)*seed)%97));
+
+      // Rule 2 — Prefer remote-friendly companies when a global remote filter is active
+      if (isGlobalRemote) {
+        cos = [
+          ...cos.filter(c =>  /remote|global/i.test(c.loc)),
+          ...cos.filter(c => !/remote|global/i.test(c.loc)),
+        ];
+      }
       if (visaRequired) cos = cos.filter(c => c.visa !== false);
       cos = cos.slice(0, 6);
 
       const k = kws.length >= 2 ? kws : ['your background', 'cross-functional work', 'your domain expertise'];
       const ages = ['1h ago','3h ago','5h ago','1d ago','2d ago','3d ago'];
+      const REMOTE_LOCS = ['Remote · Worldwide','Remote · Global','Fully Remote','Remote · Anywhere'];
 
       const jobs = cos.map((co, i) => {
-        const lvl = activeLevels[i % activeLevels.length];
-        const roles   = d.roles[lvl]   || d.roles.junior  || d.roles.senior;
-        const reqSets = d.reqs[lvl]    || d.reqs.junior   || d.reqs.senior;
-        const [sLo, sHi] = d.salaryByLevel[lvl] || [100, 150];
+        const lvl     = activeLevels[i % activeLevels.length];
+        const roles   = d.roles[lvl]   || d.roles.junior || d.roles.senior;
+        const reqSets = d.reqs[lvl]    || d.reqs.junior  || d.reqs.senior;
 
-        const k1  = k[0]||'your background', k2 = k[1]||'cross-functional work', k3 = k[2]||'your domain expertise';
+        // Rule 1 — salary spread across cards: card 0 ≈ top of range, last ≈ bottom
+        const [sLo, sHi] = getSalBench(lvl);
+        const fraction   = cos.length > 1 ? i / (cos.length - 1) : 0;
+        const payLo = Math.round(sHi - (sHi - sLo) * fraction * 0.72);
+        const spread = Math.round(payLo * (['intern','junior'].includes(lvl) ? 0.13 : 0.19));
+        const payHi  = payLo + spread;
+        const baseK  = payLo * 1000;
+
+        // Rule 3 — match % descends from ceiling, never exceeds level cap
+        const ceil  = MATCH_CEIL[lvl] || 90;
+        const match = Math.max(ceil - 14, ceil - i * 2);
+
+        const k1 = k[0]||'your background', k2 = k[1]||'cross-functional work', k3 = k[2]||'your domain expertise';
         const ck1 = k[i % k.length];
         const ck2 = k[(i + 1) % k.length];
-        const scale = co.salaryScale || 1;
-        const baseK = Math.round(((sLo*1000) + (sHi-sLo)*1000*(1 - i*0.09)) * scale);
-        const payLo = Math.round(baseK/1000);
-        const spread = scale < 1 ? Math.round(payLo * 0.20) : (40 + i*3);
-        const payHi = payLo + spread;
-        const match = 97 - i*3;
+
+        // Rule 2 — override location text to eliminate contradictions
+        let jobLoc = co.loc;
+        if (isWorldwide) {
+          jobLoc = REMOTE_LOCS[i % REMOTE_LOCS.length];
+        } else if (isRemoteOnly && !/remote/i.test(co.loc)) {
+          jobLoc = 'Remote · US preferred';
+        }
+
+        // Rule 2 — strip work-model tags that contradict the active location filter
+        let tags = [...(co.tags || [])];
+        if (isGlobalRemote) {
+          tags = tags.filter(t => !/\bhybrid\b|\bon.?site\b|\bin.?office\b/i.test(t));
+          if (!tags.some(t => /remote|async|global/i.test(t))) tags.unshift('Remote-first');
+        } else if (isHybrid) {
+          tags = tags.filter(t => !/remote.?first|fully.?remote/i.test(t));
+        }
+        const visaTag = (co.visa && visaRequired) ? 'H1B & OPT sponsor' : null;
+        tags = [...tags, ...(visaTag ? [visaTag] : [])].slice(0, 4);
 
         const why  = (d.why[i % d.why.length])
           .replace(/{co}/g,co.name).replace(/{k1}/g,k1).replace(/{k2}/g,k2).replace(/{k3}/g,k3);
         const reqs = reqSets[i % reqSets.length].map(r => r.replace(/{k1}/g,ck1).replace(/{k2}/g,ck2));
         const rawPerks = d.perks[i % d.perks.length];
         const perks = visaRequired ? rawPerks : rawPerks.map(p => /h1b|opt|visa\s*sponsor/i.test(p) ? 'Comprehensive benefits' : p);
-        const rec   = d.recruiters[i % d.recruiters.length];
+        const rec      = d.recruiters[i % d.recruiters.length];
         const recTitle = rec.title.includes('·') ? rec.title : rec.title + ' · ' + co.name;
         const avatar   = rec.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-        const visaTag  = (co.visa && visaRequired) ? 'H1B & OPT sponsor' : null;
-        const tags     = [...(co.tags||[]), ...(visaTag?[visaTag]:[])].slice(0,4);
 
         return {
-          role: roles[i % roles.length], co: co.name, loc: co.loc, logo: co.logo,
+          role: roles[i % roles.length], co: co.name, loc: jobLoc, logo: co.logo,
           pay: '$'+payLo+'k–$'+payHi+'k', base: baseK, match, age: ages[i % ages.length],
           visa: !!co.visa, level: lvl, tags, why, reqs, perks,
           recruiter: { name: rec.name, title: recTitle, avatar,
@@ -3496,14 +3582,13 @@
         if (!ignoreSalary && j.base < salaryMin) return false;
         if (!locSet || locSet.size === 0) return true;
         const jl = j.loc.toLowerCase();
-        if (locSet.has('worldwide')) return /remote|global|colombia|mexico|panama|brazil|argentina|latam/i.test(jl);
-        // Work-type check (remote / hybrid / in-office)
+        // Worldwide: locations were already overridden above, so all pass
+        if (locSet.has('worldwide')) return /remote|global|worldwide|anywhere/i.test(jl);
         const hasTypeFilter = locSet.has('remote') || locSet.has('hybrid') || locSet.has('onsite');
         const typeOk = !hasTypeFilter ||
           (locSet.has('remote') && /remote/.test(jl)) ||
           (locSet.has('hybrid') && /hybrid/.test(jl)) ||
           (locSet.has('onsite') && !/remote|hybrid/.test(jl));
-        // Region check (USA / Americas / Canada)
         const hasRegionFilter = locSet.has('usa') || locSet.has('americas') || locSet.has('canada');
         const regionOk = !hasRegionFilter ||
           ((locSet.has('usa') || locSet.has('americas')) && /sf|nyc|us |new york|seattle|austin|boston|miami|oakland|colombia|mexico|panama|brazil|argentina/.test(jl)) ||
@@ -3512,7 +3597,6 @@
       }
 
       const filtered = jobs.filter(j => locMatches(j, false));
-      // If salary is too strict and removes too many results, relax it — keep location & visa
       const withoutSalary = salaryMin > 0 && filtered.length < 3
         ? jobs.filter(j => locMatches(j, true))
         : null;
