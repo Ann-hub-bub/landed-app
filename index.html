@@ -675,7 +675,8 @@
     padding-bottom: 4px; position: relative;
   }
   .price-band .joe-wrap{
-    position: relative; display: flex; align-items: flex-end;
+    position: relative; display: flex; flex-direction: column;
+    justify-content: flex-end; align-items: flex-start;
     align-self: stretch;
   }
   .price-band .joe-wrap .joe{
@@ -694,9 +695,9 @@
     100% { transform: translateY(-6px) rotate(-3deg);}
   }
   .price-band .joe-wrap .speech{
-    position: absolute;
-    top: 16px; left: 130px;
-    max-width: 230px;
+    position: relative;
+    margin-left: 50px; margin-bottom: 10px;
+    max-width: 220px;
     background: var(--parchment); color: var(--walnut);
     padding: 12px 14px;
     border: 2px solid var(--orange-deep);
@@ -709,17 +710,17 @@
   .price-band .joe-wrap .speech b{ color: var(--orange-deep); font-weight: 700;}
   .price-band .joe-wrap .speech::after{
     content:''; position: absolute;
-    top: 100%; left: 24px;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 70px solid var(--orange-deep);
+    top: 100%; left: 22px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 16px solid var(--orange-deep);
   }
   .price-band .joe-wrap .speech::before{
     content:''; position: absolute;
-    top: 100%; left: 27px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 60px solid var(--parchment);
+    top: 100%; left: 25px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 13px solid var(--parchment);
     z-index: 1;
   }
   .price-band .tankard{
@@ -892,7 +893,7 @@
     .price-band h2{ font-size: 46px;}
     .price-band .bar{ min-height: 520px;}
     .price-band .joe-wrap .joe{ width: 220px;}
-    .price-band .joe-wrap .speech{ left: 90px; max-width: 200px; font-size: 12px;}
+    .price-band .joe-wrap .speech{ margin-left: 20px; max-width: 190px; font-size: 12px;}
   }
 
   /* Parchment manifest scroll (legacy, unused) */
@@ -1970,6 +1971,9 @@
   .s2 .meta-col .chip.rm:hover .x{ opacity:.85; }
   .s2 .meta-col .chip.rm .dd-caret{ font-size:9px; margin-left:3px; opacity:.35; transition:opacity .15s; }
   .s2 .meta-col .chip.rm:hover .dd-caret{ opacity:.7; }
+  .s2 .meta-col .chip.rm.on{ background:rgba(255,106,31,.12); border-color:rgba(255,106,31,.45); color:var(--orange); }
+  .s2 .meta-col .chip.rm.on .dd-caret{ opacity:.6; }
+  .s2 .meta-col .chip.rm.on:hover{ background:rgba(255,106,31,.18); border-color:rgba(255,106,31,.65); }
 
   /* Filter dropdown popup */
   .filter-dropdown{
@@ -3521,12 +3525,21 @@
       if (!filtersEcho) return;
       const lvlMap = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
       const locLabels = {worldwide:'Worldwide', usa:'USA', americas:'Americas', canada:'Canada', remote:'Remote', hybrid:'Hybrid', onsite:'In-office'};
-      const chips = [];
-      [...levels].forEach(v => chips.push(`<button class="chip rm" type="button" data-type="level" data-v="${v}">${lvlMap[v]||v}<span class="dd-caret">▾</span><span class="x">×</span></button>`));
-      if (salary > 0) chips.push(`<button class="chip rm" type="button" data-type="salary">$${Math.round(salary/1000)}k+<span class="dd-caret">▾</span><span class="x">×</span></button>`);
-      [...loc].forEach(v => chips.push(`<button class="chip rm" type="button" data-type="loc" data-v="${v}">${locLabels[v]||v}<span class="dd-caret">▾</span><span class="x">×</span></button>`));
-      if (visa) chips.push(`<button class="chip rm" type="button" data-type="visa">Sponsor<span class="dd-caret">▾</span><span class="x">×</span></button>`);
-      if (chips.length === 0) chips.push(`<span class="chip" style="opacity:.45;">Any</span>`);
+      const lvlArr = [...levels].map(v => lvlMap[v]||v);
+      const locArr = [...loc].map(v => locLabels[v]||v);
+      const lvlLabel = lvlArr.length === 0 ? 'Level'
+        : lvlArr.length <= 3 ? lvlArr.join(' · ')
+        : lvlArr.slice(0,2).join(' · ') + ' +' + (lvlArr.length - 2);
+      const salLabel = salary > 0 ? '$' + Math.round(salary/1000) + 'k+' : 'Salary';
+      const locLabel = locArr.length === 0 ? 'Location'
+        : locArr.length <= 3 ? locArr.join(' · ')
+        : locArr.slice(0,2).join(' · ') + ' +' + (locArr.length - 2);
+      const chips = [
+        `<button class="chip rm${levels.size>0?' on':''}" type="button" data-type="level">${lvlLabel}<span class="dd-caret">▾</span></button>`,
+        `<button class="chip rm${salary>0?' on':''}" type="button" data-type="salary">${salLabel}<span class="dd-caret">▾</span></button>`,
+        `<button class="chip rm${loc.size>0?' on':''}" type="button" data-type="loc">${locLabel}<span class="dd-caret">▾</span></button>`,
+        `<button class="chip rm${visa?' on':''}" type="button" data-type="visa">${visa?'Sponsor':'Visa'}<span class="dd-caret">▾</span></button>`,
+      ];
       filtersEcho.innerHTML = chips.join('');
     }
 
@@ -3587,26 +3600,6 @@
       filtersEcho.addEventListener('click', e => {
         const btn = e.target.closest('.chip.rm');
         if (!btn) return;
-        if (e.target.closest('.x')) {
-          closeDd();
-          const type = btn.dataset.type;
-          const v = btn.dataset.v;
-          if (type === 'level') {
-            levels.delete(v);
-            document.querySelector(`#fmLevel .fm-chip[data-v="${v}"]`)?.classList.remove('on');
-          } else if (type === 'loc') {
-            loc.delete(v);
-            document.querySelector(`#fmLoc .fm-chip[data-v="${v}"]`)?.classList.remove('on');
-          } else if (type === 'salary') {
-            salary = 0;
-            if (salaryInput) salaryInput.value = '';
-          } else if (type === 'visa') {
-            visa = false;
-            if (visaInput) visaInput.checked = false;
-          }
-          refreshResults();
-          return;
-        }
         if (filterDd.classList.contains('open') && ddState?.type === btn.dataset.type) {
           closeDd();
         } else {
