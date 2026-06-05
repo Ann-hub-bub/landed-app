@@ -2032,10 +2032,11 @@
 
     function detectSeniority(resumeText, posText, levelsSet) {
       const t = (resumeText + ' ' + posText).toLowerCase();
-      if (levelsSet.has('intern')   || /\bjunior\b|\bjr\.?\b|\bentry.level\b|\bnew grad\b/.test(t)) return 'junior';
+      if (levelsSet.has('intern') || levelsSet.has('volunteer') || /\bintern\b|\bvolunteer\b/.test(t)) return 'junior';
+      if (levelsSet.has('junior') || /\bjunior\b|\bjr\.?\b|\bentry.level\b|\bnew grad\b/.test(t)) return 'junior';
       if (levelsSet.has('director') || /\bdirector\b|\bvp\b|\bhead of\b|\b1[0-9]\+?\s*yr/.test(t)) return 'director';
       if (levelsSet.has('staff') || levelsSet.has('principal') || /\bstaff\b|\bprincipal\b|\b[89]\+?\s*yr/.test(t)) return 'staff';
-      if (levelsSet.has('senior')   || /\bsenior\b|\bsr\.?\b|\blead\b|\b[567]\+?\s*yr/.test(t)) return 'senior';
+      if (levelsSet.has('senior') || levelsSet.has('lead') || /\bsenior\b|\bsr\.?\b|\blead\b|\b[567]\+?\s*yr/.test(t)) return 'senior';
       if (levelsSet.has('mid')      || /\b[34]\+?\s*yr/.test(t)) return 'mid';
       return 'senior';
     }
