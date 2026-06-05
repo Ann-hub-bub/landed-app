@@ -519,23 +519,382 @@
   .captain-block .sig .role{ font-size: 11px; color: var(--mute); letter-spacing:.1em; text-transform:uppercase; margin-top: 2px;}
   .captain-block .sig .x{ width:1px; height: 36px; background: var(--line);}
 
-  /* ── Pricing · Jackpot ── */
-  .price-band{ background: var(--paper); color: var(--ink); padding: 120px 0 96px; position:relative; overflow:hidden;}
-  .price-band::before{ content:''; position:absolute; inset:0; background: repeating-linear-gradient(0deg, transparent 0, transparent 30px, rgba(10,10,10,.025) 30px, rgba(10,10,10,.025) 31px); pointer-events:none;}
+  /* ── Pricing · Pour Joe a Rum ── */
+  .price-band{
+    --wood-dark:#2d1a0c; --wood:#4a2c14; --wood-mid:#6b3f1d; --wood-light:#8b5a2b;
+    --brass:#c9a35a; --brass-deep:#8a6920; --brass-shadow:#5c4615;
+    --gold:#e4c662; --gold-light:#f4d97a;
+    --parchment:#f0dba8; --parchment-deep:#d9bf83; --parchment-light:#f5e7c8;
+    --walnut:#2a1608; --ruby:#b8410a;
+    --receipt:#faf4e3;
+    background: var(--paper); color: var(--ink); padding: 96px 0;
+    position: relative; overflow: hidden;
+    background-image: repeating-linear-gradient(0deg, transparent 0, transparent 30px, rgba(10,10,10,.025) 30px, rgba(10,10,10,.025) 31px);
+  }
+  .price-band .wrap{ max-width:1280px; margin:0 auto; padding: 0 52px;}
 
-  .price-band .jp-stage{ max-width: 1180px; margin: 0 auto; text-align: left; position: relative; }
-  .price-band .jp-head{ margin-bottom: 44px; max-width: 760px;}
-  .price-band .jp-eye{ font-size:12px; color:var(--orange-deep); letter-spacing:.22em; text-transform:uppercase; font-weight:600; margin-bottom: 18px;}
-  .price-band h2{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size: clamp(48px,6.2vw,84px); line-height:.94; letter-spacing:-.04em; margin:0; color: var(--ink);}
+  /* ─── Two-column layout ─── */
+  .price-band .pour-grid{
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 44px;
+    align-items: stretch;
+  }
+
+  /* ═══ LEFT — serious "Land the job" pitch ═══ */
+  .price-band .pour-left{ display: flex; flex-direction: column; min-width: 0;}
+  .price-band .pour-eye{
+    display: flex; align-items: center; gap: 10px;
+    font-family:'Space Grotesk',sans-serif; font-size: 11px; color: var(--orange-deep);
+    letter-spacing: .22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px;
+  }
+  .price-band .pour-eye::before{
+    content:''; width:6px; height:6px; border-radius:50%; background:var(--orange);
+    box-shadow:0 0 0 3px rgba(255,106,31,.18);
+  }
+  .price-band h2{
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size: 64px; line-height:.94; letter-spacing:-.035em; margin:0; color: var(--ink);
+  }
   .price-band h2 .hot{ color: var(--orange-deep);}
-  .price-band .lede{ margin: 24px 0 0; font-size:18px; color:#3a3a3a; max-width: 600px; line-height: 1.55; text-wrap: pretty;}
-  .price-band .lede b{ color: var(--ink); font-weight:600;}
+  .price-band .pour-lede{
+    font-size: 16px; color:#2a2a2a; line-height: 1.55;
+    max-width: 520px; margin: 18px 0 0;
+  }
+  .price-band .pour-lede b{ color: var(--ink); font-weight:600;}
+  .price-band .pour-values{
+    margin: 22px 0 0; padding: 18px 22px;
+    background: rgba(10,10,10,.05);
+    border-left: 3px solid var(--orange-deep);
+    list-style: none;
+    display: flex; flex-direction: column; gap: 11px;
+  }
+  .price-band .pour-values li{
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 13.5px; line-height: 1.45; color:#2a2a2a;
+  }
+  .price-band .pour-values li .m{
+    flex: 0 0 auto; width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--ink); color: var(--bone);
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size: 11px;
+    margin-top: 1px; border-radius: 2px;
+  }
+  .price-band .pour-values li b{ color: var(--ink); font-weight: 700;}
+  .price-band .pour-cta-block{
+    margin-top: auto; padding-top: 26px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .price-band .buy-btn{
+    appearance:none; border:0; cursor:pointer; text-decoration:none;
+    background: var(--ink); color: var(--bone);
+    padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    box-shadow: 0 6px 0 var(--orange-deep), 0 22px 36px -10px rgba(0,0,0,.4);
+    transition: transform .12s, box-shadow .12s;
+    width: 100%; max-width: 480px; position: relative;
+  }
+  .price-band .buy-btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 0 var(--orange-deep), 0 26px 42px -10px rgba(0,0,0,.5);}
+  .price-band .buy-btn .label{
+    display: flex; align-items: center; gap: 14px;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size: 22px; letter-spacing:-.01em;
+  }
+  .price-band .buy-btn .label .ar{ color: var(--orange); font-size: 26px; transition: transform .15s;}
+  .price-band .buy-btn:hover .label .ar{ transform: translateX(4px);}
+  .price-band .buy-btn .price{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size: 32px;
+    color: var(--orange); letter-spacing:-.03em; line-height:1;
+    display: flex; align-items: baseline; gap: 2px;
+  }
+  .price-band .buy-btn .price small{
+    font-family:'JetBrains Mono',monospace; font-weight:500; font-size: 12px;
+    color: rgba(244,237,224,.55); letter-spacing:0; margin-left:2px;
+  }
+  .price-band .buy-btn.pulse{ animation: buyPulse 1.8s ease-in-out infinite;}
+  @keyframes buyPulse{
+    0%, 100% { box-shadow: 0 6px 0 var(--orange-deep), 0 22px 36px -10px rgba(0,0,0,.4), 0 0 0 0 rgba(255,106,31,.5);}
+    50%      { box-shadow: 0 6px 0 var(--orange-deep), 0 22px 36px -10px rgba(0,0,0,.4), 0 0 0 14px rgba(255,106,31,0);}
+  }
+  .price-band .pour-micro{
+    display: flex; align-items: center; gap: 12px;
+    font-family:'JetBrains Mono',monospace; font-size: 11.5px;
+    color: #6a6a72; letter-spacing:.08em; text-transform: uppercase;
+  }
+  .price-band .pour-micro b{ color: var(--ink); font-weight: 600;}
+  .price-band .pour-micro .dot{ width:4px; height:4px; border-radius:50%; background:#b5b0a4;}
 
-  /* Two-column layout: bandit on left, tab manifest scroll on right */
-  .price-band .jp-layout{ display:grid; grid-template-columns: minmax(0,1fr) 400px; gap: 48px; align-items: start;}
-  .price-band .jp-layout .jp-left{ min-width: 0;}
+  /* ═══ RIGHT — dark wood bar, Joe + tankard + bottle ═══ */
+  .price-band .bar{
+    position: relative;
+    background:
+      radial-gradient(ellipse at 70% 18%, rgba(228,198,98,.18), transparent 55%),
+      linear-gradient(180deg, #2d1a0c 0%, #1a0e05 70%, #0a0502 100%);
+    color: var(--parchment);
+    box-shadow: 0 24px 50px -20px rgba(0,0,0,.55),
+      inset 0 3px 0 var(--brass), inset 0 -3px 0 var(--brass-shadow),
+      inset 3px 0 0 var(--brass-deep), inset -3px 0 0 var(--brass-deep);
+    padding: 22px 26px 28px;
+    display: grid; grid-template-rows: auto 1fr;
+    overflow: hidden; min-height: 600px;
+  }
+  .price-band .b-head{
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 12px; border-bottom: 1px solid rgba(228,198,98,.22);
+    position: relative; z-index: 2;
+  }
+  .price-band .b-head .t{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px;
+    letter-spacing:.18em; text-transform: uppercase; color: var(--brass);
+  }
+  .price-band .b-head .sub{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em;
+    color: rgba(228,198,98,.5); text-transform: uppercase;
+  }
+  .price-band .shelves{
+    position: absolute; left: 0; right: 0; top: 60px; bottom: 220px;
+    pointer-events: none; opacity: .14;
+    background:
+      linear-gradient(180deg, transparent 22%, rgba(228,198,98,.35) 22%, rgba(228,198,98,.35) 23%, transparent 23%),
+      linear-gradient(180deg, transparent 58%, rgba(228,198,98,.35) 58%, rgba(228,198,98,.35) 59%, transparent 59%),
+      repeating-linear-gradient(90deg,
+        transparent 0 24px,
+        rgba(184,65,10,.4) 24px 38px, transparent 38px 56px,
+        rgba(228,198,98,.35) 56px 70px, transparent 70px 90px,
+        rgba(94,240,168,.3) 90px 104px, transparent 104px 130px);
+    background-size: 100% 100%, 100% 100%, 100% 32%;
+    background-position: 0 0, 0 0, 0 28%;
+  }
+  .price-band .scene{
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 24px; align-items: end;
+    padding: 0 6px;
+  }
+  .price-band .joe-cup{
+    display: flex; align-items: flex-end; gap: 12px;
+    justify-content: flex-start;
+    align-self: stretch;
+    padding-bottom: 4px; position: relative;
+  }
+  .price-band .joe-wrap{
+    position: relative; display: flex; align-items: flex-end;
+    align-self: stretch;
+  }
+  .price-band .joe-wrap .joe{
+    width: 280px; height: auto; display: block;
+    transition: transform .4s ease, filter .4s ease;
+    filter: drop-shadow(0 16px 32px rgba(0,0,0,.6));
+  }
+  .price-band .joe-wrap .joe.joe-happy{
+    transform: translateY(-6px) rotate(-3deg);
+    filter: drop-shadow(0 16px 32px rgba(228,198,98,.55));
+    animation: joeHappy .6s ease-out;
+  }
+  @keyframes joeHappy{
+    0%   { transform: translateY(0) rotate(0);}
+    35%  { transform: translateY(-12px) rotate(-5deg);}
+    100% { transform: translateY(-6px) rotate(-3deg);}
+  }
+  .price-band .joe-wrap .speech{
+    position: absolute;
+    top: 16px; left: 130px;
+    max-width: 230px;
+    background: var(--parchment); color: var(--walnut);
+    padding: 12px 14px;
+    border: 2px solid var(--orange-deep);
+    font-family:'Space Grotesk',sans-serif; font-weight: 500;
+    font-size: 13.5px; line-height: 1.4;
+    box-shadow: 0 12px 22px -8px rgba(0,0,0,.55);
+    transform: rotate(-1.5deg);
+    z-index: 3;
+  }
+  .price-band .joe-wrap .speech b{ color: var(--orange-deep); font-weight: 700;}
+  .price-band .joe-wrap .speech::after{
+    content:''; position: absolute;
+    top: 100%; left: 24px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 70px solid var(--orange-deep);
+  }
+  .price-band .joe-wrap .speech::before{
+    content:''; position: absolute;
+    top: 100%; left: 27px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 60px solid var(--parchment);
+    z-index: 1;
+  }
+  .price-band .tankard{
+    position: relative; width: 110px; height: 140px;
+    background: linear-gradient(180deg, #6b3f1d 0%, #4a2c14 60%, #2d1a0c 100%);
+    border: 3px solid var(--walnut);
+    border-radius: 6px 6px 8px 8px;
+    box-shadow: inset 0 4px 8px rgba(0,0,0,.5), 0 10px 20px -6px rgba(0,0,0,.7);
+    transition: box-shadow .5s, transform .5s;
+  }
+  .price-band a.tankard{ text-decoration: none; cursor: pointer; display: block;}
+  .price-band .tankard::before,
+  .price-band .tankard::after{
+    content:''; position: absolute; left: -3px; right: -3px; height: 6px;
+    background: linear-gradient(180deg, var(--brass) 0%, var(--brass-shadow) 100%);
+    border-top: 1px solid var(--walnut); border-bottom: 1px solid var(--walnut);
+  }
+  .price-band .tankard::before{ top: 18px;}
+  .price-band .tankard::after{ bottom: 22px;}
+  .price-band .tankard .handle{
+    position: absolute; right: -28px; top: 18px; width: 30px; height: 86px;
+    border: 6px solid #4a2c14; border-left: 0; border-radius: 0 40px 40px 0;
+  }
+  .price-band .tankard .inside{
+    position: absolute; left: 8px; right: 8px; top: 10px; bottom: 12px;
+    background: linear-gradient(180deg, #2d1a0c 0%, #1a0e05 100%);
+    border-radius: 2px; overflow: hidden;
+  }
+  .price-band .tankard .rum{
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 0; transition: height .9s cubic-bezier(.4,1.3,.5,1);
+    background: linear-gradient(180deg, #f4a25a 0%, #c66b1f 30%, #8b3f0a 100%);
+    box-shadow: inset 0 4px 8px rgba(228,198,98,.4);
+  }
+  .price-band .tankard.full .rum{ height: 82%;}
+  .price-band .tankard .foam{
+    position: absolute; left: 0; right: 0; bottom: 82%; height: 0;
+    background:
+      radial-gradient(circle at 20% 100%, #f4ede0 0 8px, transparent 9px),
+      radial-gradient(circle at 50% 100%, #f4ede0 0 9px, transparent 10px),
+      radial-gradient(circle at 80% 100%, #f4ede0 0 8px, transparent 9px),
+      linear-gradient(180deg, #faf4e3 0%, #f4ede0 100%);
+    transition: height .3s .8s; opacity: 0;
+  }
+  .price-band .tankard.full .foam{ height: 12px; opacity: 1;}
+  .price-band .tankard .steam{
+    position: absolute; left: 14px; right: 14px; top: -28px; height: 32px;
+    display: flex; justify-content: space-around; align-items: flex-end;
+    opacity: 0; transition: opacity .2s; pointer-events: none;
+  }
+  .price-band .tankard.full .steam{ opacity: 1;}
+  .price-band .tankard.cta .steam{ display: none;}
+  .price-band .tankard .steam span{
+    width: 14px; height: 14px; border-radius: 50%;
+    background: rgba(244,237,224,.7); filter: blur(4px);
+    animation: steamRise 2.2s ease-out infinite;
+  }
+  .price-band .tankard .steam span:nth-child(2){ animation-delay: .5s;}
+  .price-band .tankard .steam span:nth-child(3){ animation-delay: 1s;}
+  @keyframes steamRise{
+    0%   { transform: translateY(8px) scale(.6); opacity: 0;}
+    30%  { opacity: .8;}
+    100% { transform: translateY(-22px) scale(1.2); opacity: 0;}
+  }
+  .price-band .tankard.cta{
+    box-shadow: inset 0 4px 8px rgba(0,0,0,.5),
+                0 14px 28px -6px rgba(0,0,0,.7),
+                0 0 0 3px var(--gold-light),
+                0 0 44px rgba(228,198,98,.6);
+  }
+  .price-band a.tankard.cta:hover{ transform: translateY(-3px);}
+  .price-band .buy-overlay{
+    position: absolute;
+    left: 50%; bottom: 100%; transform: translateX(-50%) rotate(-3deg);
+    margin-bottom: 16px;
+    display: none; flex-direction: column; align-items: center;
+    background: var(--gold-light); color: var(--walnut);
+    padding: 8px 18px;
+    border: 2px solid var(--brass-deep);
+    box-shadow: 0 5px 0 var(--brass-deep), 0 16px 28px -8px rgba(228,198,98,.55);
+    white-space: nowrap; line-height: 1; z-index: 4;
+    animation: buyTagDrop .5s ease-out;
+  }
+  @keyframes buyTagDrop{
+    0%   { opacity: 0; transform: translateX(-50%) rotate(-3deg) translateY(-12px);}
+    100% { opacity: 1; transform: translateX(-50%) rotate(-3deg) translateY(0);}
+  }
+  .price-band .tankard.cta .buy-overlay{ display: flex;}
+  .price-band .buy-overlay .bn{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size: 11px;
+    letter-spacing: .22em; text-transform: uppercase;
+  }
+  .price-band .buy-overlay .bp{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size: 22px;
+    letter-spacing: -.02em; margin-top: 2px;
+  }
+  .price-band .buy-overlay .bp small{
+    font-family:'JetBrains Mono',monospace; font-weight:500; font-size: 10px;
+    color: rgba(42,22,8,.6); margin-left: 2px;
+  }
+  .price-band .buy-overlay .ar{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size: 14px;
+    color: var(--walnut); margin-top: 3px;
+  }
+  .price-band .bottle-col{
+    display: flex; align-items: flex-end; justify-content: flex-end;
+    padding-bottom: 4px;
+  }
+  .price-band .rum-bottle{
+    appearance: none; border: 0; padding: 0; cursor: pointer; background: transparent;
+    position: relative; width: 70px; height: 170px;
+    transform-origin: 50% 90%;
+    transition: transform .8s cubic-bezier(.4,1,.5,1), opacity .5s;
+  }
+  .price-band .rum-bottle:hover{ transform: rotate(-8deg) translateY(-4px);}
+  .price-band .rum-bottle.pouring{ transform: rotate(-65deg) translateX(-30px);}
+  .price-band .bar.served .rum-bottle{
+    opacity: 0; pointer-events: none;
+    transform: rotate(-65deg) translateX(-30px) translateY(20px);
+  }
+  .price-band .rum-bottle .neck{
+    position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: 22px; height: 36px;
+    background: linear-gradient(180deg, #1a4030 0%, #0f2820 100%);
+    border: 2px solid #0a1810; border-radius: 4px 4px 0 0;
+  }
+  .price-band .rum-bottle .cork{
+    position: absolute; left: 50%; top: -10px; transform: translateX(-50%);
+    width: 18px; height: 14px;
+    background: linear-gradient(180deg, #c9a35a 0%, #8a6920 100%);
+    border: 1px solid var(--walnut); border-radius: 2px;
+  }
+  .price-band .rum-bottle .body{
+    position: absolute; left: 0; right: 0; top: 30px; bottom: 0;
+    background: linear-gradient(180deg, #2a6f4a 0%, #1a4030 50%, #0f2820 100%);
+    border: 2px solid #0a1810;
+    border-radius: 8px 8px 14px 14px / 16px 16px 14px 14px;
+    overflow: hidden;
+  }
+  .price-band .rum-bottle .label{
+    position: absolute; left: 6px; right: 6px; top: 36px;
+    background: var(--parchment-light); color: var(--walnut);
+    padding: 8px 4px 6px; text-align: center; border: 1px solid var(--walnut);
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .price-band .rum-bottle .label .n{ font-weight: 700; font-size: 13px; letter-spacing: .04em; line-height: 1;}
+  .price-band .rum-bottle .label .p{
+    font-weight: 700; font-size: 16px; color: var(--orange-deep);
+    margin-top: 4px; letter-spacing: -.02em; line-height: 1;
+  }
+  .price-band .rum-bottle .label .p small{
+    font-family:'JetBrains Mono',monospace; font-weight: 500; font-size: 8px;
+    color: rgba(74,42,20,.6); margin-left: 1px; letter-spacing: 0;
+  }
+  .price-band .rum-bottle .pour-hint{
+    position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%);
+    font-family:'JetBrains Mono',monospace; font-size: 10px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--gold-light);
+    white-space: nowrap; pointer-events: none;
+    animation: hintPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes hintPulse{ 0%,100%{ opacity: .55;} 50%{ opacity: 1;}}
+  .price-band .bar.served .pour-hint{ display: none;}
 
-  /* Parchment manifest scroll */
+  /* ─── Mobile stack ─── */
+  @media (max-width: 960px){
+    .price-band{ padding: 64px 0;}
+    .price-band .wrap{ padding: 0 24px;}
+    .price-band .pour-grid{ grid-template-columns: 1fr; gap: 32px;}
+    .price-band h2{ font-size: 46px;}
+    .price-band .bar{ min-height: 520px;}
+    .price-band .joe-wrap .joe{ width: 220px;}
+    .price-band .joe-wrap .speech{ left: 90px; max-width: 200px; font-size: 12px;}
+  }
+
+  /* Parchment manifest scroll (legacy, unused) */
   .price-band .scroll{
     background:
       repeating-linear-gradient(180deg, rgba(122,77,40,.04) 0 1px, transparent 1px 28px),
@@ -619,8 +978,8 @@
   }
   .price-band .scroll .total .val small{ font-family:'JetBrains Mono',monospace; font-weight:500; font-size:12px; color: rgba(74,42,20,.55); margin-left:3px; letter-spacing:0;}
 
-  /* ── Bandit machine · weathered wood + brass ── */
-  .price-band .bandit{
+  /* ── Bandit machine (legacy, removed) ── */
+  .price-band .bandit-REMOVED{
     --wood-dark: #2d1a0c;
     --wood: #4a2c14;
     --wood-mid: #6b3f1d;
@@ -1988,40 +2347,90 @@
 <!-- PRICING -->
 <section class="price-band" id="pricing">
   <div class="wrap">
-    <div class="jp-stage">
-      <div class="jp-head" style="text-align:center;max-width:none;margin-bottom:56px;">
-        <div class="jp-eye">One plan · no games</div>
-        <h2>Try yer luck.<br/><span class="hot">Land the $<span data-tweak-price-bill>20</span>.</span></h2>
-        <p class="lede" style="max-width:560px;margin:24px auto 0;">Everything Cap'n Jack's got — applications, resume rewrites, recruiter follow-ups, interview prep. <b>$<span data-tweak-price-2>20</span> a month. Cancel any time.</b></p>
+    <div class="pour-grid">
+
+      <!-- ── LEFT · serious "Land the job" pitch + Buy now ─── -->
+      <div class="pour-left">
+        <div class="pour-eye">One plan · get hired</div>
+        <h2>Land the job <span class="hot">in 30 days.</span></h2>
+        <p class="pour-lede">
+          Cap'n Joe and the Landed crew run the whole hunt &mdash; applications,
+          recruiters, interview prep. <b>You show up to the offer.</b>
+        </p>
+        <ul class="pour-values">
+          <li><span class="m">✓</span><span><b>100+ applications per week</b> sent in your voice &mdash; no template smell.</span></li>
+          <li><span class="m">✓</span><span><b>Resume rewritten for every shot</b> &mdash; keywords, story arc, your tone.</span></li>
+          <li><span class="m">✓</span><span><b>Recruiters chased on day 2</b> when they go quiet. They almost always do.</span></li>
+          <li><span class="m">✓</span><span><b>You approve every send.</b> Nothing leaves the dock without yer green light &mdash; review &amp; go.</span></li>
+          <li><span class="m">✓</span><span><b>30-day offer guarantee.</b> No offer in 30, full refund. One click &mdash; no support call.</span></li>
+        </ul>
+        <div class="pour-cta-block">
+          <a class="buy-btn" id="buyBtn" href="#" onclick="payOpen(event)">
+            <span class="label">Buy now <span class="ar">→</span></span>
+            <span class="price">$<span data-tweak-price>20</span><small>/mo</small></span>
+          </a>
+          <div class="pour-micro">
+            <span><b>Cancel anytime</b></span>
+            <span class="dot"></span>
+            <span>30-day refund</span>
+            <span class="dot"></span>
+            <span><b data-tweak-offers>1,247</b> hired in '25</span>
+          </div>
+        </div>
       </div>
 
-      <div style="display:flex;justify-content:center;">
-        <aside class="scroll" style="width:100%;max-width:480px;margin-top:40px;">
-          <div class="joe-av">
-            <img src="./joe-bone-peek.svg" alt="Cap'n Jack Bone" />
-            <div class="badge">CAP'N JACK</div>
+      <!-- ── RIGHT · dark bar scene with Joe + cup + bottle ─── -->
+      <div class="bar" id="pourBar">
+        <div class="shelves" aria-hidden="true"></div>
+        <div class="b-head">
+          <div class="t">Captain's bar</div>
+          <div class="sub" id="barSub">tab #1247 · open</div>
+        </div>
+
+        <div class="scene">
+          <!-- Joe + cup grouped on the LEFT of the scene -->
+          <div class="joe-cup">
+            <div class="joe-wrap">
+              <img id="joeImg" class="joe"
+                   src="./joe-bone-bust.svg"
+                   alt="Cap'n Joe Bone" />
+              <div class="speech" id="speech">
+                <b>Fill me cup with rum</b> and I'll get ye hired. Tab's $<span data-tweak-price>20</span>.
+              </div>
+            </div>
+            <!-- the tankard becomes the Buy-now CTA when served -->
+            <a id="tankard" class="tankard" href="#" aria-label="Buy now — $20/mo">
+              <div class="handle"></div>
+              <div class="inside">
+                <div class="rum"></div>
+                <div class="foam"></div>
+              </div>
+              <div class="steam"><span></span><span></span><span></span></div>
+              <div class="buy-overlay">
+                <div class="bn">Buy now</div>
+                <div class="bp">$<span data-tweak-price>20</span><small>/mo</small></div>
+                <div class="ar">→</div>
+              </div>
+            </a>
           </div>
-          <h3>What's in the tab</h3>
-          <div class="sub">Letter of marque · 2025</div>
-          <ul id="scrollItems">
-            <li class="checked"><span class="mark">✓</span><span><b>100+ applications per week</b> sent in your voice — no template smell.</span></li>
-            <li class="checked"><span class="mark">✓</span><span><b>Resume rewritten</b> for every shot — keywords, story arc, your tone.</span></li>
-            <li class="checked"><span class="mark">✓</span><span><b>Recruiters chased on day 2</b> when they go quiet. They almost always do.</span></li>
-            <li class="checked"><span class="mark">✓</span><span><b>Interview prep notes</b> the night before each one — culled from the company's last 90 days.</span></li>
-            <li class="checked"><span class="mark">✓</span><span><b>30-day offer guarantee.</b> No offer in 30, full refund. One click — no support call.</span></li>
-          </ul>
-          <div class="total lit" id="scrollTotal">
-            <div class="lbl">Your tab</div>
-            <div class="val">$<span data-tweak-price-2>20</span><small>/mo</small></div>
+
+          <!-- Bottle on the RIGHT of the scene -->
+          <div class="bottle-col">
+            <button id="rumBottle" class="rum-bottle" type="button" aria-label="Pour the rum">
+              <span class="cork"></span>
+              <span class="neck"></span>
+              <span class="body">
+                <span class="label">
+                  <span class="n">RUM</span>
+                  <span class="p">$<span data-tweak-price>20</span><small>/mo</small></span>
+                </span>
+              </span>
+              <span class="pour-hint">↑ Click to pour</span>
+            </button>
           </div>
-          <a href="#booking" class="btn-primary" style="display:flex;justify-content:center;width:100%;box-sizing:border-box;margin-top:20px;padding:18px 32px;font-size:17px;text-decoration:none;" onclick="payOpen(event)">Buy now <span class="ar" style="margin-left:8px;">→</span></a>
-        </aside>
+        </div>
       </div>
 
-      <div class="jp-foot" style="text-align:center;">
-        <div class="guarantee-line"><b>30-day offer guarantee.</b> No offer, full refund. One click — no support call.</div>
-        <div class="jp-meta"><span data-tweak-offers>1,247</span> tabs settled in 2025 · cancel any tide</div>
-      </div>
     </div>
   </div>
 </section>
@@ -3444,6 +3853,48 @@
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape') payClose();
   });
+
+  // ── Pour Joe a Rum · paywall interaction ──
+  (function(){
+    const bar     = document.getElementById('pourBar');
+    const bottle  = document.getElementById('rumBottle');
+    const tankard = document.getElementById('tankard');
+    const speech  = document.getElementById('speech');
+    const joeImg  = document.getElementById('joeImg');
+    const buyBtn  = document.getElementById('buyBtn');
+    const barSub  = document.getElementById('barSub');
+    if (!bar || !bottle) return;
+
+    let served = false;
+    let pouring = false;
+
+    function pour(){
+      if (served || pouring) return;
+      pouring = true;
+      bottle.classList.add('pouring');
+      setTimeout(serve, 900);
+    }
+
+    function serve(){
+      served = true;
+      pouring = false;
+      bar.classList.add('served');
+      tankard.classList.add('full', 'cta');
+      joeImg.src = joeImg.src.replace('joe-bone-bust.svg', 'joe-bone-salute.svg');
+      joeImg.classList.add('joe-happy');
+      speech.innerHTML = "<b>Tab's settled.</b> Tap me cup &mdash; off to the office.";
+      if (barSub) barSub.textContent = 'tab #1247 · settled';
+      if (buyBtn) buyBtn.classList.add('pulse');
+    }
+
+    bottle.addEventListener('click', pour);
+
+    tankard.addEventListener('click', function(e){
+      e.preventDefault();
+      if (!served) { pour(); }
+      else { payOpen(e); }
+    });
+  })();
 </script>
 </body>
 </html>
