@@ -2231,14 +2231,22 @@
     }
 
     function detectSeniority(resumeText, posText, levelsSet) {
+      // Single chip → user is explicitly requesting that level
+      if (levelsSet.size === 1) {
+        const v = [...levelsSet][0];
+        const map = {intern:'intern',volunteer:'intern',junior:'junior',mid:'mid',
+                     lead:'senior',senior:'senior',staff:'staff',principal:'staff',director:'director'};
+        if (map[v]) return map[v];
+      }
+      // Multiple chips or no chip → detect from resume & position text only
       const t = (resumeText + ' ' + posText).toLowerCase();
-      if (levelsSet.has('intern') || levelsSet.has('volunteer') || /\bintern\b|\bvolunteer\b/.test(t)) return 'intern';
-      if (levelsSet.has('junior') || /\bjunior\b|\bjr\.?\b|\bentry.level\b|\bnew grad\b/.test(t)) return 'junior';
-      if (levelsSet.has('director') || /\bdirector\b|\bvp\b|\bhead of\b|\b1[0-9]\+?\s*yr/.test(t)) return 'director';
-      if (levelsSet.has('staff') || levelsSet.has('principal') || /\bstaff\b|\bprincipal\b|\b[89]\+?\s*yr/.test(t)) return 'staff';
-      if (levelsSet.has('senior') || levelsSet.has('lead') || /\bsenior\b|\bsr\.?\b|\blead\b|\b[567]\+?\s*yr/.test(t)) return 'senior';
-      if (levelsSet.has('mid')      || /\b[34]\+?\s*yr/.test(t)) return 'mid';
-      return 'senior';
+      if (/\bintern\b|\btrainee\b/.test(t))                             return 'intern';
+      if (/\bjunior\b|\bjr\.?\b|\bentry.level\b|\bnew grad\b/.test(t)) return 'junior';
+      if (/\bdirector\b|\bvp\b|\bhead of\b|\b1[0-9]\+?\s*yr/.test(t)) return 'director';
+      if (/\bstaff\b|\bprincipal\b|\b[89]\+?\s*yr/.test(t))            return 'staff';
+      if (/\bsenior\b|\bsr\.?\b|\blead\b|\b[567]\+?\s*yr/.test(t))     return 'senior';
+      if (/\b[234]\+?\s*yr/.test(t))                                    return 'mid';
+      return 'mid';
     }
 
     function extractKeywords(resumeText, kwText, domain) {
@@ -2758,21 +2766,41 @@
     };
 
     // ── Job generator ─────────────────────────────────────────
-    function generateJobs(domain, seniority, kws, visaRequired, salaryMin, locSet) {
+    function generateJobs(domain, seniority, levelsSet, kws, visaRequired, salaryMin, locSet) {
       const d = DOMAIN_DATA[domain] || DOMAIN_DATA.pm;
+      const LEVEL_ORDER = ['intern','junior','mid','senior','staff','director'];
+      const chipToLevel = {intern:'intern',volunteer:'intern',junior:'junior',mid:'mid',
+                           lead:'senior',senior:'senior',staff:'staff',principal:'staff',director:'director'};
+
+      // Build the level cycle.
+      // Multiple chips → primary level (from resume) first, then others in descending order.
+      // Single chip or no chip → only that one level.
+      let activeLevels;
+      if (levelsSet && levelsSet.size > 1) {
+        const mapped = [...new Set([...levelsSet].map(c => chipToLevel[c]).filter(Boolean))];
+        // Sort highest-first so levels closest to resume level appear first in the cycle
+        const sorted = mapped.sort((a,b) => LEVEL_ORDER.indexOf(b) - LEVEL_ORDER.indexOf(a));
+        const primary = sorted.includes(seniority) ? seniority : sorted[0];
+        activeLevels = [primary, ...sorted.filter(l => l !== primary)];
+      } else {
+        activeLevels = [seniority];
+      }
+
       let cos = [...d.companies];
       const seed = (Date.now() % 97) + 1;
       cos.sort((a,b) => ((a.name.charCodeAt(0)*seed)%97) - ((b.name.charCodeAt(0)*seed)%97));
       if (visaRequired) cos = cos.filter(c => c.visa !== false);
       cos = cos.slice(0, 6);
 
-      const roles   = d.roles[seniority]    || d.roles.senior;
-      const reqSets = d.reqs[seniority]     || d.reqs.senior;
-      const [sLo, sHi] = d.salaryByLevel[seniority] || [150, 200];
       const k = kws.length >= 2 ? kws : ['your background', 'cross-functional work', 'your domain expertise'];
       const ages = ['1h ago','3h ago','5h ago','1d ago','2d ago','3d ago'];
 
       const jobs = cos.map((co, i) => {
+        const lvl = activeLevels[i % activeLevels.length];
+        const roles   = d.roles[lvl]   || d.roles.junior  || d.roles.senior;
+        const reqSets = d.reqs[lvl]    || d.reqs.junior   || d.reqs.senior;
+        const [sLo, sHi] = d.salaryByLevel[lvl] || [100, 150];
+
         const k1  = k[0]||'your background', k2 = k[1]||'cross-functional work', k3 = k[2]||'your domain expertise';
         const ck1 = k[i % k.length];
         const ck2 = k[(i + 1) % k.length];
@@ -2795,7 +2823,7 @@
         return {
           role: roles[i % roles.length], co: co.name, loc: co.loc, logo: co.logo,
           pay: '$'+payLo+'k–$'+payHi+'k', base: baseK, match, age: ages[i % ages.length],
-          visa: !!co.visa, level: seniority, tags, why, reqs, perks,
+          visa: !!co.visa, level: lvl, tags, why, reqs, perks,
           recruiter: { name: rec.name, title: recTitle, avatar,
             seen: i===0?'last seen just now':i===1?'last seen 1h ago':'last seen '+(i*2)+'h ago' }
         };
@@ -2938,7 +2966,7 @@
       const scanEl2 = document.getElementById('fmTotalScanned');
       if (scanEl)  scanEl.textContent  = domainScanCount;
       if (scanEl2) scanEl2.textContent = domainScanCount;
-      const final = generateJobs(domain, seniority, kws, visa, salary, loc);
+      const final = generateJobs(domain, seniority, levels, kws, visa, salary, loc);
 
       // Funnel numbers (decreasing): Found > Wide fit > Suitable > Super suitable.
       // Use match-score bins from the filtered set, scaled up to a believable pool.
