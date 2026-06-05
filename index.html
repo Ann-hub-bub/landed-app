@@ -1123,6 +1123,8 @@
   .fm-job .pay{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; color: var(--bone); text-align:right; line-height:1.05;}
   .fm-job .pay small{ display:block; font-size:10.5px; color: var(--mute); margin-top:3px; font-family:'Inter', sans-serif; font-weight:400; letter-spacing:.04em; text-transform:uppercase;}
   .fm-job .match{ background: rgba(255,106,31,.16); color: var(--orange); padding: 6px 10px; font-size:11px; font-weight:700; letter-spacing:.06em; font-family:'Space Grotesk',sans-serif;}
+  .fm-job.top-match{ border-color: var(--orange); box-shadow: 0 0 0 1px var(--orange);}
+  .fm-job.top-match .match{ background: var(--orange); color: var(--ink);}
   .fm-job .row2{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin-top: 14px;}
   .fm-job .row2 .tag{ font-size:11px; color: var(--mute); border: 1px solid var(--line-2); padding: 3px 8px; letter-spacing:.02em;}
   .fm-job .row2 .tag.visa{ color: var(--green); border-color: rgba(94,240,168,.3);}
@@ -2062,14 +2064,14 @@
       swe: {
         scanCount: '51,240',
         companies: [
-          {name:'Stripe',   logo:'St', tags:['Fintech','Hybrid'],        loc:'SF · hybrid',           visa:true  },
-          {name:'Vercel',   logo:'Ve', tags:['Dev Tools','Remote-first'], loc:'Remote · global',       visa:false },
-          {name:'Linear',   logo:'Li', tags:['SaaS','Remote-first'],      loc:'Remote · global',       visa:false },
-          {name:'Figma',    logo:'Fi', tags:['Design Tools','Hybrid'],    loc:'SF · hybrid',           visa:true  },
-          {name:'Retool',   logo:'Re', tags:['Dev Tools','Series C'],     loc:'SF · hybrid',           visa:true  },
-          {name:'Supabase', logo:'Su', tags:['Open Source','Remote'],     loc:'Remote · global',       visa:false },
-          {name:'Railway',  logo:'Ra', tags:['Infrastructure','Remote'],  loc:'Remote · US preferred', visa:false },
-          {name:'Clerk',    logo:'Cl', tags:['Auth','Series B'],          loc:'Remote · US preferred', visa:false },
+          {name:'Heron',      logo:'Hr', tags:['Infra','Hybrid'],           loc:'SF · hybrid',           visa:true  },
+          {name:'Stackcraft', logo:'Sc', tags:['Dev Tools','Remote-first'], loc:'Remote · global',       visa:false },
+          {name:'Parcel',     logo:'Pa', tags:['SaaS','Remote-first'],      loc:'Remote · global',       visa:false },
+          {name:'Codeflow',   logo:'Cf', tags:['Design Tools','Hybrid'],    loc:'SF · hybrid',           visa:true  },
+          {name:'Tensile',    logo:'Te', tags:['Dev Tools','Series C'],     loc:'SF · hybrid',           visa:true  },
+          {name:'Cascade',    logo:'Cs', tags:['Open Source','Remote'],     loc:'Remote · global',       visa:false },
+          {name:'Lumen',      logo:'Lu', tags:['Infrastructure','Remote'],  loc:'Remote · US preferred', visa:false },
+          {name:'Seam',       logo:'Sm', tags:['Auth','Series B'],          loc:'Remote · US preferred', visa:false },
         ],
         roles: {
           intern:   ['Software Engineering Intern','Frontend Intern','Backend Intern'],
@@ -2086,6 +2088,11 @@
           '{co} needs engineers who can own {k1} end-to-end — your track record with {k2} and {k3} is exactly the T-shape they source for.',
         ],
         reqs: {
+          intern: [
+            ['{k1} basics from coursework or projects', 'Eager to ship real code', 'Comfort with Git & PRs'],
+            ['Personal projects showing {k2}', 'Clean, readable code habits', 'CS degree in progress'],
+            ['{k1} interest demonstrated', 'Curiosity-driven problem solver', 'Feedback-receptive mindset'],
+          ],
           junior: [
             ['{k1} proficiency', 'CS degree or equivalent', 'Eagerness to learn fast in production'],
             ['Solid grasp of {k2}', 'Clean, readable code habits', 'Curiosity-driven problem solver'],
@@ -2128,14 +2135,14 @@
       pm: {
         scanCount: '6,190',
         companies: [
-          {name:'Stripe',    logo:'S',  tags:['Fintech','Hybrid'],         loc:'SF · hybrid',           visa:true  },
-          {name:'Brex',      logo:'B',  tags:['Startup','Fintech'],        loc:'SF · remote OK',        visa:true  },
-          {name:'Notion',    logo:'N',  tags:['PLG','Hybrid'],             loc:'SF · hybrid',           visa:true  },
-          {name:'Ramp',      logo:'R',  tags:['Fintech','Remote OK'],      loc:'NYC · remote OK',       visa:true  },
-          {name:'Linear',    logo:'Li', tags:['SaaS','Remote-first'],      loc:'Remote · global',       visa:false },
-          {name:'Anthropic', logo:'An', tags:['AI','Hybrid'],              loc:'SF · hybrid',           visa:true  },
-          {name:'Rippling',  logo:'Ri', tags:['HR Tech','Series E'],       loc:'SF · hybrid',           visa:true  },
-          {name:'Vercel',    logo:'Ve', tags:['Dev Tools','Remote-first'], loc:'Remote · US preferred', visa:false },
+          {name:'Kairo',     logo:'Ka', tags:['Fintech','Hybrid'],         loc:'SF · hybrid',           visa:true  },
+          {name:'Pebble',    logo:'Pb', tags:['B2B SaaS','Remote OK'],     loc:'SF · remote OK',        visa:true  },
+          {name:'Groundwork',logo:'Gw', tags:['PLG','Hybrid'],             loc:'SF · hybrid',           visa:true  },
+          {name:'Meridian',  logo:'Me', tags:['Fintech','Remote OK'],      loc:'NYC · remote OK',       visa:true  },
+          {name:'Kestrel',   logo:'Ke', tags:['SaaS','Remote-first'],      loc:'Remote · global',       visa:false },
+          {name:'Tapform',   logo:'Tf', tags:['AI','Hybrid'],              loc:'SF · hybrid',           visa:true  },
+          {name:'Fable',     logo:'Fb', tags:['HR Tech','Series E'],       loc:'SF · hybrid',           visa:true  },
+          {name:'Anvil',     logo:'Av', tags:['Dev Tools','Remote-first'], loc:'Remote · US preferred', visa:false },
         ],
         roles: {
           intern:   ['PM Intern','Product Intern','APM Trainee'],
@@ -2152,6 +2159,11 @@
           '{co} needs PMs who can operate in {k1} end-to-end — your {k2} and stakeholder experience make you a strong candidate here.',
         ],
         reqs: {
+          intern: [
+            ['{k1} curiosity', 'Strong written communication', 'Eager to learn from product team'],
+            ['Interest in {k2} products', 'Research & analytical thinking', 'Collaborative and fast learner'],
+            ['{k1} background a strong plus', 'Attention to user needs', 'Comfort working with cross-functional teams'],
+          ],
           junior: [
             ['{k1} curiosity', 'Strong written communication', 'Data-literate mindset'],
             ['Genuine interest in {k2}', 'Structured thinking under ambiguity', 'Comfort with rapid iteration'],
@@ -2194,14 +2206,14 @@
       marketing: {
         scanCount: '22,410',
         companies: [
-          {name:'HubSpot',     logo:'Hu', tags:['SaaS','Hybrid'],         loc:'Boston · hybrid',       visa:true  },
-          {name:'Klaviyo',     logo:'Kl', tags:['E-commerce','Hybrid'],   loc:'Boston · hybrid',       visa:true  },
-          {name:'Attentive',   logo:'At', tags:['SMS Mktg','Remote OK'],  loc:'NYC · remote OK',       visa:true  },
-          {name:'Braze',       logo:'Bz', tags:['MarTech','Hybrid'],      loc:'NYC · hybrid',          visa:true  },
-          {name:'Iterable',    logo:'It', tags:['Email','Remote OK'],     loc:'SF · remote OK',        visa:true  },
-          {name:'Buffer',      logo:'Bu', tags:['Social Media','Remote'], loc:'Remote · global',       visa:false },
-          {name:'Customer.io', logo:'Ci', tags:['Email','Remote-first'],  loc:'Remote · global',       visa:false },
-          {name:'Canva',       logo:'Ca', tags:['Design','Remote OK'],    loc:'Remote · US preferred', visa:false },
+          {name:'Rally',     logo:'Ra', tags:['SaaS','Hybrid'],          loc:'Boston · hybrid',       visa:true  },
+          {name:'Fieldwork', logo:'Fw', tags:['E-commerce','Hybrid'],    loc:'Boston · hybrid',       visa:true  },
+          {name:'Ripple',    logo:'Rp', tags:['SMS Mktg','Remote OK'],   loc:'NYC · remote OK',       visa:true  },
+          {name:'Compass',   logo:'Co', tags:['MarTech','Hybrid'],       loc:'NYC · hybrid',          visa:true  },
+          {name:'Beacon',    logo:'Bc', tags:['Email','Remote OK'],      loc:'SF · remote OK',        visa:true  },
+          {name:'Watershed', logo:'Ws', tags:['Social Media','Remote'],  loc:'Remote · global',       visa:false },
+          {name:'Slate',     logo:'Sl', tags:['Email','Remote-first'],   loc:'Remote · global',       visa:false },
+          {name:'Prism',     logo:'Pr', tags:['Design','Remote OK'],     loc:'Remote · US preferred', visa:false },
         ],
         roles: {
           intern:   ['Marketing Intern','Content Intern','Growth Intern'],
@@ -2218,6 +2230,11 @@
           '{co} is doubling down on {k1} in 2026 — your track record in {k2} and channel strategy is exactly what they\'re sourcing.',
         ],
         reqs: {
+          intern: [
+            ['{k1} interest or coursework', 'Strong writing & communication', 'Familiarity with social platforms'],
+            ['Creative curiosity about {k2}', 'Detail-oriented with deadlines', 'Collaborative across design & content'],
+            ['{k1} personal projects a plus', 'Analytical and data-curious', 'Eagerness to learn from day one'],
+          ],
           junior: [
             ['{k1} basics', 'Strong writing & communication', 'Comfort with analytics tools'],
             ['Eagerness to learn {k2}', 'Creative problem-solving instinct', 'Comfortable in a fast-paced environment'],
@@ -2260,14 +2277,14 @@
       data: {
         scanCount: '17,830',
         companies: [
-          {name:'Databricks',  logo:'Da', tags:['Data Platform','Hybrid'],    loc:'SF · hybrid',       visa:true  },
-          {name:'dbt Labs',    logo:'db', tags:['Analytics Eng','Remote'],    loc:'Remote · global',   visa:false },
-          {name:'Hex',         logo:'He', tags:['Data Notebooks','Remote OK'],loc:'SF · remote OK',    visa:false },
-          {name:'Fivetran',    logo:'Fv', tags:['ELT','Hybrid'],              loc:'Oakland · hybrid',  visa:true  },
-          {name:'Monte Carlo', logo:'Mo', tags:['Data Obs.','Remote OK'],     loc:'SF · remote OK',    visa:true  },
-          {name:'Hightouch',   logo:'Hi', tags:['Reverse ETL','Remote'],      loc:'Remote · US pref.', visa:false },
-          {name:'Census',      logo:'Ce', tags:['Data Activation','Remote'],  loc:'SF · remote OK',    visa:false },
-          {name:'Metabase',    logo:'Mb', tags:['BI','Remote-first'],         loc:'Remote · global',   visa:false },
+          {name:'Catalyst',  logo:'Ca', tags:['Data Platform','Hybrid'],    loc:'SF · hybrid',       visa:true  },
+          {name:'Driftwood', logo:'Dr', tags:['Analytics Eng','Remote'],    loc:'Remote · global',   visa:false },
+          {name:'Quorum',    logo:'Qu', tags:['Data Notebooks','Remote OK'],loc:'SF · remote OK',    visa:false },
+          {name:'Ironworks', logo:'Iw', tags:['ELT','Hybrid'],              loc:'Oakland · hybrid',  visa:true  },
+          {name:'Polestar',  logo:'Ps', tags:['Data Obs.','Remote OK'],     loc:'SF · remote OK',    visa:true  },
+          {name:'Fieldset',  logo:'Fs', tags:['Reverse ETL','Remote'],      loc:'Remote · US pref.', visa:false },
+          {name:'Seedbed',   logo:'Sd', tags:['Data Activation','Remote'],  loc:'SF · remote OK',    visa:false },
+          {name:'Portlight', logo:'Pt', tags:['BI','Remote-first'],         loc:'Remote · global',   visa:false },
         ],
         roles: {
           intern:   ['Data Analyst Intern','Analytics Intern','Data Science Intern'],
@@ -2284,6 +2301,11 @@
           '{co} needs someone who can own the full {k1} pipeline — your {k2} work demonstrates that capability clearly.',
         ],
         reqs: {
+          intern: [
+            ['{k1} coursework or self-study', 'Basic SQL or Python knowledge', 'Analytical and structured thinker'],
+            ['Exposure to {k2} concepts', 'Clear data storytelling instincts', 'CS or stats coursework preferred'],
+            ['{k1} personal projects a plus', 'Comfort with spreadsheets or BI tools', 'Curiosity-driven data explorer'],
+          ],
           junior: [
             ['{k1} fundamentals', 'SQL & basic Python', 'Comfort with BI tools'],
             ['Grasp of {k2} basics', 'Structured analytical thinking', 'Curiosity-driven data explorer'],
@@ -2326,14 +2348,14 @@
       design: {
         scanCount: '9,560',
         companies: [
-          {name:'Figma',   logo:'Fi', tags:['Design Tools','Hybrid'],   loc:'SF · hybrid',           visa:true  },
-          {name:'Framer',  logo:'Fr', tags:['Web Design','Remote'],     loc:'Remote · global',       visa:false },
-          {name:'Canva',   logo:'Ca', tags:['Design Platform','Remote'],loc:'Remote · US preferred', visa:false },
-          {name:'Webflow', logo:'Wf', tags:['No-Code','Remote'],        loc:'Remote · US preferred', visa:false },
-          {name:'Notion',  logo:'No', tags:['Productivity','Hybrid'],   loc:'NYC · hybrid',          visa:true  },
-          {name:'Loom',    logo:'Lo', tags:['Video','Hybrid'],          loc:'SF · hybrid',           visa:true  },
-          {name:'Pitch',   logo:'Pi', tags:['Presentations','Remote'],  loc:'Remote · global',       visa:false },
-          {name:'Coda',    logo:'Co', tags:['Productivity','Hybrid'],   loc:'SF · hybrid',           visa:true  },
+          {name:'Canvas',    logo:'Cv', tags:['Design Tools','Hybrid'],   loc:'SF · hybrid',           visa:true  },
+          {name:'Brushwork', logo:'Bw', tags:['Web Design','Remote'],     loc:'Remote · global',       visa:false },
+          {name:'Palette',   logo:'Pa', tags:['Design Platform','Remote'],loc:'Remote · US preferred', visa:false },
+          {name:'Blueprint', logo:'Bp', tags:['No-Code','Remote'],        loc:'Remote · US preferred', visa:false },
+          {name:'Mosaic',    logo:'Mo', tags:['Productivity','Hybrid'],   loc:'NYC · hybrid',          visa:true  },
+          {name:'Folio',     logo:'Fo', tags:['Video','Hybrid'],          loc:'SF · hybrid',           visa:true  },
+          {name:'Outline',   logo:'Ol', tags:['Presentations','Remote'],  loc:'Remote · global',       visa:false },
+          {name:'Contour',   logo:'Ct', tags:['Productivity','Hybrid'],   loc:'SF · hybrid',           visa:true  },
         ],
         roles: {
           intern:   ['Design Intern','UX Intern','Product Design Intern'],
@@ -2350,6 +2372,11 @@
           '{co} values designers who do both craft and research — your {k1} and {k2} background is exactly the T-shape they want.',
         ],
         reqs: {
+          intern: [
+            ['{k1} portfolio (school or personal)', 'Figma basics or equivalent', 'Strong visual instincts'],
+            ['Shows range in {k2}', 'Attention to craft and detail', 'Openness to feedback & iteration'],
+            ['{k1} interest demonstrated', 'Understanding of basic design principles', 'Eager to learn from senior designers'],
+          ],
           junior: [
             ['{k1} portfolio', 'Figma proficiency', 'Strong visual instincts'],
             ['Shows range in {k2}', 'Attention to craft and detail', 'Openness to feedback & iteration'],
@@ -2392,14 +2419,14 @@
       sales: {
         scanCount: '33,700',
         companies: [
-          {name:'Gong',     logo:'Go', tags:['Sales Intel','Hybrid'],   loc:'SF · hybrid',       visa:true  },
-          {name:'Outreach', logo:'Ou', tags:['Sales Eng','Remote OK'],  loc:'Seattle · rem. OK', visa:true  },
-          {name:'Rippling', logo:'Ri', tags:['HR+Sales','Hybrid'],      loc:'SF · hybrid',       visa:true  },
-          {name:'Brex',     logo:'Bx', tags:['Fintech','Hybrid'],       loc:'SF · hybrid',       visa:true  },
-          {name:'Ramp',     logo:'Rp', tags:['Fintech','Remote OK'],    loc:'NYC · remote OK',   visa:true  },
-          {name:'Apollo',   logo:'Ap', tags:['Sales Intel','Remote'],   loc:'Remote · US pref.', visa:false },
+          {name:'Chorus',   logo:'Ch', tags:['Sales Intel','Hybrid'],   loc:'SF · hybrid',       visa:true  },
+          {name:'Pipeline', logo:'Pl', tags:['Sales Eng','Remote OK'],  loc:'Seattle · rem. OK', visa:true  },
+          {name:'Vantage',  logo:'Va', tags:['HR+Sales','Hybrid'],      loc:'SF · hybrid',       visa:true  },
+          {name:'Keystone', logo:'Ks', tags:['Fintech','Hybrid'],       loc:'SF · hybrid',       visa:true  },
+          {name:'Clearway', logo:'Cw', tags:['Fintech','Remote OK'],    loc:'NYC · remote OK',   visa:true  },
+          {name:'Ember',    logo:'Em', tags:['Sales Intel','Remote'],   loc:'Remote · US pref.', visa:false },
           {name:'Lattice',  logo:'La', tags:['HR Tech','Hybrid'],       loc:'SF · hybrid',       visa:true  },
-          {name:'Ironclad', logo:'Ir', tags:['Legal Tech','Hybrid'],    loc:'SF · hybrid',       visa:false },
+          {name:'Irongate', logo:'Ig', tags:['Legal Tech','Hybrid'],    loc:'SF · hybrid',       visa:false },
         ],
         roles: {
           intern:   ['Sales Intern','SDR Intern','Business Dev Intern'],
@@ -2416,6 +2443,11 @@
           '{co} needs closers who understand {k1} buyers — your {k2} background and quota history make you a compelling candidate.',
         ],
         reqs: {
+          intern: [
+            ['Outgoing and {k1} curious', 'Strong verbal & written communication', 'Resilience and competitive spirit'],
+            ['Interest in {k2} space', 'Coachable and feedback-hungry', 'Goal-oriented with high energy'],
+            ['{k1} enthusiasm demonstrated', 'Comfort talking to people', 'Self-starter mindset'],
+          ],
           junior: [
             ['{k1} basics', 'Strong communication & hustle', 'CRM familiarity'],
             ['Eagerness to learn {k2}', 'Resilience through rejection', 'Competitive, goal-oriented mindset'],
@@ -2458,14 +2490,14 @@
       finance: {
         scanCount: '11,950',
         companies: [
-          {name:'Stripe',  logo:'St', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
-          {name:'Brex',    logo:'Bx', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
-          {name:'Ramp',    logo:'Rp', tags:['Fintech','Remote OK'],  loc:'NYC · remote OK',   visa:true  },
-          {name:'Mercury', logo:'My', tags:['Banking','Remote'],     loc:'Remote · US pref.', visa:false },
-          {name:'Carta',   logo:'Ct', tags:['Cap Table','Hybrid'],   loc:'SF · hybrid',       visa:true  },
-          {name:'Plaid',   logo:'Pl', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
-          {name:'Pulley',  logo:'Pu', tags:['Equity Mgmt','Remote'], loc:'Remote · US pref.', visa:false },
-          {name:'Pipe',    logo:'Pp', tags:['Rev Finance','Remote'], loc:'Miami · remote OK', visa:false },
+          {name:'Pillar',     logo:'Pi', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
+          {name:'Bridgeway',  logo:'Bw', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
+          {name:'Clearfield', logo:'Cf', tags:['Fintech','Remote OK'],  loc:'NYC · remote OK',   visa:true  },
+          {name:'Northlight', logo:'Nl', tags:['Banking','Remote'],     loc:'Remote · US pref.', visa:false },
+          {name:'Ledgermark', logo:'Lm', tags:['Cap Table','Hybrid'],   loc:'SF · hybrid',       visa:true  },
+          {name:'Vortex',     logo:'Vx', tags:['Fintech','Hybrid'],     loc:'SF · hybrid',       visa:true  },
+          {name:'Eastbrook',  logo:'Eb', tags:['Equity Mgmt','Remote'], loc:'Remote · US pref.', visa:false },
+          {name:'Trident',    logo:'Tr', tags:['Rev Finance','Remote'], loc:'Miami · remote OK', visa:false },
         ],
         roles: {
           intern:   ['Finance Intern','FP&A Intern','Investment Banking Intern'],
@@ -2482,6 +2514,11 @@
           '{co} is building out enterprise finance infrastructure — your {k1} and {k2} skills put you at the top of their candidate list.',
         ],
         reqs: {
+          intern: [
+            ['{k1} fundamentals from coursework', 'Excel & spreadsheet basics', 'Strong quantitative background'],
+            ['Interest in {k2} space', 'Detail-oriented with clean outputs', 'Finance or economics coursework preferred'],
+            ['{k1} interest demonstrated', 'Analytical and structured thinker', 'Clear written communication'],
+          ],
           junior: [
             ['{k1} fundamentals', 'Excel & financial modeling basics', 'Strong analytical skills'],
             ['Grasp of {k2} concepts', 'Accounting or finance coursework', 'Detail-oriented with clean outputs'],
@@ -2612,7 +2649,7 @@
       jobsEl.innerHTML = '';
       jobs.forEach((j, idx) => {
         const el = document.createElement('div');
-        el.className = 'fm-job';
+        el.className = 'fm-job' + (j.match >= 95 ? ' top-match' : '');
         el.dataset.idx = idx;
         el.innerHTML =
           '<div class="row1">' +
