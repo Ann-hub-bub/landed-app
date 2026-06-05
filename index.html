@@ -36,6 +36,7 @@
     --ink:#0a0a0a;
     --ink-2:#101013;
     --ink-3:#16161a;
+    --ink-4:#1c1c22;
     --line:#22222a;
     --line-2:#2c2c34;
     --bone:#f4ede0;
@@ -1260,24 +1261,73 @@
   }
 
   /* ── Booking section ── */
-  .booking-head{ text-align:center; margin-bottom:48px;}
-  .booking-head h2{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(36px,4.8vw,60px); line-height:1; letter-spacing:-.035em; margin:0 0 16px;}
-  .booking-head p{ color:var(--mute); font-size:18px; line-height:1.6; max-width:540px; margin:0 auto;}
-  .booking-tabs{ display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:720px; margin:0 auto 40px;}
-  .book-tab{ background:var(--ink-2); border:1px solid var(--line); padding:28px 32px; text-align:left; cursor:pointer; transition:border-color .2s,background .2s; display:flex; flex-direction:column; gap:6px; font-family:'Space Grotesk',sans-serif;}
-  .book-tab:hover{ border-color:var(--orange); background:var(--ink-3);}
-  .book-tab.active{ border-color:var(--orange); background:rgba(255,106,31,.07);}
-  .book-tab .tab-icon{ font-size:28px; margin-bottom:4px; display:block;}
-  .book-tab .tab-label{ font-size:18px; font-weight:700; color:var(--bone); letter-spacing:-.01em;}
-  .book-tab .tab-sub{ font-size:13px; color:var(--mute);}
-  .book-tab.active .tab-label{ color:var(--orange);}
-  .booking-panel{ max-width:720px; margin:0 auto;}
-  .booking-panel.hidden{ display:none;}
-  .chat-placeholder{ background:var(--ink-2); border:1px solid var(--line); padding:60px 40px; text-align:center;}
-  .chat-placeholder .joe-face{ width:80px; height:80px; margin:0 auto 24px; border-radius:50%; background:var(--ink-3); border:2px solid var(--orange); overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:36px;}
-  .chat-placeholder h4{ font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; margin:0 0 12px; color:var(--bone);}
-  .chat-placeholder p{ color:var(--mute); font-size:15px; line-height:1.6; max-width:400px; margin:0 auto 28px;}
-  .chat-placeholder .btn-primary{ display:inline-flex;}
+  .booking{padding:140px 0 160px;position:relative;}
+  .booking-head{text-align:center;margin:0 auto 56px;max-width:680px;}
+  .booking-head h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(44px,5.4vw,68px);line-height:1;letter-spacing:-.035em;margin:0 0 18px;color:var(--orange);}
+  .booking-head p{color:var(--mute);font-size:17px;line-height:1.6;max-width:520px;margin:0 auto;}
+  .booking-head p b{color:var(--bone-2);font-weight:500;}
+  .pick{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:880px;margin:0 auto;}
+  .pick a.choice{background:var(--ink-2);border:1px solid var(--line);padding:36px 36px 32px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;transition:border-color .2s,background .2s,transform .15s;}
+  .pick a.choice:hover{border-color:var(--orange);background:var(--ink-3);}
+  .pick a.choice:hover .arr{transform:translateX(4px);color:var(--orange);}
+  .pick .row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .pick .glyph{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--ink);border:1px solid var(--line-2);color:var(--bone-2);}
+  .pick .glyph svg{width:20px;height:20px;}
+  .pick .arr{font-family:'Space Grotesk',sans-serif;font-size:22px;color:var(--mute);transition:transform .2s,color .2s;}
+  .pick h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.015em;margin:8px 0 0;color:var(--bone);}
+  .pick p{margin:0;color:var(--mute);font-size:14.5px;line-height:1.55;}
+  .pick .meta{display:flex;gap:14px;align-items:center;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mute-2);letter-spacing:.06em;text-transform:uppercase;}
+  .pick .meta .dot{width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green);}
+  .pick .meta .dot.gold{background:var(--orange);box-shadow:0 0 10px var(--orange);}
+  .pick a.human .glyph{color:var(--orange);border-color:rgba(255,106,31,.35);}
+  /* ── Chat overlay ── */
+  .chat-overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .chat-overlay.open{opacity:1;pointer-events:all;}
+  .chat{width:100%;max-width:520px;height:min(680px,92vh);background:var(--ink-2);border:1px solid var(--line);display:flex;flex-direction:column;transform:translateY(14px) scale(.98);transition:transform .28s cubic-bezier(.2,.8,.2,1);box-shadow:0 40px 100px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,106,31,.05);}
+  .chat-overlay.open .chat{transform:none;}
+  .chat-head{display:flex;align-items:center;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--ink-3),var(--ink-2));}
+  .chat-head .av{width:42px;height:42px;flex:0 0 auto;border-radius:50%;background:var(--ink);border:1.5px solid var(--orange);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;}
+  .chat-head .av img{width:120%;height:120%;object-fit:cover;object-position:50% 22%;}
+  .chat-head .who{flex:1;min-width:0;}
+  .chat-head .name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.005em;color:var(--bone);display:flex;align-items:center;gap:8px;}
+  .chat-head .name .live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:chatPulse 2s infinite;}
+  @keyframes chatPulse{0%,100%{opacity:1}50%{opacity:.45}}
+  .chat-head .sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;}
+  .chat-head .x{background:none;border:none;color:var(--mute);font-size:24px;cursor:pointer;line-height:1;padding:6px 10px;font-family:'Space Grotesk',sans-serif;transition:color .15s;}
+  .chat-head .x:hover{color:var(--bone);}
+  .chat-body{flex:1;overflow-y:auto;padding:22px 20px 8px;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent;}
+  .chat-body::-webkit-scrollbar{width:6px;}
+  .chat-body::-webkit-scrollbar-thumb{background:var(--line-2);}
+  .msg{max-width:80%;font-size:14.5px;line-height:1.5;padding:11px 14px;animation:msgRise .35s cubic-bezier(.2,.8,.2,1);}
+  @keyframes msgRise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .msg.joe{align-self:flex-start;background:var(--ink-4);color:var(--bone);border:1px solid var(--line);}
+  .msg.joe b{color:var(--orange);font-weight:600;}
+  .msg.me{align-self:flex-end;background:var(--orange);color:var(--ink);font-weight:500;}
+  .msg.system{align-self:center;max-width:none;background:none;border:none;padding:6px 0;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--mute-2);letter-spacing:.14em;text-transform:uppercase;}
+  .msg.system::before,.msg.system::after{content:'· · ·';margin:0 10px;color:var(--line-2);}
+  .typing{align-self:flex-start;background:var(--ink-4);border:1px solid var(--line);padding:14px 16px;display:flex;gap:5px;align-items:center;}
+  .typing span{width:6px;height:6px;background:var(--mute);border-radius:50%;animation:typingBounce 1.2s infinite;}
+  .typing span:nth-child(2){animation-delay:.15s;}
+  .typing span:nth-child(3){animation-delay:.3s;}
+  @keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+  .quick{display:flex;flex-wrap:wrap;gap:8px;padding:14px 20px 4px;}
+  .quick button{background:transparent;border:1px solid var(--line-2);color:var(--bone-2);font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:13px;padding:8px 14px;cursor:pointer;transition:all .15s;}
+  .quick button:hover{border-color:var(--orange);color:var(--orange);background:rgba(255,106,31,.06);}
+  .quick.hidden{display:none;}
+  .chat-input{display:flex;align-items:center;gap:10px;padding:14px 16px 16px;border-top:1px solid var(--line);background:var(--ink-2);}
+  .chat-input input{flex:1;background:var(--ink);border:1px solid var(--line);color:var(--bone);padding:13px 16px;font-family:inherit;font-size:14.5px;outline:none;transition:border-color .15s;}
+  .chat-input input:focus{border-color:var(--orange);}
+  .chat-input input::placeholder{color:var(--mute-2);}
+  .chat-input button.send{background:var(--orange);color:var(--ink);border:none;padding:13px 18px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:background .15s,transform .15s;display:flex;align-items:center;gap:6px;}
+  .chat-input button.send:hover{background:var(--orange-soft);}
+  .chat-input button.send:disabled{background:var(--ink-4);color:var(--mute-2);cursor:not-allowed;}
+  .chat-foot{padding:6px 20px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mute-2);letter-spacing:.12em;text-transform:uppercase;}
+  .chat-foot b{color:var(--mute);font-weight:500;}
+  @media(max-width:720px){
+    .pick{grid-template-columns:1fr;}
+    .booking{padding:90px 0 110px;}
+    .chat{height:100vh;max-height:100vh;}
+  }
 
   /* ── Bleep bar ── */
   .bleep{ display:inline-block; background:var(--orange); color:var(--ink); border-radius:2px; padding:2px 10px; margin:0 6px; font-size:.7em; font-weight:700; letter-spacing:.15em; text-transform:uppercase; vertical-align:middle; transform:rotate(-2deg); font-family:'Space Grotesk',sans-serif; user-select:none; cursor:default;}
@@ -1386,8 +1436,7 @@
     .wrap{ padding: 0 24px;}
     .hero .grid, .price-band .grid, .price-band .jp-layout, .captain-block .grid, .final .final-grid{ grid-template-columns: 1fr; gap: 48px;}
     .how, .wall, .demo-jobs{ grid-template-columns: 1fr;}
-    .booking-tabs{ grid-template-columns: 1fr;}
-    .how-v2{ grid-template-columns: 1fr; gap: 36px;}
+.how-v2{ grid-template-columns: 1fr; gap: 36px;}
     .how-v2 .joe-rail{ position: static; align-self: auto;}
     .how-v2 .joe-rail{ position: static; transform: none; width: 100%;}
     .how-v2 .joe-art{ height: 200px;}
@@ -1919,6 +1968,35 @@
     margin-left:5px; opacity:.4; font-size:10px; font-weight:700; line-height:1;
   }
   .s2 .meta-col .chip.rm:hover .x{ opacity:.85; }
+  .s2 .meta-col .chip.rm .dd-caret{ font-size:9px; margin-left:3px; opacity:.35; transition:opacity .15s; }
+  .s2 .meta-col .chip.rm:hover .dd-caret{ opacity:.7; }
+
+  /* Filter dropdown popup */
+  .filter-dropdown{
+    position:fixed; z-index:400;
+    background:var(--ink-2); border:1px solid var(--line);
+    min-width:160px; padding:4px 0;
+    box-shadow:0 10px 30px rgba(0,0,0,.65);
+    display:none;
+  }
+  .filter-dropdown.open{ display:block; }
+  .filter-dropdown .fd-item{
+    display:flex; align-items:center; gap:9px;
+    padding:8px 14px; cursor:pointer;
+    font-size:12.5px; font-family:'Space Grotesk',sans-serif; font-weight:500;
+    color:var(--bone-2); transition:background .12s; user-select:none;
+  }
+  .filter-dropdown .fd-item:hover{ background:rgba(255,255,255,.05); }
+  .filter-dropdown .fd-item.active{ color:var(--orange); }
+  .filter-dropdown .fd-check{
+    flex:0 0 auto; width:13px; height:13px;
+    border:1px solid var(--line); background:transparent;
+    display:flex; align-items:center; justify-content:center;
+    font-size:9px; line-height:1; transition:all .12s;
+  }
+  .filter-dropdown .fd-item.active .fd-check{
+    background:var(--orange); border-color:var(--orange); color:var(--ink);
+  }
 
   /* Funnel column (right) */
   .s2 .funnel-col{
@@ -2436,46 +2514,75 @@
 </section>
 
 <!-- BOOKING / CHAT -->
-<section class="block" id="booking" style="padding:120px 0;">
+<section class="booking" id="booking">
   <div class="wrap">
 
     <div class="booking-head">
-      <div class="l" style="font-size:13px;color:var(--orange);letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:16px;">Not sure yet?</div>
-      <h2>Pick yer poison.</h2>
-      <p>Talk to a real human from the crew — or let Cap'n Jack handle the pleasantries. Either way, no sales pitch.</p>
+      <h2>Not sure yet?</h2>
+      <p><b>Either way — no sales pitch.</b> Just to know more.</p>
     </div>
 
-    <div class="booking-tabs">
-      <button class="book-tab active" id="tabCall" onclick="switchBookTab('call')">
-        <span class="tab-icon">📅</span>
-        <span class="tab-label">Book a 15-min call</span>
-        <span class="tab-sub">Real recruiter. No pitch. Pick a time that works.</span>
-      </button>
-      <button class="book-tab" id="tabChat" onclick="switchBookTab('chat')">
-        <span class="tab-icon">💬</span>
-        <span class="tab-label">Chat with Joe Bowen</span>
-        <span class="tab-sub">Hate small talk? Ask Joe anything. He bites but doesn't charge.</span>
-      </button>
-    </div>
+    <div class="pick">
+      <a class="choice human" href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener">
+        <div class="row">
+          <div class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square">
+              <rect x="3" y="5" width="18" height="16"/>
+              <path d="M3 10h18"/>
+              <path d="M8 3v4M16 3v4"/>
+            </svg>
+          </div>
+          <div class="arr">→</div>
+        </div>
+        <h3>Book a 15-min call</h3>
+        <p>A real recruiter. No pitch. Pick a time, show up, leave smarter.</p>
+        <div class="meta"><span class="dot gold"></span>Anna · usually replies same day</div>
+      </a>
 
-    <!-- Calendly inline embed -->
-    <div class="booking-panel" id="panel-call">
-      <div class="calendly-inline-widget" data-url="https://calendly.com/aboytsova9/coffee-break?hide_gdpr_banner=1&background_color=111112&text_color=f0ede4&primary_color=ff6a1f" style="min-width:320px;height:700px;"></div>
-      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    </div>
-
-    <!-- Chat panel -->
-    <div class="booking-panel hidden" id="panel-chat">
-      <div class="chat-placeholder">
-        <div class="joe-face">🏴‍☠️</div>
-        <h4>Joe Bowen is ready to parley.</h4>
-        <p>Ask about visa rules, your resume, which roles we'd target first — or just insult the competition. Joe's heard worse.</p>
-        <button class="btn-primary" id="openChatBtn">Start the chat <span class="ar">→</span></button>
-      </div>
+      <a class="choice bot" href="#" id="openChat">
+        <div class="row">
+          <div class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square">
+              <path d="M4 5h16v12H9l-5 4z"/>
+            </svg>
+          </div>
+          <div class="arr">→</div>
+        </div>
+        <h3>Chat with Joe Bones</h3>
+        <p>Hate small talk? Ask the skeleton anything. He bites, but he won't charge.</p>
+        <div class="meta"><span class="dot"></span>Joe · half-drunk, mostly free</div>
+      </a>
     </div>
 
   </div>
 </section>
+
+<!-- CHAT OVERLAY -->
+<div class="chat-overlay" id="chatOverlay" role="dialog" aria-modal="true" aria-labelledby="chatName">
+  <div class="chat" id="chat">
+
+    <header class="chat-head">
+      <div class="av"><img src="./joe-bone-bust.svg" alt="Joe Bones" /></div>
+      <div class="who">
+        <div class="name" id="chatName">Joe Bones <span class="live" aria-hidden="true"></span></div>
+        <div class="sub">Online · half-drunk · free</div>
+      </div>
+      <button class="x" id="closeChat" aria-label="Close chat">×</button>
+    </header>
+
+    <div class="chat-body" id="chatBody"></div>
+
+    <div class="quick" id="quickReplies"></div>
+
+    <form class="chat-input" id="chatForm" autocomplete="off">
+      <input type="text" id="chatInput" placeholder="Say somethin', matey…" maxlength="240" />
+      <button class="send" type="submit" id="sendBtn" disabled>Send →</button>
+    </form>
+
+    <div class="chat-foot">A bot in a tricorn. <b>Real human?</b> Book the call instead.</div>
+
+  </div>
+</div>
 
 <!-- FAQ -->
 <section class="block" id="faq">
@@ -3415,10 +3522,10 @@
       const lvlMap = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
       const locLabels = {worldwide:'Worldwide', usa:'USA', americas:'Americas', canada:'Canada', remote:'Remote', hybrid:'Hybrid', onsite:'In-office'};
       const chips = [];
-      [...levels].forEach(v => chips.push(`<button class="chip rm" type="button" data-type="level" data-v="${v}">${lvlMap[v]||v}<span class="x">×</span></button>`));
-      if (salary > 0) chips.push(`<button class="chip rm" type="button" data-type="salary">$${Math.round(salary/1000)}k+<span class="x">×</span></button>`);
-      [...loc].forEach(v => chips.push(`<button class="chip rm" type="button" data-type="loc" data-v="${v}">${locLabels[v]||v}<span class="x">×</span></button>`));
-      if (visa) chips.push(`<button class="chip rm" type="button" data-type="visa">Sponsor<span class="x">×</span></button>`);
+      [...levels].forEach(v => chips.push(`<button class="chip rm" type="button" data-type="level" data-v="${v}">${lvlMap[v]||v}<span class="dd-caret">▾</span><span class="x">×</span></button>`));
+      if (salary > 0) chips.push(`<button class="chip rm" type="button" data-type="salary">$${Math.round(salary/1000)}k+<span class="dd-caret">▾</span><span class="x">×</span></button>`);
+      [...loc].forEach(v => chips.push(`<button class="chip rm" type="button" data-type="loc" data-v="${v}">${locLabels[v]||v}<span class="dd-caret">▾</span><span class="x">×</span></button>`));
+      if (visa) chips.push(`<button class="chip rm" type="button" data-type="visa">Sponsor<span class="dd-caret">▾</span><span class="x">×</span></button>`);
       if (chips.length === 0) chips.push(`<span class="chip" style="opacity:.45;">Any</span>`);
       filtersEcho.innerHTML = chips.join('');
     }
@@ -3430,28 +3537,113 @@
       renderFiltersEcho();
     }
 
+    // Filter dropdown
+    const filterDd = document.createElement('div');
+    filterDd.className = 'filter-dropdown';
+    document.body.appendChild(filterDd);
+    let ddState = null;
+    const LEVEL_OPTS = [
+      {v:'intern',label:'Intern'},{v:'junior',label:'Junior'},{v:'mid',label:'Mid'},
+      {v:'senior',label:'Senior'},{v:'staff',label:'Staff'},{v:'principal',label:'Principal'},
+      {v:'lead',label:'Lead'},{v:'director',label:'Director'},{v:'volunteer',label:'Volunteer'}
+    ];
+    const LOC_OPTS = [
+      {v:'worldwide',label:'Worldwide'},{v:'usa',label:'USA'},{v:'americas',label:'Americas'},
+      {v:'canada',label:'Canada'},{v:'remote',label:'Remote'},{v:'hybrid',label:'Hybrid'},
+      {v:'onsite',label:'In-office'}
+    ];
+    const SAL_OPTS = [
+      {v:'0',label:'Any salary'},{v:'60000',label:'$60k+'},
+      {v:'80000',label:'$80k+'},{v:'100000',label:'$100k+'},
+      {v:'120000',label:'$120k+'},{v:'150000',label:'$150k+'}
+    ];
+    function ddItems(type) {
+      if (type === 'level')  return LEVEL_OPTS.map(o => ({...o, active: levels.has(o.v)}));
+      if (type === 'loc')    return LOC_OPTS.map(o => ({...o, active: loc.has(o.v)}));
+      if (type === 'salary') return SAL_OPTS.map(o => ({...o, active: Number(o.v) === salary}));
+      if (type === 'visa')   return [{v:'1', label:'Visa sponsor', active: visa}];
+      return [];
+    }
+    function renderDd() {
+      if (!ddState) return;
+      filterDd.innerHTML = ddItems(ddState.type).map(o =>
+        `<div class="fd-item${o.active?' active':''}" data-type="${ddState.type}" data-v="${o.v}">` +
+        `<div class="fd-check">${o.active?'✓':''}</div>${o.label}</div>`
+      ).join('');
+    }
+    function openDd(chip) {
+      const type = chip.dataset.type;
+      const rect = chip.getBoundingClientRect();
+      const left = Math.min(rect.left, window.innerWidth - 170);
+      ddState = { type };
+      filterDd.style.top  = (rect.bottom + 6) + 'px';
+      filterDd.style.left = left + 'px';
+      renderDd();
+      filterDd.classList.add('open');
+    }
+    function closeDd() { filterDd.classList.remove('open'); ddState = null; }
+
     if (filtersEcho) {
       filtersEcho.addEventListener('click', e => {
         const btn = e.target.closest('.chip.rm');
         if (!btn) return;
-        const type = btn.dataset.type;
-        const v = btn.dataset.v;
-        if (type === 'level') {
-          levels.delete(v);
-          document.querySelector(`#fmLevel .fm-chip[data-v="${v}"]`)?.classList.remove('on');
-        } else if (type === 'loc') {
-          loc.delete(v);
-          document.querySelector(`#fmLoc .fm-chip[data-v="${v}"]`)?.classList.remove('on');
-        } else if (type === 'salary') {
-          salary = 0;
-          if (salaryInput) salaryInput.value = '';
-        } else if (type === 'visa') {
-          visa = false;
-          if (visaInput) visaInput.checked = false;
+        if (e.target.closest('.x')) {
+          closeDd();
+          const type = btn.dataset.type;
+          const v = btn.dataset.v;
+          if (type === 'level') {
+            levels.delete(v);
+            document.querySelector(`#fmLevel .fm-chip[data-v="${v}"]`)?.classList.remove('on');
+          } else if (type === 'loc') {
+            loc.delete(v);
+            document.querySelector(`#fmLoc .fm-chip[data-v="${v}"]`)?.classList.remove('on');
+          } else if (type === 'salary') {
+            salary = 0;
+            if (salaryInput) salaryInput.value = '';
+          } else if (type === 'visa') {
+            visa = false;
+            if (visaInput) visaInput.checked = false;
+          }
+          refreshResults();
+          return;
         }
-        refreshResults();
+        if (filterDd.classList.contains('open') && ddState?.type === btn.dataset.type) {
+          closeDd();
+        } else {
+          openDd(btn);
+        }
       });
     }
+
+    filterDd.addEventListener('click', e => {
+      const item = e.target.closest('.fd-item');
+      if (!item || !ddState) return;
+      const type = item.dataset.type;
+      const v = item.dataset.v;
+      if (type === 'level') {
+        if (levels.has(v)) { levels.delete(v); document.querySelector(`#fmLevel .fm-chip[data-v="${v}"]`)?.classList.remove('on'); }
+        else               { levels.add(v);    document.querySelector(`#fmLevel .fm-chip[data-v="${v}"]`)?.classList.add('on'); }
+      } else if (type === 'loc') {
+        if (loc.has(v)) { loc.delete(v); document.querySelector(`#fmLoc .fm-chip[data-v="${v}"]`)?.classList.remove('on'); }
+        else            { loc.add(v);    document.querySelector(`#fmLoc .fm-chip[data-v="${v}"]`)?.classList.add('on'); }
+      } else if (type === 'salary') {
+        salary = Number(v);
+        if (salaryInput) salaryInput.value = salary > 0 ? String(salary) : '';
+      } else if (type === 'visa') {
+        visa = !visa;
+        if (visaInput) visaInput.checked = visa;
+      }
+      refreshResults();
+      if (type === 'salary' || type === 'visa') { closeDd(); }
+      else { renderDd(); }
+    });
+
+    document.addEventListener('click', e => {
+      if (!filterDd.classList.contains('open')) return;
+      if (filterDd.contains(e.target)) return;
+      if (filtersEcho?.contains(e.target)) return;
+      closeDd();
+    });
 
     function describeFilters(){
       const lvlMap = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
