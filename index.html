@@ -3798,27 +3798,183 @@
   // open first by default
   document.querySelector('#faqGrid .q').classList.add('open');
 
-  // ── Booking tabs ─────────────────────────────────────────
-  function switchBookTab(tab) {
-    document.getElementById('tabCall').classList.toggle('active', tab === 'call');
-    document.getElementById('tabChat').classList.toggle('active', tab === 'chat');
-    document.getElementById('panel-call').classList.toggle('hidden', tab !== 'call');
-    document.getElementById('panel-chat').classList.toggle('hidden', tab !== 'chat');
-  }
+  // ── Joe Bones chat ────────────────────────────────────────
+  (function(){
+    const GREETINGS = [
+      { type:'system', text:"Joe stumbled into the chat" },
+      { type:'joe', text:"Aye. State yer business — preferably <b>before me rum runs out</b>." },
+    ];
 
-  // Chat button — opens Tidio widget (add Tidio script below to activate)
-  const openChatBtn = document.getElementById('openChatBtn');
-  if(openChatBtn) openChatBtn.addEventListener('click', () => {
-    if(window.tidioChatApi) {
-      window.tidioChatApi.open();
-    } else {
-      // Fallback until Tidio is connected
-      alert('Chat coming soon — book a call in the meantime!');
+    const QUICKS = [
+      "How does this even work?",
+      "$20 — what's the catch?",
+      "Will it actually work for me?",
+      "Are you a real person?",
+      "I just want a human →"
+    ];
+
+    const RULES = [
+      { rx:/how.*work|what.*do|explain/i, replies:[
+          "Ye drop yer CV. We work the loop — applications, follow-ups, the whole grim parade. Ye show up to the offer.",
+          "That's it. Try not to overthink it."
+        ]},
+      { rx:/catch|hidden|fee|fine print|trick/i, replies:[
+          "$20/mo. Cancel any tide. No offer in 30 days — <b>full refund</b>.",
+          "Catch is ye gotta show up to the interviews. Even I can't do that part."
+        ]},
+      { rx:/(price|cost|how much|pay)/i, replies:[
+          "Twenty. Dollars. A month.",
+          "Less than yer last bad date."
+        ]},
+      { rx:/will it work|guarantee|chance|success/i, replies:[
+          "30 days. One offer. Or yer money back. That's the whole pact.",
+          "If I'm wrong, ye lose nothin'. If I'm right, ye're employed. Math checks out."
+        ]},
+      { rx:/visa|h1b|opt|sponsor/i, replies:[
+          "We filter <b>H1B, OPT, TN, L1</b> friendly first. Sponsorship gets verified before it hits yer pipeline.",
+          "Aye, we've seen this dance."
+        ]},
+      { rx:/real|human|person|bot|ai|robot/i, replies:[
+          "I'm a skeleton with a script. Cap'n Jack made me. <b>Hate me?</b> Tap 'I just want a human' — Anna's got better manners."
+        ]},
+      { rx:/(joe|jack|cap'?n|captain)/i, replies:[
+          "That's me. Joe Bones. Cap'n Jack's first mate, brand mascot, and emotional support skeleton."
+        ]},
+      { rx:/(refund|money back|cancel)/i, replies:[
+          "One click in the dashboard. No forms. No exit interview. Walk the plank in peace."
+        ]},
+      { rx:/(hi|hello|hey|yo|sup)\b/i, replies:[
+          "...is that all ye got?",
+          "Hi. Now what."
+        ]},
+      { rx:/(thanks|thank you|cheers|ty)/i, replies:[
+          "Don't thank me. Land the job."
+        ]},
+      { rx:/(no|nope|nah)\b/i, replies:[
+          "Bold of ye to come here just to say no."
+        ]},
+      { rx:/(yes|yeah|yep|sure|ok)\b/i, replies:[
+          "Good. Drop yer resume up top — I'll do the rest."
+        ]},
+      { rx:/.+/, replies:[
+          "Couldn't parse that through the rum, matey. Try a quick reply below.",
+          "Ye lost me. Pick one →",
+          "Skeleton brain. Use smaller words."
+        ]},
+    ];
+
+    const HUMAN_RX = /human|real person|talk to (someone|anna)|book.*call/i;
+
+    const chatBody = document.getElementById('chatBody');
+    const quickEl  = document.getElementById('quickReplies');
+    const form     = document.getElementById('chatForm');
+    const input    = document.getElementById('chatInput');
+    const sendBtn  = document.getElementById('sendBtn');
+    const overlay  = document.getElementById('chatOverlay');
+
+    if(!overlay) return;
+
+    function addMsg(type, text){
+      const el = document.createElement('div');
+      el.className = 'msg ' + type;
+      el.innerHTML = text;
+      chatBody.appendChild(el);
+      chatBody.scrollTop = chatBody.scrollHeight;
     }
-  });
 
-  // TODO: add Tidio script here once you have your account ID:
-  // <script src="//code.tidio.co/YOUR_TIDIO_ID.js" async><\/script>
+    function showTyping(){
+      const el = document.createElement('div');
+      el.className = 'typing';
+      el.id = 'joeTyping';
+      el.innerHTML = '<span></span><span></span><span></span>';
+      chatBody.appendChild(el);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    function hideTyping(){
+      const t = document.getElementById('joeTyping');
+      if(t) t.remove();
+    }
+
+    function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function joeReplies(replies){
+      quickEl.classList.add('hidden');
+      for(let i=0;i<replies.length;i++){
+        showTyping();
+        await wait(700 + replies[i].length * 12);
+        hideTyping();
+        addMsg('joe', replies[i]);
+        if(i < replies.length-1) await wait(220);
+      }
+      showQuick();
+    }
+
+    function showQuick(){
+      quickEl.innerHTML = '';
+      QUICKS.forEach(q => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = q;
+        b.addEventListener('click', () => handleUser(q));
+        quickEl.appendChild(b);
+      });
+      quickEl.classList.remove('hidden');
+    }
+
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function findReplies(text){
+      for(const r of RULES){ if(r.rx.test(text)) return r.replies; }
+      return RULES[RULES.length-1].replies;
+    }
+
+    function handleUser(text){
+      addMsg('me', escapeHtml(text));
+      if(HUMAN_RX.test(text)){
+        setTimeout(() => joeReplies([
+          "Fine. Anna's nicer than me anyway.",
+          '→ <a href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;">Book the 15-min call</a>'
+        ]), 400);
+        return;
+      }
+      setTimeout(() => joeReplies(findReplies(text)), 350);
+    }
+
+    function seed(){
+      chatBody.innerHTML = '';
+      quickEl.innerHTML = '';
+      GREETINGS.forEach(g => addMsg(g.type, g.text));
+      showQuick();
+    }
+
+    document.getElementById('openChat').addEventListener('click', e => {
+      e.preventDefault();
+      seed();
+      overlay.classList.add('open');
+      setTimeout(() => input.focus(), 280);
+    });
+    document.getElementById('closeChat').addEventListener('click', () => {
+      overlay.classList.remove('open');
+    });
+    overlay.addEventListener('click', e => {
+      if(e.target === overlay) overlay.classList.remove('open');
+    });
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape' && overlay.classList.contains('open')) overlay.classList.remove('open');
+    });
+
+    input.addEventListener('input', () => { sendBtn.disabled = !input.value.trim(); });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const v = input.value.trim();
+      if(!v) return;
+      input.value = '';
+      sendBtn.disabled = true;
+      handleUser(v);
+    });
+  })();
 
   // ── Tweaks bridge (cross-iframe) ─────────────────────────
   function applyTweaks(t){
