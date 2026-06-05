@@ -3425,6 +3425,12 @@
   function paySubmit(){
     const email = document.getElementById('payEmail').value.trim();
     if(!email || !email.includes('@')){ document.getElementById('payEmail').focus(); return; }
+    const phone = document.getElementById('payPhone').value.trim();
+    fetch('https://script.google.com/macros/s/AKfycbzNl_Jy-EbslZnwq-GcipUgI5Ae_-ASbExIsg1SNi6CR9joAFIbDQ799Kq__FC_bYDl2w/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({ email, phone })
+    }).catch(() => {});
     document.getElementById('payForm').classList.remove('active');
     document.getElementById('payLoading').classList.add('active');
     setTimeout(() => {
