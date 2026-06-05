@@ -2032,7 +2032,7 @@
 
     function detectSeniority(resumeText, posText, levelsSet) {
       const t = (resumeText + ' ' + posText).toLowerCase();
-      if (levelsSet.has('intern') || levelsSet.has('volunteer') || /\bintern\b|\bvolunteer\b/.test(t)) return 'junior';
+      if (levelsSet.has('intern') || levelsSet.has('volunteer') || /\bintern\b|\bvolunteer\b/.test(t)) return 'intern';
       if (levelsSet.has('junior') || /\bjunior\b|\bjr\.?\b|\bentry.level\b|\bnew grad\b/.test(t)) return 'junior';
       if (levelsSet.has('director') || /\bdirector\b|\bvp\b|\bhead of\b|\b1[0-9]\+?\s*yr/.test(t)) return 'director';
       if (levelsSet.has('staff') || levelsSet.has('principal') || /\bstaff\b|\bprincipal\b|\b[89]\+?\s*yr/.test(t)) return 'staff';
@@ -2072,13 +2072,14 @@
           {name:'Clerk',    logo:'Cl', tags:['Auth','Series B'],          loc:'Remote · US preferred', visa:false },
         ],
         roles: {
+          intern:   ['Software Engineering Intern','Frontend Intern','Backend Intern'],
           junior:   ['Software Engineer','Frontend Engineer','Backend Engineer'],
           mid:      ['Software Engineer II','Full-Stack Engineer','Backend Engineer'],
           senior:   ['Senior Software Engineer','Senior Full-Stack Engineer','Senior Backend Engineer'],
           staff:    ['Staff Engineer','Principal Engineer','Engineering Lead'],
           director: ['Director of Engineering','VP of Engineering','Head of Engineering'],
         },
-        salaryByLevel: { junior:[110,150], mid:[150,190], senior:[190,265], staff:[240,325], director:[280,390] },
+        salaryByLevel: { intern:[60,90], junior:[110,150], mid:[150,190], senior:[190,265], staff:[240,325], director:[280,390] },
         why: [
           '{co} is scaling their core engineering infrastructure — your {k1} and {k2} background maps directly to what their team is hiring for.',
           'The {co} eng team is rebuilding critical systems — {k1} expertise and strong {k2} skills make you a standout at this level.',
@@ -2137,13 +2138,14 @@
           {name:'Vercel',    logo:'Ve', tags:['Dev Tools','Remote-first'], loc:'Remote · US preferred', visa:false },
         ],
         roles: {
+          intern:   ['PM Intern','Product Intern','APM Trainee'],
           junior:   ['Associate PM','APM','Product Analyst'],
           mid:      ['Product Manager','PM II','Product Manager, Growth'],
           senior:   ['Senior PM','Senior Product Manager','Senior PM, Platform'],
           staff:    ['Staff PM','Principal PM','Group PM'],
           director: ['Director of Product','VP of Product','Head of Product'],
         },
-        salaryByLevel: { junior:[120,160], mid:[160,200], senior:[195,265], staff:[240,325], director:[290,400] },
+        salaryByLevel: { intern:[55,85], junior:[120,160], mid:[160,200], senior:[195,265], staff:[240,325], director:[290,400] },
         why: [
           '{co} is scaling its product org — your {k1} experience and {k2} background map directly to their 2026 roadmap priorities.',
           'The {co} product team needs someone who can own {k1} — your {k2} track record and cross-functional leadership put you in their top tier.',
@@ -2202,13 +2204,14 @@
           {name:'Canva',       logo:'Ca', tags:['Design','Remote OK'],    loc:'Remote · US preferred', visa:false },
         ],
         roles: {
+          intern:   ['Marketing Intern','Content Intern','Growth Intern'],
           junior:   ['Marketing Coordinator','Content Marketing Associate','Growth Analyst'],
           mid:      ['Marketing Manager','Content Marketing Manager','Growth Manager'],
           senior:   ['Senior Marketing Manager','Head of Content','Senior Growth Manager'],
           staff:    ['Director of Marketing','VP of Growth','Head of Demand Generation'],
           director: ['CMO','VP of Marketing','Head of Brand'],
         },
-        salaryByLevel: { junior:[62,85], mid:[85,120], senior:[120,162], staff:[160,215], director:[200,285] },
+        salaryByLevel: { intern:[30,50], junior:[62,85], mid:[85,120], senior:[120,162], staff:[160,215], director:[200,285] },
         why: [
           '{co} is scaling their marketing engine — your {k1} and {k2} experience matches the gaps they\'re urgently filling.',
           'The {co} growth team needs someone who owns {k1} — your background in {k2} at scale makes you a natural fit.',
@@ -2267,13 +2270,14 @@
           {name:'Metabase',    logo:'Mb', tags:['BI','Remote-first'],         loc:'Remote · global',   visa:false },
         ],
         roles: {
+          intern:   ['Data Analyst Intern','Analytics Intern','Data Science Intern'],
           junior:   ['Data Analyst','Junior Data Scientist','Analytics Associate'],
           mid:      ['Data Scientist','Analytics Engineer','Data Analyst II'],
           senior:   ['Senior Data Scientist','Senior Analytics Engineer','Lead Data Analyst'],
           staff:    ['Staff Data Scientist','Principal Data Engineer','Head of Analytics'],
           director: ['Director of Data Science','VP of Analytics','Head of Data'],
         },
-        salaryByLevel: { junior:[90,125], mid:[125,165], senior:[165,225], staff:[210,285], director:[260,345] },
+        salaryByLevel: { intern:[50,75], junior:[90,125], mid:[125,165], senior:[165,225], staff:[210,285], director:[260,345] },
         why: [
           '{co} is building the next layer of data infrastructure — your {k1} and {k2} experience fits their core team profile perfectly.',
           'The {co} data team is scaling fast — your background in {k1} and comfort with {k2} at production scale is what they\'re sourcing.',
@@ -2332,13 +2336,14 @@
           {name:'Coda',    logo:'Co', tags:['Productivity','Hybrid'],   loc:'SF · hybrid',           visa:true  },
         ],
         roles: {
+          intern:   ['Design Intern','UX Intern','Product Design Intern'],
           junior:   ['Product Designer','UI/UX Designer','Junior Visual Designer'],
           mid:      ['Product Designer II','UX Designer','UI Designer'],
           senior:   ['Senior Product Designer','Senior UX Designer','Lead Product Designer'],
           staff:    ['Staff Designer','Principal Designer','Design Lead'],
           director: ['Design Director','VP of Design','Head of Design'],
         },
-        salaryByLevel: { junior:[85,120], mid:[120,162], senior:[160,215], staff:[200,265], director:[240,325] },
+        salaryByLevel: { intern:[40,65], junior:[85,120], mid:[120,162], senior:[160,215], staff:[200,265], director:[240,325] },
         why: [
           '{co} is rebuilding core product surfaces — your {k1} portfolio and {k2} experience are a direct match for their hiring bar.',
           'The {co} design team is scaling — your {k1} work and depth in {k2} puts you in the top 5% of applicants they\'re seeing.',
@@ -2397,13 +2402,14 @@
           {name:'Ironclad', logo:'Ir', tags:['Legal Tech','Hybrid'],    loc:'SF · hybrid',       visa:false },
         ],
         roles: {
+          intern:   ['Sales Intern','SDR Intern','Business Dev Intern'],
           junior:   ['Sales Development Rep','BDR','Inside Sales Rep'],
           mid:      ['Account Executive','SMB Account Executive','Mid-Market AE'],
           senior:   ['Senior Account Executive','Enterprise AE','Strategic AE'],
           staff:    ['Sales Manager','Regional Sales Manager','Director of Sales'],
           director: ['VP of Sales','Head of Sales','Chief Revenue Officer'],
         },
-        salaryByLevel: { junior:[55,80], mid:[80,120], senior:[120,185], staff:[160,225], director:[210,305] },
+        salaryByLevel: { intern:[30,50], junior:[55,80], mid:[80,120], senior:[120,185], staff:[160,225], director:[210,305] },
         why: [
           '{co} is expanding into new verticals — your {k1} track record and experience with {k2} gives you a strong edge in their pipeline.',
           'The {co} sales team is hiring aggressively — your {k1} close rate and {k2} background aligns with what their team needs to hit quota.',
@@ -2462,13 +2468,14 @@
           {name:'Pipe',    logo:'Pp', tags:['Rev Finance','Remote'], loc:'Miami · remote OK', visa:false },
         ],
         roles: {
+          intern:   ['Finance Intern','FP&A Intern','Investment Banking Intern'],
           junior:   ['Financial Analyst','Finance Associate','Junior FP&A Analyst'],
           mid:      ['Senior Financial Analyst','FP&A Manager','Finance Manager'],
           senior:   ['Senior FP&A Manager','Finance Lead','Senior Finance Manager'],
           staff:    ['Director of Finance','Head of FP&A','Senior Director of Finance'],
           director: ['VP of Finance','CFO','Head of Corporate Finance'],
         },
-        salaryByLevel: { junior:[85,115], mid:[115,155], senior:[155,205], staff:[190,255], director:[240,345] },
+        salaryByLevel: { intern:[45,70], junior:[85,115], mid:[115,155], senior:[155,205], staff:[190,255], director:[240,345] },
         why: [
           '{co} is scaling its finance function — your {k1} background and {k2} experience map directly to the gaps they\'re filling.',
           'The {co} FP&A team needs someone who can own {k1} end-to-end — your {k2} track record is exactly what they\'re sourcing.',
@@ -2542,7 +2549,8 @@
         const why  = (d.why[i % d.why.length])
           .replace(/{co}/g,co.name).replace(/{k1}/g,k1).replace(/{k2}/g,k2).replace(/{k3}/g,k3);
         const reqs = reqSets[i % reqSets.length].map(r => r.replace(/{k1}/g,ck1).replace(/{k2}/g,ck2));
-        const perks = d.perks[i % d.perks.length];
+        const rawPerks = d.perks[i % d.perks.length];
+        const perks = visaRequired ? rawPerks : rawPerks.map(p => /h1b|opt|visa\s*sponsor/i.test(p) ? 'Comprehensive benefits' : p);
         const rec   = d.recruiters[i % d.recruiters.length];
         const recTitle = rec.title.includes('·') ? rec.title : rec.title + ' · ' + co.name;
         const avatar   = rec.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
@@ -2561,8 +2569,9 @@
       function locMatches(j, ignoreSalary) {
         if (visaRequired && !j.visa) return false;
         if (!ignoreSalary && j.base < salaryMin) return false;
-        if (!locSet || locSet.size === 0 || locSet.has('worldwide')) return true;
+        if (!locSet || locSet.size === 0) return true;
         const jl = j.loc.toLowerCase();
+        if (locSet.has('worldwide')) return /remote|global/i.test(jl);
         // Work-type check (remote / hybrid / in-office)
         const hasTypeFilter = locSet.has('remote') || locSet.has('hybrid') || locSet.has('onsite');
         const typeOk = !hasTypeFilter ||
