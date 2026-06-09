@@ -1,0 +1,343 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" aria-label="Capt. Joe Bone — reviewing on tablet">
+<defs>
+  <radialGradient id="halo" cx=".5" cy=".34" r=".62">
+    <stop offset="0" stop-color="#ff6a1f" stop-opacity=".28"></stop>
+    <stop offset=".55" stop-color="#ff6a1f" stop-opacity=".05"></stop>
+    <stop offset="1" stop-color="#0a0a0a" stop-opacity="0"></stop>
+  </radialGradient>
+  <radialGradient id="screenGlow" cx=".5" cy=".5" r=".6">
+    <stop offset="0" stop-color="#a8e6ff" stop-opacity=".75"></stop>
+    <stop offset=".55" stop-color="#5ec8ff" stop-opacity=".25"></stop>
+    <stop offset="1" stop-color="#5ec8ff" stop-opacity="0"></stop>
+  </radialGradient>
+  <radialGradient id="skullGlow" cx=".5" cy=".9" r=".55">
+    <stop offset="0" stop-color="#b8e8ff" stop-opacity=".75"></stop>
+    <stop offset=".5" stop-color="#6cb8e8" stop-opacity=".25"></stop>
+    <stop offset="1" stop-color="#5ec8ff" stop-opacity="0"></stop>
+  </radialGradient>
+  <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#9be8ff"></stop>
+    <stop offset=".4" stop-color="#5fc8ff"></stop>
+    <stop offset="1" stop-color="#2a7aa8"></stop>
+  </linearGradient>
+  <radialGradient id="eyeRed" cx=".4" cy=".4" r=".6">
+    <stop offset="0" stop-color="#ffe0a8"></stop>
+    <stop offset=".22" stop-color="#ff8a3a"></stop>
+    <stop offset=".62" stop-color="#d92a05"></stop>
+    <stop offset="1" stop-color="#4a0500"></stop>
+  </radialGradient>
+  <linearGradient id="bone" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f1e6c9"></stop>
+    <stop offset=".55" stop-color="#e6d6b1"></stop>
+    <stop offset="1" stop-color="#cdba8d"></stop>
+  </linearGradient>
+  <linearGradient id="hatGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0c0c12"></stop>
+    <stop offset=".5" stop-color="#1c1c24"></stop>
+    <stop offset="1" stop-color="#06060a"></stop>
+  </linearGradient>
+  <linearGradient id="uniform" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1d1d24"></stop>
+    <stop offset="1" stop-color="#0c0c11"></stop>
+  </linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd58a"></stop>
+    <stop offset=".5" stop-color="#e8a23a"></stop>
+    <stop offset="1" stop-color="#7a4a14"></stop>
+  </linearGradient>
+  <linearGradient id="tabletBezel" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2a2a32"></stop>
+    <stop offset=".5" stop-color="#16161c"></stop>
+    <stop offset="1" stop-color="#08080c"></stop>
+  </linearGradient>
+</defs>
+
+
+<ellipse cx="240" cy="216" rx="270" ry="250" fill="url(#halo)"></ellipse>
+
+<ellipse cx="240" cy="500" rx="260" ry="160" fill="url(#screenGlow)" opacity=".9"></ellipse>
+<ellipse cx="240" cy="460" rx="180" ry="100" fill="#5fc8ff" opacity=".12"></ellipse>
+
+
+
+<g>
+  <path d="M 38 600 L 78 410 Q 102 388 142 380 L 240 372 L 338 380 Q 378 388 402 410 L 442 600 Z" fill="url(#uniform)"></path>
+
+  
+  <path d="M 240 372 L 170 462 L 224 538 L 240 498 Z" fill="#05050a"></path>
+  <path d="M 240 372 L 310 462 L 256 538 L 240 498 Z" fill="#05050a"></path>
+  <path d="M 240 372 L 170 462 L 224 538" stroke="url(#gold)" stroke-width="2.4" fill="none" stroke-linecap="round"></path>
+  <path d="M 240 372 L 310 462 L 256 538" stroke="url(#gold)" stroke-width="2.4" fill="none" stroke-linecap="round"></path>
+
+  
+  <path d="M 220 372 L 240 392 L 260 372 L 254 416 L 226 416 Z" fill="#b8200f"></path>
+  <circle cx="240" cy="402" r="3" fill="url(#gold)"></circle>
+</g>
+
+<g>
+  <!-- volumetric light CONE rising from tablet to face — trapezoid, brightest at source -->
+  <defs>
+    <linearGradient id="lightCone" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#a8e8ff" stop-opacity=".5"></stop>
+      <stop offset=".4" stop-color="#7ed4ff" stop-opacity=".22"></stop>
+      <stop offset="1" stop-color="#5ec8ff" stop-opacity="0"></stop>
+    </linearGradient>
+    <radialGradient id="hotspot" cx=".5" cy="1" r=".7">
+      <stop offset="0" stop-color="#e8f6ff" stop-opacity=".7"></stop>
+      <stop offset=".4" stop-color="#9be8ff" stop-opacity=".3"></stop>
+      <stop offset="1" stop-color="#5ec8ff" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <path d="M 156 470 L 324 470 L 360 320 L 120 320 Z" fill="url(#lightCone)"></path>
+  <path d="M 176 470 L 304 470 L 320 340 L 160 340 Z" fill="url(#lightCone)" opacity=".7"></path>
+  <ellipse cx="240" cy="460" rx="160" ry="100" fill="url(#hotspot)"></ellipse>
+  <!-- broad ambient cast for environment -->
+  <ellipse cx="240" cy="480" rx="180" ry="110" fill="#5fc8ff" opacity=".12"></ellipse>
+  <!-- chest rim sweep — a hot stripe directly above the tablet bezel -->
+  <path d="M 168 444 Q 240 410 312 444 L 308 460 Q 240 432 172 460 Z" fill="#b8ecff" opacity=".35"></path>
+  <!-- rim along the V of the lapels (catches light from below) -->
+  <path d="M 178 458 L 240 396" stroke="#9be8ff" stroke-width="3" opacity=".75" stroke-linecap="round" fill="none"></path>
+  <path d="M 302 458 L 240 396" stroke="#9be8ff" stroke-width="3" opacity=".75" stroke-linecap="round" fill="none"></path>
+  <path d="M 184 462 L 240 408" stroke="#e8f6ff" stroke-width="1.4" opacity=".7" stroke-linecap="round" fill="none"></path>
+  <path d="M 296 462 L 240 408" stroke="#e8f6ff" stroke-width="1.4" opacity=".7" stroke-linecap="round" fill="none"></path>
+</g>
+
+
+
+<g>
+  <path d="M 240 174 C 172 174 138 222 138 272 C 138 308 152 336 168 352 L 174 370 Q 180 386 196 391 L 208 394 Q 240 401 272 394 L 284 391 Q 300 386 306 370 L 312 352 C 328 336 342 308 342 272 C 342 222 308 174 240 174 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.6"></path>
+
+  
+  <path d="M 160 278 Q 178 322 198 340" stroke="#b7a47a" stroke-width="2" fill="none" opacity=".55" stroke-linecap="round"></path>
+  <path d="M 320 278 Q 302 322 282 340" stroke="#b7a47a" stroke-width="2" fill="none" opacity=".55" stroke-linecap="round"></path>
+
+  
+  <path d="M 184 196 L 178 220 L 192 234" stroke="#8a6f40" stroke-width="1.6" fill="none" opacity=".75"></path>
+  <path d="M 296 188 L 304 206 L 296 220 L 308 234" stroke="#8a6f40" stroke-width="1.4" fill="none" opacity=".7"></path>
+  <path d="M 228 178 L 222 212 L 230 244" stroke="#8a6f40" stroke-width="1.2" fill="none" opacity=".7"></path>
+
+  
+  <path d="M 162 252 Q 198 240 234 254" stroke="#070708" stroke-width="7" stroke-linecap="round" fill="none"></path>
+  <path d="M 250 254 Q 284 240 318 252" stroke="#070708" stroke-width="7" stroke-linecap="round" fill="none"></path>
+
+  
+  <g>
+    <ellipse cx="200" cy="278" rx="32" ry="34" fill="#040406"></ellipse>
+    <ellipse cx="200" cy="284" rx="25" ry="27" fill="#020203"></ellipse>
+    
+    <ellipse cx="200" cy="296" rx="9" ry="6" fill="#5fc8ff" opacity=".85"></ellipse>
+    <ellipse cx="200" cy="296" rx="4" ry="3" fill="#a8e8ff"></ellipse>
+  </g>
+  
+  <g>
+    <ellipse cx="286" cy="278" rx="24" ry="27" fill="#070708"></ellipse>
+    <ellipse cx="286" cy="284" rx="18" ry="20" fill="#000"></ellipse>
+    <ellipse cx="286" cy="295" rx="7" ry="4" fill="#5fc8ff" opacity=".9"></ellipse>
+    <ellipse cx="286" cy="295" rx="3" ry="1.6" fill="#a8e8ff"></ellipse>
+  </g>
+
+  
+  <path d="M 240 298 L 226 328 Q 240 336 254 328 Z" fill="#070708"></path>
+
+  
+  <g transform="translate(240 356)">
+    <path d="M -54 -4 Q 0 -10 54 -4 L 52 18 Q 0 24 -52 18 Z" fill="#040406"></path>
+    <g fill="url(#bone)" stroke="#3a3026" stroke-width=".6">
+      <path d="M -52 -2 L -46 11 L -40 -2 Z"></path>
+      <path d="M -40 -2 L -34 11 L -28 -2 Z"></path>
+      <path d="M -28 -2 L -22 11 L -16 -2 Z"></path>
+      <path d="M -4 -2 L 2 11 L 8 -2 Z"></path>
+      <path d="M 8 -2 L 14 11 L 20 -2 Z"></path>
+      <path d="M 20 -2 L 26 11 L 32 -2 Z"></path>
+      <path d="M 32 -2 L 38 11 L 44 -2 Z"></path>
+      <path d="M 44 -2 L 50 8 L 52 -2 Z"></path>
+    </g>
+    <path d="M -16 -2 L -10 11 L -4 -2 Z" fill="url(#gold)" stroke="#5a3a0e" stroke-width=".6"></path>
+  </g>
+
+  
+  <path d="M 168 352 L 174 370 Q 180 386 196 391 L 208 394 Q 240 401 272 394 L 284 391 Q 300 386 306 370 L 312 352 Q 280 386 240 388 Q 200 386 168 352 Z" fill="url(#skullGlow)" opacity="1"></path>
+  <!-- broader subsurface scatter on the lower half of the face -->
+  <ellipse cx="240" cy="372" rx="96" ry="32" fill="#a8e8ff" opacity=".35"></ellipse>
+  <!-- bright JAWLINE rim light — catches the bottom edge of the bone -->
+  <path d="M 178 348 Q 200 384 240 395 Q 280 384 302 348" stroke="#e8f6ff" stroke-width="3.5" fill="none" opacity=".85" stroke-linecap="round"></path>
+  <path d="M 196 391 Q 240 402 284 391" stroke="#b8ecff" stroke-width="4" fill="none" opacity=".85" stroke-linecap="round"></path>
+  <!-- CHIN tip hotspot -->
+  <ellipse cx="240" cy="396" rx="16" ry="5" fill="#ffffff" opacity=".65"></ellipse>
+  <!-- cheekbone catch-light on each side (downward-facing surface) -->
+  <ellipse cx="170" cy="332" rx="14" ry="5" fill="#9be8ff" opacity=".55" transform="rotate(-30 170 332)"></ellipse>
+  <ellipse cx="310" cy="332" rx="14" ry="5" fill="#9be8ff" opacity=".55" transform="rotate(30 310 332)"></ellipse>
+</g>
+
+
+
+
+<g>
+  
+  <g transform="translate(150 378)">
+    <ellipse cx="0" cy="0" rx="26" ry="12" fill="url(#gold)" stroke="#5a3a0e" stroke-width="1.2"></ellipse>
+    <ellipse cx="0" cy="-1" rx="20" ry="8" fill="none" stroke="#ffd58a" stroke-width=".8" opacity=".7"></ellipse>
+    <g stroke="#6a4410" stroke-width="1.3" stroke-linecap="round">
+      <line x1="-18" y1="6" x2="-20" y2="20"></line>
+      <line x1="-10" y1="8" x2="-12" y2="22"></line>
+      <line x1="-2" y1="8" x2="-2" y2="22"></line>
+      <line x1="6" y1="8" x2="8" y2="22"></line>
+      <line x1="14" y1="8" x2="16" y2="20"></line>
+    </g>
+  </g>
+  
+  <path d="M 124 386&#xA;           Q 110 432 132 480&#xA;           Q 152 510 192 504&#xA;           L 210 478&#xA;           Q 196 444 182 410&#xA;           Q 168 388 150 384 Z" fill="url(#uniform)" stroke="#000" stroke-width="1.2"></path>
+  
+  <path d="M 130 408 Q 124 452 148 492" stroke="url(#gold)" stroke-width="1.6" fill="none" opacity=".7"></path>
+  
+  <path d="M 178 484 Q 192 508 208 502 L 222 480 Q 210 462 196 462 Q 184 466 178 484 Z" fill="url(#gold)" stroke="#5a3a0e" stroke-width="1.2"></path>
+  <g stroke="#6a4410" stroke-width="1.2" stroke-linecap="round" opacity=".75">
+    <line x1="186" y1="492" x2="184" y2="504"></line>
+    <line x1="196" y1="494" x2="196" y2="506"></line>
+    <line x1="206" y1="492" x2="208" y2="504"></line>
+  </g>
+</g>
+
+
+<g>
+  <g transform="translate(330 378)">
+    <ellipse cx="0" cy="0" rx="26" ry="12" fill="url(#gold)" stroke="#5a3a0e" stroke-width="1.2"></ellipse>
+    <ellipse cx="0" cy="-1" rx="20" ry="8" fill="none" stroke="#ffd58a" stroke-width=".8" opacity=".7"></ellipse>
+    <g stroke="#6a4410" stroke-width="1.3" stroke-linecap="round">
+      <line x1="-18" y1="6" x2="-20" y2="20"></line>
+      <line x1="-10" y1="8" x2="-12" y2="22"></line>
+      <line x1="-2" y1="8" x2="-2" y2="22"></line>
+      <line x1="6" y1="8" x2="8" y2="22"></line>
+      <line x1="14" y1="8" x2="16" y2="20"></line>
+    </g>
+  </g>
+  <path d="M 356 386&#xA;           Q 370 432 348 480&#xA;           Q 328 510 288 504&#xA;           L 270 478&#xA;           Q 284 444 298 410&#xA;           Q 312 388 330 384 Z" fill="url(#uniform)" stroke="#000" stroke-width="1.2"></path>
+  <path d="M 350 408 Q 356 452 332 492" stroke="url(#gold)" stroke-width="1.6" fill="none" opacity=".7"></path>
+  <path d="M 302 484 Q 288 508 272 502 L 258 480 Q 270 462 284 462 Q 296 466 302 484 Z" fill="url(#gold)" stroke="#5a3a0e" stroke-width="1.2"></path>
+  <g stroke="#6a4410" stroke-width="1.2" stroke-linecap="round" opacity=".75">
+    <line x1="294" y1="492" x2="296" y2="504"></line>
+    <line x1="284" y1="494" x2="284" y2="506"></line>
+    <line x1="274" y1="492" x2="272" y2="504"></line>
+  </g>
+</g>
+
+
+
+<g transform="translate(240 502) rotate(-4)">
+  
+  <rect x="-94" y="-58" width="188" height="116" rx="10" fill="url(#tabletBezel)" stroke="#000" stroke-width="1.6"></rect>
+  
+  <rect x="-82" y="-46" width="164" height="92" rx="4" fill="url(#screen)"></rect>
+  
+  <rect x="-82" y="-46" width="164" height="92" rx="4" fill="url(#screenGlow)" opacity=".7"></rect>
+  
+  <g opacity=".7">
+    <rect x="-72" y="-36" width="58" height="6" rx="2" fill="#0a3a5e"></rect>
+    <rect x="-72" y="-22" width="38" height="4" rx="2" fill="#0a3a5e" opacity=".7"></rect>
+    <rect x="-72" y="-12" width="146" height="2" fill="#0a3a5e" opacity=".5"></rect>
+    <rect x="-72" y="-4" width="98" height="2" fill="#0a3a5e" opacity=".5"></rect>
+    <rect x="-72" y="4" width="120" height="2" fill="#0a3a5e" opacity=".5"></rect>
+    <rect x="-72" y="12" width="86" height="2" fill="#0a3a5e" opacity=".5"></rect>
+    
+    <g fill="#0a3a5e" opacity=".85">
+      <rect x="-72" y="26" width="6" height="12"></rect>
+      <rect x="-62" y="22" width="6" height="16"></rect>
+      <rect x="-52" y="18" width="6" height="20"></rect>
+      <rect x="-42" y="14" width="6" height="24"></rect>
+      <rect x="-32" y="20" width="6" height="18"></rect>
+    </g>
+    
+    <rect x="14" y="22" width="60" height="16" rx="2" fill="#0a3a5e" opacity=".6"></rect>
+  </g>
+  
+  <path d="M -78 -42 L 76 -42 L 60 -10 L -78 -10 Z" fill="#ffffff" opacity=".18"></path>
+  
+  <circle cx="0" cy="-52" r="1.6" fill="#0a0a0a"></circle>
+</g>
+
+
+
+<g transform="translate(190 488) rotate(-12)">
+  
+  <path d="M -6 -2 Q 0 -14 18 -12 L 28 12 Q 14 22 -4 16 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.2"></path>
+  
+  <g fill="url(#bone)" stroke="#7a6238" stroke-width="1">
+    <path d="M 4 -10 Q 4 -22 12 -22 Q 20 -22 20 -10 L 18 0 L 6 0 Z"></path>
+    <path d="M 16 -8  Q 16 -22 24 -22 Q 32 -22 32 -8 L 30 4 L 18 4 Z"></path>
+    <path d="M 26 -4  Q 26 -18 34 -18 Q 40 -18 40 -4 L 38 8 L 28 8 Z"></path>
+    <path d="M 32  4  Q 32 -10 40 -10 Q 46 -10 46  4 L 42 14 L 34 14 Z"></path>
+  </g>
+  
+  <g stroke="#5a4a28" stroke-width=".8" opacity=".7">
+    <line x1="12" y1="-12" x2="12" y2="-2"></line>
+    <line x1="24" y1="-10" x2="24" y2="2"></line>
+    <line x1="34" y1="-6" x2="34" y2="6"></line>
+    <line x1="40" y1="2" x2="40" y2="12"></line>
+  </g>
+</g>
+
+
+<g transform="translate(290 488) rotate(12)">
+  <path d="M 6 -2 Q 0 -14 -18 -12 L -28 12 Q -14 22 4 16 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.2"></path>
+  <g fill="url(#bone)" stroke="#7a6238" stroke-width="1">
+    <path d="M -4 -10 Q -4 -22 -12 -22 Q -20 -22 -20 -10 L -18 0 L -6 0 Z"></path>
+    <path d="M -16 -8  Q -16 -22 -24 -22 Q -32 -22 -32 -8 L -30 4 L -18 4 Z"></path>
+    <path d="M -26 -4  Q -26 -18 -34 -18 Q -40 -18 -40 -4 L -38 8 L -28 8 Z"></path>
+    <path d="M -32  4  Q -32 -10 -40 -10 Q -46 -10 -46  4 L -42 14 L -34 14 Z"></path>
+  </g>
+  <g stroke="#5a4a28" stroke-width=".8" opacity=".7">
+    <line x1="-12" y1="-12" x2="-12" y2="-2"></line>
+    <line x1="-24" y1="-10" x2="-24" y2="2"></line>
+    <line x1="-34" y1="-6" x2="-34" y2="6"></line>
+    <line x1="-40" y1="2" x2="-40" y2="12"></line>
+  </g>
+</g>
+
+
+
+<g>
+  <ellipse cx="240" cy="206" rx="172" ry="14" fill="#000" opacity=".4"></ellipse>
+
+  <path d="M 54 198&#xA;           Q 86 96 240 72&#xA;           Q 394 96 426 198&#xA;           Q 410 216 384 218&#xA;           L 96 218&#xA;           Q 70 216 54 198 Z" fill="url(#hatGrad)" stroke="#000" stroke-width="1.4"></path>
+
+  <path d="M 96 200 Q 130 124 240 102 Q 350 124 384 200" stroke="#3a3a44" stroke-width="2" fill="none" opacity=".55"></path>
+  <path d="M 54 198 Q 86 96 240 72 Q 394 96 426 198" stroke="url(#gold)" stroke-width="2.4" fill="none"></path>
+  <path d="M 96 218 L 384 218" stroke="url(#gold)" stroke-width="1.6" fill="none" opacity=".7"></path>
+
+  
+  <path d="M 78 174 Q 56 138 78 102 Q 100 130 94 174 Z" fill="#bf2a1a"></path>
+
+  
+  <g>
+    <line x1="58" y1="200" x2="44" y2="232" stroke="url(#gold)" stroke-width="2.2"></line>
+    <circle cx="42" cy="238" r="4.5" fill="url(#gold)"></circle>
+  </g>
+  <g>
+    <line x1="422" y1="200" x2="436" y2="232" stroke="url(#gold)" stroke-width="2.2"></line>
+    <circle cx="438" cy="238" r="4.5" fill="url(#gold)"></circle>
+  </g>
+
+  
+  <g transform="translate(240 144)">
+    <circle r="32" fill="#0a0a0a" stroke="url(#gold)" stroke-width="2.6"></circle>
+    <circle r="27" fill="none" stroke="url(#gold)" stroke-width=".8" opacity=".55"></circle>
+    <g stroke="url(#bone)" stroke-width="4.5" stroke-linecap="round">
+      <line x1="-20" y1="-14" x2="20" y2="16"></line>
+      <line x1="-20" y1="16" x2="20" y2="-14"></line>
+    </g>
+    <g fill="url(#bone)">
+      <circle cx="-21" cy="-15" r="3.6"></circle>
+      <circle cx="21" cy="17" r="3.6"></circle>
+      <circle cx="-21" cy="17" r="3.6"></circle>
+      <circle cx="21" cy="-15" r="3.6"></circle>
+    </g>
+    <g>
+      <ellipse cx="0" cy="-1" rx="10" ry="11" fill="url(#bone)" stroke="#5a4a28" stroke-width=".7"></ellipse>
+      <ellipse cx="-3.6" cy="-1" rx="2.2" ry="2.8" fill="#0a0a0a"></ellipse>
+      <ellipse cx="3.6" cy="-1" rx="2.2" ry="2.8" fill="#0a0a0a"></ellipse>
+      <rect x="-4" y="6.5" width="8" height="3.2" fill="url(#bone)"></rect>
+    </g>
+  </g>
+</g>
+
+</svg>

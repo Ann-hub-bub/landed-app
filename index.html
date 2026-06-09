@@ -1594,6 +1594,10 @@
   .fm-job .expand .recruiter .info .t{ font-size:11.5px; color: var(--mute); margin-top: 2px;}
   .fm-job .expand .recruiter .seen{ font-size:11px; color: var(--green); font-family:'Space Mono',monospace; display:flex; align-items:center; gap:6px; white-space:nowrap;}
   .fm-job .expand .recruiter .seen::before{ content:''; width:6px; height:6px; border-radius:50%; background: var(--green); box-shadow: 0 0 0 0 rgba(94,240,168,.6); animation: log-blink 2s ease-out infinite;}
+  .view-job-btn{ display:inline-flex; align-items:center; gap:8px; margin-top:16px; padding:10px 22px; background:transparent; border:1px solid var(--orange); color:var(--orange); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:13px; letter-spacing:.02em; cursor:pointer; transition:background .18s,color .18s; width:100%;}
+  .view-job-btn:hover{ background:var(--orange); color:var(--ink);}
+  .view-job-btn .ar{ margin-left:auto; transition:transform .18s;}
+  .view-job-btn:hover .ar{ transform:translateX(4px);}
 
   /* Stage 1 lock-target bar */
   .fm-locktarget{ display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 18px 22px; background: linear-gradient(180deg, transparent, rgba(255,106,31,.06)); border:1px dashed var(--line-2); transition: all .25s;}
@@ -3571,7 +3575,7 @@
         return {
           role: roles[i % roles.length], co: co.name, loc: jobLoc, logo: co.logo,
           pay: '$'+payLo+'k–$'+payHi+'k', base: baseK, match, age: ages[i % ages.length],
-          visa: !!co.visa, level: lvl, tags, why, reqs, perks,
+          visa: !!co.visa, level: lvl, domain, tags, why, reqs, perks,
           recruiter: { name: rec.name, title: recTitle, avatar,
             seen: i===0?'last seen just now':i===1?'last seen 1h ago':'last seen '+(i*2)+'h ago' }
         };
@@ -3734,9 +3738,17 @@
 
     function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+    let lastRenderedJobs = [];
+
     function renderJobs(jobs){
+      lastRenderedJobs = jobs;
+      // Identify top 3 by match score — these get the "View Full Posting" button
+      const sortedDesc = [...jobs].sort((a,b) => b.match - a.match);
+      const top3Keys   = new Set(sortedDesc.slice(0,3).map(j => j.co + '|' + j.role));
+
       jobsEl.innerHTML = '';
       jobs.forEach((j, idx) => {
+        const isTop = top3Keys.has(j.co + '|' + j.role);
         const el = document.createElement('div');
         el.className = 'fm-job' + (j.match >= 95 ? ' top-match' : '');
         el.dataset.idx = idx;
@@ -3766,12 +3778,20 @@
               '<div class="info"><div class="n">' + escapeHtml(j.recruiter.name) + '</div><div class="t">' + escapeHtml(j.recruiter.title) + '</div></div>' +
               '<div class="seen">' + escapeHtml(j.recruiter.seen) + '</div>' +
             '</div>' +
-          '</div>';
+          '</div>' +
+          (isTop ? '<button class="view-job-btn" type="button">View Full Posting <span class="ar">→</span></button>' : '');
         const toggle = el.querySelector('.toggle-btn');
         toggle.addEventListener('click', () => {
           const wasOpen = el.dataset.open === 'true';
           el.dataset.open = wasOpen ? 'false' : 'true';
         });
+        const viewBtn = el.querySelector('.view-job-btn');
+        if (viewBtn) {
+          viewBtn.addEventListener('click', () => {
+            sessionStorage.setItem('landed_job_detail', JSON.stringify(j));
+            window.location.href = '/job.html';
+          });
+        }
         jobsEl.appendChild(el);
       });
     }
@@ -4280,6 +4300,11 @@
       else { payOpen(e); }
     });
   })();
+
+  // Auto-open paywall when returning from job detail page
+  if (new URLSearchParams(location.search).get('pour') === '1') {
+    setTimeout(payOpen, 500);
+  }
 </script>
 </body>
 </html>

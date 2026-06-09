@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Full Job Posting — Landed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a;
+  --ink-2:#101013;
+  --ink-3:#16161a;
+  --ink-4:#1c1c22;
+  --line:#22222a;
+  --line-2:#2c2c34;
+  --bone:#f4ede0;
+  --bone-2:#d9d2c4;
+  --mute:#8a8a92;
+  --mute-2:#6a6a72;
+  --orange:#ff6a1f;
+  --orange-soft:#ffa56a;
+  --green:#5ef0a8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink);color:var(--bone);}
+body{font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+
+/* ── Nav ── */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em;color:var(--bone);}
+.nav-logo span{color:var(--orange);}
+.nav-back{font-size:13px;color:var(--mute);display:flex;align-items:center;gap:6px;transition:color .18s;}
+.nav-back:hover{color:var(--bone);}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.02em;border:none;transition:opacity .18s;text-decoration:none;}
+.nav-cta:hover{opacity:.88;}
+
+/* ── Wrap ── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 48px;}
+
+/* ── Hero ── */
+.jd-hero{padding:56px 0 0;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+.jd-hero-inner{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:end;}
+.jd-hero-left{padding-bottom:48px;}
+.jd-back-crumb{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mute);margin-bottom:24px;transition:color .18s;}
+.jd-back-crumb:hover{color:var(--orange);}
+.jd-company-row{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.jd-logo{width:44px;height:44px;background:var(--ink-3);border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--bone);flex:0 0 auto;}
+.jd-company-name{font-size:15px;color:var(--mute);}
+.jd-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-.03em;margin:0 0 20px;}
+.jd-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.jd-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border:1px solid var(--line-2);font-size:12px;color:var(--bone-2);}
+.jd-chip.match{background:rgba(255,106,31,.12);border-color:rgba(255,106,31,.3);color:var(--orange);font-family:'Space Grotesk',sans-serif;font-weight:700;}
+.jd-chip.salary{background:rgba(94,240,168,.07);border-color:rgba(94,240,168,.2);color:var(--green);}
+.jd-hero-joe{display:flex;align-items:flex-end;justify-content:center;position:relative;}
+.jd-hero-joe::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,31,.12) 0%,transparent 70%);}
+.jd-hero-joe img{position:relative;z-index:2;width:260px;height:auto;filter:drop-shadow(0 30px 60px rgba(255,106,31,.3));}
+
+/* ── Section wrapper ── */
+.jd-section{padding:56px 0;border-bottom:1px solid var(--line);}
+.jd-section:last-child{border-bottom:0;}
+.jd-label{font-size:11px;color:var(--orange);font-family:'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.jd-h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);letter-spacing:-.025em;margin:0 0 28px;line-height:1.1;}
+.jd-body{font-size:15px;line-height:1.7;color:var(--bone-2);}
+.jd-body b{color:var(--bone);font-weight:600;}
+
+/* ── Meta facts ── */
+.jd-meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+.jd-meta-cell{background:var(--ink-2);padding:20px 22px;}
+.jd-meta-cell .mc-label{font-size:10px;color:var(--mute);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;}
+.jd-meta-cell .mc-val{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:var(--bone);}
+.jd-meta-cell .mc-val.green{color:var(--green);}
+.jd-meta-cell .mc-val.orange{color:var(--orange);}
+
+/* ── Context ── */
+.jd-context-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.jd-stage-badge{display:inline-block;padding:5px 12px;background:rgba(255,106,31,.1);border:1px solid rgba(255,106,31,.25);color:var(--orange);font-size:11px;font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;}
+.jd-why-box{background:var(--ink-3);border:1px solid var(--line-2);padding:24px 26px;}
+.jd-why-box .wb-label{font-size:10px;color:var(--mute);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.jd-why-box p{font-size:14px;line-height:1.65;color:var(--bone-2);margin:0;}
+
+/* ── Goals 30/90/365 ── */
+.jd-goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.jd-goal-card{background:var(--ink-3);border:1px solid var(--line-2);padding:28px 24px;position:relative;}
+.jd-goal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.jd-goal-card:nth-child(1)::before{background:var(--line-2);}
+.jd-goal-card:nth-child(2)::before{background:rgba(255,106,31,.5);}
+.jd-goal-card:nth-child(3)::before{background:var(--orange);}
+.jd-goal-period{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;color:var(--orange);margin-bottom:4px;}
+.jd-goal-unit{font-size:11px;color:var(--mute);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
+.jd-goal-text{font-size:13.5px;line-height:1.6;color:var(--bone-2);}
+
+/* ── Skills ── */
+.jd-skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:36px;}
+.jd-skills-col-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:0 0 16px;}
+.jd-must-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+.jd-must-list li{display:flex;gap:14px;font-size:14px;line-height:1.5;color:var(--bone-2);}
+.jd-must-list .num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--orange);min-width:18px;margin-top:2px;}
+.jd-nice-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+.jd-nice-list li{display:flex;gap:10px;font-size:14px;color:var(--bone-2);line-height:1.5;}
+.jd-nice-list .ck{color:var(--mute);font-size:12px;margin-top:2px;}
+.jd-stack-label{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:12px;}
+.jd-stack-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.jd-stack-chip{padding:5px 12px;background:var(--ink-3);border:1px solid var(--line-2);font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--bone-2);}
+
+/* ── Team ── */
+.jd-team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.jd-team-cell{background:var(--ink-2);padding:24px 26px;}
+.jd-team-cell .tc-label{font-size:10px;color:var(--mute);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;}
+.jd-team-cell .tc-val{font-size:14px;line-height:1.5;color:var(--bone-2);}
+.jd-team-cell .tc-val b{color:var(--bone);font-weight:600;}
+
+/* ── Benefits ── */
+.jd-benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+.jd-benefit{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--ink-3);border:1px solid var(--line-2);}
+.jd-benefit .bi{width:30px;height:30px;background:rgba(255,106,31,.1);border:1px solid rgba(255,106,31,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.jd-benefit .bi svg{width:14px;height:14px;color:var(--orange);}
+.jd-benefit .bt{font-size:13.5px;line-height:1.45;color:var(--bone-2);}
+
+/* ── Hiring process ── */
+.jd-pipeline{display:flex;flex-direction:column;gap:0;}
+.jd-pipe-step{display:grid;grid-template-columns:56px 1fr;gap:0;position:relative;}
+.jd-pipe-step:not(:last-child)::before{content:'';position:absolute;left:27px;top:44px;bottom:-1px;width:2px;background:var(--line-2);}
+.jd-pipe-num{display:flex;align-items:flex-start;justify-content:center;padding-top:8px;}
+.jd-pipe-badge{width:36px;height:36px;border-radius:50%;background:var(--ink-3);border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--mute);z-index:1;transition:border-color .3s,color .3s;}
+.jd-pipe-step.active .jd-pipe-badge{border-color:var(--orange);color:var(--orange);}
+.jd-pipe-content{padding:4px 0 32px 16px;}
+.jd-pipe-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.jd-pipe-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--bone);}
+.jd-pipe-dur{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--orange);padding:2px 8px;border:1px solid rgba(255,106,31,.3);}
+.jd-pipe-desc{font-size:13.5px;color:var(--mute);line-height:1.55;}
+
+/* ── CTA ── */
+.jd-cta{padding:80px 0;text-align:center;position:relative;overflow:hidden;}
+.jd-cta::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,31,.08) 0%,transparent 65%);}
+.jd-cta-inner{position:relative;z-index:2;}
+.jd-cta-joe{display:flex;justify-content:center;margin-bottom:32px;}
+.jd-cta-joe img{width:200px;height:auto;filter:drop-shadow(0 20px 40px rgba(255,106,31,.35));}
+.jd-cta h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,42px);letter-spacing:-.03em;margin:0 0 12px;line-height:1.1;}
+.jd-cta p{font-size:15px;color:var(--mute);margin:0 0 32px;}
+.jd-cta-btn{display:inline-flex;align-items:center;gap:10px;padding:18px 40px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;letter-spacing:.01em;border:none;transition:opacity .18s,transform .18s;text-decoration:none;}
+.jd-cta-btn:hover{opacity:.9;transform:translateY(-2px);}
+.jd-cta-btn .ar{font-size:18px;}
+.jd-guarantee{margin-top:20px;font-size:12px;color:var(--mute-2);}
+.jd-guarantee b{color:var(--mute);}
+
+/* ── Responsive ── */
+@media(max-width:860px){
+  .nav-inner,.wrap{padding:0 24px;}
+  .jd-hero-inner{grid-template-columns:1fr;}
+  .jd-hero-joe{display:none;}
+  .jd-context-grid,.jd-skills-grid{grid-template-columns:1fr;}
+  .jd-goals-grid{grid-template-columns:1fr;}
+  .jd-team-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Landed<span>.</span></a>
+    <a href="/" class="nav-back">← Back to your shortlist</a>
+    <a href="/?pour=1" class="nav-cta">Get me hired →</a>
+  </div>
+</nav>
+
+<main id="jdMain">
+  <!-- Content rendered by JS below -->
+</main>
+
+<script>
+(function(){
+  const raw = sessionStorage.getItem('landed_job_detail');
+  if (!raw) { window.location.href = '/'; return; }
+  let job;
+  try { job = JSON.parse(raw); } catch(e) { window.location.href = '/'; return; }
+
+  // ── Content templates ─────────────────────────────────────
+
+  const CO_DESC = {
+    'Fintech': [
+      '{co} builds payment and banking infrastructure trusted by modern businesses across North America. Their platform handles compliance, reconciliation, and money movement so finance teams can focus on strategy, not paperwork.',
+      '{co} is rethinking how companies manage cash flow and financial operations. Their real-time ledger gives CFOs granular visibility that legacy banking tools simply cannot offer.',
+    ],
+    'SaaS': [
+      '{co} makes B2B workflow software that teams actually want to use. Their retention rates sit in the top decile of the category, driven by an opinionated UX and deep enterprise integrations.',
+      '{co} is a vertical SaaS company replacing fragmented point solutions with one unified platform. Enterprise clients see 40%+ productivity gains within their first 90 days.',
+    ],
+    'Dev Tools': [
+      '{co} builds developer tooling that sits in the critical path of software delivery for thousands of engineering teams. Their users ship faster, debug quicker, and spend dramatically less time on toil.',
+      '{co} is building next-generation engineering productivity tools — trusted daily by engineers at companies like Stripe, Notion, and Linear. They are early and growing fast.',
+    ],
+    'AI': [
+      '{co} is an applied AI company turning raw business data into automated decisions at enterprise scale. They are one of the few AI startups with measurable, day-one ROI for customers.',
+      '{co} builds AI-native software for knowledge workers. Their models are fine-tuned on proprietary data and outperform general-purpose LLMs in their vertical by a meaningful margin.',
+    ],
+    'PLG': [
+      '{co} is a product-led growth company with over a million registered users and a freemium funnel that converts at 11% to paid. Self-serve revenue is growing 3× year over year.',
+      '{co} pioneered PLG in their category. Their product sells itself — the sales motion closes expansion, not new logos.',
+    ],
+    'Infra': [
+      '{co} builds infrastructure software that powers mission-critical workloads for financial institutions and healthcare companies. Reliability and security are non-negotiable at their scale.',
+      '{co} is a deep infrastructure company with enterprise contracts averaging $2M ARR. Their technology is in production at some of the largest institutions in North America.',
+    ],
+    'Infrastructure': [
+      '{co} builds infrastructure software that powers mission-critical workloads for financial institutions and healthcare companies. Reliability and security are non-negotiable at their scale.',
+      '{co} is a deep infrastructure company. Their technology is in production at some of the largest organizations in North America.',
+    ],
+    'HR Tech': [
+      '{co} is modernizing people operations for fast-growing companies. Their platform covers onboarding, performance management, and compensation — and HR teams genuinely love using it.',
+      '{co} builds talent and HR software for companies that have outgrown their legacy HRIS. Customers switch from Bamboo or Workday to {co} and rarely look back.',
+    ],
+    'B2B SaaS': [
+      '{co} is a B2B SaaS platform helping operations teams move faster with less overhead. Their NRR consistently runs above 120%, driven by deep workflow integrations and sticky power users.',
+      '{co} builds software for teams that currently run on spreadsheets and email. Their product replaces both — and their customers become fierce advocates.',
+    ],
+    'Open Source': [
+      '{co} is an open-source company with a thriving developer community and a commercial enterprise tier. Their community grows 20% month over month, fueling a strong product-led motion.',
+      '{co} built a beloved open-source developer tool and is now commercializing it for enterprise. Their 200k GitHub stars are their most powerful distribution channel.',
+    ],
+    'Auth': [
+      '{co} builds identity and authentication infrastructure trusted by Fortune 500 security teams. Their platform handles billions of auth events monthly with a 99.99% uptime SLA.',
+      '{co} is the identity layer for the modern web. Developers implement auth in hours instead of months with their SDK — and enterprises trust them with access to critical systems.',
+    ],
+    'E-commerce': [
+      '{co} is an e-commerce infrastructure company processing billions in GMV for direct-to-consumer brands. Their merchants grow 2× faster than the industry average.',
+      '{co} builds the operating system for modern e-commerce — from catalog management to post-purchase experience. High-volume Shopify sellers graduate to {co} when they need more flexibility.',
+    ],
+    'default': [
+      '{co} is a technology company building software that matters. Their team combines deep domain expertise with world-class engineering to ship products that users genuinely love.',
+      '{co} is solving a hard, specific problem in a large market. Their approach is differentiated, their team is strong, and they are at an exciting stage of growth.',
+    ],
+  };
+
+  const ROLE_WHY = {
+    swe: {
+      intern:   "We're giving talented engineers real-world experience shipping production code. You'll have a dedicated mentor and a meaningful, scoped project from day one.",
+      junior:   "Our engineering team is growing fast and we need someone who can own features end-to-end within 90 days. High performers here have a direct path to a mid-level role within 12 months.",
+      mid:      "We're accelerating product development across two new verticals and need engineers who hit the ground running. Onboarding is measured in weeks, not months.",
+      senior:   "We're at a critical inflection point: our codebase needs to scale 10× in the next 18 months to support enterprise clients. We need someone who has been here before.",
+      staff:    "We're rebuilding our core infrastructure to handle the next order of magnitude of scale. This is a highly leveraged, architectural role — you'll define how the entire organization builds software.",
+      director: "We're at the stage where we need engineering leadership that can scale the organization. The foundation is built. This hire will build the machine that builds the machine.",
+    },
+    pm: {
+      intern:   "We're building our APM pipeline and want to give driven students real product ownership. You'll run a mini-sprint with real users and a real launch.",
+      junior:   "Our product org is expanding. We need a sharp APM who can run discovery, write specs, and partner closely with engineering from week one.",
+      mid:      "We're launching a new product line and need a PM who can hold the roadmap, work across engineering and design, and keep stakeholders aligned. Ownership starts on day one.",
+      senior:   "Our core product needs an experienced PM to own the roadmap and drive strategy. The last PM who held this role is now our CPO — we invest heavily in our product managers.",
+      staff:    "We're building a product platform that spans three product lines. We need a Principal PM who can think across the portfolio, not just one product area.",
+      director: "We're hiring our first Head of Product to build the function from scratch. You'll hire the team, set the process, and define what 'great product' looks like here.",
+    },
+    data: {
+      junior:   "We're building our data practice from the ground up. You'll be one of the first analysts — broad scope, high visibility, and direct access to leadership.",
+      mid:      "Our data team is under-resourced relative to our ambition. We need an analyst who can own the self-serve reporting layer and drive a metrics-first culture.",
+      senior:   "Our data infrastructure is mature but our analytics layer is catching up. We need someone who can own the full analytical stack and mentor junior analysts.",
+      staff:    "We're centralizing fragmented data work into one cohesive platform. This is a founding data leadership role — you'll set the strategy and build the team.",
+      director: "Data is a company-wide priority. We're hiring a Head of Data to build the function, establish governance, and make us a genuinely data-driven organization in practice.",
+    },
+    marketing: {
+      junior:   "Our marketing team is growing and needs execution muscle. You'll own specific channels and see the direct impact of your work in weekly metrics.",
+      mid:      "We're scaling our demand gen engine and need a skilled marketer who can own a channel, run experiments, and report results without hand-holding.",
+      senior:   "Our brand and content strategy needs an experienced owner. We're moving from scrappy early-stage marketing to something that can support a scaled enterprise motion.",
+      staff:    "We're hiring our first VP of Marketing to build a real team. The CEO has been doing marketing — it's time to hand it to someone who does this professionally.",
+      director: "This is a founding marketing leadership hire. You'll define the go-to-market strategy, build the brand, and hire the team that executes it.",
+    },
+    default: {
+      mid: "We're growing fast and this role is a direct response to that growth. Ownership is immediate and the impact is visible.",
+      senior: "This is a critical hire at an inflection point. We need someone who has navigated this stage before and can move quickly.",
+    },
+  };
+
+  const GOALS = {
+    swe: {
+      '30': {
+        intern: 'Set up your dev environment, complete the onboarding project, and merge your first pull request to a production codebase.',
+        junior: 'Complete codebase orientation, fix 3–5 real bugs, ship your first feature, and finish a full code review cycle.',
+        mid: 'Ship a scoped feature end-to-end, contribute to one architectural discussion, and establish your code review rhythm.',
+        senior: 'Complete a technical audit of one core system, identify the top 3 reliability risks, and ship your first non-trivial feature.',
+        staff: 'Conduct a full architectural review, present findings to the team, and draft a 6-month technical roadmap.',
+        director: 'Meet every engineer 1:1, audit team health, and draft your engineering org design for the next 12 months.',
+      },
+      '90': {
+        intern: 'Own a complete feature from scoping to ship and present learnings to the product team.',
+        junior: 'Own a full feature end-to-end, lead a technical design doc, and increase test coverage in your area by 20%.',
+        mid: 'Deliver a major feature, lead technical design for the next sprint cycle, and start mentoring one junior engineer.',
+        senior: 'Migrate one legacy system to modern standards, define coding patterns for the team, and reduce P1 incident rate in your area.',
+        staff: 'Complete the first major infrastructure migration, establish team-wide engineering standards, and close one senior hire.',
+        director: 'Close 3 key engineering hires, ship the Q2 roadmap on time, and establish engineering OKRs aligned with product strategy.',
+      },
+      '365': {
+        intern: 'Return as a full-time engineer. Our goal is 80%+ intern-to-FTE conversion.',
+        junior: 'Own an independent product area, have shipped at least 3 user-facing features, and be on track for a mid-level conversation.',
+        mid: 'Be the go-to owner for at least one core system, have mentored two junior engineers, and be seen as a technical leader on the team.',
+        senior: 'Reduce system latency by 30%, establish a culture of documentation and testing, and have grown the team by 2 engineers.',
+        staff: 'Deliver a full architectural overhaul, have 10+ engineers aligned on your technical vision, and achieve 99.95% uptime.',
+        director: 'Double engineering headcount, improve deployment frequency by 3×, and establish the engineering culture the company will be built on.',
+      },
+    },
+    pm: {
+      '30': {
+        intern: 'Shadow 5+ customer discovery calls, run your first user interview, and ship one copy or UX quick win.',
+        junior: 'Shadow discovery calls, audit core product metrics, and submit your first PRD draft for team review.',
+        mid: 'Own your first user story end-to-end, define success metrics for your area, and ship one quick-win experiment.',
+        senior: 'Complete a full product audit of your area, run 3 customer interviews, and align with engineering on the next sprint priorities.',
+        staff: 'Complete a portfolio audit, align stakeholders on the 6-month roadmap, and define product strategy for your area.',
+        director: 'Meet all product stakeholders, audit current roadmap coverage, and draft a product operating model for the team.',
+      },
+      '90': {
+        intern: 'Own a small feature from concept to launch and present user research findings to the product team.',
+        junior: 'Ship your first feature to production, own the metrics for your area, and run a full discovery → delivery cycle.',
+        mid: 'Launch a significant feature, improve one core KPI by 15%+, and own the full backlog for your product area.',
+        senior: 'Launch a major product initiative, drive a measurable improvement in your North Star metric, and define the next 6-month roadmap.',
+        staff: 'Unify roadmaps across your portfolio, ship a cross-functional initiative, and run a company-wide product review.',
+        director: 'Hire 2 PMs, ship the first roadmap cycle, and establish product rituals (discovery reviews, ship reviews, metrics reviews).',
+      },
+      '365': {
+        intern: 'Return as an APM. We convert 70%+ of our product interns to full-time roles.',
+        junior: 'Own an independent product area and have launched at least one feature used by 10,000+ users.',
+        mid: "Have shipped 2+ major features, own your product area's OKRs, and be ready for a Senior PM conversation.",
+        senior: 'Have shipped a major platform initiative, measurably grown your North Star metric, and be a trusted voice in product strategy.',
+        staff: 'Have aligned the entire product org on a coherent strategy, shipped a cross-cutting platform feature, and grown the PM team.',
+        director: 'Have built and scaled the PM function, shipped a product driving 20%+ of company revenue, and be seen as the product leader here.',
+      },
+    },
+    data: {
+      '30': {
+        junior: 'Learn the data stack, document existing dashboards, and run your first ad-hoc analysis for the business.',
+        mid: 'Audit the existing data infrastructure, identify coverage gaps, and ship your first self-serve dashboard.',
+        senior: 'Complete a full audit of the data model, identify the top 3 data quality issues, and propose a remediation plan.',
+        staff: 'Map the full data landscape, identify redundancies and gaps, and draft a data platform roadmap.',
+        director: 'Assess team capabilities, audit data governance maturity, and align with leadership on data strategy priorities.',
+      },
+      '90': {
+        junior: 'Own a reporting domain, build 3+ production dashboards, and complete your first end-to-end analysis project.',
+        mid: 'Build out the self-serve analytics layer, run one high-impact deep-dive analysis, and improve data documentation.',
+        senior: 'Rebuild the core data model, improve pipeline reliability to 99.9%, and deliver an analysis that changes a product decision.',
+        staff: 'Complete the first phase of data platform migration, establish data quality SLAs, and close one data engineer hire.',
+        director: 'Hire 2 analysts, establish data governance policies, and have leadership trusting data in their weekly decisions.',
+      },
+      '365': {
+        junior: 'Own a full analytical domain and be the go-to analyst for 2+ business teams.',
+        mid: 'Own the self-serve analytics layer, have 80%+ of the company using your dashboards, and be ready for a senior title.',
+        senior: 'Have rebuilt the data platform, established a data quality culture, and mentored two junior analysts.',
+        staff: 'Run a data team of 3+, with a platform trusted company-wide for accuracy and speed.',
+        director: 'Have built a world-class data function that is a genuine competitive advantage for the company.',
+      },
+    },
+    marketing: {
+      '30': {
+        junior: 'Learn the brand voice and content workflow, publish your first content piece, and audit existing channel performance.',
+        mid: 'Own one marketing channel, run your first experiment, and align with sales on ICP definition.',
+        senior: 'Audit the full marketing stack, identify the top 3 growth levers, and draft a 90-day action plan.',
+        staff: 'Assess team and channel mix, define a go-to-market strategy, and align with leadership on brand positioning.',
+        director: 'Meet all GTM stakeholders, audit the full marketing function, and draft a 12-month org design.',
+      },
+      '90': {
+        junior: 'Own a content calendar, publish 12+ pieces, and report channel metrics weekly.',
+        mid: 'Launch a demand gen campaign, improve one channel metric by 25%, and build the reporting dashboard.',
+        senior: 'Run a full campaign from brief to launch, improve MQL quality by 20%, and make your first hire.',
+        staff: 'Ship the rebrand or new campaign strategy, establish marketing OKRs, and close the first major co-marketing partnership.',
+        director: 'Hire 3 marketers, ship a brand campaign, and establish the full demand gen engine.',
+      },
+      '365': {
+        junior: 'Own a channel with measurable impact and be on track for a manager conversation.',
+        mid: 'Own 2+ channels, contribute to pipeline goals, and be seen as a key player on the growth team.',
+        senior: 'Drive a meaningful share of pipeline, own a major brand initiative, and be ready for a VP conversation.',
+        staff: 'Have built a marketing team that executes without you in the room, with measurable revenue attribution.',
+        director: 'Have built the full marketing function, with brand awareness and pipeline metrics both trending up.',
+      },
+    },
+  };
+
+  const TECH_STACK = {
+    swe:       ['TypeScript','React','Node.js','PostgreSQL','Redis','Docker','Kubernetes','GitHub Actions','AWS','Datadog','Terraform','GraphQL'],
+    pm:        ['Notion','Linear','Figma','Amplitude','SQL','Mixpanel','Slack','Miro','Jira','Productboard','Looker'],
+    data:      ['Python','SQL','dbt','Airflow','BigQuery','Looker','Tableau','Snowflake','Spark','Metabase','pandas'],
+    marketing: ['HubSpot','Google Analytics','Segment','Webflow','Canva','Apollo.io','LinkedIn Ads','Marketo','Notion','Clearbit'],
+    design:    ['Figma','Principle','Zeplin','Maze','UserTesting','Abstract','Lottie','Storybook'],
+    sales:     ['Salesforce','Outreach','Gong','ZoomInfo','LinkedIn Sales Nav','Apollo','Slack','Notion'],
+    finance:   ['Excel','Google Sheets','Adaptive Insights','Looker','SQL','Xero','QuickBooks','Carta'],
+    default:   ['Notion','Slack','Google Workspace','Jira','Confluence'],
+  };
+
+  const NICE_TO_HAVE = {
+    swe: {
+      intern:   ['Personal projects on GitHub','Open source contributions','Familiarity with cloud providers (AWS/GCP)'],
+      junior:   ['Open source contributions','Experience with a second programming language','Familiarity with infrastructure as code (Terraform/CDK)'],
+      mid:      ['System design experience','Prior startup experience','Experience with distributed systems or event-driven architecture'],
+      senior:   ['Open source maintainer or technical author','Experience in a hypergrowth engineering environment','Prior Staff-level scope'],
+      staff:    ['Published technical writing or conference talks','Experience leading engineering through a Series A→B transition','Org design or team-building experience'],
+      director: ['Experience supporting an IPO or M&A process','Board-level technical communication','Previous CTO or VPE role'],
+    },
+    pm: {
+      intern:   ['SQL basics (SELECT, WHERE, GROUP BY)','Familiarity with Figma','Experience running a survey or user test'],
+      junior:   ['SQL for basic data pulls','Comfort in Figma or similar design tool','Experience with a PLG or growth-stage product'],
+      mid:      ['Technical background or strong engineering empathy','B2B and B2C experience','Prior experience at an early-stage startup'],
+      senior:   ['0→1 launch experience','Technical background (engineering or data science)','Experience with a PLG or enterprise GTM motion'],
+      staff:    ['CPO or C-suite reporting experience','M&A due diligence involvement','Published product thinking (articles, talks, writing)'],
+      director: ['Operator background alongside PM track record','Board-level storytelling experience','Experience navigating a company pivot'],
+    },
+    data: {
+      junior:   ['Python basics (pandas, scripts)','Experience with a BI tool (Looker, Tableau)','Statistics or analytics coursework'],
+      mid:      ['Machine learning fundamentals','Data pipeline or ETL experience','Prior startup experience'],
+      senior:   ['ML modeling experience','Data engineering background','Prior experience building or leading a data team'],
+      staff:    ['ML platform or feature store experience','Cross-functional data strategy ownership','Prior Head of Data or equivalent role'],
+      director: ['Data monetization or data product experience','Executive data leadership at a public company'],
+    },
+    marketing: {
+      junior:   ['Video or podcast editing skills','SEO fundamentals (keyword research, on-page)','Social media content creation experience'],
+      mid:      ['ABM strategy experience','Marketing operations or automation background','Prior experience at an early-stage startup'],
+      senior:   ['Agency or consulting background','International marketing experience','Strong technical content writing skills'],
+      staff:    ['Experience partnering closely with a CPO or CEO on GTM','PLG and enterprise GTM combined experience','Community or influencer marketing'],
+      director: ['Board presentation experience','Category creation or brand positioning experience','Prior CMO role'],
+    },
+    default: {
+      mid: ['Strong communication skills','Experience in a fast-moving environment','Comfort with ambiguity'],
+    },
+  };
+
+  const TEAM = {
+    swe: {
+      intern:   { reportsTo:'Engineering Manager', comp:'a team of 4–6 engineers with a dedicated mentor', paradigm:'Async-first. GitHub-native workflow, stand-ups in Slack, PRs reviewed within 24h.' },
+      junior:   { reportsTo:'Engineering Manager', comp:'4 engineers + 1 QA engineer', paradigm:'Async-first. Linear for task tracking, GitHub for code review, weekly team sync.' },
+      mid:      { reportsTo:'Senior Engineer or EM', comp:'5 engineers and 1 product designer', paradigm:'Weekly planning sync + async standups in Slack. Deep work hours are protected.' },
+      senior:   { reportsTo:'Engineering Manager', comp:'4 engineers you will mentor and lead technically', paradigm:'Async-first culture. You set technical direction through RFCs and design docs.' },
+      staff:    { reportsTo:'VP of Engineering', comp:'cross-org influence across 3 engineering teams', paradigm:'Sparse calendar. Technical direction is set through documentation and async review.' },
+      director: { reportsTo:'CTO', comp:'3 engineering managers and 20+ individual contributors', paradigm:'Weekly leadership sync + monthly engineering all-hands.' },
+    },
+    pm: {
+      intern:   { reportsTo:'Senior PM', comp:'a cross-functional pod with 2 engineers and 1 designer', paradigm:'Weekly product review, Notion for documentation, Figma for design hand-off.' },
+      junior:   { reportsTo:'Senior PM', comp:'a cross-functional squad of 3 engineers and 1 designer', paradigm:'Bi-weekly sprint cycles. Linear for tasks, Notion for specs.' },
+      mid:      { reportsTo:'Senior PM or Director of Product', comp:'a cross-functional pod of 5', paradigm:'Async-first. Discovery Thursdays, Ship Fridays. Minimal meetings.' },
+      senior:   { reportsTo:'Director of Product or CPO', comp:'a cross-functional team of 6', paradigm:'Weekly product strategy sync with leadership; async execution week-to-week.' },
+      staff:    { reportsTo:'CPO', comp:'a portfolio of 3 product areas and 3 PMs', paradigm:'Monthly cross-PM strategy session; async execution and documentation culture.' },
+      director: { reportsTo:'CPO or CEO', comp:'a PM team of 4–6 and design leads', paradigm:'Quarterly roadmap reviews and weekly leadership sync.' },
+    },
+    data: {
+      junior:   { reportsTo:'Head of Data or Senior Analyst', comp:'a data team of 3', paradigm:'Weekly stakeholder syncs, async analysis work, Friday metrics review.' },
+      mid:      { reportsTo:'Head of Data', comp:'a data team of 4 (analysts + 1 data engineer)', paradigm:'Async-first. Weekly metrics review with business leads.' },
+      senior:   { reportsTo:'Head of Data or VP of Analytics', comp:'a team of 4 analysts you will mentor', paradigm:'Weekly data review, async analysis, monthly data council.' },
+      staff:    { reportsTo:'VP of Data or CTO', comp:'a data platform team of 5', paradigm:'Sparse calendar, documentation-driven organization.' },
+      director: { reportsTo:'CTO or CEO', comp:'a data organization of 6–10', paradigm:'Monthly data council, weekly leadership sync.' },
+    },
+    marketing: {
+      junior:   { reportsTo:'Marketing Manager or Head of Marketing', comp:'a marketing team of 4', paradigm:'Weekly campaign syncs, async content production and reporting.' },
+      mid:      { reportsTo:'Head of Marketing', comp:'a marketing team of 5', paradigm:'Weekly growth review, async content and campaign work.' },
+      senior:   { reportsTo:'VP or Head of Marketing', comp:'a team of 3 marketers', paradigm:'Bi-weekly campaign reviews, async execution.' },
+      staff:    { reportsTo:'CMO or CEO', comp:'a full marketing organization of 6', paradigm:'Monthly marketing all-hands, weekly leadership sync.' },
+      director: { reportsTo:'CEO or COO', comp:'a marketing organization of 8–12', paradigm:'Quarterly planning, weekly leadership sync.' },
+    },
+    default: {
+      mid: { reportsTo:'Team Lead or Manager', comp:'a cross-functional team of 5', paradigm:'Weekly team sync, async execution.' },
+    },
+  };
+
+  const PIPELINE = {
+    swe: [
+      { title:'Recruiter screen', dur:'30 min', desc:'Quick alignment on your background, expectations, and compensation range.' },
+      { title:'Technical interview', dur:'60–75 min', desc:'Live coding or systems design session with 1–2 engineers. No trick questions — we test how you think, not whether you memorized algorithms.' },
+      { title:'Take-home or project review', dur:'2–3 hrs', desc:'A realistic coding exercise or a review of your own past work. Time-boxed and compensated.' },
+      { title:'Final panel + offer', dur:'90 min', desc:'Meet the team, talk culture and strategy, ask anything. Offers go out within 48h of the final round.' },
+    ],
+    pm: [
+      { title:'Recruiter screen', dur:'30 min', desc:'Overview of your background, what you\'re looking for, and mutual fit check.' },
+      { title:'Product case study', dur:'45 min', desc:'You present a product you\'ve shipped or a case exercise prepared in advance. We evaluate thinking, not polish.' },
+      { title:'Cross-functional interviews', dur:'2 hrs', desc:'1:1s with Engineering, Design, and a business stakeholder. Focus on collaboration style and execution track record.' },
+      { title:'CPO or founder interview + offer', dur:'45 min', desc:'Strategy discussion with senior leadership. Offer decision made within 3 business days.' },
+    ],
+    data: [
+      { title:'Recruiter screen', dur:'30 min', desc:'Quick alignment on your background, technical experience, and expectations.' },
+      { title:'Technical assessment', dur:'60 min', desc:'SQL and Python problems drawn directly from real work. Take-home option available.' },
+      { title:'Analytical case study', dur:'45 min', desc:'Walk us through an analysis you\'ve done. We look for structured thinking and data storytelling.' },
+      { title:'Final interviews + offer', dur:'90 min', desc:'Meet stakeholders across the business. Offer within 3 business days of the final round.' },
+    ],
+    marketing: [
+      { title:'Recruiter screen', dur:'30 min', desc:'Overview of your background and a check on mutual expectations.' },
+      { title:'Portfolio or campaign review', dur:'45 min', desc:'Walk us through work you\'re proud of — a campaign, a launch, a channel you\'ve owned and grown.' },
+      { title:'Cross-functional interviews', dur:'60 min', desc:'1:1s with Sales and Product to assess collaboration and business fluency.' },
+      { title:'Final interview + offer', dur:'45 min', desc:'A conversation with the CMO or CEO. Offer within 48h of the final round.' },
+    ],
+    default: [
+      { title:'Recruiter screen', dur:'30 min', desc:'Background and fit alignment.' },
+      { title:'Skills assessment', dur:'60 min', desc:'Role-specific evaluation tailored to the position.' },
+      { title:'Panel interviews', dur:'90 min', desc:'Cross-functional interviews with key team members.' },
+      { title:'Offer', dur:'—', desc:'Decision within 3 business days of your final round.' },
+    ],
+  };
+
+  // ── Helper: deterministic pick using company name as seed ──
+  function pick(arr, seed) {
+    if (!arr || arr.length === 0) return '';
+    let h = 0;
+    const s = String(seed);
+    for (let i = 0; i < s.length; i++) h = (Math.imul(h, 31) + s.charCodeAt(i)) | 0;
+    return arr[Math.abs(h) % arr.length];
+  }
+
+  function esc(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // ── Derive content from job data ──────────────────────────
+  const domain  = job.domain || 'pm';
+  const level   = job.level  || 'mid';
+  const primaryTag = (job.tags||[])[0] || 'default';
+
+  // Company description
+  const descArr = CO_DESC[primaryTag] || CO_DESC['default'];
+  const coDesc  = pick(descArr, job.co).replace(/\{co\}/g, esc(job.co));
+
+  // Why this role is open
+  const whyOpen = (ROLE_WHY[domain]||ROLE_WHY.default)[level]
+               || (ROLE_WHY[domain]||ROLE_WHY.default)['mid']
+               || "We're growing and this role is a direct response to that growth.";
+
+  // Company stage
+  const stageTag = (job.tags||[]).find(t => /series [abcde]/i.test(t)) || null;
+  const stage    = stageTag || (job.visa ? 'Visa-sponsor · Series A+' : 'Bootstrapped / Profitable');
+
+  // Equity
+  const isStartupEquity = true;
+  const equityMap = { 'Series A':'.2%–.75%','Series B':'.1%–.4%','Series C':'.05%–.2%','Series D':'.02%–.1%' };
+  const equityKey = stageTag ? stageTag.replace(/series\s*/i,'Series ').trim() : 'Series A';
+  const equity    = equityMap[equityKey] || '.1%–.35%';
+
+  // Employment type
+  const empType = level === 'intern' ? 'Internship (12 weeks)' : 'Full-time';
+
+  // Core hours for remote roles
+  const isRemote   = /remote/i.test(job.loc||'');
+  const hoursPool  = ['9:00 AM–12:00 PM EST','2:00 PM–5:00 PM EST','10:00 AM–1:00 PM CET','Fully async — no required hours'];
+  const coreHours  = isRemote ? pick(hoursPool, job.co) : null;
+
+  // Goals
+  const domainGoals = GOALS[domain] || GOALS.pm;
+  const g30  = (domainGoals['30']||{})[level]  || (domainGoals['30']||{})['mid']  || '';
+  const g90  = (domainGoals['90']||{})[level]  || (domainGoals['90']||{})['mid']  || '';
+  const g365 = (domainGoals['365']||{})[level] || (domainGoals['365']||{})['mid'] || '';
+
+  // Nice-to-have
+  const nthDomain = NICE_TO_HAVE[domain] || NICE_TO_HAVE.default || {};
+  const niceArr   = nthDomain[level] || nthDomain['mid'] || ['Strong communication skills','Experience in fast-moving environments','Comfort with ambiguity'];
+
+  // Tech stack — pick 8 from domain list
+  const stackFull = TECH_STACK[domain] || TECH_STACK.default;
+  const stackShow = stackFull.slice(0, 8);
+
+  // Team info
+  const teamDomain = TEAM[domain] || TEAM.default || {};
+  const team       = teamDomain[level] || teamDomain['mid'] || { reportsTo:'Team Lead', comp:'a cross-functional team', paradigm:'Weekly team sync, async execution.' };
+
+  // Benefits — expand from perks + standard additions
+  const STANDARD_BENEFITS = [
+    'Medical, dental & vision — 100% covered for you',
+    'Unlimited PTO with a 21-day annual minimum',
+    '$1,500 annual learning & development budget',
+    '401(k) with 4% company match',
+    '$2,000 home office setup stipend',
+    'Annual team off-site (fully covered)',
+    'Mental health support — sessions on us',
+    'Parental leave — 16 weeks fully paid',
+  ];
+  const benefitsSet = new Set([...(job.perks||[]), ...STANDARD_BENEFITS]);
+  const benefits    = [...benefitsSet].slice(0, 8);
+
+  // Pipeline
+  const pipeline = PIPELINE[domain] || PIPELINE.default;
+
+  // Visa text
+  const visaText = job.visa ? 'H1B & OPT sponsor' : 'Not available';
+
+  // ── Benefit icons (inline SVG) ──────────────────────────
+  const BENEFIT_ICONS = [
+    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>',
+    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3Z"/><path d="M6 7h4M8 5v4"/></svg>',
+    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M8 5v6"/></svg>',
+    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2Z"/><path d="M8 6v4M6 8h4"/></svg>',
+    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5Z"/><path d="M6 8l1.5 1.5L10 6"/></svg>',
+    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L8 2l6 10H2Z"/></svg>',
+    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3.31 2.69-6 6-6s6 2.69 6 6"/></svg>',
+    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v12M2 8h12"/></svg>',
+  ];
+
+  // ── Build the page HTML ────────────────────────────────────
+  const locationIcon = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="7" r="3"/><path d="M8 2C5.24 2 3 4.24 3 7c0 4 5 8 5 8s5-4 5-8c0-2.76-2.24-5-5-5Z"/></svg>';
+  const salIcon      = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 4v8M6 6h3a1 1 0 0 1 0 2H7a1 1 0 0 0 0 2h3"/></svg>';
+
+  const html = `
+    <!-- Hero -->
+    <section class="jd-hero">
+      <div class="wrap">
+        <div class="jd-hero-inner">
+          <div class="jd-hero-left">
+            <a href="/" class="jd-back-crumb">← Back to your shortlist</a>
+            <div class="jd-company-row">
+              <div class="jd-logo">${esc(job.logo||'??')}</div>
+              <span class="jd-company-name">${esc(job.co)}</span>
+            </div>
+            <h1 class="jd-title">${esc(job.role)}</h1>
+            <div class="jd-chips">
+              <span class="jd-chip match">${job.match}% match</span>
+              <span class="jd-chip salary">${salIcon} ${esc(job.pay)} base · USD</span>
+              <span class="jd-chip">${locationIcon} ${esc(job.loc)}</span>
+              ${job.visa ? '<span class="jd-chip">Visa sponsor</span>' : ''}
+              ${(job.tags||[]).map(t => `<span class="jd-chip">${esc(t)}</span>`).join('')}
+            </div>
+          </div>
+          <div class="jd-hero-joe">
+            <img src="./Joe Bone/joe-bone-tablet.svg" alt="Cap'n Joe Bone reviewing the job posting" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 1: Quick Facts -->
+    <section class="jd-section">
+      <div class="wrap">
+        <div class="jd-label">Quick facts</div>
+        <div class="jd-meta-grid">
+          <div class="jd-meta-cell">
+            <div class="mc-label">Work format</div>
+            <div class="mc-val">${isRemote ? 'Remote' : /hybrid/i.test(job.loc) ? 'Hybrid' : 'On-site'}</div>
+          </div>
+          <div class="jd-meta-cell">
+            <div class="mc-label">Employment type</div>
+            <div class="mc-val">${empType}</div>
+          </div>
+          <div class="jd-meta-cell">
+            <div class="mc-label">Salary</div>
+            <div class="mc-val green">${esc(job.pay)}</div>
+          </div>
+          <div class="jd-meta-cell">
+            <div class="mc-label">Equity</div>
+            <div class="mc-val orange">${equity}</div>
+          </div>
+          <div class="jd-meta-cell">
+            <div class="mc-label">Visa sponsorship</div>
+            <div class="mc-val">${visaText}</div>
+          </div>
+          ${coreHours ? `<div class="jd-meta-cell"><div class="mc-label">Core hours</div><div class="mc-val">${esc(coreHours)}</div></div>` : ''}
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 2: Company Context -->
+    <section class="jd-section">
+      <div class="wrap">
+        <div class="jd-label">Company context</div>
+        <div class="jd-context-grid">
+          <div>
+            <h2 class="jd-h2">About ${esc(job.co)}</h2>
+            <p class="jd-body">${coDesc}</p>
+            <div class="jd-stage-badge" style="margin-top:24px;">${esc(stage)}</div>
+          </div>
+          <div>
+            <div class="jd-why-box">
+              <div class="wb-label">Why this role is open</div>
+              <p>${esc(whyOpen)}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 3: 30 / 90 / 365 goals -->
+    <section class="jd-section">
+      <div class="wrap">
+        <div class="jd-label">What you'll achieve</div>
+        <h2 class="jd-h2">Measurable outcomes — not vague duties</h2>
+        <div class="jd-goals-grid">
+          <div class="jd-goal-card">
+            <div class="jd-goal-period">30</div>
+            <div class="jd-goal-unit">days</div>
+            <div class="jd-goal-text">${esc(g30)}</div>
+          </div>
+          <div class="jd-goal-card">
+            <div class="jd-goal-period">90</div>
+            <div class="jd-goal-unit">days</div>
+            <div class="jd-goal-text">${esc(g90)}</div>
+          </div>
+          <div class="jd-goal-card">
+            <div class="jd-goal-period">365</div>
+            <div class="jd-goal-unit">days</div>
+            <div class="jd-goal-text">${esc(g365)}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 4: Skills + Tech Stack -->
+    <section class="jd-section">
+      <div class="wrap">
+        <div class="jd-label">Skills & stack</div>
+        <h2 class="jd-h2">What they're looking for</h2>
+        <div class="jd-skills-grid">
+          <div>
+            <h4 class="jd-skills-col-h">Must-have</h4>
+            <ul class="jd-must-list">
+              ${(job.reqs||[]).map((r,i) => `<li><span class="num">0${i+1}</span><span>${esc(r)}</span></li>`).join('')}
+            </ul>
+          </div>
+          <div>
+            <h4 class="jd-skills-col-h">Nice-to-have</h4>
+            <ul class="jd-nice-list">
+              ${niceArr.map(n => `<li><span class="ck">◦</span><span>${esc(n)}</span></li>`).join('')}
+            </ul>
+          </div>
+        </div>
+        <div class="jd-stack-label">Tech stack</div>
+        <div class="jd-stack-chips">
+          ${stackShow.map(t => `<span class="jd-stack-chip">${esc(t)}</span>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 5: Team -->
+    <section class="jd-section">
+      <div class="wrap">
+        <div class="jd-label">Team & work style</div>
+        <h2 class="jd-h2">Who you'll work with</h2>
+        <div class="jd-team-grid">
+          <div class="jd-team-cell">
+            <div class="tc-label">Reports to</div>
+            <div class="tc-val"><b>${esc(team.reportsTo)}</b></div>
+          </div>
+          <div class="jd-team-cell">
+            <div class="tc-label">Your team</div>
+            <div class="tc-val">You'll work directly with ${esc(team.comp)}.</div>
+          </div>
+          <div class="jd-team-cell">
+            <div class="tc-label">Work paradigm</div>
+            <div class="tc-val">${esc(team.paradigm)}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 6: Benefits -->
+    <section class="jd-section">
+      <div class="wrap">
+        <div class="jd-label">Benefits & perks</div>
+        <h2 class="jd-h2">What's in the package</h2>
+        <div class="jd-benefits-grid">
+          ${benefits.map((b,i) => `
+            <div class="jd-benefit">
+              <div class="bi">${BENEFIT_ICONS[i % BENEFIT_ICONS.length]}</div>
+              <div class="bt">${esc(b)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 7: Hiring Process -->
+    <section class="jd-section">
+      <div class="wrap">
+        <div class="jd-label">Hiring process</div>
+        <h2 class="jd-h2">No black holes. No ghost rounds.</h2>
+        <div class="jd-pipeline">
+          ${pipeline.map((s,i) => `
+            <div class="jd-pipe-step active">
+              <div class="jd-pipe-num"><div class="jd-pipe-badge">${i+1}</div></div>
+              <div class="jd-pipe-content">
+                <div class="jd-pipe-head">
+                  <span class="jd-pipe-title">${esc(s.title)}</span>
+                  <span class="jd-pipe-dur">${esc(s.dur)}</span>
+                </div>
+                <div class="jd-pipe-desc">${esc(s.desc)}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+
+    <!-- Block 8: CTA -->
+    <section class="jd-cta">
+      <div class="wrap">
+        <div class="jd-cta-inner">
+          <div class="jd-cta-joe">
+            <img src="./joe-bone-salute.svg" alt="Cap'n Joe Bone saluting — ready to apply" />
+          </div>
+          <h2>Give Joe a Rum<br>&amp; Start Applying</h2>
+          <p>Joe handles every application, follow-up, and recruiter reply on your behalf.<br>You just show up to interviews.</p>
+          <a href="/?pour=1" class="jd-cta-btn">
+            Pour Joe a Rum &amp; Get Hired <span class="ar">→</span>
+          </a>
+          <div class="jd-guarantee"><b>30-day guarantee:</b> no offer = full refund. No questions asked.</div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  document.getElementById('jdMain').innerHTML = html;
+
+  // Update page title
+  document.title = `${job.role} at ${job.co} — Landed`;
+})();
+</script>
+</body>
+</html>

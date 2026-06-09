@@ -1,0 +1,287 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" aria-label="Capt. Joe Bone — peeking">
+<defs>
+  <radialGradient id="halo" cx=".2" cy=".4" r=".55">
+    <stop offset="0" stop-color="#ff6a1f" stop-opacity=".22"></stop>
+    <stop offset=".55" stop-color="#ff6a1f" stop-opacity=".05"></stop>
+    <stop offset="1" stop-color="#0a0a0a" stop-opacity="0"></stop>
+  </radialGradient>
+  <radialGradient id="eyeBlue" cx=".4" cy=".4" r=".6">
+    <stop offset="0" stop-color="#e8f6ff"></stop>
+    <stop offset=".22" stop-color="#a8e8ff"></stop>
+    <stop offset=".62" stop-color="#3a9ad4"></stop>
+    <stop offset="1" stop-color="#0a2a48"></stop>
+  </radialGradient>
+  <linearGradient id="blockFace" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1a1a22"></stop>
+    <stop offset=".25" stop-color="#13131a"></stop>
+    <stop offset="1" stop-color="#06060a"></stop>
+  </linearGradient>
+  <linearGradient id="blockTop" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#34343e"></stop>
+    <stop offset="1" stop-color="#0a0a10"></stop>
+  </linearGradient>
+  <radialGradient id="brimCast" cx=".5" cy="0" r=".8">
+    <stop offset="0" stop-color="#000" stop-opacity=".75"></stop>
+    <stop offset="1" stop-color="#000" stop-opacity="0"></stop>
+  </radialGradient>
+  <radialGradient id="eyeRed" cx=".4" cy=".4" r=".6">
+    <stop offset="0" stop-color="#ffe0a8"></stop>
+    <stop offset=".22" stop-color="#ff8a3a"></stop>
+    <stop offset=".62" stop-color="#d92a05"></stop>
+    <stop offset="1" stop-color="#4a0500"></stop>
+  </radialGradient>
+  <linearGradient id="bone" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f1e6c9"></stop>
+    <stop offset=".55" stop-color="#e6d6b1"></stop>
+    <stop offset="1" stop-color="#cdba8d"></stop>
+  </linearGradient>
+  <linearGradient id="hatGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0c0c12"></stop>
+    <stop offset=".5" stop-color="#1c1c24"></stop>
+    <stop offset="1" stop-color="#06060a"></stop>
+  </linearGradient>
+  <linearGradient id="uniform" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1d1d24"></stop>
+    <stop offset="1" stop-color="#0c0c11"></stop>
+  </linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd58a"></stop>
+    <stop offset=".5" stop-color="#e8a23a"></stop>
+    <stop offset="1" stop-color="#7a4a14"></stop>
+  </linearGradient>
+  <filter id="eyeGlow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="b"></feGaussianBlur>
+    <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+  </filter>
+  <clipPath id="cropL">
+    <rect x="0" y="0" width="320" height="600"></rect>
+  </clipPath>
+  <radialGradient id="skullContact" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#000" stop-opacity=".55"></stop>
+    <stop offset="1" stop-color="#000" stop-opacity="0"></stop>
+  </radialGradient>
+  <linearGradient id="edgeShadow" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#000" stop-opacity="0"></stop>
+    <stop offset="1" stop-color="#000" stop-opacity=".55"></stop>
+  </linearGradient>
+</defs>
+
+
+<ellipse cx="100" cy="280" rx="260" ry="280" fill="url(#halo)"></ellipse>
+
+
+<!-- DIMENSIONAL DARK BLOCK — starts below the hat with rounded top-left corner.
+     Layered: face gradient + beveled top edge highlight + inner edge shadow + ambient occlusion at corner. -->
+<!-- 1. block face with vertical gradient (lighter near top, darker below) -->
+<path d="M 318 200
+         L 480 200
+         L 480 600
+         L 290 600
+         L 290 228
+         Q 290 200 318 200 Z" fill="url(#blockFace)"></path>
+
+<!-- 2. beveled TOP edge — catches light, sells horizontal surface -->
+<path d="M 318 200 L 480 200 L 480 212 L 290 212 L 290 228 Q 290 200 318 200 Z"
+      fill="url(#blockTop)"></path>
+<!-- top-edge highlight stroke -->
+<path d="M 480 201 L 320 201 Q 292 202 291 226" fill="none" stroke="#4a4a58" stroke-width="1.4" opacity=".9"></path>
+<!-- thinner inner highlight on the rounded corner -->
+<path d="M 290 226 Q 290 203 316 203" fill="none" stroke="#6a6a78" stroke-width=".8" opacity=".75"></path>
+
+<!-- 3. left vertical edge — darker shadow channel selling the block's depth -->
+<path d="M 290 228 L 290 600 L 306 600 L 306 232 Q 306 216 318 216 Q 290 216 290 228 Z"
+      fill="#000" opacity=".55"></path>
+
+<!-- 4. wood-grain / column texture (very subtle vertical streaks on the face) -->
+<g stroke="#1a1a22" stroke-width="1" opacity=".55">
+  <line x1="330" y1="230" x2="330" y2="600"></line>
+  <line x1="360" y1="212" x2="360" y2="600"></line>
+  <line x1="402" y1="212" x2="402" y2="600"></line>
+  <line x1="438" y1="212" x2="438" y2="600"></line>
+  <line x1="468" y1="212" x2="468" y2="600"></line>
+</g>
+
+<!-- 5. ambient occlusion in the corner (where hat / skull will sit) -->
+<ellipse cx="308" cy="218" rx="30" ry="14" fill="#000" opacity=".35"></ellipse>
+
+
+<g clip-path="url(#cropL)" transform="translate(-46 60)">
+
+  
+  <g>
+    <path d="M 38 540 L 78 410 Q 102 388 142 380 L 240 372 L 320 380 L 320 540 Z" fill="url(#uniform)"></path>
+    <path d="M 240 372 L 170 462 L 224 538 L 240 498 Z" fill="#05050a"></path>
+    <path d="M 240 372 L 170 462 L 224 538" stroke="url(#gold)" stroke-width="2.4" fill="none" stroke-linecap="round"></path>
+    <path d="M 220 372 L 240 392 L 246 384 L 244 416 L 226 416 Z" fill="#b8200f"></path>
+    <g fill="url(#gold)" stroke="#5a3a0e" stroke-width=".8">
+      <circle cx="194" cy="472" r="5"></circle>
+      <circle cx="188" cy="514" r="5"></circle>
+    </g>
+    
+    <path d="M 56 396 Q 64 384 92 384 L 138 388 L 132 414 L 88 410 Q 62 408 56 396 Z" fill="url(#gold)" stroke="#5a3a0e" stroke-width="1"></path>
+    <g stroke="#6a4410" stroke-width="1.3" stroke-linecap="round">
+      <line x1="72" y1="414" x2="68" y2="436"></line>
+      <line x1="82" y1="416" x2="80" y2="440"></line>
+      <line x1="92" y1="416" x2="92" y2="438"></line>
+      <line x1="102" y1="416" x2="106" y2="438"></line>
+      <line x1="114" y1="416" x2="118" y2="436"></line>
+    </g>
+    
+    <g transform="translate(148 484)" stroke="url(#gold)" stroke-width="2.2" fill="none" stroke-linecap="round">
+      <circle cx="0" cy="-10" r="2.4" fill="url(#gold)" stroke="none"></circle>
+      <line x1="0" y1="-7" x2="0" y2="12"></line>
+      <line x1="-6" y1="-3" x2="6" y2="-3"></line>
+      <path d="M -10 6 Q 0 20 10 6"></path>
+    </g>
+  </g>
+
+  
+  <g>
+    <path d="M 240 174 C 172 174 138 222 138 272 C 138 308 152 336 168 352 L 174 370 Q 180 386 196 391 L 208 394 Q 240 401 272 394 L 284 391 Q 300 386 306 370 L 312 352 C 328 336 342 308 342 272 C 342 222 308 174 240 174 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.6"></path>
+    <path d="M 160 278 Q 178 322 198 340" stroke="#b7a47a" stroke-width="2" fill="none" opacity=".55" stroke-linecap="round"></path>
+    <path d="M 138 244 Q 130 256 138 268 Q 146 262 152 270 L 150 280 Q 138 280 134 270 Z" fill="#0a0a0a" opacity=".82"></path>
+    <path d="M 184 196 L 178 220 L 192 234" stroke="#8a6f40" stroke-width="1.6" fill="none" opacity=".75"></path>
+    <path d="M 228 178 L 222 212 L 230 244" stroke="#8a6f40" stroke-width="1.2" fill="none" opacity=".7"></path>
+
+    <path d="M 162 248 Q 198 232 234 252" stroke="#070708" stroke-width="7" stroke-linecap="round" fill="none"></path>
+    <path d="M 250 252 Q 284 232 318 248" stroke="#070708" stroke-width="7" stroke-linecap="round" fill="none"></path>
+
+    <g>
+      <ellipse cx="200" cy="270" rx="32" ry="34" fill="#040406"></ellipse>
+      <ellipse cx="200" cy="274" rx="25" ry="27" fill="#020203"></ellipse>
+      <ellipse cx="200" cy="272" rx="15" ry="13" fill="#0a0a0a"></ellipse>
+      <path d="M 172 284 Q 200 264 228 254" stroke="#5a3a18" stroke-width="3.4" fill="none" stroke-linecap="round"></path>
+      <path d="M 172 284 Q 200 264 228 254" stroke="#2a1a08" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".95"></path>
+      <g stroke="#1a1208" stroke-width="1.8" stroke-linecap="round">
+        <line x1="178" y1="276" x2="182" y2="288"></line>
+        <line x1="188" y1="270" x2="192" y2="282"></line>
+        <line x1="200" y1="264" x2="204" y2="276"></line>
+        <line x1="212" y1="258" x2="216" y2="270"></line>
+        <line x1="222" y1="252" x2="226" y2="262"></line>
+      </g>
+      <path d="M 196 288 Q 194 298 198 308" stroke="#5a0f08" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".9"></path>
+    </g>
+    <g>
+      <ellipse cx="286" cy="270" rx="24" ry="27" fill="#070708"></ellipse>
+      <ellipse cx="286" cy="273" rx="18" ry="20" fill="#000"></ellipse>
+      <circle cx="289" cy="270" r="10" fill="#3aa6e8" opacity=".25"></circle>
+      <circle cx="289" cy="270" r="6.5" fill="url(#eyeBlue)" opacity=".98"></circle>
+      <circle cx="288" cy="268" r="1.8" fill="#e8f6ff"></circle>
+    </g>
+
+    <path d="M 240 298 L 226 328 Q 240 336 254 328 Z" fill="#070708"></path>
+
+    
+    <g transform="translate(232 358) rotate(-4)">
+      <path d="M -46 -4 Q 0 -10 46 -4 L 44 18 Q 0 24 -44 18 Z" fill="#040406"></path>
+      <g fill="url(#bone)" stroke="#3a3026" stroke-width=".6">
+        <path d="M -44 -2 L -38 11 L -32 -2 Z"></path>
+        <path d="M -32 -2 L -26 11 L -20 -2 Z"></path>
+        <path d="M -20 -2 L -14 11 L -8 -2 Z"></path>
+        <path d="M 4 -2 L 10 11 L 16 -2 Z"></path>
+        <path d="M 16 -2 L 22 11 L 28 -2 Z"></path>
+        <path d="M 28 -2 L 34 11 L 40 -2 Z"></path>
+        <path d="M 40 -2 L 44 8 L 44 -2 Z"></path>
+      </g>
+      <path d="M -8 -2 L -2 11 L 4 -2 Z" fill="url(#gold)" stroke="#5a3a0e" stroke-width=".6"></path>
+    </g>
+
+    
+    <path d="M 318 162 L 168 348" stroke="#0a0a0a" stroke-width="11" stroke-linecap="round" fill="none"></path>
+    <path d="M 318 162 L 168 348" stroke="#2a2218" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".85"></path>
+    <g stroke="#1a1208" stroke-width="1.6" stroke-linecap="round">
+      <line x1="226" y1="252" x2="240" y2="240"></line>
+      <line x1="248" y1="278" x2="262" y2="266"></line>
+    </g>
+  </g>
+
+  
+  <g>
+    <ellipse cx="240" cy="206" rx="172" ry="14" fill="#000" opacity=".4"></ellipse>
+    <path d="M 54 198 Q 86 96 240 72 Q 394 96 426 198 Q 410 216 384 218 L 96 218 Q 70 216 54 198 Z" fill="url(#hatGrad)" stroke="#000" stroke-width="1.4"></path>
+    <path d="M 96 200 Q 130 124 240 102 Q 350 124 384 200" stroke="#3a3a44" stroke-width="2" fill="none" opacity=".55"></path>
+    <path d="M 54 198 Q 86 96 240 72 Q 394 96 426 198" stroke="url(#gold)" stroke-width="2.4" fill="none"></path>
+    <path d="M 78 174 Q 56 138 78 102 Q 100 130 94 174 Z" fill="#bf2a1a"></path>
+    <g>
+      <line x1="58" y1="200" x2="44" y2="232" stroke="url(#gold)" stroke-width="2.2"></line>
+      <circle cx="42" cy="238" r="4.5" fill="url(#gold)"></circle>
+    </g>
+    <g transform="translate(240 144)">
+      <circle r="32" fill="#0a0a0a" stroke="url(#gold)" stroke-width="2.6"></circle>
+      <g stroke="url(#bone)" stroke-width="4.5" stroke-linecap="round">
+        <line x1="-20" y1="-14" x2="20" y2="16"></line>
+        <line x1="-20" y1="16" x2="20" y2="-14"></line>
+      </g>
+      <g>
+        <ellipse cx="0" cy="-1" rx="10" ry="11" fill="url(#bone)" stroke="#5a4a28" stroke-width=".7"></ellipse>
+        <ellipse cx="-3.6" cy="-1" rx="2.2" ry="2.8" fill="#0a0a0a"></ellipse>
+        <ellipse cx="3.6" cy="-1" rx="2.2" ry="2.8" fill="#0a0a0a"></ellipse>
+        <rect x="-4" y="6.5" width="8" height="3.2" fill="url(#bone)"></rect>
+      </g>
+    </g>
+  </g>
+
+</g>
+
+<!-- DEPTH LAYER 1: skull-meets-edge cast shadow on the block (pronounced, multi-stop) -->
+<ellipse cx="316" cy="260" rx="60" ry="42" fill="url(#skullContact)"></ellipse>
+<ellipse cx="310" cy="300" rx="36" ry="70" fill="url(#skullContact)" opacity=".75"></ellipse>
+<ellipse cx="304" cy="360" rx="22" ry="60" fill="url(#skullContact)" opacity=".55"></ellipse>
+<!-- DEPTH LAYER 2: ambient occlusion stripe where skull contour touches block face -->
+<path d="M 295 232 L 305 232 L 305 388 L 295 388 Z" fill="#000" opacity=".5"></path>
+
+<!-- HAT rendered OUTSIDE the figure clip and AFTER the dark block,
+     so the tricorn brim's right peak naturally pokes past the block's top edge. -->
+<g transform="translate(-46 60)">
+  <ellipse cx="240" cy="206" rx="172" ry="14" fill="#000" opacity=".4"></ellipse>
+  <path d="M 54 198 Q 86 96 240 72 Q 394 96 426 198 Q 410 216 384 218 L 96 218 Q 70 216 54 198 Z" fill="url(#hatGrad)" stroke="#000" stroke-width="1.4"></path>
+  <path d="M 96 200 Q 130 124 240 102 Q 350 124 384 200" stroke="#3a3a44" stroke-width="2" fill="none" opacity=".55"></path>
+  <path d="M 54 198 Q 86 96 240 72 Q 394 96 426 198" stroke="url(#gold)" stroke-width="2.4" fill="none"></path>
+  <path d="M 96 218 L 384 218" stroke="url(#gold)" stroke-width="1.6" fill="none" opacity=".7"></path>
+  <!-- plume -->
+  <path d="M 78 174 Q 56 138 78 102 Q 100 130 94 174 Z" fill="#bf2a1a"></path>
+  <!-- left tassel -->
+  <g>
+    <line x1="58" y1="200" x2="44" y2="232" stroke="url(#gold)" stroke-width="2.2"></line>
+    <circle cx="42" cy="238" r="4.5" fill="url(#gold)"></circle>
+  </g>
+  <!-- right tassel (now visible because hat isn't clipped) -->
+  <g>
+    <line x1="422" y1="200" x2="436" y2="232" stroke="url(#gold)" stroke-width="2.2"></line>
+    <circle cx="438" cy="238" r="4.5" fill="url(#gold)"></circle>
+  </g>
+  <!-- skull-and-crossbones medallion -->
+  <g transform="translate(240 144)">
+    <circle r="32" fill="#0a0a0a" stroke="url(#gold)" stroke-width="2.6"></circle>
+    <g stroke="url(#bone)" stroke-width="4.5" stroke-linecap="round">
+      <line x1="-20" y1="-14" x2="20" y2="16"></line>
+      <line x1="-20" y1="16" x2="20" y2="-14"></line>
+    </g>
+    <g>
+      <ellipse cx="0" cy="-1" rx="10" ry="11" fill="url(#bone)" stroke="#5a4a28" stroke-width=".7"></ellipse>
+      <ellipse cx="-3.6" cy="-1" rx="2.2" ry="2.8" fill="#0a0a0a"></ellipse>
+      <ellipse cx="3.6" cy="-1" rx="2.2" ry="2.8" fill="#0a0a0a"></ellipse>
+      <rect x="-4" y="6.5" width="8" height="3.2" fill="url(#bone)"></rect>
+    </g>
+  </g>
+  <!-- soft shadow the hat brim casts onto the dark block beneath it -->
+  <path d="M 332 220 Q 366 230 392 220 L 388 240 Q 360 248 336 238 Z" fill="url(#brimCast)" opacity=".95"></path>
+  <path d="M 336 218 Q 366 226 384 218" stroke="#000" stroke-width="2" fill="none" opacity=".55"></path>
+</g>
+
+
+<g transform="translate(284 366) rotate(10)">
+  <path d="M -6 -4 L 30 -4 L 26 28 L -10 28 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.4"></path>
+  <path d="M 26 -4 L 26 -22 Q 26 -28 32 -28 Q 38 -28 38 -22 L 38 8 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.2"></path>
+  <path d="M 14 -4 L 14 -22 Q 14 -28 20 -28 Q 26 -28 26 -22 L 26 4 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.2"></path>
+  <path d="M 2 -4 L 2 -20 Q 2 -26 8 -26 Q 14 -26 14 -20 L 14 4 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.2"></path>
+  <path d="M -10 -2 L -10 -16 Q -10 -22 -4 -22 Q 2 -22 2 -16 L 2 4 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.2"></path>
+  <g stroke="#5a4a28" stroke-width=".8" opacity=".5">
+    <line x1="-4" y1="-12" x2="-4" y2="-4"></line>
+    <line x1="8" y1="-14" x2="8" y2="-4"></line>
+    <line x1="20" y1="-16" x2="20" y2="-4"></line>
+    <line x1="32" y1="-18" x2="32" y2="-4"></line>
+  </g>
+</g>
+
+</svg>

@@ -1,0 +1,332 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" aria-label="Capt. Joe Bone — bust">
+<defs>
+  <radialGradient id="halo" cx=".5" cy=".34" r=".62">
+    <stop offset="0" stop-color="#ff6a1f" stop-opacity=".30"></stop>
+    <stop offset=".55" stop-color="#ff6a1f" stop-opacity=".05"></stop>
+    <stop offset="1" stop-color="#0a0a0a" stop-opacity="0"></stop>
+  </radialGradient>
+  <radialGradient id="eyeRed" cx=".4" cy=".4" r=".6">
+    <stop offset="0" stop-color="#ffe0a8"></stop>
+    <stop offset=".22" stop-color="#ff8a3a"></stop>
+    <stop offset=".62" stop-color="#d92a05"></stop>
+    <stop offset="1" stop-color="#4a0500"></stop>
+  </radialGradient>
+  <linearGradient id="bone" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f1e6c9"></stop>
+    <stop offset=".55" stop-color="#e6d6b1"></stop>
+    <stop offset="1" stop-color="#cdba8d"></stop>
+  </linearGradient>
+  <linearGradient id="hatGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0c0c12"></stop>
+    <stop offset=".5" stop-color="#1c1c24"></stop>
+    <stop offset="1" stop-color="#06060a"></stop>
+  </linearGradient>
+  <linearGradient id="uniform" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1d1d24"></stop>
+    <stop offset="1" stop-color="#0c0c11"></stop>
+  </linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffd58a"></stop>
+    <stop offset=".5" stop-color="#e8a23a"></stop>
+    <stop offset="1" stop-color="#7a4a14"></stop>
+  </linearGradient>
+  <filter id="eyeGlow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="b"></feGaussianBlur>
+    <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+  </filter>
+</defs>
+
+
+<ellipse cx="240" cy="216" rx="270" ry="250" fill="url(#halo)"></ellipse>
+
+
+<g>
+  
+  <path d="M 38 600 L 78 410 Q 102 388 142 380 L 240 372 L 338 380 Q 378 388 402 410 L 442 600 Z" fill="url(#uniform)"></path>
+
+  
+  <path d="M 240 372 L 170 462 L 224 538 L 240 498 Z" fill="#05050a"></path>
+  <path d="M 240 372 L 310 462 L 256 538 L 240 498 Z" fill="#05050a"></path>
+  
+  <path d="M 240 372 L 170 462 L 224 538" stroke="url(#gold)" stroke-width="2.4" fill="none" stroke-linecap="round"></path>
+  <path d="M 240 372 L 310 462 L 256 538" stroke="url(#gold)" stroke-width="2.4" fill="none" stroke-linecap="round"></path>
+
+  
+  <path d="M 220 372 L 240 392 L 260 372 L 254 416 L 226 416 Z" fill="#b8200f"></path>
+  <path d="M 240 392 L 240 416" stroke="#5a0a04" stroke-width="1.2" opacity=".6"></path>
+  
+  <circle cx="240" cy="402" r="3" fill="url(#gold)"></circle>
+
+  
+  <g fill="url(#gold)" stroke="#5a3a0e" stroke-width=".8">
+    <circle cx="194" cy="472" r="5"></circle>
+    <circle cx="188" cy="514" r="5"></circle>
+    <circle cx="182" cy="556" r="5"></circle>
+    <circle cx="286" cy="472" r="5"></circle>
+    <circle cx="292" cy="514" r="5"></circle>
+    <circle cx="298" cy="556" r="5"></circle>
+  </g>
+
+  
+  <g>
+    <path d="M 56 396 Q 64 384 92 384 L 138 388 L 132 414 L 88 410 Q 62 408 56 396 Z" fill="url(#gold)" stroke="#5a3a0e" stroke-width="1"></path>
+    <g stroke="#6a4410" stroke-width="1.3" stroke-linecap="round">
+      <line x1="72" y1="414" x2="68" y2="436"></line>
+      <line x1="82" y1="416" x2="80" y2="440"></line>
+      <line x1="92" y1="416" x2="92" y2="438"></line>
+      <line x1="102" y1="416" x2="106" y2="438"></line>
+      <line x1="114" y1="416" x2="118" y2="436"></line>
+      <line x1="124" y1="416" x2="128" y2="432"></line>
+    </g>
+    <g transform="translate(96 396)">
+      <path d="M 0 -7 L 1.8 -2 L 7 -2 L 2.8 1.2 L 4.5 6 L 0 3 L -4.5 6 L -2.8 1.2 L -7 -2 L -1.8 -2 Z" fill="#0a0a0a"></path>
+    </g>
+
+    <path d="M 424 396 Q 416 384 388 384 L 342 388 L 348 414 L 392 410 Q 418 408 424 396 Z" fill="url(#gold)" stroke="#5a3a0e" stroke-width="1"></path>
+    <g stroke="#6a4410" stroke-width="1.3" stroke-linecap="round">
+      <line x1="408" y1="414" x2="412" y2="436"></line>
+      <line x1="398" y1="416" x2="400" y2="440"></line>
+      <line x1="388" y1="416" x2="388" y2="438"></line>
+      <line x1="378" y1="416" x2="374" y2="438"></line>
+      <line x1="366" y1="416" x2="362" y2="436"></line>
+      <line x1="356" y1="416" x2="352" y2="432"></line>
+    </g>
+    <g transform="translate(384 396)">
+      <path d="M 0 -7 L 1.8 -2 L 7 -2 L 2.8 1.2 L 4.5 6 L 0 3 L -4.5 6 L -2.8 1.2 L -7 -2 L -1.8 -2 Z" fill="#0a0a0a"></path>
+    </g>
+  </g>
+
+  
+  <g transform="translate(148 484)" stroke="url(#gold)" stroke-width="2.4" fill="none" stroke-linecap="round">
+    <circle cx="0" cy="-10" r="2.6" fill="url(#gold)" stroke="none"></circle>
+    <line x1="0" y1="-7" x2="0" y2="14"></line>
+    <line x1="-7" y1="-3" x2="7" y2="-3"></line>
+    <path d="M -11 8 Q 0 24 11 8"></path>
+    <line x1="-11" y1="8" x2="-7" y2="11"></line>
+    <line x1="11" y1="8" x2="7" y2="11"></line>
+  </g>
+
+  
+  <g transform="translate(312 462)">
+    <rect width="48" height="10" fill="#070708"></rect>
+    <rect width="16" height="10" fill="#bf2a1a"></rect>
+    <rect x="16" width="16" height="10" fill="#e8a23a"></rect>
+    <rect x="32" width="16" height="10" fill="#bf2a1a"></rect>
+    <rect width="48" height="10" fill="none" stroke="#000" stroke-width="1"></rect>
+  </g>
+  <g transform="translate(312 478)">
+    <rect width="48" height="10" fill="#1e3a6b"></rect>
+    <rect x="20" width="8" height="10" fill="#e8a23a"></rect>
+    <rect width="48" height="10" fill="none" stroke="#000" stroke-width="1"></rect>
+  </g>
+
+  
+  <g>
+    <rect x="142" y="566" width="196" height="26" fill="#ff6a1f"></rect>
+    <rect x="142" y="566" width="196" height="3" fill="#ffb37a"></rect>
+    <rect x="142" y="589" width="196" height="3" fill="#c64a0a"></rect>
+    <text x="240" y="585" text-anchor="middle" fill="#0a0a0a" font-family="&#39;Space Grotesk&#39;, system-ui, sans-serif" font-weight="700" font-size="11" letter-spacing="1.6">CAPT. JACK BONE  ·  EST. 2089</text>
+  </g>
+</g>
+
+
+<g>
+  
+  <path d="M 240 174 C 172 174 138 222 138 272 C 138 308 152 336 168 352 L 174 370 Q 180 386 196 391 L 208 394 Q 240 401 272 394 L 284 391 Q 300 386 306 370 L 312 352 C 328 336 342 308 342 272 C 342 222 308 174 240 174 Z" fill="url(#bone)" stroke="#7a6238" stroke-width="1.6"></path>
+
+  
+  <path d="M 160 278 Q 178 322 198 340" stroke="#b7a47a" stroke-width="2" fill="none" opacity=".55" stroke-linecap="round"></path>
+  <path d="M 320 278 Q 302 322 282 340" stroke="#b7a47a" stroke-width="2" fill="none" opacity=".55" stroke-linecap="round"></path>
+
+  
+  <path d="M 138 244 Q 130 256 138 268 Q 146 262 152 270 L 150 280 Q 138 280 134 270 Z" fill="#0a0a0a" opacity=".82"></path>
+  
+  <path d="M 342 252 Q 348 260 343 268 L 338 264 Q 338 258 342 252 Z" fill="#0a0a0a" opacity=".7"></path>
+
+  
+  <path d="M 184 196 L 178 220 L 192 234" stroke="#8a6f40" stroke-width="1.6" fill="none" opacity=".75"></path>
+  <path d="M 178 220 L 166 224" stroke="#8a6f40" stroke-width="1" fill="none" opacity=".55"></path>
+  <path d="M 296 188 L 304 206 L 296 220 L 308 234" stroke="#8a6f40" stroke-width="1.4" fill="none" opacity=".7"></path>
+  <path d="M 228 178 L 222 212 L 230 244" stroke="#8a6f40" stroke-width="1.2" fill="none" opacity=".7"></path>
+  <path d="M 262 196 L 270 222" stroke="#8a6f40" stroke-width="1" fill="none" opacity=".7"></path>
+  <path d="M 200 374 L 208 384" stroke="#8a6f40" stroke-width="1" fill="none" opacity=".6"></path>
+
+  
+  <path d="M 162 248 Q 198 232 234 252" stroke="#070708" stroke-width="7" stroke-linecap="round" fill="none"></path>
+  <path d="M 250 252 Q 284 232 318 248" stroke="#070708" stroke-width="7" stroke-linecap="round" fill="none"></path>
+
+  
+  <g>
+    <ellipse cx="200" cy="270" rx="32" ry="34" fill="#040406"></ellipse>
+    <ellipse cx="200" cy="274" rx="25" ry="27" fill="#020203"></ellipse>
+    <ellipse cx="200" cy="272" rx="15" ry="13" fill="#0a0a0a"></ellipse>
+    <path d="M 172 284 Q 200 264 228 254" stroke="#5a3a18" stroke-width="3.4" fill="none" stroke-linecap="round"></path>
+    <path d="M 172 284 Q 200 264 228 254" stroke="#2a1a08" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".95"></path>
+    <g stroke="#1a1208" stroke-width="1.8" stroke-linecap="round">
+      <line x1="178" y1="276" x2="182" y2="288"></line>
+      <line x1="188" y1="270" x2="192" y2="282"></line>
+      <line x1="200" y1="264" x2="204" y2="276"></line>
+      <line x1="212" y1="258" x2="216" y2="270"></line>
+      <line x1="222" y1="252" x2="226" y2="262"></line>
+    </g>
+    <path d="M 196 288 Q 194 298 198 308" stroke="#5a0f08" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".9"></path>
+    <circle cx="200" cy="310" r="1.6" fill="#5a0f08" opacity=".8"></circle>
+  </g>
+
+  
+  <g>
+    <ellipse cx="286" cy="270" rx="24" ry="27" fill="#070708"></ellipse>
+    <ellipse cx="286" cy="273" rx="18" ry="20" fill="#000"></ellipse>
+    <circle cx="289" cy="270" r="10" fill="#ff3a10" opacity=".18"></circle>
+    <circle cx="289" cy="270" r="6.5" fill="url(#eyeRed)" opacity=".95"></circle>
+    <circle cx="288" cy="268" r="1.8" fill="#1a0500"></circle>
+  </g>
+
+  
+  <path d="M 240 298 L 226 328 Q 240 336 254 328 Z" fill="#070708"></path>
+  
+  <path d="M 234 318 L 230 322" stroke="#8a6f40" stroke-width="1" opacity=".6"></path>
+
+  
+  <g transform="translate(240 356)">
+    
+    <path d="M -54 -4 Q 0 -10 54 -4 L 52 18 Q 0 24 -52 18 Z" fill="#040406"></path>
+
+    
+    <g fill="url(#bone)" stroke="#3a3026" stroke-width=".6">
+      <path d="M -52 -2 L -46 11 L -40 -2 Z"></path>
+      <path d="M -40 -2 L -34 11 L -28 -2 Z"></path>
+      <path d="M -28 -2 L -22 11 L -16 -2 Z"></path>
+      
+      <path d="M -4 -2 L 2 11 L 8 -2 Z"></path>
+      <path d="M 8 -2 L 14 11 L 20 -2 Z"></path>
+      <path d="M 20 -2 L 26 11 L 32 -2 Z"></path>
+      <path d="M 32 -2 L 38 11 L 44 -2 Z"></path>
+      <path d="M 44 -2 L 50 8 L 52 -2 Z"></path>
+    </g>
+    
+    <path d="M -16 -2 L -10 11 L -4 -2 Z" fill="url(#gold)" stroke="#5a3a0e" stroke-width=".6"></path>
+
+    
+    <g fill="url(#bone)" stroke="#3a3026" stroke-width=".6" opacity=".92">
+      <path d="M -48 20 L -42 10 L -36 20 Z"></path>
+      <path d="M -36 20 L -30 10 L -24 20 Z"></path>
+      <path d="M -24 20 L -18 10 L -12 20 Z"></path>
+      <path d="M -12 20 L -6 10 L 0 20 Z"></path>
+      
+      <path d="M 0 20 L 6 14 L 12 20 Z"></path>
+      <path d="M 12 20 L 18 10 L 24 20 Z"></path>
+      <path d="M 24 20 L 30 10 L 36 20 Z"></path>
+      <path d="M 36 20 L 42 10 L 48 20 Z"></path>
+    </g>
+  </g>
+
+  
+  <g>
+    
+    <path d="M 290 358 Q 320 366 340 370 Q 360 372 366 358" stroke="#26180e" stroke-width="7" fill="none" stroke-linecap="round"></path>
+    <path d="M 290 358 Q 320 366 340 370 Q 360 372 366 358" stroke="#3a261a" stroke-width="3.4" fill="none" stroke-linecap="round" opacity=".8"></path>
+    
+    <ellipse cx="290" cy="357" rx="6" ry="3" fill="#0a0a0a"></ellipse>
+    
+    <path d="M 366 358 Q 376 354 378 342 Q 378 328 366 326 Q 358 328 358 340 Q 358 350 366 358 Z" fill="#3a2618" stroke="#1a0e06" stroke-width="1"></path>
+    <ellipse cx="368" cy="332" rx="6" ry="3" fill="#1a0e06"></ellipse>
+    
+    <circle cx="368" cy="333" r="3" fill="#ff8a3a"></circle>
+    <circle cx="368" cy="333" r="1.4" fill="#fff0c8"></circle>
+    
+    <path d="M 372 322 Q 380 308 374 296 Q 366 282 378 268" stroke="#cfc4a8" stroke-width="2.2" fill="none" opacity=".55" stroke-linecap="round"></path>
+    <path d="M 386 312 Q 394 300 390 288" stroke="#cfc4a8" stroke-width="1.6" fill="none" opacity=".4" stroke-linecap="round"></path>
+    <path d="M 360 318 Q 354 308 360 298" stroke="#cfc4a8" stroke-width="1.4" fill="none" opacity=".35" stroke-linecap="round"></path>
+  </g>
+
+  
+  <g>
+    <path d="M 318 162 L 168 348" stroke="#0a0a0a" stroke-width="11" stroke-linecap="round" fill="none"></path>
+    <path d="M 318 162 L 168 348" stroke="#2a2218" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".85"></path>
+    <g stroke="#1a1208" stroke-width="1.8" stroke-linecap="round">
+      <line x1="226" y1="252" x2="240" y2="240"></line>
+      <line x1="248" y1="278" x2="262" y2="266"></line>
+      <line x1="270" y1="304" x2="284" y2="292"></line>
+    </g>
+  </g>
+</g>
+
+
+<g>
+  
+  <ellipse cx="240" cy="206" rx="172" ry="14" fill="#000" opacity=".4"></ellipse>
+
+  
+  <path d="M 54 198&#xA;           Q 86 96 240 72&#xA;           Q 394 96 426 198&#xA;           Q 410 216 384 218&#xA;           L 96 218&#xA;           Q 70 216 54 198 Z" fill="url(#hatGrad)" stroke="#000" stroke-width="1.4"></path>
+
+  
+  <path d="M 96 200 Q 130 124 240 102 Q 350 124 384 200" stroke="#3a3a44" stroke-width="2" fill="none" opacity=".55"></path>
+
+  
+  <path d="M 54 198 Q 86 96 240 72 Q 394 96 426 198" stroke="url(#gold)" stroke-width="2.4" fill="none"></path>
+  
+  <path d="M 96 218 L 384 218" stroke="url(#gold)" stroke-width="1.6" fill="none" opacity=".7"></path>
+
+  
+  <path d="M 78 174 Q 56 138 78 102 Q 100 130 94 174 Z" fill="#bf2a1a"></path>
+  <path d="M 80 170 Q 76 142 88 110" stroke="#7a1208" stroke-width=".8" fill="none" opacity=".7"></path>
+  <path d="M 86 170 Q 90 150 94 120" stroke="#7a1208" stroke-width=".6" fill="none" opacity=".5"></path>
+
+  
+  <g>
+    <line x1="58" y1="200" x2="44" y2="232" stroke="url(#gold)" stroke-width="2.2"></line>
+    <circle cx="42" cy="238" r="4.5" fill="url(#gold)"></circle>
+    <g stroke="#6a4410" stroke-width="1">
+      <line x1="38" y1="240" x2="36" y2="252"></line>
+      <line x1="42" y1="242" x2="42" y2="254"></line>
+      <line x1="46" y1="240" x2="48" y2="252"></line>
+    </g>
+  </g>
+  <g>
+    <line x1="422" y1="200" x2="436" y2="232" stroke="url(#gold)" stroke-width="2.2"></line>
+    <circle cx="438" cy="238" r="4.5" fill="url(#gold)"></circle>
+    <g stroke="#6a4410" stroke-width="1">
+      <line x1="434" y1="240" x2="432" y2="252"></line>
+      <line x1="438" y1="242" x2="438" y2="254"></line>
+      <line x1="442" y1="240" x2="444" y2="252"></line>
+    </g>
+  </g>
+
+  
+  <g transform="translate(240 144)">
+    <circle r="32" fill="#0a0a0a" stroke="url(#gold)" stroke-width="2.6"></circle>
+    <circle r="27" fill="none" stroke="url(#gold)" stroke-width=".8" opacity=".55"></circle>
+    
+    <g stroke="url(#bone)" stroke-width="4.5" stroke-linecap="round">
+      <line x1="-20" y1="-14" x2="20" y2="16"></line>
+      <line x1="-20" y1="16" x2="20" y2="-14"></line>
+    </g>
+    <g fill="url(#bone)">
+      <circle cx="-21" cy="-15" r="3.6"></circle>
+      <circle cx="21" cy="17" r="3.6"></circle>
+      <circle cx="-21" cy="17" r="3.6"></circle>
+      <circle cx="21" cy="-15" r="3.6"></circle>
+    </g>
+    
+    <g>
+      <ellipse cx="0" cy="-1" rx="10" ry="11" fill="url(#bone)" stroke="#5a4a28" stroke-width=".7"></ellipse>
+      <ellipse cx="-3.6" cy="-1" rx="2.2" ry="2.8" fill="#0a0a0a"></ellipse>
+      <ellipse cx="3.6" cy="-1" rx="2.2" ry="2.8" fill="#0a0a0a"></ellipse>
+      <rect x="-4" y="6.5" width="8" height="3.2" fill="url(#bone)"></rect>
+      <line x1="-2" y1="6.5" x2="-2" y2="9.6" stroke="#5a4a28" stroke-width=".7"></line>
+      <line x1="2" y1="6.5" x2="2" y2="9.6" stroke="#5a4a28" stroke-width=".7"></line>
+    </g>
+  </g>
+
+  
+  <path d="M 312 90 L 256 132 L 222 168" stroke="#000" stroke-width="3" fill="none" opacity=".7" stroke-linecap="round"></path>
+  
+  <g>
+    <circle cx="354" cy="152" r="6" fill="#040406"></circle>
+    <circle cx="354" cy="152" r="4" fill="#0a0a0a"></circle>
+    <circle cx="354" cy="152" r="2" fill="url(#halo)"></circle>
+  </g>
+</g>
+
+</svg>
