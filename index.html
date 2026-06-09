@@ -3890,57 +3890,7 @@
       "I just want a human →"
     ];
 
-    const RULES = [
-      { rx:/how.*work|what.*do|explain/i, replies:[
-          "Ye drop yer CV. We work the loop — applications, follow-ups, the whole grim parade. Ye show up to the offer.",
-          "That's it. Try not to overthink it."
-        ]},
-      { rx:/catch|hidden|fee|fine print|trick/i, replies:[
-          "$20/mo. Cancel any tide. No offer in 30 days — <b>full refund</b>.",
-          "Catch is ye gotta show up to the interviews. Even I can't do that part."
-        ]},
-      { rx:/(price|cost|how much|pay)/i, replies:[
-          "Twenty. Dollars. A month.",
-          "Less than yer last bad date."
-        ]},
-      { rx:/will it work|guarantee|chance|success/i, replies:[
-          "30 days. One offer. Or yer money back. That's the whole pact.",
-          "If I'm wrong, ye lose nothin'. If I'm right, ye're employed. Math checks out."
-        ]},
-      { rx:/visa|h1b|opt|sponsor/i, replies:[
-          "We filter <b>H1B, OPT, TN, L1</b> friendly first. Sponsorship gets verified before it hits yer pipeline.",
-          "Aye, we've seen this dance."
-        ]},
-      { rx:/real|human|person|bot|ai|robot/i, replies:[
-          "I'm a skeleton with a script. Cap'n Jack made me. <b>Hate me?</b> Tap 'I just want a human' — Anna's got better manners."
-        ]},
-      { rx:/(joe|jack|cap'?n|captain)/i, replies:[
-          "That's me. Joe Bones. Cap'n Jack's first mate, brand mascot, and emotional support skeleton."
-        ]},
-      { rx:/(refund|money back|cancel)/i, replies:[
-          "One click in the dashboard. No forms. No exit interview. Walk the plank in peace."
-        ]},
-      { rx:/(hi|hello|hey|yo|sup)\b/i, replies:[
-          "...is that all ye got?",
-          "Hi. Now what."
-        ]},
-      { rx:/(thanks|thank you|cheers|ty)/i, replies:[
-          "Don't thank me. Land the job."
-        ]},
-      { rx:/(no|nope|nah)\b/i, replies:[
-          "Bold of ye to come here just to say no."
-        ]},
-      { rx:/(yes|yeah|yep|sure|ok)\b/i, replies:[
-          "Good. Drop yer resume up top — I'll do the rest."
-        ]},
-      { rx:/.+/, replies:[
-          "Couldn't parse that through the rum, matey. Try a quick reply below.",
-          "Ye lost me. Pick one →",
-          "Skeleton brain. Use smaller words."
-        ]},
-    ];
-
-    const HUMAN_RX = /human|real person|talk to (someone|anna)|book.*call/i;
+    const conversationHistory = [];
 
     const chatBody = document.getElementById('chatBody');
     const quickEl  = document.getElementById('quickReplies');
@@ -4002,24 +3952,34 @@
       return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
-    function findReplies(text){
-      for(const r of RULES){ if(r.rx.test(text)) return r.replies; }
-      return RULES[RULES.length-1].replies;
-    }
-
-    function handleUser(text){
+    async function handleUser(text){
       addMsg('me', escapeHtml(text));
-      if(HUMAN_RX.test(text)){
-        setTimeout(() => joeReplies([
-          "Fine. Anna's nicer than me anyway.",
-          '→ <a href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;">Book the 15-min call</a>'
-        ]), 400);
-        return;
+      quickEl.classList.add('hidden');
+      input.disabled = true;
+      sendBtn.disabled = true;
+      showTyping();
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, history: conversationHistory })
+        });
+        const data = await res.json();
+        hideTyping();
+        const reply = data.reply || "Aye, somethin's off. Give it another go.";
+        conversationHistory.push({ role: 'user', content: text });
+        conversationHistory.push({ role: 'assistant', content: reply });
+        addMsg('joe', reply);
+      } catch(e) {
+        hideTyping();
+        addMsg('joe', "Lost the signal somewhere out there. Give it another go.");
       }
-      setTimeout(() => joeReplies(findReplies(text)), 350);
+      input.disabled = false;
+      showQuick();
     }
 
     function seed(){
+      conversationHistory.length = 0;
       chatBody.innerHTML = '';
       quickEl.innerHTML = '';
       GREETINGS.forEach(g => addMsg(g.type, g.text));
