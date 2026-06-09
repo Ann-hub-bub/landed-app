@@ -4267,7 +4267,7 @@
     const email = document.getElementById('payEmail').value.trim();
     if(!email || !email.includes('@')){ document.getElementById('payEmail').focus(); return; }
     const phone = document.getElementById('payPhone').value.trim();
-    fetch('https://script.google.com/macros/s/AKfycbzNl_Jy-EbslZnwq-GcipUgI5Ae_-ASbExIsg1SNi6CR9joAFIbDQ799Kq__FC_bYDl2w/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
       method: 'POST',
       mode: 'no-cors',
       body: JSON.stringify({ email, phone })
