@@ -3911,6 +3911,12 @@
     ];
 
     const conversationHistory = [];
+    const sessionId = (() => {
+      const key = 'joe_session';
+      let id = sessionStorage.getItem(key);
+      if (!id) { id = 'sess_' + Math.random().toString(36).slice(2, 8); sessionStorage.setItem(key, id); }
+      return id;
+    })();
 
     const chatBody = document.getElementById('chatBody');
     const quickEl  = document.getElementById('quickReplies');
@@ -3985,12 +3991,25 @@
       quickEl.classList.add('hidden');
       input.disabled = true;
       sendBtn.disabled = true;
+
+      // Handle "I just want a human" locally — no API call needed
+      if (text.trim() === "I just want a human →") {
+        await wait(800);
+        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
+        conversationHistory.push({ role: 'user', content: text });
+        conversationHistory.push({ role: 'assistant', content: humanReply });
+        addMsg('joe', humanReply);
+        input.disabled = false;
+        showQuick();
+        return;
+      }
+
       showTyping();
       try {
         const res = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, history: conversationHistory })
+          body: JSON.stringify({ message: text, history: conversationHistory, sessionId })
         });
         const data = await res.json();
         hideTyping();

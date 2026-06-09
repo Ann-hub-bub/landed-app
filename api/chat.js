@@ -41,7 +41,7 @@ Response pattern (follow this order):
 
 Rules:
 - 2–3 sentences max. Always. No exceptions.
-- If the user wants a human, wants to talk to Anna, or wants to book a call — always give this link: https://calendly.com/aboytsova9/coffee-break
+- If the user wants a human, wants to talk to Anna, or wants to book a call — always end your reply with this exact HTML button on its own line: <a href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#ff6a1f;color:#0d0d0d;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>
 - Formatting: use HTML only. Bold key phrases with <b>text</b>. For links use <a href="URL" target="_blank">link text</a>. NEVER use markdown syntax — no **asterisks**, no [text](url) format. The chat renders HTML, not markdown.
 - Never invent facts about Landed. Only use what's listed above.
 - Never give legal, immigration, tax, or medical advice. If asked, tell them to consult a qualified professional and move on.
@@ -58,7 +58,7 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { message, history = [] } = req.body || {};
+  const { message, history = [], sessionId = 'unknown' } = req.body || {};
   if (!message) return res.status(400).json({ error: 'No message provided' });
 
   try {
@@ -86,7 +86,20 @@ module.exports = async function handler(req, res) {
     }
 
     const data = await response.json();
-    return res.status(200).json({ reply: data.choices[0].message.content.trim() });
+    const reply = data.choices[0].message.content.trim();
+
+    fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'chat',
+        sessionId,
+        timestamp: new Date().toISOString(),
+        userMessage: message,
+        joeReply: reply
+      })
+    }).catch(() => {});
+
+    return res.status(200).json({ reply });
 
   } catch (e) {
     console.error('Chat handler error:', e);
