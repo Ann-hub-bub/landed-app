@@ -3926,7 +3926,15 @@
       el.className = 'msg ' + type;
       el.innerHTML = text;
       chatBody.appendChild(el);
-      chatBody.scrollTop = chatBody.scrollHeight;
+      if (type === 'joe') {
+        // Scroll to the start of Joe's reply so user sees it from the beginning
+        requestAnimationFrame(() => {
+          const offset = el.getBoundingClientRect().top - chatBody.getBoundingClientRect().top;
+          chatBody.scrollTop += offset - 12;
+        });
+      } else {
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
     }
 
     function showTyping(){
