@@ -46,8 +46,8 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
 .jd-hero{padding:56px 0 0;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
 .jd-hero-inner{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:end;}
 .jd-hero-left{padding-bottom:48px;}
-.jd-back-crumb{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mute);margin-bottom:24px;transition:color .18s;}
-.jd-back-crumb:hover{color:var(--orange);}
+.jd-back-crumb{position:fixed;top:80px;left:24px;z-index:40;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mute);background:var(--ink-3);border:1px solid var(--line);padding:8px 14px;text-decoration:none;transition:color .18s, box-shadow .18s;}
+.jd-back-crumb:hover{color:var(--orange);box-shadow:0 2px 12px rgba(0,0,0,.4);}
 .jd-company-row{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
 .jd-logo{width:44px;height:44px;background:var(--ink-3);border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--bone);flex:0 0 auto;}
 .jd-company-name{font-size:15px;color:var(--mute);}
@@ -780,7 +780,7 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
       <div class="wrap">
         <div class="jd-cta-inner">
           <div class="jd-cta-joe">
-            <img src="./Joe Bone/Gemini_Generated_Image_ax0v53ax0v53ax0v.png" alt="Cap'n Joe Bone with a rum — ready to apply" />
+            <img src="./Joe Bone/joe-rum-nobg.png" alt="Cap'n Joe Bone with a rum — ready to apply" />
           </div>
           <h2>Give Joe a Rum<br>&amp; Start Applying</h2>
 <a href="/?pour=1" class="jd-cta-btn">
