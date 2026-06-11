@@ -2101,7 +2101,7 @@
 
 <nav class="top">
   <div class="wrap inner">
-    <a class="logo" href="#" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">Landed<span>.</span></a>
+    <a class="logo" href="#" onclick="event.preventDefault();if(window.demoReset)demoReset();window.scrollTo({top:0,behavior:'smooth'})">Landed<span>.</span></a>
     <div class="links">
       <a href="#how">How it works</a>
       <a href="#wall">Wall of offers</a>
@@ -3904,6 +3904,39 @@
 
     /* Stage 1 starts active; Stage 2 stays locked until submit succeeds.
        The submit handler flips Stage 2 to active and reveals it inline. */
+
+    window.demoReset = function() {
+      sessionStorage.removeItem('landed_shortlist');
+      sessionStorage.removeItem('landed_scroll');
+
+      const stagesWrap = document.getElementById('fmStages');
+      const stage1El   = document.querySelector('.fm-stage[data-stage-num="1"]');
+      const stage2El   = document.querySelector('.fm-stage[data-stage-num="2"]');
+
+      if (stage1El)   { stage1El.dataset.state = 'active'; }
+      if (stagesWrap) { stagesWrap.classList.remove('fm-revealed'); }
+      if (stage2El)   { delete stage2El.dataset.state; }
+
+      resEl.classList.remove('active');
+      loadEl.classList.remove('active');
+
+      fileInput.value = '';
+      upload.classList.remove('has-file');
+      fnEl.innerHTML = 'pdf, word, max 5mb';
+
+      if (positionInput) positionInput.value = '';
+      if (keywordsInput) keywordsInput.value = '';
+      if (salaryInput)   salaryInput.value   = '';
+      if (visaInput)     visaInput.checked   = false;
+
+      document.querySelectorAll('#fmLevel .fm-chip, #fmLoc .fm-chip').forEach(c => c.classList.remove('on'));
+
+      position = ''; levels.clear(); salary = 0; visa = false; loc.clear(); keywords = '';
+      lastDomain = null; lastSeniority = null; lastKws = null;
+
+      const funnel = document.getElementById('fmFunnel');
+      if (funnel) funnel.classList.remove('show');
+    };
 
     // Save scroll position so F5 restores it correctly
     window.addEventListener('beforeunload', () => {
