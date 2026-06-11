@@ -63,7 +63,7 @@
   /* ── Nav ── */
   nav.top{ position: sticky; top:0; z-index:50; background: rgba(10,10,10,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);}
   nav.top .inner{ display:flex; align-items:center; justify-content:space-between; padding: 18px 0;}
-  nav.top .logo{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px; letter-spacing:-.02em; color:var(--bone);}
+  nav.top .logo{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px; letter-spacing:-.02em; color:var(--bone); cursor:pointer; text-decoration:none; display:inline-block;}
   nav.top .logo span{ color: var(--orange);}
   nav.top .links{ display:flex; gap:32px; color:var(--mute); font-size:14.5px;}
   nav.top .links a{ cursor:pointer; transition: color .15s;}
@@ -2099,7 +2099,7 @@
 
 <nav class="top">
   <div class="wrap inner">
-    <div class="logo">Landed<span>.</span></div>
+    <a class="logo" href="#" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">Landed<span>.</span></a>
     <div class="links">
       <a href="#how">How it works</a>
       <a href="#wall">Wall of offers</a>
