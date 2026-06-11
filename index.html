@@ -3874,6 +3874,7 @@
       setBar('tier-4', Math.round((superSuitable / found) * 100));
 
       renderJobs(final);
+      sessionStorage.setItem('landed_shortlist', JSON.stringify(final));
       loadEl.classList.remove('active');
       resEl.classList.add('active');
 
@@ -3886,6 +3887,27 @@
 
     /* Stage 1 starts active; Stage 2 stays locked until submit succeeds.
        The submit handler flips Stage 2 to active and reveals it inline. */
+
+    // Restore shortlist if user navigated back from a job detail page
+    const _savedList = sessionStorage.getItem('landed_shortlist');
+    if (_savedList) {
+      try {
+        const _jobs  = JSON.parse(_savedList);
+        const _wrap  = document.getElementById('fmStages');
+        const _s2    = document.querySelector('.fm-stage[data-stage-num="2"]');
+        const _s1    = document.querySelector('.fm-stage[data-stage-num="1"]');
+        if (_s1)   _s1.dataset.state = 'hidden';
+        if (_wrap) _wrap.classList.add('fm-revealed');
+        if (_s2)   _s2.dataset.state = 'active';
+        renderJobs(_jobs);
+        loadEl.classList.remove('active');
+        resEl.classList.add('active');
+        setTimeout(() => {
+          const sec = document.getElementById('demo');
+          if (sec) window.scrollTo({ top: sec.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+        }, 150);
+      } catch(e) {}
+    }
   })();
 
   // ── FAQ accordion ────────────────────────────────────────
