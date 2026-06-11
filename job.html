@@ -43,9 +43,9 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
 .wrap{max-width:1200px;margin:0 auto;padding:0 48px;}
 
 /* ── Hero ── */
-.jd-hero{padding:56px 0 0;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
-.jd-hero-inner{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:end;}
-.jd-hero-left{padding-bottom:48px;}
+.jd-hero{padding:32px 0 0;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+.jd-hero-inner{display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:end;}
+.jd-hero-left{padding-bottom:24px;}
 .jd-back-crumb{position:fixed;top:80px;left:24px;z-index:40;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mute);background:var(--ink-3);border:1px solid var(--line);padding:8px 14px;text-decoration:none;transition:color .18s, box-shadow .18s;}
 .jd-back-crumb:hover{color:var(--orange);box-shadow:0 2px 12px rgba(0,0,0,.4);}
 .jd-company-row{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
@@ -61,31 +61,31 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
 .jd-hero-joe img{position:relative;z-index:2;width:260px;height:auto;filter:drop-shadow(0 30px 60px rgba(255,106,31,.3));}
 
 /* ── Section wrapper ── */
-.jd-section{padding:56px 0;border-bottom:1px solid var(--line);}
+.jd-section{padding:32px 0;border-bottom:1px solid var(--line);}
 .jd-section:last-child{border-bottom:0;}
 .jd-label{font-size:11px;color:var(--orange);font-family:'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
-.jd-h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);letter-spacing:-.025em;margin:0 0 28px;line-height:1.1;}
+.jd-h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);letter-spacing:-.025em;margin:0 0 16px;line-height:1.1;}
 .jd-body{font-size:15px;line-height:1.7;color:var(--bone-2);}
 .jd-body b{color:var(--bone);font-weight:600;}
 
 /* ── Meta facts ── */
 .jd-meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
-.jd-meta-cell{background:var(--ink-2);padding:20px 22px;}
+.jd-meta-cell{background:var(--ink-2);padding:14px 18px;}
 .jd-meta-cell .mc-label{font-size:10px;color:var(--mute);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;}
 .jd-meta-cell .mc-val{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:var(--bone);}
 .jd-meta-cell .mc-val.green{color:var(--green);}
 .jd-meta-cell .mc-val.orange{color:var(--orange);}
 
 /* ── Context ── */
-.jd-context-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.jd-context-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
 .jd-stage-badge{display:inline-block;padding:5px 12px;background:rgba(255,106,31,.1);border:1px solid rgba(255,106,31,.25);color:var(--orange);font-size:11px;font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;}
-.jd-why-box{background:var(--ink-3);border:1px solid var(--line-2);padding:24px 26px;}
+.jd-why-box{background:var(--ink-3);border:1px solid var(--line-2);padding:16px 20px;}
 .jd-why-box .wb-label{font-size:10px;color:var(--mute);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
 .jd-why-box p{font-size:14px;line-height:1.65;color:var(--bone-2);margin:0;}
 
 /* ── Goals 30/90/365 ── */
-.jd-goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.jd-goal-card{background:var(--ink-3);border:1px solid var(--line-2);padding:28px 24px;position:relative;}
+.jd-goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.jd-goal-card{background:var(--ink-3);border:1px solid var(--line-2);padding:20px 18px;position:relative;}
 .jd-goal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .jd-goal-card:nth-child(1)::before{background:var(--line-2);}
 .jd-goal-card:nth-child(2)::before{background:rgba(255,106,31,.5);}
@@ -109,14 +109,14 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
 
 /* ── Team ── */
 .jd-team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-.jd-team-cell{background:var(--ink-2);padding:24px 26px;}
+.jd-team-cell{background:var(--ink-2);padding:16px 20px;}
 .jd-team-cell .tc-label{font-size:10px;color:var(--mute);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;}
 .jd-team-cell .tc-val{font-size:14px;line-height:1.5;color:var(--bone-2);}
 .jd-team-cell .tc-val b{color:var(--bone);font-weight:600;}
 
 /* ── Benefits ── */
 .jd-benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
-.jd-benefit{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:var(--ink-3);border:1px solid var(--line-2);}
+.jd-benefit{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--ink-3);border:1px solid var(--line-2);}
 .jd-benefit .bi{width:30px;height:30px;background:rgba(255,106,31,.1);border:1px solid rgba(255,106,31,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
 .jd-benefit .bi svg{width:14px;height:14px;color:var(--orange);}
 .jd-benefit .bt{font-size:13.5px;line-height:1.45;color:var(--bone-2);}
@@ -128,17 +128,17 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
 .jd-pipe-num{display:flex;align-items:flex-start;justify-content:center;padding-top:8px;}
 .jd-pipe-badge{width:36px;height:36px;border-radius:50%;background:var(--ink-3);border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--mute);z-index:1;transition:border-color .3s,color .3s;}
 .jd-pipe-step.active .jd-pipe-badge{border-color:var(--orange);color:var(--orange);}
-.jd-pipe-content{padding:4px 0 32px 16px;}
+.jd-pipe-content{padding:4px 0 18px 16px;}
 .jd-pipe-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
 .jd-pipe-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--bone);}
 .jd-pipe-dur{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--orange);padding:2px 8px;border:1px solid rgba(255,106,31,.3);}
 .jd-pipe-desc{font-size:13.5px;color:var(--mute);line-height:1.55;}
 
 /* ── CTA ── */
-.jd-cta{padding:80px 0;text-align:center;position:relative;overflow:hidden;}
+.jd-cta{padding:48px 0;text-align:center;position:relative;overflow:hidden;}
 .jd-cta::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,31,.08) 0%,transparent 65%);}
 .jd-cta-inner{position:relative;z-index:2;}
-.jd-cta-joe{display:flex;justify-content:center;margin-bottom:32px;}
+.jd-cta-joe{display:flex;justify-content:center;margin-bottom:20px;}
 .jd-cta-joe img{width:200px;height:auto;filter:drop-shadow(0 20px 40px rgba(255,106,31,.35));}
 .jd-cta h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,42px);letter-spacing:-.03em;margin:0 0 12px;line-height:1.1;}
 .jd-cta p{font-size:15px;color:var(--mute);margin:0 0 32px;}
@@ -423,37 +423,37 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
 
   const TEAM = {
     swe: {
-      intern:   { reportsTo:'Engineering Manager', comp:'a team of 4–6 engineers with a dedicated mentor', paradigm:'Async-first. GitHub-native workflow, stand-ups in Slack, PRs reviewed within 24h.' },
-      junior:   { reportsTo:'Engineering Manager', comp:'4 engineers + 1 QA engineer', paradigm:'Async-first. Linear for task tracking, GitHub for code review, weekly team sync.' },
-      mid:      { reportsTo:'Senior Engineer or EM', comp:'5 engineers and 1 product designer', paradigm:'Weekly planning sync + async standups in Slack. Deep work hours are protected.' },
-      senior:   { reportsTo:'Engineering Manager', comp:'4 engineers you will mentor and lead technically', paradigm:'Async-first culture. You set technical direction through RFCs and design docs.' },
-      staff:    { reportsTo:'VP of Engineering', comp:'cross-org influence across 3 engineering teams', paradigm:'Sparse calendar. Technical direction is set through documentation and async review.' },
-      director: { reportsTo:'CTO', comp:'3 engineering managers and 20+ individual contributors', paradigm:'Weekly leadership sync + monthly engineering all-hands.' },
+      intern:   { reportsTo:'Engineering Manager', comp:'a team of 4–6 engineers with a dedicated mentor', paradigm:'Fully async' },
+      junior:   { reportsTo:'Engineering Manager', comp:'4 engineers + 1 QA engineer', paradigm:'Weekly sync, async' },
+      mid:      { reportsTo:'Senior Engineer or EM', comp:'5 engineers and 1 product designer', paradigm:'Weekly sync, async' },
+      senior:   { reportsTo:'Engineering Manager', comp:'4 engineers you will mentor and lead technically', paradigm:'Fully async' },
+      staff:    { reportsTo:'VP of Engineering', comp:'cross-org influence across 3 engineering teams', paradigm:'Fully async' },
+      director: { reportsTo:'CTO', comp:'3 engineering managers and 20+ individual contributors', paradigm:'Weekly sync' },
     },
     pm: {
-      intern:   { reportsTo:'Senior PM', comp:'a cross-functional pod with 2 engineers and 1 designer', paradigm:'Weekly product review, Notion for documentation, Figma for design hand-off.' },
-      junior:   { reportsTo:'Senior PM', comp:'a cross-functional squad of 3 engineers and 1 designer', paradigm:'Bi-weekly sprint cycles. Linear for tasks, Notion for specs.' },
-      mid:      { reportsTo:'Senior PM or Director of Product', comp:'a cross-functional pod of 5', paradigm:'Async-first. Discovery Thursdays, Ship Fridays. Minimal meetings.' },
-      senior:   { reportsTo:'Director of Product or CPO', comp:'a cross-functional team of 6', paradigm:'Weekly product strategy sync with leadership; async execution week-to-week.' },
-      staff:    { reportsTo:'CPO', comp:'a portfolio of 3 product areas and 3 PMs', paradigm:'Monthly cross-PM strategy session; async execution and documentation culture.' },
-      director: { reportsTo:'CPO or CEO', comp:'a PM team of 4–6 and design leads', paradigm:'Quarterly roadmap reviews and weekly leadership sync.' },
+      intern:   { reportsTo:'Senior PM', comp:'a cross-functional pod with 2 engineers and 1 designer', paradigm:'Weekly sync' },
+      junior:   { reportsTo:'Senior PM', comp:'a cross-functional squad of 3 engineers and 1 designer', paradigm:'2-week sprints' },
+      mid:      { reportsTo:'Senior PM or Director of Product', comp:'a cross-functional pod of 5', paradigm:'Fully async' },
+      senior:   { reportsTo:'Director of Product or CPO', comp:'a cross-functional team of 6', paradigm:'Weekly sync' },
+      staff:    { reportsTo:'CPO', comp:'a portfolio of 3 product areas and 3 PMs', paradigm:'Mostly async' },
+      director: { reportsTo:'CPO or CEO', comp:'a PM team of 4–6 and design leads', paradigm:'Weekly + quarterly' },
     },
     data: {
-      junior:   { reportsTo:'Head of Data or Senior Analyst', comp:'a data team of 3', paradigm:'Weekly stakeholder syncs, async analysis work, Friday metrics review.' },
-      mid:      { reportsTo:'Head of Data', comp:'a data team of 4 (analysts + 1 data engineer)', paradigm:'Async-first. Weekly metrics review with business leads.' },
-      senior:   { reportsTo:'Head of Data or VP of Analytics', comp:'a team of 4 analysts you will mentor', paradigm:'Weekly data review, async analysis, monthly data council.' },
-      staff:    { reportsTo:'VP of Data or CTO', comp:'a data platform team of 5', paradigm:'Sparse calendar, documentation-driven organization.' },
-      director: { reportsTo:'CTO or CEO', comp:'a data organization of 6–10', paradigm:'Monthly data council, weekly leadership sync.' },
+      junior:   { reportsTo:'Head of Data or Senior Analyst', comp:'a data team of 3', paradigm:'Weekly syncs' },
+      mid:      { reportsTo:'Head of Data', comp:'a data team of 4 (analysts + 1 data engineer)', paradigm:'Fully async' },
+      senior:   { reportsTo:'Head of Data or VP of Analytics', comp:'a team of 4 analysts you will mentor', paradigm:'Weekly review' },
+      staff:    { reportsTo:'VP of Data or CTO', comp:'a data platform team of 5', paradigm:'Fully async' },
+      director: { reportsTo:'CTO or CEO', comp:'a data organization of 6–10', paradigm:'Weekly sync' },
     },
     marketing: {
-      junior:   { reportsTo:'Marketing Manager or Head of Marketing', comp:'a marketing team of 4', paradigm:'Weekly campaign syncs, async content production and reporting.' },
-      mid:      { reportsTo:'Head of Marketing', comp:'a marketing team of 5', paradigm:'Weekly growth review, async content and campaign work.' },
-      senior:   { reportsTo:'VP or Head of Marketing', comp:'a team of 3 marketers', paradigm:'Bi-weekly campaign reviews, async execution.' },
-      staff:    { reportsTo:'CMO or CEO', comp:'a full marketing organization of 6', paradigm:'Monthly marketing all-hands, weekly leadership sync.' },
-      director: { reportsTo:'CEO or COO', comp:'a marketing organization of 8–12', paradigm:'Quarterly planning, weekly leadership sync.' },
+      junior:   { reportsTo:'Marketing Manager or Head of Marketing', comp:'a marketing team of 4', paradigm:'Weekly syncs' },
+      mid:      { reportsTo:'Head of Marketing', comp:'a marketing team of 5', paradigm:'Weekly review' },
+      senior:   { reportsTo:'VP or Head of Marketing', comp:'a team of 3 marketers', paradigm:'Bi-weekly' },
+      staff:    { reportsTo:'CMO or CEO', comp:'a full marketing organization of 6', paradigm:'Monthly all-hands' },
+      director: { reportsTo:'CEO or COO', comp:'a marketing organization of 8–12', paradigm:'Weekly + quarterly' },
     },
     default: {
-      mid: { reportsTo:'Team Lead or Manager', comp:'a cross-functional team of 5', paradigm:'Weekly team sync, async execution.' },
+      mid: { reportsTo:'Team Lead or Manager', comp:'a cross-functional team of 5', paradigm:'Weekly sync' },
     },
   };
 
@@ -603,7 +603,6 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
               <span class="jd-chip match">${job.match}% match</span>
               <span class="jd-chip salary">${salIcon} ${esc(job.pay)} base · USD</span>
               <span class="jd-chip">${locationIcon} ${esc(job.loc)}</span>
-              ${job.visa ? '<span class="jd-chip">Visa sponsor</span>' : ''}
               ${(job.tags||[]).map(t => `<span class="jd-chip">${esc(t)}</span>`).join('')}
             </div>
           </div>
@@ -617,19 +616,10 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
     <!-- Block 1: Quick Facts -->
     <section class="jd-section">
       <div class="wrap">
-        <div class="jd-label">Quick facts</div>
         <div class="jd-meta-grid">
-          <div class="jd-meta-cell">
-            <div class="mc-label">Work format</div>
-            <div class="mc-val">${isRemote ? 'Remote' : /hybrid/i.test(job.loc) ? 'Hybrid' : 'On-site'}</div>
-          </div>
           <div class="jd-meta-cell">
             <div class="mc-label">Employment type</div>
             <div class="mc-val">${empType}</div>
-          </div>
-          <div class="jd-meta-cell">
-            <div class="mc-label">Salary</div>
-            <div class="mc-val green">${esc(job.pay)}</div>
           </div>
           <div class="jd-meta-cell">
             <div class="mc-label">Equity</div>
@@ -647,7 +637,6 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
     <!-- Block 2: Company Context -->
     <section class="jd-section">
       <div class="wrap">
-        <div class="jd-label">Company context</div>
         <div class="jd-context-grid">
           <div>
             <h2 class="jd-h2">About ${esc(job.co)}</h2>
@@ -667,8 +656,7 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
     <!-- Block 3: 30 / 90 / 365 goals -->
     <section class="jd-section">
       <div class="wrap">
-        <div class="jd-label">What you'll achieve</div>
-        <h2 class="jd-h2">Measurable outcomes — not vague duties</h2>
+        <h2 class="jd-h2">Measurable outcomes</h2>
         <div class="jd-goals-grid">
           <div class="jd-goal-card">
             <div class="jd-goal-period">30</div>
@@ -692,8 +680,7 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
     <!-- Block 4: Skills + Tech Stack -->
     <section class="jd-section">
       <div class="wrap">
-        <div class="jd-label">Skills & stack</div>
-        <h2 class="jd-h2">What they're looking for</h2>
+        <h2 class="jd-h2">Skills & stack</h2>
         <div class="jd-skills-grid">
           <div>
             <h4 class="jd-skills-col-h">Must-have</h4>
@@ -718,8 +705,7 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
     <!-- Block 5: Team -->
     <section class="jd-section">
       <div class="wrap">
-        <div class="jd-label">Team & work style</div>
-        <h2 class="jd-h2">Who you'll work with</h2>
+        <h2 class="jd-h2">Team & work style</h2>
         <div class="jd-team-grid">
           <div class="jd-team-cell">
             <div class="tc-label">Reports to</div>
@@ -740,8 +726,7 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
     <!-- Block 6: Benefits -->
     <section class="jd-section">
       <div class="wrap">
-        <div class="jd-label">Benefits & perks</div>
-        <h2 class="jd-h2">What's in the package</h2>
+        <h2 class="jd-h2">Benefits</h2>
         <div class="jd-benefits-grid">
           ${benefits.map((b,i) => `
             <div class="jd-benefit">
@@ -756,8 +741,7 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
     <!-- Block 7: Hiring Process -->
     <section class="jd-section">
       <div class="wrap">
-        <div class="jd-label">Hiring process</div>
-        <h2 class="jd-h2">No black holes. No ghost rounds.</h2>
+        <h2 class="jd-h2">Hiring process</h2>
         <div class="jd-pipeline">
           ${pipeline.map((s,i) => `
             <div class="jd-pipe-step active">
@@ -767,7 +751,6 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.88);backdrop-
                   <span class="jd-pipe-title">${esc(s.title)}</span>
                   <span class="jd-pipe-dur">${esc(s.dur)}</span>
                 </div>
-                <div class="jd-pipe-desc">${esc(s.desc)}</div>
               </div>
             </div>
           `).join('')}
