@@ -1330,6 +1330,15 @@
     .chat{height:100vh;max-height:100vh;}
   }
 
+  /* ── Floating chat button ── */
+  .chat-fab{position:fixed;bottom:28px;right:28px;z-index:8900;width:56px;height:56px;border-radius:50%;background:var(--orange);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(255,106,31,.4);transition:transform .18s,box-shadow .18s;animation:fabPulse 3s 2s ease-out;}
+  .chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,.65),0 0 0 0 rgba(255,106,31,.0);}
+  .chat-fab svg{width:26px;height:26px;fill:var(--ink);flex-shrink:0;}
+  .chat-fab .fab-dot{position:absolute;top:10px;right:10px;width:10px;height:10px;border-radius:50%;background:var(--green);border:2px solid var(--ink);box-shadow:0 0 8px var(--green);}
+  .chat-overlay.open ~ .chat-fab{display:none;}
+  @keyframes fabPulse{0%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(255,106,31,.55);}70%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 14px rgba(255,106,31,0);}100%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(255,106,31,0);}}
+  @media(max-width:720px){.chat-fab{bottom:18px;right:18px;width:52px;height:52px;}}
+
   /* ── Bleep bar ── */
   .bleep{ display:inline-block; background:var(--orange); color:var(--ink); border-radius:2px; padding:2px 10px; margin:0 6px; font-size:.7em; font-weight:700; letter-spacing:.15em; text-transform:uppercase; vertical-align:middle; transform:rotate(-2deg); font-family:'Space Grotesk',sans-serif; user-select:none; cursor:default;}
   .bleep-title{ font-size:.45em; padding:4px 14px; border-radius:3px; margin:0 10px;}
@@ -1394,7 +1403,7 @@
   .final .actions .btn-primary{ padding: 20px 30px; font-size:17px;}
 
   /* ── Payment modal ── */
-  .pay-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:9000; display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition: opacity .25s;}
+  .pay-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:9000; display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition: opacity .25s; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);}
   .pay-overlay.open{ opacity:1; pointer-events:all;}
   .pay-box{ background:var(--ink-2); border:1px solid var(--line); max-width:440px; width:100%; padding:40px 36px; position:relative; transform: translateY(12px); transition: transform .25s;}
   .pay-overlay.open .pay-box{ transform:none;}
@@ -2591,6 +2600,12 @@
 
   </div>
 </div>
+
+<!-- Floating chat button -->
+<button class="chat-fab" id="chatFab" aria-label="Chat with Joe Bones">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3l3 3 3-3h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
+  <span class="fab-dot" aria-hidden="true"></span>
+</button>
 
 <!-- FAQ -->
 <section class="block" id="faq">
@@ -4065,11 +4080,17 @@
       showQuick();
     }
 
-    document.getElementById('openChat').addEventListener('click', e => {
-      e.preventDefault();
+    function openChatOverlay() {
       seed();
       overlay.classList.add('open');
       setTimeout(() => input.focus(), 280);
+    }
+    document.getElementById('openChat').addEventListener('click', e => {
+      e.preventDefault();
+      openChatOverlay();
+    });
+    document.getElementById('chatFab').addEventListener('click', () => {
+      openChatOverlay();
     });
     document.getElementById('closeChat').addEventListener('click', () => {
       overlay.classList.remove('open');

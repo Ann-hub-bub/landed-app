@@ -255,6 +255,36 @@
     .sticky-bar .l .pair,.sticky-bar .l .divider { display:none; }
     .hero-outcomes .row { grid-template-columns:1fr; }
   }
+  /* ── Payment modal ── */
+  .pay-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:9000; display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition: opacity .25s; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);}
+  .pay-overlay.open{ opacity:1; pointer-events:all;}
+  .pay-box{ background:var(--ink-2); border:1px solid var(--line); max-width:440px; width:100%; padding:40px 36px; position:relative; transform: translateY(12px); transition: transform .25s;}
+  .pay-overlay.open .pay-box{ transform:none;}
+  .pay-close{ position:absolute; top:16px; right:18px; background:none; border:none; color:var(--mute); font-size:22px; cursor:pointer; line-height:1; padding:4px;}
+  .pay-close:hover{ color:var(--bone);}
+  .pay-kicker{ font-size:11px; color:var(--orange); letter-spacing:.2em; text-transform:uppercase; font-weight:600; margin-bottom:14px;}
+  .pay-box h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:26px; line-height:1.1; letter-spacing:-.02em; margin:0 0 8px; color:var(--bone);}
+  .pay-box .pay-sub{ color:var(--mute); font-size:14px; margin:0 0 28px; line-height:1.5;}
+  .pay-field{ margin-bottom:16px;}
+  .pay-field label{ display:block; font-size:12px; color:var(--mute); letter-spacing:.04em; margin-bottom:7px;}
+  .pay-field input{ width:100%; box-sizing:border-box; background:var(--ink); border:1px solid var(--line); color:var(--bone); font-family:inherit; font-size:15px; padding:13px 14px; outline:none; transition:border-color .15s;}
+  .pay-field input:focus{ border-color:var(--orange);}
+  .pay-field input::placeholder{ color:var(--mute-2);}
+  .pay-submit{ width:100%; background:var(--orange); color:var(--ink); border:none; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; padding:18px; cursor:pointer; margin-top:8px; transition:background .15s, transform .15s; display:flex; align-items:center; justify-content:center; gap:10px;}
+  .pay-submit:hover{ background:#ff7a30; transform:translateY(-1px);}
+  .pay-trust{ font-size:12px; color:var(--mute); margin-top:14px; text-align:center; line-height:1.5;}
+  .pay-trust b{ color:var(--orange);}
+  .pay-screen{ display:none;}
+  .pay-screen.active{ display:block;}
+  .pay-loading{ text-align:center; padding:20px 0 10px;}
+  .pay-spinner{ width:48px; height:48px; border:3px solid var(--line); border-top-color:var(--orange); border-radius:50%; animation:payspin .8s linear infinite; margin:0 auto 24px;}
+  @keyframes payspin{ to{ transform:rotate(360deg);} }
+  .pay-loading p{ color:var(--mute); font-size:15px; line-height:1.6;}
+  .pay-success{ text-align:center; padding:10px 0;}
+  .pay-success .pay-icon{ font-size:40px; margin-bottom:18px;}
+  .pay-success h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:-.02em; color:var(--bone); margin:0 0 10px;}
+  .pay-success p{ color:var(--mute); font-size:14px; line-height:1.6; margin:0 0 24px;}
+  .pay-calendly-btn{ display:inline-flex; align-items:center; gap:10px; background:var(--orange); color:var(--ink); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; padding:16px 28px; text-decoration:none; transition:background .15s, transform .15s;}
 </style>
 </head>
 <body>
@@ -262,7 +292,7 @@
 <nav class="nav">
   <div class="wrap">
     <div class="logo">Landed<b>.</b></div>
-    <a class="cta" href="/?pour=1">Get me hired →</a>
+    <a class="cta" href="#" onclick="payOpen(event)">Get me hired →</a>
   </div>
 </nav>
 
@@ -948,7 +978,7 @@
           <div class="guarantee">
             <b>30-day Landed guarantee.</b> No offer = full refund. We read every answer within 48 hours.
           </div>
-          <a class="apply-big" href="/?pour=1">
+          <a class="apply-big" href="#" onclick="payOpen(event)">
             Apply for ${esc(roleCta)} · ${esc(job.co)} →
           </a>
         </div>
@@ -992,6 +1022,80 @@
   }
 
 })();
+</script>
+
+<!-- PAYMENT MODAL -->
+<div class="pay-overlay" id="payOverlay" role="dialog" aria-modal="true">
+  <div class="pay-box">
+    <button class="pay-close" onclick="payClose()" aria-label="Close">&times;</button>
+    <div class="pay-screen active" id="payForm">
+      <div class="pay-kicker">Secure checkout</div>
+      <h3>Prepare for departure.</h3>
+      <p class="pay-sub">$20/mo — cancel any tide. We'll confirm your spot and send the link to get started.</p>
+      <div class="pay-field">
+        <label for="payEmail">Email address</label>
+        <input type="email" id="payEmail" placeholder="you@email.com" autocomplete="email" />
+      </div>
+      <div class="pay-field">
+        <label for="payPhone">Phone number <span style="color:var(--mute-2);font-weight:400;">(optional)</span></label>
+        <input type="tel" id="payPhone" placeholder="+1 (555) 000-0000" autocomplete="tel" />
+      </div>
+      <button class="pay-submit" onclick="paySubmit()">Complete purchase &nbsp;→</button>
+      <div class="pay-trust"><b>30-day offer guarantee.</b> No offer, full refund. One click — no support call.</div>
+    </div>
+    <div class="pay-screen" id="payLoading">
+      <div class="pay-loading">
+        <div class="pay-spinner"></div>
+        <p>Securing your spot on the crew&hellip;</p>
+      </div>
+    </div>
+    <div class="pay-screen" id="paySuccess">
+      <div class="pay-success">
+        <div class="pay-icon">&#9875;</div>
+        <h3>Yer aboard, mate.</h3>
+        <p>We want to know more about you so Cap'n Jack can hit the ground running. Book a quick 15-min call — we'll set up your pipeline together.</p>
+        <a class="pay-calendly-btn" href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener">Book your onboarding call &nbsp;→</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function payOpen(e){
+    if(e) e.preventDefault();
+    const overlay = document.getElementById('payOverlay');
+    document.getElementById('payForm').classList.add('active');
+    document.getElementById('payLoading').classList.remove('active');
+    document.getElementById('paySuccess').classList.remove('active');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('payEmail').focus(), 300);
+  }
+  function payClose(){
+    document.getElementById('payOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function paySubmit(){
+    const email = document.getElementById('payEmail').value.trim();
+    if(!email || !email.includes('@')){ document.getElementById('payEmail').focus(); return; }
+    const phone = document.getElementById('payPhone').value.trim();
+    fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
+      method: 'POST', mode: 'no-cors',
+      body: JSON.stringify({ email, phone })
+    }).catch(() => {});
+    document.getElementById('payForm').classList.remove('active');
+    document.getElementById('payLoading').classList.add('active');
+    setTimeout(() => {
+      document.getElementById('payLoading').classList.remove('active');
+      document.getElementById('paySuccess').classList.add('active');
+    }, 2000);
+  }
+  document.getElementById('payOverlay').addEventListener('click', function(e){
+    if(e.target === this) payClose();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') payClose();
+  });
 </script>
 </body>
 </html>
