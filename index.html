@@ -3888,6 +3888,11 @@
     /* Stage 1 starts active; Stage 2 stays locked until submit succeeds.
        The submit handler flips Stage 2 to active and reveals it inline. */
 
+    // Save scroll position so F5 restores it correctly
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('landed_scroll', window.scrollY);
+    });
+
     // Restore shortlist if user navigated back from a job detail page
     const _savedList = sessionStorage.getItem('landed_shortlist');
     if (_savedList) {
@@ -3902,9 +3907,14 @@
         renderJobs(_jobs);
         loadEl.classList.remove('active');
         resEl.classList.add('active');
+        const _savedScroll = sessionStorage.getItem('landed_scroll');
         setTimeout(() => {
-          const sec = document.getElementById('demo');
-          if (sec) window.scrollTo({ top: sec.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+          if (_savedScroll) {
+            window.scrollTo({ top: parseInt(_savedScroll), behavior: 'instant' });
+          } else {
+            const sec = document.getElementById('demo');
+            if (sec) window.scrollTo({ top: sec.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+          }
         }, 150);
       } catch(e) {}
     }
