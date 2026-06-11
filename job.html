@@ -24,10 +24,14 @@
   button { font-family:inherit; cursor:pointer; }
 
   /* ── NAV ── */
-  .nav { position:sticky; top:0; z-index:50; background:rgba(10,10,10,.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; padding:0 56px; height:64px; }
+  .nav { position:sticky; top:0; z-index:50; background:rgba(10,10,10,.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); height:64px; }
+  .nav .wrap { display:flex; justify-content:space-between; align-items:center; height:100%; }
   .nav .logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; letter-spacing:-.01em; }
   .nav .logo b { color:var(--orange); }
   .nav .cta { background:var(--orange); color:var(--ink); padding:10px 20px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; text-decoration:none; }
+
+  /* ── CENTERED CONTAINER ── */
+  .wrap { max-width:1280px; margin:0 auto; padding:0 56px; }
 
   /* ── FLOATING BACK BUTTON ── */
   .floating-back { position:fixed; left:24px; top:84px; z-index:45; background:rgba(16,16,19,.94); backdrop-filter:blur(10px); border:1px solid var(--line); color:var(--bone); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; text-decoration:none; display:inline-flex; align-items:center; overflow:hidden; white-space:nowrap; max-width:42px; height:42px; transition:max-width .28s cubic-bezier(.4,0,.2,1), border-color .15s ease, color .15s ease; }
@@ -37,7 +41,7 @@
   .floating-back:hover .label-expand { opacity:1; }
 
   /* ── HERO ── */
-  .hero { padding:0 56px; }
+  .hero { padding:0; }
   .hero-grid { display:grid; grid-template-columns:1fr 380px; gap:64px; align-items:start; padding:64px 0 80px; }
 
   .hero .crumb { display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.06em; color:var(--mute-2); margin-bottom:28px; }
@@ -118,7 +122,7 @@
   .guarantee-card b { color:var(--green); }
 
   /* ── SKILLS — paper ── */
-  .skills { padding:80px 56px; background:var(--paper); color:var(--ink); border-bottom:1px solid var(--paper-2); }
+  .skills { padding:80px 0; background:var(--paper); color:var(--ink); border-bottom:1px solid var(--paper-2); }
   .skills h2 { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(38px,5vw,64px); letter-spacing:-.035em; margin:0 0 40px; line-height:1; color:var(--ink); }
   .skills h2 em { color:var(--orange); font-style:normal; }
   .skills .twocol { display:grid; grid-template-columns:1fr 1fr; gap:64px; margin-bottom:48px; border-top:1px solid rgba(10,10,10,.2); padding-top:36px; }
@@ -134,7 +138,7 @@
   .skills .stack .chip.core { background:rgba(255,106,31,.14); border-color:var(--orange-deep); color:var(--orange-deep); }
 
   /* ── TEAM — dark ── */
-  .team { padding:80px 56px; background:var(--ink); border-top:1px solid var(--ink-3); }
+  .team { padding:80px 0; background:var(--ink); border-top:1px solid var(--ink-3); }
   .team h2 { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,4vw,52px); letter-spacing:-.03em; margin:0 0 40px; line-height:1; }
   .team .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   .team .card-row { padding:32px; border:1px solid var(--line); background:var(--ink-2); }
@@ -148,7 +152,7 @@
   .team .card-row .chip { display:inline-block; margin-top:14px; padding:5px 10px; background:var(--ink); border:1px solid var(--line); font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--green); letter-spacing:.04em; }
 
   /* ── BENEFITS — paper ── */
-  .benefits { padding:80px 56px; background:var(--paper); color:var(--ink); border-top:1px solid var(--paper-2); border-bottom:1px solid var(--paper-2); }
+  .benefits { padding:80px 0; background:var(--paper); color:var(--ink); border-top:1px solid var(--paper-2); border-bottom:1px solid var(--paper-2); }
   .benefits .head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:36px; gap:48px; }
   .benefits h2 { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,4vw,52px); letter-spacing:-.03em; margin:0; line-height:1; }
   .benefits .head .note { font-family:'Instrument Serif',serif; font-style:italic; font-size:16px; color:var(--mute-2); white-space:nowrap; }
@@ -164,7 +168,7 @@
   .benefits .b.wide { grid-column:span 2; }
 
   /* ── PROCESS — dark ── */
-  .process { padding:80px 56px; background:var(--ink); border-top:1px solid var(--ink-3); }
+  .process { padding:80px 0; background:var(--ink); border-top:1px solid var(--ink-3); }
   .process .head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:48px; gap:32px; }
   .process h2 { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,4vw,52px); letter-spacing:-.03em; margin:0; line-height:1; }
   .process .total { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--green); letter-spacing:.06em; white-space:nowrap; }
@@ -180,7 +184,7 @@
   .process .stp .meta .sep { color:var(--line); margin:0 6px; }
 
   /* ── APPLY — paper ── */
-  .apply { background:var(--paper); color:var(--ink); padding:80px 56px; border-top:1px solid var(--paper-2); }
+  .apply { background:var(--paper); color:var(--ink); padding:80px 0; border-top:1px solid var(--paper-2); }
   .apply .top { display:grid; grid-template-columns:1fr 220px; gap:48px; align-items:end; margin-bottom:40px; }
   .apply h2 { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(32px,4vw,56px); letter-spacing:-.035em; line-height:.95; margin:0; }
   .apply h2 em { color:var(--orange); font-style:normal; }
@@ -231,11 +235,10 @@
 
   /* ── RESPONSIVE ── */
   @media(max-width:1100px){
-    .nav { padding:0 32px; }
-    .hero { padding:0 32px; }
+    .wrap { padding:0 32px; }
     .hero-grid { grid-template-columns:1fr; gap:48px; }
     .rail { position:relative; top:auto; }
-    .skills,.team,.benefits,.process,.apply { padding:60px 32px; }
+    .skills,.team,.benefits,.process,.apply { padding:60px 0; }
   }
   @media(max-width:768px){
     .hero-grid { padding:36px 0; }
@@ -257,8 +260,10 @@
 <body>
 
 <nav class="nav">
-  <div class="logo">Landed<b>.</b></div>
-  <a class="cta" href="/?pour=1">Get me hired →</a>
+  <div class="wrap">
+    <div class="logo">Landed<b>.</b></div>
+    <a class="cta" href="/?pour=1">Get me hired →</a>
+  </div>
 </nav>
 
 <a class="floating-back" href="/#demo" aria-label="Back to shortlist">
@@ -706,6 +711,7 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
+      <div class="wrap">
       <div class="hero-grid">
 
         <!-- Left column -->
@@ -800,10 +806,12 @@
 
         </aside>
       </div>
+      </div>
     </section>
 
     <!-- SKILLS — paper -->
     <section class="skills">
+      <div class="wrap">
       <div class="head">
         <h2>Skills &amp; <em>stack.</em></h2>
       </div>
@@ -821,10 +829,12 @@
       <div class="stack">
         ${stackShow.map(t => `<span class="chip${coreSet.has(t) ? ' core' : ''}">${esc(t)}</span>`).join('')}
       </div>
+      </div>
     </section>
 
     <!-- TEAM — dark -->
     <section class="team">
+      <div class="wrap">
       <h2>Team &amp; work style</h2>
       <div class="grid">
         <div class="card-row">
@@ -855,10 +865,12 @@
           <span class="chip">≈ 2h synchronous / week</span>
         </div>
       </div>
+      </div>
     </section>
 
     <!-- BENEFITS — paper -->
     <section class="benefits">
+      <div class="wrap">
       <div class="head">
         <h2>Benefits, honestly.</h2>
         <div class="note">Everything below is funded — not "available to discuss."</div>
@@ -873,10 +885,12 @@
         <div class="b"><div class="hd">Offsites</div><div class="v">2× / year<small>Whole-company, flights covered</small></div></div>
         <div class="b"><div class="hd">Visa</div><div class="v">${job.visa ? 'H1B sponsor' : 'No sponsorship'}<small>${job.visa ? 'H1B and OPT supported' : "You'll need work auth where you are"}</small></div></div>
       </div>
+      </div>
     </section>
 
     <!-- PROCESS — dark -->
     <section class="process">
+      <div class="wrap">
       <div class="head">
         <h2>Hiring process</h2>
         <div class="total">total time: <b>≈ 4h</b> · over 2–3 weeks</div>
@@ -891,10 +905,12 @@
           </div>
         `).join('')}
       </div>
+      </div>
     </section>
 
     <!-- APPLY — paper -->
     <section class="apply" id="apply">
+      <div class="wrap">
       <div class="top">
         <div>
           <h2>One question.<br>Not a <em>cover letter.</em></h2>
@@ -937,6 +953,7 @@
           </a>
         </div>
 
+      </div>
       </div>
     </section>
 
