@@ -2329,7 +2329,7 @@
                         <path d="M3 1.5h5l3 3V12a.5.5 0 0 1-.5.5h-7A.5.5 0 0 1 3 12V1.5Z"/>
                         <path d="M8 1.5V4.5h3"/>
                       </svg>
-                      <span id="demoFnEcho">your-resume.pdf</span>
+                      <span id="demoFnEcho"></span>
                     </div>
                   </div>
                   <div class="seg">
@@ -3540,6 +3540,27 @@
         activeLevels = [seniority];
       }
 
+      // If user entered a target salary and didn't pick a level chip,
+      // find the level whose salary band best matches and override activeLevels.
+      if (salaryMin > 0 && !(levelsSet && levelsSet.size > 0)) {
+        const salTbl = domain === 'pm' ? SAL.pm
+                     : domain === 'swe' ? (isGlobalRemote ? SAL.swe_global : SAL.swe_local)
+                     : domain === 'data' ? SAL.data
+                     : null;
+        if (salTbl) {
+          const salK = salaryMin / 1000;
+          let bestLvl = null, bestDist = Infinity;
+          for (const lvl of LEVEL_ORDER) {
+            const range = salTbl[lvl]; if (!range) continue;
+            const [lo, hi] = range;
+            if (salK >= lo && salK <= hi) { bestLvl = lvl; break; }
+            const dist = Math.min(Math.abs(salK - lo), Math.abs(salK - hi));
+            if (dist < bestDist) { bestDist = dist; bestLvl = lvl; }
+          }
+          if (bestLvl) activeLevels = [bestLvl];
+        }
+      }
+
       let cos = [...d.companies];
       const seed = (Date.now() % 97) + 1;
       cos.sort((a,b) => ((a.name.charCodeAt(0)*seed)%97) - ((b.name.charCodeAt(0)*seed)%97));
@@ -3618,7 +3639,7 @@
 
       function locMatches(j, ignoreSalary) {
         if (visaRequired && !j.visa) return false;
-        if (!ignoreSalary && salaryMin > 0 && (j.base < salaryMin - 20000 || j.base > salaryMin + 20000)) return false;
+        if (!ignoreSalary && salaryMin > 0 && j.base < salaryMin - 30000) return false;
         if (!locSet || locSet.size === 0) return true;
         const jl = j.loc.toLowerCase();
         // Worldwide: locations were already overridden above, so all pass
@@ -3653,7 +3674,7 @@
       const lvlLabel = lvlArr.length === 0 ? 'Level'
         : lvlArr.length <= 3 ? lvlArr.join(' · ')
         : lvlArr.slice(0,2).join(' · ') + ' +' + (lvlArr.length - 2);
-      const salLabel = salary > 0 ? '$' + Math.round(Math.max(0, salary - 20000)/1000) + 'k–$' + Math.round((salary + 20000)/1000) + 'k' : 'Salary';
+      const salLabel = salary > 0 ? '~$' + Math.round(salary/1000) + 'k' : 'Salary';
       const locLabel = locArr.length === 0 ? 'Location'
         : locArr.length <= 3 ? locArr.join(' · ')
         : locArr.slice(0,2).join(' · ') + ' +' + (locArr.length - 2);
@@ -3689,9 +3710,9 @@
       {v:'onsite',label:'In-office'}
     ];
     const SAL_OPTS = [
-      {v:'0',label:'Any salary'},{v:'60000',label:'~$60k ($40k–$80k)'},
-      {v:'80000',label:'~$80k ($60k–$100k)'},{v:'100000',label:'~$100k ($80k–$120k)'},
-      {v:'120000',label:'~$120k ($100k–$140k)'},{v:'150000',label:'~$150k ($130k–$170k)'}
+      {v:'0',label:'Any salary'},{v:'60000',label:'~$60k'},
+      {v:'80000',label:'~$80k'},{v:'100000',label:'~$100k'},
+      {v:'120000',label:'~$120k'},{v:'150000',label:'~$150k'}
     ];
     function ddItems(type) {
       if (type === 'level')  return LEVEL_OPTS.map(o => ({...o, active: levels.has(o.v)}));
@@ -3767,7 +3788,7 @@
       const locLabels = {worldwide:'Worldwide', usa:'USA', americas:'Americas', canada:'Canada', remote:'Remote', hybrid:'Hybrid', onsite:'In-office'};
       const locs = [...loc].map(l => locLabels[l]).filter(Boolean).join(' / ');
       const kw = keywords ? ' · ' + keywords.split(/\s*,\s*/).filter(Boolean).slice(0,3).join(', ') : '';
-      const salaryFmt = salary ? '$' + Math.round(Math.max(0, salary - 20000)/1000) + 'k–$' + Math.round((salary + 20000)/1000) + 'k' : 'any';
+      const salaryFmt = salary ? '~$' + Math.round(salary/1000) + 'k' : 'any';
       return lvl + ' · ' + salaryFmt + ' · ' + (locs || 'Any location') + (visa ? ' · sponsor' : '') + kw;
     }
 
@@ -3822,7 +3843,19 @@
 
     submitBtn.addEventListener('click', async () => {
       const f = fileInput.files[0];
-      fnEcho.textContent = f ? f.name : 'sample-resume.pdf';
+      if (f) {
+        fnEcho.textContent = f.name;
+        const analyzedLbl = fnEcho.closest('.seg')?.querySelector('.lbl');
+        if (analyzedLbl) analyzedLbl.textContent = 'Analyzed';
+        const fileSvg = fnEcho.closest('.file')?.querySelector('svg');
+        if (fileSvg) fileSvg.style.display = '';
+      } else {
+        const analyzedLbl = fnEcho.closest('.seg')?.querySelector('.lbl');
+        if (analyzedLbl) analyzedLbl.textContent = 'Searching for';
+        const fileSvg = fnEcho.closest('.file')?.querySelector('svg');
+        if (fileSvg) fileSvg.style.display = 'none';
+        fnEcho.textContent = position || 'Based on role & filters';
+      }
       renderFiltersEcho();
 
       const stagesWrap = document.getElementById('fmStages');
