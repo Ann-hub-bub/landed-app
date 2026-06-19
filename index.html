@@ -28,6 +28,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Get your US tech job in 30 days. We send the applications, chase recruiters, and rewrite your resume — you sign the offer. 30-day guarantee or full refund.">
 <title>Landed: Get your US Tech job in 30 days</title>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -2548,7 +2549,7 @@
     </div>
 
     <div class="pick">
-      <a class="choice human" href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener">
+      <a class="choice human" href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;">
         <div class="row">
           <div class="glyph" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square">
@@ -4084,7 +4085,7 @@
       // Handle "I just want a human" locally — no API call needed
       if (text.trim() === "I just want a human →") {
         await wait(800);
-        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
+        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
         conversationHistory.push({ role: 'user', content: text });
         conversationHistory.push({ role: 'assistant', content: humanReply });
         addMsg('joe', humanReply);
@@ -4386,6 +4387,7 @@
 
 </script>
 <script src="paywall.js"></script>
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
 

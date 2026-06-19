@@ -57,7 +57,7 @@ function paySubmit() {
         <div class="pay-icon">&#9875;</div>
         <h3>Yer aboard, mate.</h3>
         <p>We want to know more about you so Cap'n Jack can hit the ground running. Book a quick 15-min call — we'll set up your pipeline together.</p>
-        <a class="pay-calendly-btn" href="https://calendly.com/aboytsova9/coffee-break" target="_blank" rel="noopener">Book your onboarding call &nbsp;→</a>
+        <a class="pay-calendly-btn" href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;">Book your onboarding call &nbsp;→</a>
       </div>
     </div>
   </div>
