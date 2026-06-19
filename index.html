@@ -1833,6 +1833,24 @@
   .fm-criteria input[type=text]::placeholder{ color: var(--mute-2);}
   .fm-criteria input[type=text]:focus{ border-color: var(--orange);}
 
+  /* Animated placeholder for the merged search field */
+  .fm-search-wrap{ position: relative; }
+  .fm-search-wrap input[type=text]::placeholder{ color: transparent; }
+  .fm-ph-cycle{
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    pointer-events: none; height: 1.4em; overflow: hidden;
+    transition: opacity .2s;
+  }
+  .fm-ph-cycle.has-value{ opacity: 0; }
+  .fm-ph-item{
+    display: block; position: absolute; top: 0; left: 0;
+    color: var(--mute-2); font-size: 14.5px; font-family: inherit; line-height: 1.4;
+    white-space: nowrap;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity .45s ease, transform .45s ease;
+  }
+  .fm-ph-item.ph-visible{ opacity: 1; transform: translateY(0); }
+
   /* Resume upload should sit inside the criteria grid cleanly */
   .fm-criteria .demo-upload{ margin:0;}
 
@@ -2212,7 +2230,7 @@
               <span class="num">01</span>
               <div>
                 <div class="kicker">Move 01 · Set yer sights</div>
-                <h3 class="stage-h">Just drop the résumé.</h3>
+                <h3 class="stage-h">What are ye hunting?</h3>
               </div>
             </div>
 
@@ -2220,12 +2238,21 @@
               <div class="demo-form" id="demoForm">
                 <div class="fm-criteria">
                   <div class="field span2">
-                    <label>Position you're hunting</label>
-                    <input type="text" id="fmPosition" placeholder="Senior Product Manager" autocomplete="off" />
+                    <label>What are you looking for?</label>
+                    <div class="fm-search-wrap">
+                      <input type="text" id="fmPosition" autocomplete="off" />
+                      <div class="fm-ph-cycle" id="fmPhCycle" aria-hidden="true">
+                        <span class="fm-ph-item">Product Manager at a fintech startup</span>
+                        <span class="fm-ph-item">Senior iOS Developer in crypto</span>
+                        <span class="fm-ph-item">Data Engineer with ML pipeline experience</span>
+                        <span class="fm-ph-item">Backend Developer at a B2B startup</span>
+                        <span class="fm-ph-item">UX Designer for SaaS products</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="field span2">
-                    <label>Resume</label>
+                    <label>Resume <span style="color:var(--mute-2); text-transform:none; letter-spacing:.02em; font-weight:500;">— optional</span></label>
                     <label class="demo-upload" id="demoUpload">
                       <input type="file" id="demoFile" accept=".pdf,.doc,.docx" hidden />
                       <div class="fn" id="demoFn">pdf, word, max 5mb</div>
@@ -2267,11 +2294,6 @@
                       <button type="button" class="fm-chip" data-v="hybrid">Hybrid</button>
                       <button type="button" class="fm-chip" data-v="onsite">In-office</button>
                     </div>
-                  </div>
-
-                  <div class="field span2">
-                    <label>Keywords <span style="color:var(--mute-2); text-transform:none; letter-spacing:.02em; font-weight:500;">— skills, industries, anything important</span></label>
-                    <input type="text" id="fmKeywords" placeholder="e.g. payments, 0→1, fintech, fraud, ML platforms" autocomplete="off" />
                   </div>
 
                   <div class="field span2">
@@ -2678,11 +2700,7 @@
       <h3>Prepare for departure.</h3>
       <p class="pay-sub">$20/mo — cancel any tide. We'll confirm your spot and send the link to get started.</p>
       <div class="pay-field">
-        <label for="payEmail">Email address</label>
-        <input type="email" id="payEmail" placeholder="you@email.com" autocomplete="email" />
-      </div>
-      <div class="pay-field">
-        <label for="payPhone">Phone number <span style="color:var(--mute-2);font-weight:400;">(optional)</span></label>
+        <label for="payPhone">Phone number</label>
         <input type="tel" id="payPhone" placeholder="+1 (555) 000-0000" autocomplete="tel" />
       </div>
       <button class="pay-submit" onclick="paySubmit()">Complete purchase &nbsp;→</button>
@@ -2789,9 +2807,26 @@
     let lastDomain = null, lastSeniority = null, lastKws = null;
 
     const positionInput = document.getElementById('fmPosition');
-    if (positionInput) positionInput.addEventListener('input', () => { position = positionInput.value.trim(); });
-    const keywordsInput = document.getElementById('fmKeywords');
-    if (keywordsInput) keywordsInput.addEventListener('input', () => { keywords = keywordsInput.value.trim(); });
+    if (positionInput) positionInput.addEventListener('input', () => {
+      position = positionInput.value.trim();
+      const phCycle = document.getElementById('fmPhCycle');
+      if (phCycle) phCycle.classList.toggle('has-value', position.length > 0);
+    });
+
+    // Animated placeholder cycling
+    (function initPlaceholder(){
+      const cycle = document.getElementById('fmPhCycle');
+      if (!cycle) return;
+      const items = cycle.querySelectorAll('.fm-ph-item');
+      if (!items.length) return;
+      let idx = 0;
+      items[0].classList.add('ph-visible');
+      setInterval(() => {
+        items[idx].classList.remove('ph-visible');
+        idx = (idx + 1) % items.length;
+        items[idx].classList.add('ph-visible');
+      }, 2800);
+    })();
     const salaryInput = document.getElementById('fmSalary');
     if (salaryInput) salaryInput.addEventListener('input', () => {
       const n = parseInt(String(salaryInput.value).replace(/[^0-9]/g, ''), 10);
@@ -4356,13 +4391,12 @@
     document.body.style.overflow = '';
   }
   function paySubmit(){
-    const email = document.getElementById('payEmail').value.trim();
-    if(!email || !email.includes('@')){ document.getElementById('payEmail').focus(); return; }
     const phone = document.getElementById('payPhone').value.trim();
+    if(!phone){ document.getElementById('payPhone').focus(); return; }
     fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
       method: 'POST',
       mode: 'no-cors',
-      body: JSON.stringify({ email, phone })
+      body: JSON.stringify({ phone })
     }).catch(() => {});
     document.getElementById('payForm').classList.remove('active');
     document.getElementById('payLoading').classList.add('active');
