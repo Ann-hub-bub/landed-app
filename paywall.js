@@ -6,7 +6,7 @@ function payOpen(e) {
   document.getElementById('paySuccess').classList.remove('active');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
-  setTimeout(function() { document.getElementById('fmPosition').focus(); }, 300);
+  setTimeout(function() { document.getElementById('payPhoneInput').focus(); }, 300);
 }
 
 function payClose() {
@@ -15,8 +15,8 @@ function payClose() {
 }
 
 function paySubmit() {
-  var phone = document.getElementById('fmPosition').value.trim();
-  if (!phone) { document.getElementById('fmPosition').focus(); return; }
+  var phone = document.getElementById('payPhoneInput').value.trim();
+  if (!phone) { document.getElementById('payPhoneInput').focus(); return; }
   fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
     method: 'POST',
     mode: 'no-cors',
@@ -40,8 +40,8 @@ function paySubmit() {
       <h3>Prepare for departure.</h3>
       <p class="pay-sub">$20/mo — cancel any tide. We'll confirm your spot and send the link to get started.</p>
       <div class="pay-field">
-        <label for="fmPosition">Phone number</label>
-        <input type="tel" id="fmPosition" placeholder="+1 (555) 000-0000" autocomplete="tel" />
+        <label for="payPhoneInput">Phone number</label>
+        <input type="tel" id="payPhoneInput" placeholder="+1 (555) 000-0000" autocomplete="tel" />
       </div>
       <button class="pay-submit" id="demoSubmit" onclick="paySubmit()">Complete purchase &nbsp;→</button>
       <div class="pay-trust"><b>30-day offer guarantee.</b> No offer, full refund. One click — no support call.</div>
