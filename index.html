@@ -896,6 +896,17 @@
     .price-band .joe-wrap .joe{ width: 220px;}
     .price-band .joe-wrap .speech{ margin-left: 20px; max-width: 190px; font-size: 12px;}
   }
+  /* ─── Small phone: fix bar scene so tankard stays visible ─── */
+  @media (max-width: 500px){
+    .price-band .bar{ min-height: 400px; padding: 18px 18px 24px;}
+    /* stack scene: Joe+cup on top, bottle below */
+    .price-band .scene{ grid-template-columns: 1fr; gap: 0; align-items: center; justify-items: center;}
+    .price-band .joe-cup{ justify-content: center; gap: 10px;}
+    .price-band .joe-wrap .joe{ width: 150px;}
+    .price-band .joe-wrap .speech{ margin-left: 0; max-width: 160px; font-size: 11px; align-self: flex-end;}
+    .price-band .bottle-col{ justify-content: center; padding-bottom: 0; padding-top: 8px;}
+    .price-band .rum-bottle .pour-hint{ bottom: -20px; font-size: 9px;}
+  }
 
   /* Parchment manifest scroll (legacy, unused) */
   .price-band .scroll{
@@ -1329,6 +1340,10 @@
     .pick{grid-template-columns:1fr;}
     .booking{padding:90px 0 110px;}
     .chat{height:100vh;max-height:100vh;}
+    /* hide reviews 4-6 on mobile — keep only first 3 */
+    .wall .card:nth-child(n+4){ display:none; }
+    /* tighten card padding so both choice cards fit without clipping */
+    .pick a.choice{ padding:22px 20px 20px; }
   }
 
   /* ── Floating chat button ── */
