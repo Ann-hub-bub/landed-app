@@ -44,7 +44,6 @@ function paySubmit() {
         <input type="tel" id="payPhoneInput" placeholder="+1 (555) 000-0000" autocomplete="tel" />
       </div>
       <button class="pay-submit" id="paySubmitBtn" onclick="paySubmit()">Start my trial &nbsp;→</button>
-      <div class="pay-trust"><b>30-day guarantee.</b> No offers? Full refund, one click.</div>
     </div>
     <div class="pay-screen" id="payLoading">
       <div class="pay-loading">
