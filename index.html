@@ -1539,7 +1539,19 @@
   .ch-t2 b{ color:var(--bone);}
   .ch-done-btn{ width:100%; background:var(--orange); color:var(--ink); border:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; padding:16px; cursor:pointer; transition:background .15s;}
   .ch-done-btn:hover{ background:#ff7a30;}
-  @media(max-width:640px){ .ch-checkout{ grid-template-columns:1fr;} .ch-summary{ border-right:none; border-bottom:1px solid var(--line);} .ch-contact{ grid-template-columns:1fr;} .ch-pay-side{ padding:24px 20px;} .ch-success{ padding:14px 20px 28px;}}
+  @media(max-width:640px){
+    .ch-checkout{ grid-template-columns:1fr;}
+    .ch-summary{ border-right:none; border-bottom:1px solid var(--line);}
+    .ch-contact{ grid-template-columns:1fr;}
+    .ch-pay-side{ padding:24px 20px;}
+    .ch-success{ padding:14px 20px 28px;}
+    /* make modal scrollable — without this the bottom buttons are unreachable on mobile */
+    .ch-overlay{ align-items:flex-start; padding:0; overflow-y:auto;}
+    .ch-box{ width:100%; max-width:100%; border-left:none; border-right:none; border-radius:0;}
+    /* hide checklist in summary on mobile — it's already on the landing page */
+    .ch-vals{ display:none;}
+    .ch-plan-sub{ margin-bottom:12px;}
+  }
 
   /* ── Footer ── */
   footer{ border-top:1px solid var(--line); padding: 40px 0;}
@@ -2392,7 +2404,7 @@
                     <label class="fm-toggle">
                       <input type="checkbox" id="fmVisa" />
                       <span class="track"></span>
-                      <span><b>Need sponsorship</b> (H1B, OPT, TN, L1)</span>
+                      <span><b>Need sponsorship</b><span style="display:block;font-size:10px;color:var(--mute);margin-top:2px;letter-spacing:.06em;">H1B · OPT · TN · L1</span></span>
                     </label>
                   </div>
                 </div>
