@@ -28,7 +28,7 @@ function paySubmit() {
   fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
     method: 'POST',
     mode: 'no-cors',
-    body: JSON.stringify({ name: name, phone: phone })
+    body: JSON.stringify({ email: name, phone: phone })
   }).catch(function() {});
 
   document.getElementById('payDoneName').textContent = name ? name + '.' : 'Captain.';

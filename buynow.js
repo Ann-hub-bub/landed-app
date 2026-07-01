@@ -27,7 +27,7 @@ function buyNowPay(method) {
   fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
     method: 'POST',
     mode: 'no-cors',
-    body: JSON.stringify({ name: name, phone: phone, plan: 'landed_monthly', amount: 2000 })
+    body: JSON.stringify({ email: name, phone: phone, plan: 'landed_monthly', amount: 2000 })
   }).catch(function() {});
 
   document.getElementById('chCheckout').style.display = 'none';
