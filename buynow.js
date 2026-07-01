@@ -83,7 +83,7 @@ function buyNowPay(method) {
         </div>
         <div class="ch-sub" style="margin-bottom:16px;">Then pick how to pay &mdash; card details are entered on Stripe&rsquo;s secure page, never stored by Landed.</div>
         <div class="ch-express">
-          <button class="ch-btn-applepay" onclick="buyNowPay('applepay')">&#xF8FF; Apple Pay</button>
+          <button class="ch-btn-applepay" onclick="buyNowPay('applepay')">Apple Pay</button>
           <button class="ch-btn-gpay" onclick="buyNowPay('gpay')">Google Pay</button>
         </div>
         <div class="ch-divider">or pay by card</div>
