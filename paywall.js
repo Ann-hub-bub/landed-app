@@ -36,15 +36,15 @@ function paySubmit() {
   <div class="pay-box">
     <button class="pay-close" onclick="payClose()" aria-label="Close">&times;</button>
     <div class="pay-screen active" id="payForm">
-      <div class="pay-kicker">Secure checkout</div>
-      <h3>Prepare for departure.</h3>
-      <p class="pay-sub">$20/mo — cancel any tide. We'll confirm your spot and send the link to get started.</p>
+      <div class="pay-kicker">Get hired</div>
+      <h3>Start your trial.</h3>
+      <p class="pay-sub">We'll reach out within 24 hours to get you started.</p>
       <div class="pay-field">
         <label for="payPhoneInput">Phone number</label>
         <input type="tel" id="payPhoneInput" placeholder="+1 (555) 000-0000" autocomplete="tel" />
       </div>
-      <button class="pay-submit" id="paySubmitBtn" onclick="paySubmit()">Complete purchase &nbsp;→</button>
-      <div class="pay-trust"><b>30-day offer guarantee.</b> No offer, full refund. One click — no support call.</div>
+      <button class="pay-submit" id="paySubmitBtn" onclick="paySubmit()">Start my trial &nbsp;→</button>
+      <div class="pay-trust"><b>30-day guarantee.</b> No offers? Full refund, one click.</div>
     </div>
     <div class="pay-screen" id="payLoading">
       <div class="pay-loading">
