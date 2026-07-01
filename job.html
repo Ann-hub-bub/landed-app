@@ -262,36 +262,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .sticky-bar .l .pair,.sticky-bar .l .divider { display:none; }
     .hero-outcomes .row { grid-template-columns:1fr; }
   }
-  /* ── Payment modal ── */
-  .pay-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:9000; display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition: opacity .25s; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);}
+  /* ── Sign-up modal ── */
+  .pay-overlay{ position:fixed; inset:0; background:rgba(4,4,6,.55); backdrop-filter:blur(1px); -webkit-backdrop-filter:blur(1px); z-index:9000; display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .25s;}
   .pay-overlay.open{ opacity:1; pointer-events:all;}
-  .pay-box{ background:var(--ink-2); border:1px solid var(--line); max-width:440px; width:100%; padding:40px 36px; position:relative; transform: translateY(12px); transition: transform .25s;}
+  .pay-box{ background:var(--ink-2); border:1px solid var(--line); width:460px; max-width:100%; position:relative; box-shadow:0 40px 90px rgba(0,0,0,.6); overflow:hidden; transform:translateY(12px); transition:transform .25s;}
   .pay-overlay.open .pay-box{ transform:none;}
-  .pay-close{ position:absolute; top:16px; right:18px; background:none; border:none; color:var(--mute); font-size:22px; cursor:pointer; line-height:1; padding:4px;}
-  .pay-close:hover{ color:var(--bone);}
-  .pay-kicker{ font-size:11px; color:var(--orange); letter-spacing:.2em; text-transform:uppercase; font-weight:600; margin-bottom:14px;}
-  .pay-box h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:26px; line-height:1.1; letter-spacing:-.02em; margin:0 0 8px; color:var(--bone);}
-  .pay-box .pay-sub{ color:var(--mute); font-size:14px; margin:0 0 28px; line-height:1.5;}
-  .pay-field{ margin-bottom:16px;}
-  .pay-field label{ display:block; font-size:12px; color:var(--mute); letter-spacing:.04em; margin-bottom:7px;}
-  .pay-field input{ width:100%; box-sizing:border-box; background:var(--ink); border:1px solid var(--line); color:var(--bone); font-family:inherit; font-size:15px; padding:13px 14px; outline:none; transition:border-color .15s;}
+  .pay-accent{ height:4px; background:var(--orange);}
+  .pay-body{ padding:34px 36px 32px; position:relative;}
+  .pay-close{ position:absolute; top:20px; right:22px; width:30px; height:30px; display:flex; align-items:center; justify-content:center; background:none; border:1px solid transparent; color:var(--mute); font-size:18px; cursor:pointer; z-index:3; transition:color .15s, border-color .15s; line-height:1; padding:0;}
+  .pay-close:hover{ color:var(--bone); border-color:var(--line);}
+  .pay-who{ display:flex; align-items:center; gap:14px; margin-bottom:24px; padding-bottom:22px; border-bottom:1px solid var(--line);}
+  .pay-who .av{ width:52px; height:52px; flex:0 0 auto; border-radius:50%; overflow:hidden; background:#0c0c0f; border:1px solid var(--line); display:flex; align-items:flex-end; justify-content:center;}
+  .pay-who .av img{ width:52px; margin-bottom:-4px;}
+  .pay-who .bubble{ background:var(--ink-3); border:1px solid var(--line); padding:10px 14px; font-family:'Instrument Serif',serif; font-style:italic; font-size:15px; color:var(--bone); line-height:1.35;}
+  .pay-kicker{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--orange); font-weight:700;}
+  .pay-box h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; letter-spacing:-.025em; color:var(--bone); line-height:1.05; margin:10px 0 26px;}
+  .pay-field{ margin-bottom:18px;}
+  .pay-field label{ display:block; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute); font-weight:600; margin-bottom:10px;}
+  .pay-field input{ width:100%; box-sizing:border-box; background:var(--ink-3); border:1px solid var(--line); color:var(--bone); padding:16px 18px; font-family:'Inter',sans-serif; font-size:16px; outline:none; transition:border-color .15s;}
   .pay-field input:focus{ border-color:var(--orange);}
   .pay-field input::placeholder{ color:var(--mute-2);}
-  .pay-submit{ width:100%; background:var(--orange); color:var(--ink); border:none; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; padding:18px; cursor:pointer; margin-top:8px; transition:background .15s, transform .15s; display:flex; align-items:center; justify-content:center; gap:10px;}
+  .pay-field input.err{ border-color:#d44a0a;}
+  .pay-err-msg{ color:var(--orange); font-size:12.5px; margin:-10px 0 16px; display:none;}
+  .pay-err-msg.show{ display:block;}
+  .pay-submit{ width:100%; background:var(--orange); color:var(--ink); border:none; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px; padding:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; transition:background .15s, transform .12s; margin-top:6px;}
   .pay-submit:hover{ background:#ff7a30; transform:translateY(-1px);}
-  .pay-trust{ font-size:12px; color:var(--mute); margin-top:14px; text-align:center; line-height:1.5;}
-  .pay-trust b{ color:var(--orange);}
-  .pay-screen{ display:none;}
-  .pay-screen.active{ display:block;}
-  .pay-loading{ text-align:center; padding:20px 0 10px;}
-  .pay-spinner{ width:48px; height:48px; border:3px solid var(--line); border-top-color:var(--orange); border-radius:50%; animation:payspin .8s linear infinite; margin:0 auto 24px;}
-  @keyframes payspin{ to{ transform:rotate(360deg);} }
-  .pay-loading p{ color:var(--mute); font-size:15px; line-height:1.6;}
-  .pay-success{ text-align:center; padding:10px 0;}
-  .pay-success .pay-icon{ font-size:40px; margin-bottom:18px;}
-  .pay-success h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:-.02em; color:var(--bone); margin:0 0 10px;}
-  .pay-success p{ color:var(--mute); font-size:14px; line-height:1.6; margin:0 0 24px;}
-  .pay-calendly-btn{ display:inline-flex; align-items:center; gap:10px; background:var(--orange); color:var(--ink); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; padding:16px 28px; text-decoration:none; transition:background .15s, transform .15s;}
+  .pay-pane{ display:none;}
+  .pay-pane.active{ display:block; animation:paySlideIn .32s cubic-bezier(.4,0,.2,1);}
+  @keyframes paySlideIn{ from{ opacity:0; transform:translateX(16px);} to{ opacity:1; transform:translateX(0);}}
+  .pay-success-wrap{ text-align:center; padding:10px 36px 34px;}
+  .pay-success-wrap .joe-hero{ width:180px; margin:6px auto 0; display:block; filter:drop-shadow(0 18px 30px rgba(255,106,31,.4));}
+  .pay-badge{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#5ef0a8; font-weight:700; margin:16px 0 10px;}
+  .pay-success-wrap h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:38px; letter-spacing:-.03em; color:var(--bone); margin:0 0 12px;}
+  .pay-success-wrap h3 em{ color:var(--orange); font-style:normal;}
+  .pay-success-wrap p{ color:var(--bone-2); font-size:15px; line-height:1.55; margin:0 auto 24px; max-width:320px;}
+  .pay-success-wrap p b{ color:var(--bone);}
+  .pay-next{ display:flex; flex-direction:column; border:1px solid var(--line); text-align:left; margin-bottom:24px;}
+  .pay-next .row{ display:grid; grid-template-columns:30px 1fr; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line); align-items:center;}
+  .pay-next .row:last-child{ border-bottom:0;}
+  .pay-next .n{ width:24px; height:24px; border-radius:50%; background:var(--ink-3); border:1px solid var(--line); color:var(--orange); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center;}
+  .pay-next .t{ font-size:13.5px; color:var(--bone-2); line-height:1.4;}
+  .pay-next .t b{ color:var(--bone);}
+  .pay-done-btn{ width:100%; background:transparent; color:var(--bone); border:1px solid var(--line); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; padding:15px; cursor:pointer; transition:border-color .15s, color .15s;}
+  .pay-done-btn:hover{ border-color:var(--orange); color:var(--orange);}
+  @media(max-width:480px){ .pay-body{ padding:24px 20px 20px;} .pay-success-wrap{ padding:10px 20px 24px;} .pay-box h3{ font-size:26px;} .pay-success-wrap h3{ font-size:28px;}}
 </style>
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
