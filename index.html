@@ -51,7 +51,7 @@
     --green:#5ef0a8;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--ink);color:var(--bone);}
+  html,body{margin:0;background:var(--ink);color:var(--bone);overflow-x:hidden;}
   body{ font-family:'Inter', system-ui, sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
   a{ color:inherit; text-decoration:none;}
   button{font-family:inherit;}
@@ -73,7 +73,7 @@
   nav.top .cta:hover{ background: var(--orange-soft); }
 
   /* ── Hero ── */
-  section.hero{ padding: 96px 0 80px; position:relative;}
+  section.hero{ padding: 96px 0 80px; position:relative; overflow-x:hidden;}
   .hero .grid{ display:grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items:center;}
   .eyebrow{ display:inline-flex; align-items:center; gap:10px; font-size:12px; color: var(--orange); letter-spacing:.16em; text-transform:uppercase; font-weight:600; margin-bottom: 22px;}
   .eyebrow .dot{ width:8px; height:8px; border-radius:50%; background: var(--green); box-shadow:0 0 0 4px rgba(94,240,168,.18); animation: pulse 2.4s ease-out infinite;}
