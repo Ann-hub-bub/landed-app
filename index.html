@@ -1350,6 +1350,9 @@
     .final .final-portrait{ height:320px; overflow:hidden; }
     .final .final-portrait img{ width:280px; }
     .final .final-portrait::before{ width:300px; height:300px; }
+    /* chat with keyboard open — remove overlay padding and let chat fill visual viewport */
+    .chat-overlay{ padding:0; align-items:stretch; }
+    .chat{ height:100%; max-height:100%; width:100%; max-width:100%; border-left:none; border-right:none; }
   }
 
   /* ── Floating chat button ── */
@@ -2240,7 +2243,7 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">F<span class="bleep-nav"></span>Q</a>
     </div>
-    <a href="#pricing" class="cta" onclick="payOpen(event)">Get me hired →</a>
+    <a href="#pricing" class="cta" data-entry-cta="get_me_hired" onclick="payOpen(event)">Get me hired →</a>
   </div>
 </nav>
 
@@ -2255,7 +2258,7 @@
         <p class="lede">We chase recruiters when they ghost.</p>
         <p class="lede"><b>You sign the offer.</b></p>
         <div class="actions">
-          <a class="btn-primary" href="#demo">Drop your resume <span class="ar">→</span></a>
+          <a class="btn-primary" href="#demo" data-entry-cta="drop_resume">Drop your resume <span class="ar">→</span></a>
           <div class="btn-ghost">30 days. <b>Or full refund.</b><br/>No forms.</div>
         </div>
         <div class="stats">
@@ -2598,7 +2601,7 @@
           <li><span class="m">✓</span><span><b>30-day offer guarantee.</b> No offer in 30, full refund. One click: no support call.</span></li>
         </ul>
         <div class="pour-cta-block">
-          <a class="buy-btn" id="buyBtn" href="#" onclick="buyNowOpen(event)">
+          <a class="buy-btn" id="buyBtn" href="#" data-entry-cta="buy_now" onclick="buyNowOpen(event)">
             <span class="label">Buy now <span class="ar">→</span></span>
             <span class="price">$<span data-tweak-price>20</span><small>/mo</small></span>
           </a>
@@ -2632,7 +2635,7 @@
                    alt="Cap'n Joe Bone" />
             </div>
             <!-- the tankard becomes the Buy-now CTA when served -->
-            <a id="tankard" class="tankard" href="#" aria-label="Buy now — $20/mo" onclick="buyNowOpen(event)">
+            <a id="tankard" class="tankard" href="#" aria-label="Buy now — $20/mo" data-entry-cta="buy_now" onclick="buyNowOpen(event)">
               <div class="handle"></div>
               <div class="inside">
                 <div class="rum"></div>
@@ -2678,7 +2681,7 @@
     </div>
 
     <div class="pick">
-      <a class="choice human" href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;">
+      <a class="choice human" href="javascript:void(0)" data-entry-cta="book_call" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step9_calendly_popup_open',popup_source:'booking_section'});Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;">
         <div class="row">
           <div class="glyph" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square">
@@ -2694,7 +2697,7 @@
         <div class="meta"><span class="dot gold"></span>Anna · usually replies same day</div>
       </a>
 
-      <a class="choice bot chatWithJoe" href="#" id="openChat">
+      <a class="choice bot chatWithJoe" href="#" id="openChat" data-entry-cta="chat_open">
         <div class="row">
           <div class="glyph" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square">
@@ -2740,7 +2743,7 @@
 </div>
 
 <!-- Floating chat button -->
-<button class="chat-fab chatWithJoe" id="chatFab" aria-label="Chat with Joe Bones">
+<button class="chat-fab chatWithJoe" id="chatFab" aria-label="Chat with Joe Bones" data-entry-cta="chat_open">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3l3 3 3-3h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
   <span class="fab-dot" aria-hidden="true"></span>
 </button>
@@ -2795,7 +2798,7 @@
         <h2 class="display">Stop asking.<br/>Start <span class="hot">taking</span> seats.</h2>
         <div class="lede">$<span data-tweak-price-3>20</span>. Thirty days. One offer — or your money back. <b>Jack's waiting.</b></div>
         <div class="actions">
-          <a class="btn-primary" href="#demo">Drop your resume <span class="ar">→</span></a>
+          <a class="btn-primary" href="#demo" data-entry-cta="drop_resume">Drop your resume <span class="ar">→</span></a>
           <div class="btn-ghost" style="text-align:left">No forms. <b>No call with sales.</b> Just the work.</div>
         </div>
       </div>
@@ -3963,6 +3966,8 @@
         const viewBtn = el.querySelector('.view-job-btn');
         if (viewBtn) {
           viewBtn.addEventListener('click', () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'step3_demo_view_job', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
             sessionStorage.setItem('landed_job_detail', JSON.stringify(j));
             window.location.href = '/job.html';
           });
@@ -3972,6 +3977,8 @@
     }
 
     submitBtn.addEventListener('click', async () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'step2_demo_find_jobs', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
       const f = fileInput.files[0];
       if (f) {
         fnEcho.textContent = f.name;
@@ -4213,8 +4220,10 @@
 
       // Handle "I just want a human" locally — no API call needed
       if (text.trim() === "I just want a human →") {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'chat_human_requested', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
         await wait(800);
-        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
+        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step9_calendly_popup_open',popup_source:'joe_chat'});Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
         conversationHistory.push({ role: 'user', content: text });
         conversationHistory.push({ role: 'assistant', content: humanReply });
         addMsg('joe', humanReply);
@@ -4530,6 +4539,19 @@
     window.visualViewport.addEventListener('resize', updateFab);
     window.addEventListener('resize', updateFab);
     updateFab();
+  })();
+
+  // ── Funnel tracking: step1 — remembers which door the visitor used, ──
+  // ── so later steps (contact form, purchase, booking) can report it back. ──
+  (function(){
+    document.querySelectorAll('[data-entry-cta]').forEach(function(el){
+      el.addEventListener('click', function(){
+        var entryType = el.getAttribute('data-entry-cta');
+        sessionStorage.setItem('landed_entry_type', entryType);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'step1_entry_click', entry_type: entryType });
+      });
+    });
   })();
 
 </script>

@@ -25,7 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     --green:#5ef0a8;
   }
   * { box-sizing:border-box; }
-  html, body { margin:0; padding:0; }
+  html, body { margin:0; padding:0; overflow-x:hidden; }
   body { background:var(--ink); color:var(--bone); font-family:'Inter',system-ui,sans-serif; font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   a { color:inherit; text-decoration:none; }
   button { font-family:inherit; cursor:pointer; }
@@ -248,8 +248,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .skills,.team,.benefits,.process,.apply { padding:60px 0; }
   }
   @media(max-width:768px){
+    /* hide floating back button — browser native back handles navigation on mobile */
+    .floating-back { display:none; }
     .hero-grid { padding:36px 0; }
-    .hero h1 { font-size:42px; }
+    .hero h1 { font-size:38px; }
     .skills .twocol { grid-template-columns:1fr; gap:32px; }
     .team .grid { grid-template-columns:1fr; }
     .benefits .grid { grid-template-columns:1fr 1fr; grid-auto-rows:auto; }
@@ -261,6 +263,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .apply .submit-paper { grid-template-columns:1fr; }
     .sticky-bar .l .pair,.sticky-bar .l .divider { display:none; }
     .hero-outcomes .row { grid-template-columns:1fr; }
+  }
+  @media(max-width:500px){
+    .wrap { padding:0 20px; }
+    /* steps go 1-column on small phones */
+    .process .flow { grid-template-columns:1fr; gap:24px; }
+    /* apply big button full width */
+    .apply-big { width:100%; justify-content:center; }
+    /* pay modal: scrollable on mobile keyboard-up */
+    .pay-overlay { align-items:flex-start; padding:0; overflow:hidden; }
+    .pay-box { max-height:100dvh; overflow-y:auto; border-left:none; border-right:none; }
   }
   /* ── Sign-up modal ── */
   .pay-overlay{ position:fixed; inset:0; background:rgba(4,4,6,.55); backdrop-filter:blur(1px); -webkit-backdrop-filter:blur(1px); z-index:9000; display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .25s;}
@@ -396,7 +408,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="nav">
   <div class="wrap">
     <div class="logo">Landed<b>.</b></div>
-    <a class="cta" href="#" onclick="payOpen(event)">Get me hired →</a>
+    <a class="cta" href="#" data-entry-cta="get_me_hired" onclick="payOpen(event)">Get me hired →</a>
   </div>
 </nav>
 
@@ -1082,7 +1094,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="guarantee">
             <b>30-day Landed guarantee.</b> No offer = full refund. We read every answer within 48 hours.
           </div>
-          <a class="apply-big" id="applySubmit" href="#" onclick="payOpen(event)">
+          <a class="apply-big" id="applySubmit" href="#" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step4_demo_apply_click',entry_type:sessionStorage.getItem('landed_entry_type')||'unknown'});payOpen(event)">
             Apply for ${esc(roleCta)} · ${esc(job.co)} →
           </a>
         </div>
@@ -1125,6 +1137,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }, { rootMargin:'-120px 0px 0px 0px', threshold:0 }).observe(hero);
   }
 
+})();
+
+// ── Funnel tracking: step1 — remembers which door the visitor used ──
+(function(){
+  document.querySelectorAll('[data-entry-cta]').forEach(function(el){
+    el.addEventListener('click', function(){
+      var entryType = el.getAttribute('data-entry-cta');
+      sessionStorage.setItem('landed_entry_type', entryType);
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'step1_entry_click', entry_type: entryType });
+    });
+  });
 })();
 </script>
 
