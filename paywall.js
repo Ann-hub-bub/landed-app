@@ -44,7 +44,6 @@ function paySubmit() {
 }
 
 function payPay(method) {
-  document.getElementById('payPaymentPane').classList.remove('active');
   document.getElementById('payPtext').textContent = method === 'card'
     ? 'Taking you to secure checkout…'
     : 'Confirming payment…';
@@ -58,6 +57,7 @@ function payPay(method) {
   }).catch(function() {});
 
   setTimeout(function() {
+    document.getElementById('payPaymentPane').classList.remove('active');
     document.getElementById('payProcessing').classList.remove('show');
     document.getElementById('paySuccessPane').classList.add('active');
   }, 1600);
@@ -124,7 +124,7 @@ function payPay(method) {
           <div class="row"><span class="n">2</span><span class="t"><b>We build your shortlist</b> &mdash; roles matched to your profile.</span></div>
           <div class="row"><span class="n">3</span><span class="t"><b>You start applying</b> &mdash; one tap per role.</span></div>
         </div>
-        <button class="pay-done-btn" onclick="payClose()">Got it &mdash; take me in &nbsp;&rarr;</button>
+        <button class="pay-submit" onclick="Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'})">Book your onboarding call &nbsp;&rarr;</button>
       </div>
     </div>
   </div>
