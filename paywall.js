@@ -1,5 +1,7 @@
 function payOpen(e) {
   if (e) e.preventDefault();
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'step5_contact_form_open', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen' });
   var overlay = document.getElementById('payOverlay');
   document.getElementById('payFormPane').classList.add('active');
   document.getElementById('payPaymentPane').classList.remove('active');
@@ -29,6 +31,9 @@ function paySubmit() {
   document.getElementById('payPhoneInput').classList.remove('err');
   document.getElementById('payPhoneErr').classList.remove('show');
 
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'step6_lead_contact_submitted', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen' });
+
   fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
     method: 'POST',
     mode: 'no-cors',
@@ -44,6 +49,8 @@ function paySubmit() {
 }
 
 function payPay(method) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'step7_payment_method_selected', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen', method: method });
   document.getElementById('payPtext').textContent = method === 'card'
     ? 'Taking you to secure checkout…'
     : 'Confirming payment…';
@@ -60,6 +67,8 @@ function payPay(method) {
     document.getElementById('payPaymentPane').classList.remove('active');
     document.getElementById('payProcessing').classList.remove('show');
     document.getElementById('paySuccessPane').classList.add('active');
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'step8_trial_success_shown', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen' });
   }, 1600);
 }
 
@@ -124,7 +133,7 @@ function payPay(method) {
           <div class="row"><span class="n">2</span><span class="t"><b>We build your shortlist</b> &mdash; roles matched to your profile.</span></div>
           <div class="row"><span class="n">3</span><span class="t"><b>You start applying</b> &mdash; one tap per role.</span></div>
         </div>
-        <button class="pay-submit" onclick="Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'})">Book your onboarding call &nbsp;&rarr;</button>
+        <button class="pay-submit" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step9_calendly_popup_open',popup_source:'onboarding'});Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'})">Book your onboarding call &nbsp;&rarr;</button>
       </div>
     </div>
   </div>
