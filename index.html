@@ -1346,10 +1346,14 @@
     .wall .card:nth-child(n+4){ display:none; }
     /* tighten card padding so both choice cards fit without clipping */
     .pick a.choice{ padding:22px 20px 20px; }
+    /* shrink final CTA portrait so Cap'n Jack compass doesn't overflow right edge */
+    .final .final-portrait{ height:320px; overflow:hidden; }
+    .final .final-portrait img{ width:280px; }
+    .final .final-portrait::before{ width:300px; height:300px; }
   }
 
   /* ── Floating chat button ── */
-  .chat-fab{position:fixed;bottom:28px;right:28px;z-index:8900;width:56px;height:56px;border-radius:50%;background:var(--orange);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(255,106,31,.4);transition:transform .18s,box-shadow .18s;animation:fabPulse 3s 2s ease-out;}
+  .chat-fab{position:fixed;bottom:28px;right:28px;z-index:9100;width:56px;height:56px;border-radius:50%;background:var(--orange);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(255,106,31,.4);transition:transform .18s,box-shadow .18s;animation:fabPulse 3s 2s ease-out;}
   .chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,.65),0 0 0 0 rgba(255,106,31,.0);}
   .chat-fab svg{width:26px;height:26px;fill:var(--ink);flex-shrink:0;}
   .chat-fab .fab-dot{position:absolute;top:10px;right:10px;width:10px;height:10px;border-radius:50%;background:var(--green);border:2px solid var(--ink);box-shadow:0 0 8px var(--green);}
@@ -4508,6 +4512,24 @@
       if (!served) { pour(); }
       else { payOpen(e); }
     });
+  })();
+
+  // Keep chat FAB above Samsung Internet's browser chrome on mobile
+  (function(){
+    var fab = document.getElementById('chatFab');
+    if (!fab || !window.visualViewport) return;
+    function updateFab(){
+      if (window.innerWidth > 720) { fab.style.bottom = ''; return; }
+      // Some browsers (Samsung Internet) use layout viewport for position:fixed,
+      // so the FAB ends up hidden under the browser navigation bar.
+      // Calculate how many pixels of layout viewport are below the visual viewport.
+      var hidden = Math.max(0, window.innerHeight - window.visualViewport.offsetTop - window.visualViewport.height);
+      fab.style.bottom = (28 + hidden) + 'px';
+    }
+    window.visualViewport.addEventListener('scroll', updateFab);
+    window.visualViewport.addEventListener('resize', updateFab);
+    window.addEventListener('resize', updateFab);
+    updateFab();
   })();
 
 </script>
