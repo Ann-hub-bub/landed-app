@@ -6,12 +6,14 @@ function buyNowOpen(e) {
   document.getElementById('chSuccess').classList.remove('show');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.body.classList.add('modal-open');
   setTimeout(function() { document.getElementById('chNameInput').focus(); }, 300);
 }
 
 function buyNowClose() {
   document.getElementById('chOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.body.classList.remove('modal-open');
 }
 
 function buyNowPay(method) {

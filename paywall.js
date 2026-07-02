@@ -2,15 +2,19 @@ function payOpen(e) {
   if (e) e.preventDefault();
   var overlay = document.getElementById('payOverlay');
   document.getElementById('payFormPane').classList.add('active');
+  document.getElementById('payPaymentPane').classList.remove('active');
   document.getElementById('paySuccessPane').classList.remove('active');
+  document.getElementById('payProcessing').classList.remove('show');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.body.classList.add('modal-open');
   setTimeout(function() { document.getElementById('payNameInput').focus(); }, 300);
 }
 
 function payClose() {
   document.getElementById('payOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.body.classList.remove('modal-open');
 }
 
 function paySubmit() {
@@ -31,10 +35,32 @@ function paySubmit() {
     body: JSON.stringify({ email: name, phone: phone })
   }).catch(function() {});
 
+  document.getElementById('payOverlay').dataset.name = name;
+  document.getElementById('payOverlay').dataset.phone = phone;
   document.getElementById('payDoneName').textContent = name ? name + '.' : 'Captain.';
   document.getElementById('payDonePhone').textContent = phone;
   document.getElementById('payFormPane').classList.remove('active');
-  document.getElementById('paySuccessPane').classList.add('active');
+  document.getElementById('payPaymentPane').classList.add('active');
+}
+
+function payPay(method) {
+  document.getElementById('payPaymentPane').classList.remove('active');
+  document.getElementById('payPtext').textContent = method === 'card'
+    ? 'Taking you to secure checkout…'
+    : 'Confirming payment…';
+  document.getElementById('payProcessing').classList.add('show');
+
+  var overlay = document.getElementById('payOverlay');
+  fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify({ email: overlay.dataset.name, phone: overlay.dataset.phone, plan: 'landed_monthly', amount: 2000 })
+  }).catch(function() {});
+
+  setTimeout(function() {
+    document.getElementById('payProcessing').classList.remove('show');
+    document.getElementById('paySuccessPane').classList.add('active');
+  }, 1600);
 }
 
 (function() {
@@ -63,6 +89,28 @@ function paySubmit() {
         </div>
         <button class="pay-submit" id="paySubmitBtn" onclick="paySubmit()">Sign up &nbsp;&rarr;</button>
       </div>
+    </div>
+
+    <div class="pay-pane" id="payPaymentPane">
+      <div class="pay-body">
+        <div class="pay-kicker">Get hired</div>
+        <h3>Lock in your trial.</h3>
+        <div class="ch-line"><span>Landed, monthly</span><span>$20.00</span></div>
+        <div class="ch-total" style="margin-bottom:22px;"><span class="ch-lab">Due today</span><span class="ch-amt">$20<small>/mo</small></span></div>
+        <div class="ch-express">
+          <button class="ch-btn-applepay" onclick="payPay('applepay')">Apple Pay</button>
+          <button class="ch-btn-gpay" onclick="payPay('gpay')">Google Pay</button>
+        </div>
+        <div class="ch-divider">or pay by card</div>
+        <button class="ch-btn-card" onclick="payPay('card')">Credit or debit card &nbsp;&rarr;</button>
+        <div class="ch-card-note"><span class="ch-lk">&#x1F512;</span><span>You&rsquo;ll enter your card on <b>Stripe&rsquo;s</b> secure checkout. We never see or store your card number.</span></div>
+      </div>
+    </div>
+
+    <div class="ch-processing" id="payProcessing">
+      <div class="ch-spinner"></div>
+      <div class="ch-ptext" id="payPtext">Taking you to secure checkout&hellip;</div>
+      <div class="ch-psub">&#x1F512; Powered by Stripe</div>
     </div>
 
     <div class="pay-pane" id="paySuccessPane">
