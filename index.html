@@ -1948,13 +1948,14 @@
   .fm-ph-cycle{
     position: absolute; left: 14px; right: 14px; top: 50%; transform: translateY(-50%);
     pointer-events: none; height: 1.4em;
+    overflow: hidden;
     transition: opacity .2s;
   }
   .fm-ph-cycle.has-value{ opacity: 0; }
   .fm-ph-item{
-    display: block; position: absolute; top: 0; left: 0;
+    display: block; position: absolute; top: 0; left: 0; right: 0;
     color: var(--mute-2); font-size: 14.5px; font-family: inherit; line-height: 1.4;
-    white-space: nowrap;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     opacity: 0; transform: translateY(8px);
     transition: opacity .45s ease, transform .45s ease;
   }
