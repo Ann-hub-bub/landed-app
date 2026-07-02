@@ -1357,7 +1357,8 @@
   /* also hide FAB when pay/checkout modals are open — they're injected after FAB in DOM so we use body class */
   body.modal-open .chat-fab{display:none;}
   @keyframes fabPulse{0%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(255,106,31,.55);}70%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 14px rgba(255,106,31,0);}100%{box-shadow:0 6px 24px rgba(0,0,0,.55),0 0 0 0 rgba(255,106,31,0);}}
-  @media(max-width:720px){.chat-fab{bottom:18px;right:18px;width:52px;height:52px;}}
+  /* on mobile, push FAB above browser navigation bar (~56px on Android) */
+  @media(max-width:720px){.chat-fab{bottom:80px;right:18px;width:52px;height:52px;}}
 
   /* ── Bleep bar ── */
   .bleep{ display:inline-block; background:var(--orange); color:var(--ink); border-radius:2px; padding:2px 10px; margin:0 6px; font-size:.7em; font-weight:700; letter-spacing:.15em; text-transform:uppercase; vertical-align:middle; transform:rotate(-2deg); font-family:'Space Grotesk',sans-serif; user-select:none; cursor:default;}
@@ -1549,9 +1550,10 @@
     .ch-contact{ grid-template-columns:1fr;}
     .ch-pay-side{ padding:24px 20px;}
     .ch-success{ padding:14px 20px 28px;}
-    /* make modal scrollable — without this the bottom buttons are unreachable on mobile */
-    .ch-overlay{ align-items:flex-start; padding:0; overflow-y:auto;}
-    .ch-box{ width:100%; max-width:100%; border-left:none; border-right:none; border-radius:0;}
+    /* overlay is non-scrollable — prevents horizontal clip bug on Android */
+    .ch-overlay{ align-items:flex-start; padding:0; overflow:hidden;}
+    /* box itself scrolls — no horizontal scroll drift possible */
+    .ch-box{ width:100%; max-width:100%; border-left:none; border-right:none; border-radius:0; max-height:100dvh; overflow-y:auto;}
     /* hide checklist in summary on mobile — it's already on the landing page */
     .ch-vals{ display:none;}
     .ch-plan-sub{ margin-bottom:12px;}
