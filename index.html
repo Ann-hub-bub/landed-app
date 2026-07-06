@@ -1727,37 +1727,27 @@
   .fm-toggle input:checked + .track::after{ background: var(--ink); transform: translateX(16px);}
   .fm-toggle b{ color: var(--bone); font-weight:600;}
 
-  /* Stage 2 — job cards (real-looking, expandable) in 2 columns */
+  /* Stage 2 — simplified job rows: logo · role · company/location · match% · chevron */
   .fm-jobs{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 6px 0 22px;}
-  @media (max-width: 760px){ .fm-jobs{ grid-template-columns: 1fr;} }
-  .fm-job{ background: var(--ink-3); border: 1px solid var(--line); padding: 18px 22px; transition: border-color .18s, background .18s;}
-  .fm-job:hover{ border-color: rgba(255,106,31,.35);}
-  .fm-job .row1{ display:grid; grid-template-columns: 38px 1fr auto auto; align-items:center; gap:14px;}
-  .fm-job .logo{ width:38px; height:38px; background: var(--ink); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; color: var(--bone); letter-spacing:-.02em;}
-  .fm-job .titleblock .role{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16.5px; letter-spacing:-.01em; line-height:1.2;}
-  .fm-job .titleblock .co{ font-size:12.5px; color: var(--mute); margin-top:3px;}
-  .fm-job .pay{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; color: var(--bone); text-align:right; line-height:1.05;}
-  .fm-job .pay small{ display:block; font-size:10.5px; color: var(--mute); margin-top:3px; font-family:'Inter', sans-serif; font-weight:400; letter-spacing:.04em; text-transform:uppercase;}
-  .fm-job .match{ background: rgba(255,106,31,.16); color: var(--orange); padding: 6px 10px; font-size:11px; font-weight:700; letter-spacing:.06em; font-family:'Space Grotesk',sans-serif;}
+  .fm-job{ display:block; background: var(--ink-3); border: 1px solid var(--line); color:inherit; text-decoration:none; transition: border-color .18s, background .18s;}
+  .fm-job:hover{ border-color: rgba(255,106,31,.4);}
+  .fm-job-head{ display:grid; grid-template-columns: 40px 1fr auto 14px; align-items:center; gap:13px; padding: 16px 18px;}
+  .fm-job-logo{ width:40px; height:40px; border-radius:9px; background: var(--ink); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; color: var(--bone);}
+  .fm-job-tb{ min-width:0;}
+  .fm-job-tb .role{ display:block; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15.5px; color: var(--bone); line-height:1.25; letter-spacing:-.01em;}
+  .fm-job-tb .co{ display:block; font-size:12.5px; color: var(--mute); margin-top:3px;}
+  .fm-job-match{ background: rgba(255,106,31,.16); color: var(--orange); padding: 6px 10px; font-size:11px; font-weight:700; letter-spacing:.06em; font-family:'Space Grotesk',sans-serif; white-space:nowrap;}
   .fm-job.top-match{ border-color: var(--orange); box-shadow: 0 0 0 1px var(--orange);}
-  .fm-job.top-match .match{ background: var(--orange); color: var(--ink);}
-  .fm-job .row2{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin-top: 14px;}
-  .fm-job .row2 .tag{ font-size:11px; color: var(--mute); border: 1px solid var(--line-2); padding: 3px 8px; letter-spacing:.02em;}
-  .fm-job .row2 .tag.visa{ color: var(--green); border-color: rgba(94,240,168,.3);}
-  .fm-job .row2 .age{ font-size:11px; color: var(--mute); margin-left:auto; font-family:'Space Mono', monospace;}
-  .fm-job .expand{ display:block; padding-top: 18px; margin-top: 16px; border-top: 1px solid rgba(255,255,255,.05);}
-  @keyframes fmExpand{ from{opacity:0; transform: translateY(-4px);} to{opacity:1; transform:none;} }
-  .fm-job .expand .why{ font-size: 13.5px; color: var(--bone-2); line-height: 1.55; margin: 0 0 16px;}
-  .fm-job .expand .why b{ color: var(--orange); font-weight:600;}
-  .fm-job .expand .grid{ display:grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 16px;}
-  .fm-job .expand .col h6{ font-family:'Space Grotesk',sans-serif; font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color: var(--mute); font-weight:700; margin: 0 0 10px;}
-  .fm-job .expand .col ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:7px;}
-  .fm-job .expand .col li{ font-size:13px; color: var(--bone-2); display:flex; align-items:flex-start; gap:8px; line-height:1.45;}
-  .fm-job .expand .col li::before{ content:'·'; color: var(--orange); flex:0 0 auto; font-weight:700;}
-  .view-job-btn{ display:inline-flex; align-items:center; gap:8px; margin-top:16px; padding:10px 22px; background:transparent; border:1px solid var(--orange); color:var(--orange); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:13px; letter-spacing:.02em; cursor:pointer; transition:background .18s,color .18s; width:100%;}
-  .view-job-btn:hover{ background:var(--orange); color:var(--ink);}
-  .view-job-btn .ar{ margin-left:auto; transition:transform .18s;}
-  .view-job-btn:hover .ar{ transform:translateX(4px);}
+  .fm-job.top-match .fm-job-match{ background: var(--orange); color: var(--ink);}
+  .fm-job .fm-chev{ color: var(--mute);}
+  .fm-job:hover .fm-chev{ color: var(--orange);}
+  @media (max-width: 760px){
+    .fm-jobs{ grid-template-columns: 1fr; gap:0;}
+    .fm-job{ background: transparent; border: 0; border-top: 1px solid var(--line);}
+    .fm-jobs .fm-job:last-child{ border-bottom: 1px solid var(--line);}
+    .fm-job:hover{ background: rgba(255,106,31,.04); border-color: var(--line);}
+    .fm-job-logo{ background: var(--ink-3);}
+  }
 
   /* Stage 1 lock-target bar */
   .fm-locktarget{ display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 18px 22px; background: linear-gradient(180deg, transparent, rgba(255,106,31,.06)); border:1px dashed var(--line-2); transition: all .25s;}
@@ -2036,9 +2026,6 @@
     .fm-criteria{ grid-template-columns: 1fr;}
     .fm-mini-resume{ grid-template-columns: 1fr;}
     .fm-mini-offer{ grid-template-columns: 1fr;}
-    .fm-job .row1{ grid-template-columns: 38px 1fr; row-gap: 10px;}
-    .fm-job .pay, .fm-job .match{ grid-column: 1 / -1;}
-    .fm-job .pay{ text-align:left;}
   }
 
   /* Stage 1 — fade out when replaced by Stage 2 */
@@ -2112,80 +2099,50 @@
     letter-spacing:-.02em; line-height:1.08; margin:0; color:var(--bone);
   }
 
-  /* Body grid: meta col | funnel col */
-  .s2 .body-grid{
-    display:grid; grid-template-columns:1fr 1.05fr; gap:18px; align-items:stretch;
-    margin-bottom:28px;
-  }
-
-  /* Meta column (left) */
-  .s2 .meta-col{
-    display:flex; flex-direction:column;
-    border:1px solid var(--line); background:rgba(0,0,0,.22);
-    padding:22px 24px;
-  }
-  .s2 .meta-col .seg{ display:flex; flex-direction:column; gap:8px; padding:14px 0; }
-  .s2 .meta-col .seg + .seg{ border-top:1px solid var(--line); }
-  .s2 .meta-col .seg:first-child{ padding-top:0; }
-  .s2 .meta-col .seg:last-child{ padding-bottom:0; }
-  .s2 .meta-col .lbl{
-    font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:600;
-    letter-spacing:.18em; text-transform:uppercase; color:var(--mute);
-  }
-  .s2 .meta-col .file{
-    display:flex; align-items:center; gap:8px; color:var(--bone);
-    font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:14.5px;
-    word-break:break-word; line-height:1.35;
-  }
-  .s2 .meta-col .file svg{ width:14px; height:14px; opacity:.55; flex:0 0 auto; }
-  .s2 .meta-col .chips{ display:flex; flex-wrap:wrap; gap:6px; }
-  .s2 .meta-col .chip{
-    display:inline-flex; align-items:center; padding:5px 11px; font-size:12.5px;
-    background:var(--ink); border:1px solid var(--line); color:var(--bone-2);
-    font-family:'Space Grotesk',sans-serif; font-weight:500;
-  }
-  .s2 .meta-col .chip.rm{
-    cursor:pointer; transition: background .15s, border-color .15s, color .15s;
-  }
-  .s2 .meta-col .chip.rm:hover{
-    background:rgba(255,106,31,.12); border-color:rgba(255,106,31,.35); color:var(--bone);
-  }
-  .s2 .meta-col .chip.rm .x{
-    margin-left:5px; opacity:.4; font-size:10px; font-weight:700; line-height:1;
-  }
-  .s2 .meta-col .chip.rm:hover .x{ opacity:.85; }
-  .s2 .meta-col .chip.rm .dd-caret{ font-size:9px; margin-left:3px; opacity:.35; transition:opacity .15s; }
-  .s2 .meta-col .chip.rm:hover .dd-caret{ opacity:.7; }
-  .s2 .meta-col .chip.rm.on{ background:rgba(255,106,31,.12); border-color:rgba(255,106,31,.45); color:var(--orange); }
-  .s2 .meta-col .chip.rm.on .dd-caret{ opacity:.6; }
-  .s2 .meta-col .chip.rm.on:hover{ background:rgba(255,106,31,.18); border-color:rgba(255,106,31,.65); }
-
-  /* Filter dropdown popup */
-  .filter-dropdown{
-    position:fixed; z-index:400;
-    background:var(--ink-2); border:1px solid var(--line);
-    min-width:160px; padding:4px 0;
-    box-shadow:0 10px 30px rgba(0,0,0,.65);
-    display:none;
-  }
-  .filter-dropdown.open{ display:block; }
-  .filter-dropdown .fd-item{
-    display:flex; align-items:center; gap:9px;
-    padding:8px 14px; cursor:pointer;
-    font-size:12.5px; font-family:'Space Grotesk',sans-serif; font-weight:500;
-    color:var(--bone-2); transition:background .12s; user-select:none;
-  }
-  .filter-dropdown .fd-item:hover{ background:rgba(255,255,255,.05); }
-  .filter-dropdown .fd-item.active{ color:var(--orange); }
-  .filter-dropdown .fd-check{
-    flex:0 0 auto; width:13px; height:13px;
-    border:1px solid var(--line); background:transparent;
-    display:flex; align-items:center; justify-content:center;
-    font-size:9px; line-height:1; transition:all .12s;
-  }
-  .filter-dropdown .fd-item.active .fd-check{
-    background:var(--orange); border-color:var(--orange); color:var(--ink);
-  }
+  /* Collapsible "Your filters" panel */
+  .s2 .fm-setup{ background:var(--ink-2); border:1px solid var(--line); margin-bottom:22px; overflow:hidden; }
+  .s2 .fm-setup.open{ border-color:var(--orange); }
+  .s2 .fm-setup-head{ display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px; width:100%; text-align:left; background:transparent; border:0; padding:16px 20px; cursor:pointer; font:inherit; color:inherit; }
+  .s2 .fm-setup-head .fm-lbl{ font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--mute); }
+  .s2 .fm-setup-head .fm-summary{ font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; color:var(--bone); margin-top:6px; line-height:1.35; }
+  .s2 .fm-chev{ color:var(--mute); display:inline-flex; transition:transform .25s,color .18s; }
+  .s2 .fm-chev svg{ width:15px; height:15px; }
+  .s2 .fm-setup.open .fm-setup-head .fm-chev{ transform:rotate(90deg); color:var(--orange); }
+  .s2 .fm-setup-body{ display:none; padding:2px 20px 20px; }
+  .s2 .fm-setup.open .fm-setup-body{ display:block; }
+  .s2 .fm-resume{ display:flex; align-items:center; gap:12px; padding:13px 15px; background:var(--ink); border:1px solid var(--line); margin-bottom:16px; }
+  .s2 .fm-resume .ic{ width:36px; height:36px; background:rgba(255,106,31,.14); color:var(--orange); display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .s2 .fm-resume .ic svg{ width:17px; height:17px; }
+  .s2 .fm-resume .m{ flex:1; min-width:0; }
+  .s2 .fm-resume .m .n{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; color:var(--bone); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .s2 .fm-resume .m .s{ font-size:11.5px; color:var(--mute); margin-top:2px; font-family:'Space Mono',monospace; }
+  .s2 .fm-resume-change{ font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--orange); background:transparent; border:1px solid rgba(255,106,31,.4); padding:8px 12px; cursor:pointer; white-space:nowrap; }
+  .s2 .fm-fset{ border:1px solid var(--line); }
+  .s2 .fm-frow + .fm-frow{ border-top:1px solid var(--line); }
+  .s2 .fm-frow-head{ display:grid; grid-template-columns:120px 1fr auto; align-items:center; gap:14px; width:100%; text-align:left; background:transparent; border:0; padding:13px 16px; cursor:pointer; font:inherit; color:inherit; }
+  .s2 .fm-frow-head .k{ font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--mute); }
+  .s2 .fm-frow-head .val{ display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; }
+  .s2 .fm-frow.open .fm-frow-head .fm-chev{ transform:rotate(90deg); color:var(--orange); }
+  .s2 .fm-fchip{ font-family:'Space Grotesk',sans-serif; font-size:12.5px; font-weight:500; color:var(--bone-2); background:var(--ink); border:1px solid var(--line-2); padding:4px 10px; white-space:nowrap; }
+  .s2 .fm-fchip.on{ color:var(--orange); border-color:rgba(255,106,31,.5); background:rgba(255,106,31,.1); }
+  .s2 .fm-fchip.muted{ color:var(--mute); }
+  .s2 .fm-frow-edit{ display:none; padding:0 16px 16px; }
+  .s2 .fm-frow.open .fm-frow-edit{ display:block; }
+  .s2 .fm-opts{ display:flex; flex-wrap:wrap; gap:7px; }
+  .s2 .fm-opts .fm-fchip{ cursor:pointer; padding:7px 12px; font-size:13px; }
+  .s2 .fm-opts .fm-fchip:hover{ border-color:var(--orange); }
+  .s2 .fm-finput{ display:flex; align-items:center; gap:8px; background:var(--ink); border:1px solid var(--line-2); padding:11px 14px; max-width:360px; }
+  .s2 .fm-finput .pre{ color:var(--mute); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; }
+  .s2 .fm-finput .suf{ color:var(--mute); font-size:12.5px; font-family:'Space Grotesk',sans-serif; white-space:nowrap; }
+  .s2 .fm-finput input{ flex:1; min-width:0; background:transparent; border:0; outline:0; color:var(--bone); font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; }
+  .s2 .fm-finput:focus-within{ border-color:var(--orange); }
+  .s2 .fm-vtoggle{ display:flex; align-items:center; gap:12px; cursor:pointer; }
+  .s2 .fm-vtoggle .track{ width:46px; height:26px; border-radius:99px; background:var(--ink); border:1px solid var(--line-2); position:relative; flex:0 0 auto; transition:.2s; }
+  .s2 .fm-vtoggle .track::after{ content:''; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:var(--mute); transition:.2s; }
+  .s2 .fm-vtoggle.on .track{ background:rgba(255,106,31,.18); border-color:var(--orange); }
+  .s2 .fm-vtoggle.on .track::after{ transform:translateX(20px); background:var(--orange); }
+  .s2 .fm-vtoggle .txt{ font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--bone-2); }
+  .s2 .fm-vtoggle .txt b{ color:var(--bone); font-weight:600; }
 
   /* Funnel column (right) */
   .s2 .funnel-col{
@@ -2232,22 +2189,22 @@
   .s2 .funnel-col .row.t1 .fill{ background:#2c2c34; }
   .s2 .funnel-col .row.t2 .fill{ background:#5b5b66; }
   .s2 .funnel-col .row.t3 .fill{ background:var(--bone-2); }
-  .s2 .funnel-col .row.t4 .fill{ background:var(--green); box-shadow:0 0 18px rgba(94,240,168,.55); }
+  .s2 .funnel-col .row.t4 .fill{ background:var(--orange); box-shadow:0 0 18px rgba(255,106,31,.55); }
 
-  .s2 .funnel-col .row.t4 .lbl{ color:var(--green); font-weight:700; }
+  .s2 .funnel-col .row.t4 .lbl{ color:var(--orange); font-weight:700; }
   .s2 .funnel-col .row.t1 .lbl{ color:var(--mute); }
   .s2 .funnel-col .count{
     font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700;
     text-align:right; line-height:1; letter-spacing:-.02em; color:var(--bone);
   }
-  .s2 .funnel-col .row.t4 .count{ color:var(--green); }
+  .s2 .funnel-col .row.t4 .count{ color:var(--orange); }
   .s2 .funnel-col .row.t1 .count{ color:var(--bone-2); opacity:.7; }
 
-  /* small green tick on the win row */
+  /* small orange tick on the win row */
   .s2 .funnel-col .row.t4::before{
     content:''; position:absolute; left:-26px; top:50%;
-    width:3px; height:18px; background:var(--green); transform:translateY(-50%);
-    box-shadow:0 0 10px rgba(94,240,168,.6);
+    width:3px; height:18px; background:var(--orange); transform:translateY(-50%);
+    box-shadow:0 0 10px rgba(255,106,31,.6);
   }
 
   /* hide Step 01 card captain — section header now has the single captain */
@@ -2257,9 +2214,11 @@
   @media (max-width: 860px){
     .s2 .sec-head{ grid-template-columns:1fr; }
     .s2 .sec-head .cap-mini{ justify-content:flex-start; }
-    .s2 .body-grid{ grid-template-columns:1fr; }
     .s2 .sec-head .cap-mini .cap{ height:160px; margin-bottom:0; align-self:auto; }
     .s2 .sec-head .how-title{ font-size:40px; }
+  }
+  @media (max-width: 760px){
+    .s2 .fm-frow-head{ grid-template-columns:auto 1fr auto; }
   }
 </style>
 </head>
@@ -2486,59 +2445,59 @@
             <!-- Results -->
             <div class="demo-results" id="demoResults">
 
-              <div class="body-grid">
-
-                <!-- LEFT: meta -->
-                <div class="meta-col">
-                  <div class="seg">
-                    <div class="lbl">Analyzed</div>
-                    <div class="file">
-                      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2">
-                        <path d="M3 1.5h5l3 3V12a.5.5 0 0 1-.5.5h-7A.5.5 0 0 1 3 12V1.5Z"/>
-                        <path d="M8 1.5V4.5h3"/>
-                      </svg>
-                      <span id="demoFnEcho"></span>
-                    </div>
+              <!-- Collapsible "Your filters" panel -->
+              <div class="fm-setup" id="fmSetup">
+                <button class="fm-setup-head" id="fmSetupHead" type="button" aria-expanded="false">
+                  <div>
+                    <div class="fm-lbl">Your filters</div>
+                    <div class="fm-summary" id="fmSetupSummary"></div>
                   </div>
-                  <div class="seg">
-                    <div class="lbl">Filters</div>
-                    <div class="chips" id="fmFiltersEcho"></div>
+                  <span class="fm-chev"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5 8 6l-4 3.5"/></svg></span>
+                </button>
+                <div class="fm-setup-body" id="fmSetupBody">
+                  <div class="fm-resume">
+                    <div class="ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3.5 1.5h5l4 4V14a.5.5 0 0 1-.5.5h-8A.5.5 0 0 1 3.5 14V1.5Z"/><path d="M8.5 1.5V5.5h4"/></svg></div>
+                    <div class="m">
+                      <div class="n" id="fmResumeName">Based on role &amp; filters</div>
+                      <div class="s" id="fmResumeMeta">No résumé uploaded</div>
+                    </div>
+                    <button class="fm-resume-change" id="fmResumeChangeBtn" type="button">Change</button>
+                  </div>
+                  <div class="fm-fset" id="fmFset"></div>
+                </div>
+              </div>
+
+              <!-- Funnel -->
+              <div class="funnel-col">
+                <div class="funnel-head">
+                  <div class="lbl">Scanned</div>
+                  <div class="stat">
+                    <span class="n" id="fmTotalScanned">2,847</span>
+                    <span class="suf">live postings · last 24h</span>
                   </div>
                 </div>
-
-                <!-- RIGHT: funnel -->
-                <div class="funnel-col">
-                  <div class="funnel-head">
-                    <div class="lbl">Scanned</div>
-                    <div class="stat">
-                      <span class="n" id="fmTotalScanned">2,847</span>
-                      <span class="suf">live postings · last 24h</span>
-                    </div>
+                <div class="funnel-bars" id="fmFunnel">
+                  <div class="row t1 fm-funnel-row tier-1" style="--w:100%">
+                    <span class="lbl">Found</span>
+                    <span class="bar"><span class="fill"></span></span>
+                    <span class="count" id="fnFound">36</span>
                   </div>
-                  <div class="funnel-bars" id="fmFunnel">
-                    <div class="row t1 fm-funnel-row tier-1" style="--w:100%">
-                      <span class="lbl">Found</span>
-                      <span class="bar"><span class="fill"></span></span>
-                      <span class="count" id="fnFound">36</span>
-                    </div>
-                    <div class="row t2 fm-funnel-row tier-2" style="--w:50%">
-                      <span class="lbl">Wide fit</span>
-                      <span class="bar"><span class="fill"></span></span>
-                      <span class="count" id="fnWide">18</span>
-                    </div>
-                    <div class="row t3 fm-funnel-row tier-3" style="--w:16.7%">
-                      <span class="lbl">Suitable</span>
-                      <span class="bar"><span class="fill"></span></span>
-                      <span class="count" id="fnSuitable">6</span>
-                    </div>
-                    <div class="row t4 fm-funnel-row tier-4" style="--w:5.6%">
-                      <span class="lbl">Super suitable</span>
-                      <span class="bar"><span class="fill"></span></span>
-                      <span class="count" id="fnSuper">2</span>
-                    </div>
+                  <div class="row t2 fm-funnel-row tier-2" style="--w:50%">
+                    <span class="lbl">Wide fit</span>
+                    <span class="bar"><span class="fill"></span></span>
+                    <span class="count" id="fnWide">18</span>
+                  </div>
+                  <div class="row t3 fm-funnel-row tier-3" style="--w:16.7%">
+                    <span class="lbl">Suitable</span>
+                    <span class="bar"><span class="fill"></span></span>
+                    <span class="count" id="fnSuitable">6</span>
+                  </div>
+                  <div class="row t4 fm-funnel-row tier-4" style="--w:5.6%">
+                    <span class="lbl">Super suitable</span>
+                    <span class="bar"><span class="fill"></span></span>
+                    <span class="count" id="fnSuper">2</span>
                   </div>
                 </div>
-
               </div>
 
               <!-- Jobs in 2 columns -->
@@ -2905,8 +2864,8 @@
     const resEl     = document.getElementById('demoResults');
     const submitBtn = document.getElementById('demoSubmit');
     const jobsEl    = document.getElementById('fmJobs');
-    const fnEcho    = document.getElementById('demoFnEcho');
-    const filtersEcho = document.getElementById('fmFiltersEcho');
+    const resumeNameEl = document.getElementById('fmResumeName');
+    const resumeMetaEl = document.getElementById('fmResumeMeta');
     if (!fileInput || !submitBtn) return;
 
     // criteria state
@@ -2919,6 +2878,7 @@
 
     // stored after first run so filter edits can re-generate without re-submitting
     let lastDomain = null, lastSeniority = null, lastKws = null;
+    let lastResumeText = null, lastFilename = '';
 
     const positionInput = document.getElementById('fmPosition');
     if (positionInput) positionInput.addEventListener('input', () => {
@@ -3833,40 +3793,9 @@
            : jobs.slice(0, 6);
     }
 
-    function renderFiltersEcho() {
-      if (!filtersEcho) return;
-      const lvlMap = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
-      const locLabels = {worldwide:'Worldwide', usa:'USA', americas:'Americas', canada:'Canada', remote:'Remote', hybrid:'Hybrid', onsite:'In-office'};
-      const lvlArr = [...levels].map(v => lvlMap[v]||v);
-      const locArr = [...loc].map(v => locLabels[v]||v);
-      const lvlLabel = lvlArr.length === 0 ? 'Level'
-        : lvlArr.length <= 3 ? lvlArr.join(' · ')
-        : lvlArr.slice(0,2).join(' · ') + ' +' + (lvlArr.length - 2);
-      const salLabel = salary > 0 ? '~$' + Math.round(salary/1000) + 'k' : 'Salary';
-      const locLabel = locArr.length === 0 ? 'Location'
-        : locArr.length <= 3 ? locArr.join(' · ')
-        : locArr.slice(0,2).join(' · ') + ' +' + (locArr.length - 2);
-      const chips = [
-        `<button class="chip rm${levels.size>0?' on':''}" type="button" data-type="level">${lvlLabel}<span class="dd-caret">▾</span></button>`,
-        `<button class="chip rm${salary>0?' on':''}" type="button" data-type="salary">${salLabel}<span class="dd-caret">▾</span></button>`,
-        `<button class="chip rm${loc.size>0?' on':''}" type="button" data-type="loc">${locLabel}<span class="dd-caret">▾</span></button>`,
-        `<button class="chip rm${visa?' on':''}" type="button" data-type="visa">${visa?'Sponsor':'Visa'}<span class="dd-caret">▾</span></button>`,
-      ];
-      filtersEcho.innerHTML = chips.join('');
-    }
-
-    function refreshResults() {
-      if (!lastDomain) return;
-      const final = generateJobs(lastDomain, lastSeniority, levels, lastKws, visa, salary, loc);
-      renderJobs(final);
-      renderFiltersEcho();
-    }
-
-    // Filter dropdown
-    const filterDd = document.createElement('div');
-    filterDd.className = 'filter-dropdown';
-    document.body.appendChild(filterDd);
-    let ddState = null;
+    const CHEV = '<span class="fm-chev"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5 8 6l-4 3.5"/></svg></span>';
+    const LVL_MAP = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
+    const LOC_LABELS = {worldwide:'Worldwide', usa:'USA', americas:'Americas', canada:'Canada', remote:'Remote', hybrid:'Hybrid', onsite:'In-office'};
     const LEVEL_OPTS = [
       {v:'intern',label:'Intern'},{v:'junior',label:'Junior'},{v:'mid',label:'Mid'},
       {v:'senior',label:'Senior'},{v:'staff',label:'Staff'},{v:'principal',label:'Principal'},
@@ -3877,158 +3806,238 @@
       {v:'canada',label:'Canada'},{v:'remote',label:'Remote'},{v:'hybrid',label:'Hybrid'},
       {v:'onsite',label:'In-office'}
     ];
-    const SAL_OPTS = [
-      {v:'0',label:'Any salary'},{v:'60000',label:'~$60k'},
-      {v:'80000',label:'~$80k'},{v:'100000',label:'~$100k'},
-      {v:'120000',label:'~$120k'},{v:'150000',label:'~$150k'}
-    ];
-    function ddItems(type) {
-      if (type === 'level')  return LEVEL_OPTS.map(o => ({...o, active: levels.has(o.v)}));
-      if (type === 'loc')    return LOC_OPTS.map(o => ({...o, active: loc.has(o.v)}));
-      if (type === 'salary') return SAL_OPTS.map(o => ({...o, active: Number(o.v) === salary}));
-      if (type === 'visa')   return [{v:'1', label:'Visa sponsor', active: visa}];
-      return [];
-    }
-    function renderDd() {
-      if (!ddState) return;
-      filterDd.innerHTML = ddItems(ddState.type).map(o =>
-        `<div class="fd-item${o.active?' active':''}" data-type="${ddState.type}" data-v="${o.v}">` +
-        `<div class="fd-check">${o.active?'✓':''}</div>${o.label}</div>`
-      ).join('');
-    }
-    function openDd(chip) {
-      const type = chip.dataset.type;
-      const rect = chip.getBoundingClientRect();
-      const left = Math.min(rect.left, window.innerWidth - 170);
-      ddState = { type };
-      filterDd.style.top  = (rect.bottom + 6) + 'px';
-      filterDd.style.left = left + 'px';
-      renderDd();
-      filterDd.classList.add('open');
-    }
-    function closeDd() { filterDd.classList.remove('open'); ddState = null; }
-
-    if (filtersEcho) {
-      filtersEcho.addEventListener('click', e => {
-        const btn = e.target.closest('.chip.rm');
-        if (!btn) return;
-        if (filterDd.classList.contains('open') && ddState?.type === btn.dataset.type) {
-          closeDd();
-        } else {
-          openDd(btn);
-        }
-      });
-    }
-
-    filterDd.addEventListener('click', e => {
-      const item = e.target.closest('.fd-item');
-      if (!item || !ddState) return;
-      const type = item.dataset.type;
-      const v = item.dataset.v;
-      if (type === 'level') {
-        if (levels.has(v)) { levels.delete(v); document.querySelector(`#fmLevel .fm-chip[data-v="${v}"]`)?.classList.remove('on'); }
-        else               { levels.add(v);    document.querySelector(`#fmLevel .fm-chip[data-v="${v}"]`)?.classList.add('on'); }
-      } else if (type === 'loc') {
-        if (loc.has(v)) { loc.delete(v); document.querySelector(`#fmLoc .fm-chip[data-v="${v}"]`)?.classList.remove('on'); }
-        else            { loc.add(v);    document.querySelector(`#fmLoc .fm-chip[data-v="${v}"]`)?.classList.add('on'); }
-      } else if (type === 'salary') {
-        salary = Number(v);
-        if (salaryInput) salaryInput.value = salary > 0 ? String(salary) : '';
-      } else if (type === 'visa') {
-        visa = !visa;
-        if (visaInput) visaInput.checked = visa;
-      }
-      refreshResults();
-      if (type === 'salary' || type === 'visa') { closeDd(); }
-      else { renderDd(); }
-    });
-
-    document.addEventListener('click', e => {
-      if (!filterDd.classList.contains('open')) return;
-      if (filterDd.contains(e.target)) return;
-      if (filtersEcho?.contains(e.target)) return;
-      closeDd();
-    });
-
-    function describeFilters(){
-      const lvlMap = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
-      const lvl = levels.size > 0 ? [...levels].map(v => lvlMap[v] || v).join(', ') : 'Any level';
-      const locLabels = {worldwide:'Worldwide', usa:'USA', americas:'Americas', canada:'Canada', remote:'Remote', hybrid:'Hybrid', onsite:'In-office'};
-      const locs = [...loc].map(l => locLabels[l]).filter(Boolean).join(' / ');
-      const kw = keywords ? ' · ' + keywords.split(/\s*,\s*/).filter(Boolean).slice(0,3).join(', ') : '';
-      const salaryFmt = salary ? '~$' + Math.round(salary/1000) + 'k' : 'any';
-      return lvl + ' · ' + salaryFmt + ' · ' + (locs || 'Any location') + (visa ? ' · sponsor' : '') + kw;
-    }
 
     function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+    // ── Funnel (shared by first submit, filter edits, resume changes, and back-nav restore) ──
+    function setFunnelText(id, v){ const el = document.getElementById(id); if (el) el.textContent = v; }
+    function setFunnelBar(cls, pct){ const row = document.querySelector('.fm-funnel-row.' + cls); if (row) row.style.setProperty('--w', pct + '%'); }
+    function updateFunnel(jobs){
+      const suitable = jobs.length;
+      const superSuitable = jobs.filter(j => j.match >= 92).length;
+      const wideFit = Math.max(suitable * 3, suitable + 12);
+      const found = Math.max(wideFit * 2 - 8, suitable * 6);
+      setFunnelText('fnFound', found);
+      setFunnelText('fnWide', wideFit);
+      setFunnelText('fnSuitable', suitable);
+      setFunnelText('fnSuper', superSuitable);
+      setFunnelBar('tier-1', 100);
+      setFunnelBar('tier-2', Math.round((wideFit / found) * 100));
+      setFunnelBar('tier-3', Math.round((suitable / found) * 100));
+      setFunnelBar('tier-4', Math.round((superSuitable / found) * 100));
+    }
+
+    function refreshResults() {
+      if (!lastDomain) return;
+      const final = generateJobs(lastDomain, lastSeniority, levels, lastKws, visa, salary, loc);
+      renderJobs(final);
+      updateFunnel(final);
+      renderSetupSummary();
+      sessionStorage.setItem('landed_shortlist', JSON.stringify(final));
+    }
+
+    // ── "Your filters" panel ──────────────────────────────────
+    function salaryLabel(){ return salary > 0 ? ('$' + Math.round(salary/1000) + 'k+') : 'Any salary'; }
+
+    function setupSummaryText(){
+      const lvl = levels.size ? (LVL_MAP[[...levels][0]] || [...levels][0]) : 'Any level';
+      const locArr = [...loc].map(v => LOC_LABELS[v] || v);
+      const locTxt = locArr.length === 0 ? 'Any location'
+        : locArr.length <= 2 ? locArr.join(' / ')
+        : locArr.slice(0,2).join(' / ') + ' +' + (locArr.length - 2);
+      return [position || 'Any role', lvl, salaryLabel(), locTxt].join(' · ');
+    }
+
+    function renderSetupSummary(){
+      const el = document.getElementById('fmSetupSummary');
+      if (el) el.textContent = setupSummaryText();
+    }
+
+    const FROWS = [['role','Role'],['level','Level'],['salary','Salary'],['location','Location'],['visa','Visa']];
+
+    function frowValueHtml(k){
+      if (k === 'role')     return `<span class="fm-fchip">${escapeHtml(position || 'Any role')}</span>`;
+      if (k === 'level')    return levels.size
+                                ? `<span class="fm-fchip on">${LVL_MAP[[...levels][0]]}</span>`
+                                : `<span class="fm-fchip muted">Any level</span>`;
+      if (k === 'salary')   return `<span class="fm-fchip${salary>0?' on':''}">${salaryLabel()}</span>`;
+      if (k === 'location') return loc.size
+                                ? [...loc].map(v => `<span class="fm-fchip on">${LOC_LABELS[v]||v}</span>`).join('')
+                                : `<span class="fm-fchip muted">Any location</span>`;
+      return visa ? `<span class="fm-fchip on">Need sponsorship</span>` : `<span class="fm-fchip muted">Not needed</span>`;
+    }
+
+    function frowEditHtml(k){
+      if (k === 'role')
+        return `<div class="fm-finput"><input class="e-role" type="text" value="${escapeHtml(position)}" placeholder="e.g. Senior Product Manager"></div>`;
+      if (k === 'level')
+        return `<div class="fm-opts">${LEVEL_OPTS.map(o => `<button type="button" class="fm-fchip${levels.has(o.v)?' on':''}" data-v="${o.v}">${o.label}</button>`).join('')}</div>`;
+      if (k === 'salary')
+        return `<div class="fm-finput"><span class="pre">$</span><input class="e-salary" type="text" inputmode="numeric" value="${salary>0?salary.toLocaleString():''}" placeholder="e.g. 120,000"><span class="suf">/ year</span></div>`;
+      if (k === 'location')
+        return `<div class="fm-opts">${LOC_OPTS.map(o => `<button type="button" class="fm-fchip${loc.has(o.v)?' on':''}" data-v="${o.v}">${o.label}</button>`).join('')}</div>`;
+      return `<div class="fm-vtoggle${visa?' on':''}"><span class="track"></span><span class="txt"><b>Need sponsorship</b> — H1B, OPT, TN, L1</span></div>`;
+    }
+
+    function refreshRowValue(k){
+      const row = document.querySelector(`.fm-frow[data-row="${k}"]`);
+      if (row) row.querySelector('.val').innerHTML = frowValueHtml(k);
+      renderSetupSummary();
+    }
+
+    function onRoleInput(v){
+      position = v.trim();
+      if (lastDomain){
+        const newDomain = detectDomain(lastResumeText || '', position, keywords, lastFilename);
+        lastSeniority = detectSeniority(lastResumeText || '', position, levels);
+        lastKws = extractKeywords(lastResumeText || '', keywords, newDomain);
+        lastDomain = newDomain;
+        const dc = (DOMAIN_DATA[lastDomain]||DOMAIN_DATA.pm).scanCount;
+        const scanEl2 = document.getElementById('fmTotalScanned');
+        if (scanEl2) scanEl2.textContent = dc;
+      }
+      refreshRowValue('role');
+      refreshResults();
+    }
+
+    function bindFsetRow(k){
+      const row = document.querySelector(`.fm-frow[data-row="${k}"]`);
+      if (!row) return;
+      row.querySelector('.fm-frow-head').addEventListener('click', () => row.classList.toggle('open'));
+
+      if (k === 'role'){
+        row.querySelector('.e-role').addEventListener('input', (e) => onRoleInput(e.target.value));
+      }
+      if (k === 'level'){
+        row.querySelectorAll('.fm-opts .fm-fchip').forEach(btn => btn.addEventListener('click', () => {
+          levels.clear(); levels.add(btn.dataset.v);
+          row.querySelectorAll('.fm-opts .fm-fchip').forEach(b => b.classList.toggle('on', b === btn));
+          document.querySelectorAll('#fmLevel .fm-chip').forEach(c => c.classList.toggle('on', c.dataset.v === btn.dataset.v));
+          refreshRowValue('level'); refreshResults();
+        }));
+      }
+      if (k === 'salary'){
+        const input = row.querySelector('.e-salary');
+        input.addEventListener('input', (e) => {
+          const n = parseInt(String(e.target.value).replace(/[^0-9]/g, ''), 10);
+          salary = isNaN(n) ? 0 : n;
+          if (salaryInput) salaryInput.value = salary ? String(salary) : '';
+          refreshRowValue('salary'); refreshResults();
+        });
+        input.addEventListener('blur', () => { input.value = salary > 0 ? salary.toLocaleString() : ''; });
+      }
+      if (k === 'location'){
+        row.querySelectorAll('.fm-opts .fm-fchip').forEach(btn => btn.addEventListener('click', () => {
+          const v = btn.dataset.v;
+          if (loc.has(v)) { loc.delete(v); btn.classList.remove('on'); }
+          else            { loc.add(v);    btn.classList.add('on'); }
+          document.querySelector(`#fmLoc .fm-chip[data-v="${v}"]`)?.classList.toggle('on', loc.has(v));
+          refreshRowValue('location'); refreshResults();
+        }));
+      }
+      if (k === 'visa'){
+        row.querySelector('.fm-vtoggle').addEventListener('click', function(){
+          visa = !visa; this.classList.toggle('on', visa);
+          if (visaInput) visaInput.checked = visa;
+          refreshRowValue('visa'); refreshResults();
+        });
+      }
+    }
+
+    function renderFset(){
+      const host = document.getElementById('fmFset');
+      if (!host) return;
+      host.innerHTML = FROWS.map(([k,label]) => `
+        <div class="fm-frow" data-row="${k}">
+          <button class="fm-frow-head" type="button">
+            <span class="k">${label}</span><span class="val">${frowValueHtml(k)}</span>${CHEV}
+          </button>
+          <div class="fm-frow-edit">${frowEditHtml(k)}</div>
+        </div>`).join('');
+      FROWS.forEach(([k]) => bindFsetRow(k));
+    }
+
+    const setupHead = document.getElementById('fmSetupHead');
+    const setupEl   = document.getElementById('fmSetup');
+    if (setupHead && setupEl) setupHead.addEventListener('click', () => setupEl.classList.toggle('open'));
+
+    const resumeChangeBtn = document.getElementById('fmResumeChangeBtn');
+    if (resumeChangeBtn) resumeChangeBtn.addEventListener('click', () => fileInput.click());
+
+    // ── Job cards ──────────────────────────────────────────────
     let lastRenderedJobs = [];
 
     function renderJobs(jobs){
       lastRenderedJobs = jobs;
-      // Identify top 3 by match score — these get the "View Full Posting" button
-      const sortedDesc = [...jobs].sort((a,b) => b.match - a.match);
-      const top3Keys   = new Set(sortedDesc.slice(0,3).map(j => j.co + '|' + j.role));
-
-      jobsEl.innerHTML = '';
-      jobs.forEach((j, idx) => {
-        const isTop = top3Keys.has(j.co + '|' + j.role);
-        const el = document.createElement('div');
-        el.className = 'fm-job' + (j.match >= 95 ? ' top-match' : '');
-        el.dataset.idx = idx;
-        el.innerHTML =
-          '<div class="row1">' +
-            '<div class="logo">' + j.logo + '</div>' +
-            '<div class="titleblock">' +
-              '<div class="role">' + escapeHtml(j.role) + '</div>' +
-              '<div class="co">' + escapeHtml(j.co) + ' · ' + escapeHtml(j.loc) + '</div>' +
-            '</div>' +
-            '<div class="pay">' + j.pay + '<small>base · USD</small></div>' +
-            '<div class="match">' + j.match + '% MATCH</div>' +
-          '</div>' +
-          '<div class="row2">' +
-            j.tags.map(t => '<span class="tag' + (/sponsor|H1B|OPT|TN/i.test(t) ? ' visa' : '') + '">' + escapeHtml(t) + '</span>').join('') +
-            '<span class="age">' + j.age + '</span>' +
-          '</div>' +
-          '<div class="expand">' +
-            '<p class="why"><b>Why you match:</b> ' + j.why + '</p>' +
-            '<div class="grid">' +
-              '<div class="col"><h6>What they ask</h6><ul>' + j.reqs.map(r => '<li>' + escapeHtml(r) + '</li>').join('') + '</ul></div>' +
-              '<div class="col"><h6>What they offer</h6><ul>' + j.perks.map(p => '<li>' + escapeHtml(p) + '</li>').join('') + '</ul></div>' +
-            '</div>' +
-          '</div>' +
-          (isTop ? '<button class="view-job-btn" type="button">View Full Job Description <span class="ar">→</span></button>' : '');
-        const viewBtn = el.querySelector('.view-job-btn');
-        if (viewBtn) {
-          viewBtn.addEventListener('click', () => {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({ event: 'step3_demo_view_job', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
-            sessionStorage.setItem('landed_job_detail', JSON.stringify(j));
-            window.location.href = '/job.html';
-          });
-        }
-        jobsEl.appendChild(el);
-      });
+      jobsEl.innerHTML = jobs.map((j, idx) => `
+        <a class="fm-job${j.match >= 95 ? ' top-match' : ''}" href="/job.html" data-idx="${idx}">
+          <span class="fm-job-head">
+            <span class="fm-job-logo">${escapeHtml(j.logo)}</span>
+            <span class="fm-job-tb">
+              <span class="role">${escapeHtml(j.role)}</span>
+              <span class="co">${escapeHtml(j.co)} · ${escapeHtml(j.loc)}</span>
+            </span>
+            <span class="fm-job-match">${j.match}% MATCH</span>
+            ${CHEV}
+          </span>
+        </a>`).join('');
     }
+
+    jobsEl.addEventListener('click', (e) => {
+      const a = e.target.closest('a.fm-job');
+      if (!a) return;
+      const j = lastRenderedJobs[Number(a.dataset.idx)];
+      if (!j) return;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'step3_demo_view_job', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
+      sessionStorage.setItem('landed_job_detail', JSON.stringify(j));
+    });
+
+    // ── Resume parsing pipeline — shared by first submit + "Change" re-upload ──
+    async function runMatchPipeline(file){
+      const resumeText = await extractResumeText(file);
+      const domain    = detectDomain(resumeText, position, keywords, file ? file.name : '');
+      const seniority = detectSeniority(resumeText, position, levels);
+      const kws       = extractKeywords(resumeText, keywords, domain);
+      lastDomain = domain; lastSeniority = seniority; lastKws = kws;
+      lastResumeText = resumeText; lastFilename = file ? file.name : '';
+
+      const domainScanCount = (DOMAIN_DATA[domain]||DOMAIN_DATA.pm).scanCount;
+      const scanEl  = document.getElementById('fmScanCount');
+      const scanEl2 = document.getElementById('fmTotalScanned');
+      if (scanEl)  scanEl.textContent  = domainScanCount;
+      if (scanEl2) scanEl2.textContent = domainScanCount;
+
+      const final = generateJobs(domain, seniority, levels, kws, visa, salary, loc);
+      renderJobs(final);
+      updateFunnel(final);
+      renderSetupSummary();
+      sessionStorage.setItem('landed_shortlist', JSON.stringify(final));
+      return final;
+    }
+
+    fileInput.addEventListener('change', (e) => {
+      const f = e.target.files[0];
+      if (!f) return;
+      const kb = Math.round(f.size/1024);
+      if (resumeNameEl) resumeNameEl.textContent = f.name;
+      if (resumeMetaEl) resumeMetaEl.textContent = 'uploaded just now · ' + kb + ' KB';
+      if (resEl.classList.contains('active')) runMatchPipeline(f);
+    });
 
     submitBtn.addEventListener('click', async () => {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'step2_demo_find_jobs', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
       const f = fileInput.files[0];
       if (f) {
-        fnEcho.textContent = f.name;
-        const analyzedLbl = fnEcho.closest('.seg')?.querySelector('.lbl');
-        if (analyzedLbl) analyzedLbl.textContent = 'Analyzed';
-        const fileSvg = fnEcho.closest('.file')?.querySelector('svg');
-        if (fileSvg) fileSvg.style.display = '';
+        if (resumeNameEl) resumeNameEl.textContent = f.name;
+        if (resumeMetaEl) resumeMetaEl.textContent = 'uploaded just now · ' + Math.round(f.size/1024) + ' KB';
       } else {
-        const analyzedLbl = fnEcho.closest('.seg')?.querySelector('.lbl');
-        if (analyzedLbl) analyzedLbl.textContent = 'Searching for';
-        const fileSvg = fnEcho.closest('.file')?.querySelector('svg');
-        if (fileSvg) fileSvg.style.display = 'none';
-        fnEcho.textContent = position || 'Based on role & filters';
+        if (resumeNameEl) resumeNameEl.textContent = position || 'Based on role & filters';
+        if (resumeMetaEl) resumeMetaEl.textContent = 'No résumé uploaded';
       }
-      renderFiltersEcho();
+      renderFset();
+      renderSetupSummary();
 
       const stagesWrap = document.getElementById('fmStages');
       const stage2 = document.querySelector('.fm-stage[data-stage-num="2"]');
@@ -4068,42 +4077,8 @@
       steps[steps.length-1].querySelector('.ic').innerHTML = check;
       await new Promise(r => setTimeout(r, 320));
 
-      const resumeFile = fileInput.files[0];
-      const resumeText = await extractResumeText(resumeFile);
-      const domain     = detectDomain(resumeText, position, keywords, resumeFile ? resumeFile.name : '');
-      const seniority  = detectSeniority(resumeText, position, levels);
-      const kws        = extractKeywords(resumeText, keywords, domain);
-      lastDomain = domain; lastSeniority = seniority; lastKws = kws;
-      const domainScanCount = (DOMAIN_DATA[domain]||DOMAIN_DATA.pm).scanCount;
-      const scanEl  = document.getElementById('fmScanCount');
-      const scanEl2 = document.getElementById('fmTotalScanned');
-      if (scanEl)  scanEl.textContent  = domainScanCount;
-      if (scanEl2) scanEl2.textContent = domainScanCount;
-      const final = generateJobs(domain, seniority, levels, kws, visa, salary, loc);
+      await runMatchPipeline(fileInput.files[0]);
 
-      // Funnel numbers (decreasing): Found > Wide fit > Suitable > Super suitable.
-      // Use match-score bins from the filtered set, scaled up to a believable pool.
-      const suitable = final.length;                                       // 6-ish
-      const superSuitable = final.filter(j => j.match >= 92).length;       // top tier
-      const wideFit  = Math.max(suitable * 3, suitable + 12);              // looser match
-      const found    = Math.max(wideFit * 2 - 8, suitable * 6);            // broader pool
-      const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-      setText('fnFound',     found);
-      setText('fnWide',      wideFit);
-      setText('fnSuitable',  suitable);
-      setText('fnSuper',     superSuitable);
-      // Bar widths
-      const setBar = (cls, pct) => {
-        const row = document.querySelector('.fm-funnel-row.' + cls);
-        if (row) row.style.setProperty('--w', pct + '%');
-      };
-      setBar('tier-1', 100);
-      setBar('tier-2', Math.round((wideFit / found) * 100));
-      setBar('tier-3', Math.round((suitable / found) * 100));
-      setBar('tier-4', Math.round((superSuitable / found) * 100));
-
-      renderJobs(final);
-      sessionStorage.setItem('landed_shortlist', JSON.stringify(final));
       loadEl.classList.remove('active');
       resEl.classList.add('active');
 
@@ -4134,6 +4109,11 @@
         if (_wrap) _wrap.classList.add('fm-revealed');
         if (_s2)   _s2.dataset.state = 'active';
         renderJobs(_jobs);
+        renderFset();
+        updateFunnel(_jobs);
+        renderSetupSummary();
+        const funnelRestore = document.getElementById('fmFunnel');
+        if (funnelRestore) funnelRestore.classList.add('show');
         loadEl.classList.remove('active');
         resEl.classList.add('active');
         const _savedScroll = sessionStorage.getItem('landed_scroll');
