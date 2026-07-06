@@ -2119,13 +2119,14 @@
   /* Collapsible "Your filters" panel */
   .s2 .fm-setup{ background:var(--ink-2); border:1px solid var(--line); overflow:hidden; }
   .s2 .fm-setup.open{ border-color:var(--orange); }
-  .s2 .fm-setup-head{ display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px; width:100%; text-align:left; background:transparent; border:0; padding:16px 20px; cursor:pointer; font:inherit; color:inherit; }
+  .s2 .fm-setup-head{ display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px; width:100%; min-height:90px; text-align:left; background:transparent; border:0; padding:18px 22px; cursor:pointer; font:inherit; color:inherit; }
+  .s2 .fm-setup-head > div{ min-width:0; }
   .s2 .fm-setup-head .fm-lbl{ font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--mute); }
-  .s2 .fm-setup-head .fm-summary{ font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; color:var(--bone); margin-top:6px; line-height:1.35; }
+  .s2 .fm-setup-head .fm-summary{ font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; color:var(--bone); margin-top:6px; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .s2 .fm-chev{ color:var(--mute); display:inline-flex; transition:transform .25s,color .18s; }
   .s2 .fm-chev svg{ width:15px; height:15px; }
   .s2 .fm-setup.open .fm-setup-head .fm-chev{ transform:rotate(90deg); color:var(--orange); }
-  .s2 .fm-setup-body{ display:none; padding:2px 20px 20px; }
+  .s2 .fm-setup-body{ display:none; padding:2px 22px 20px; }
   .s2 .fm-setup.open .fm-setup-body{ display:block; }
   .s2 .fm-resume{ display:flex; align-items:center; gap:12px; padding:13px 15px; background:var(--ink); border:1px solid var(--line); margin-bottom:16px; }
   .s2 .fm-resume .ic{ width:36px; height:36px; background:rgba(255,106,31,.14); color:var(--orange); display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
@@ -2168,8 +2169,8 @@
   .s2 .funnel-col.open{ border-color:var(--orange); }
   .s2 .funnel-col .funnel-head{
     display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px;
-    width:100%; text-align:left; background:transparent; border:0;
-    padding:22px 26px; cursor:pointer; font:inherit; color:inherit;
+    width:100%; min-height:90px; text-align:left; background:transparent; border:0;
+    padding:18px 22px; cursor:pointer; font:inherit; color:inherit;
   }
   .s2 .funnel-col.open .funnel-head .fm-chev{ transform:rotate(90deg); color:var(--orange); }
   .s2 .funnel-col .funnel-head .lbl{
@@ -2184,7 +2185,7 @@
   }
   .s2 .funnel-col .funnel-head .stat .suf{ font-size:13.5px; color:var(--mute); font-weight:500; }
 
-  .s2 .funnel-col .funnel-body{ display:none; padding:0 26px 22px; }
+  .s2 .funnel-col .funnel-body{ display:none; padding:0 22px 20px; }
   .s2 .funnel-col.open .funnel-body{ display:block; }
   .s2 .funnel-col .funnel-bars{ display:flex; flex-direction:column; gap:18px; }
   .s2 .funnel-col .row{
@@ -2490,8 +2491,8 @@
                 </div>
 
                 <!-- Collapsible funnel panel -->
-                <div class="funnel-col open" id="fmFunnelCol">
-                  <button class="funnel-head" id="fmFunnelHead" type="button" aria-expanded="true">
+                <div class="funnel-col" id="fmFunnelCol">
+                  <button class="funnel-head" id="fmFunnelHead" type="button" aria-expanded="false">
                     <div>
                       <div class="lbl">Scanned</div>
                       <div class="stat">
