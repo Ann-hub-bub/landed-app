@@ -1597,6 +1597,41 @@
     .demo-card{ padding: 32px 24px;}
   }
 
+  /* ── HERO · "Captain up top" (phones only — doesn't touch the 980px block above) ── */
+  @media (max-width: 640px){
+    section.hero{ padding: 8px 0 40px;}
+
+    /* stack the two columns and pull the captain ABOVE the copy */
+    .hero .grid{ display:flex; flex-direction:column; gap:0;}
+    .hero .stage{ order:-1; align-items:flex-end; height:244px; margin:0 0 4px; overflow:visible;}
+    .hero .captain{ width:auto; height:250px;}
+    .hero .stage::before{ width:300px; height:300px;}
+    .hero .stage::after{ width:240px; height:240px;}
+
+    /* small speech bubble pinned to the top-right of the captain band */
+    .hero .speech{ right:4px; top:6px; font-size:14px; line-height:1.2; padding:11px 13px;
+      max-width:156px; transform:rotate(3deg);}
+
+    /* headline sits right under the captain */
+    .hero h1.display{ font-size:clamp(38px, 12.5vw, 52px); margin:2px 0 14px;}
+
+    /* merge the four promise lines into one flowing paragraph */
+    .hero .lede{ display:inline; font-size:16px; line-height:1.5; margin:0;}
+    .hero .lede + .lede{ margin:0;}
+    .hero .lede:not(:last-child)::after{ content:' ';}
+
+    /* full-width CTA + single-line guarantee under it */
+    .hero .actions{ display:flex; flex-direction:column; align-items:stretch; gap:12px; margin-top:22px;}
+    .hero .actions .btn-primary{ width:100%; justify-content:center; padding:18px; font-size:17px;}
+    .hero .btn-ghost{ max-width:none; text-align:center; font-size:13px;}
+    .hero .btn-ghost br{ display:none;}
+    .hero .btn-ghost b::after{ content:' ';}
+
+    /* inline stats */
+    .hero .stats{ display:flex; flex-wrap:wrap; gap:22px 26px; margin-top:26px;}
+    .hero .stat .n{ font-size:26px;}
+  }
+
   /* ───────────────────────────────────────────────────────────
      FIVE MOVES — merged demo + how-it-works walkthrough
      ─────────────────────────────────────────────────────────── */
