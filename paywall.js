@@ -1,6 +1,9 @@
 var __scrollLockCount = 0;
 function lockBodyScroll() {
   if (__scrollLockCount === 0) {
+    // html also needs overflow:hidden here: the site's `html,body{overflow-x:hidden}`
+    // rule stops browsers from letting body's overflow control page scroll on its own.
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     document.body.classList.add('modal-open');
   }
@@ -9,6 +12,7 @@ function lockBodyScroll() {
 function unlockBodyScroll() {
   __scrollLockCount = Math.max(0, __scrollLockCount - 1);
   if (__scrollLockCount === 0) {
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
     document.body.classList.remove('modal-open');
   }
