@@ -1,3 +1,39 @@
+var __scrollLockCount = 0;
+function lockBodyScroll() {
+  if (__scrollLockCount === 0) {
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+  }
+  __scrollLockCount++;
+}
+function unlockBodyScroll() {
+  __scrollLockCount = Math.max(0, __scrollLockCount - 1);
+  if (__scrollLockCount === 0) {
+    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
+  }
+}
+
+// Calendly's popup widget injects/removes .calendly-overlay itself;
+// there's no public open/close callback, so watch the DOM for it.
+new MutationObserver(function(mutations) {
+  for (var i = 0; i < mutations.length; i++) {
+    var m = mutations[i];
+    for (var j = 0; j < m.addedNodes.length; j++) {
+      var n = m.addedNodes[j];
+      if (n.nodeType === 1 && n.classList && n.classList.contains('calendly-overlay')) {
+        lockBodyScroll();
+      }
+    }
+    for (var k = 0; k < m.removedNodes.length; k++) {
+      var r = m.removedNodes[k];
+      if (r.nodeType === 1 && r.classList && r.classList.contains('calendly-overlay')) {
+        unlockBodyScroll();
+      }
+    }
+  }
+}).observe(document.body, { childList: true });
+
 function payOpen(e) {
   if (e) e.preventDefault();
   window.dataLayer = window.dataLayer || [];
@@ -8,15 +44,13 @@ function payOpen(e) {
   document.getElementById('paySuccessPane').classList.remove('active');
   document.getElementById('payProcessing').classList.remove('show');
   overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  document.body.classList.add('modal-open');
+  lockBodyScroll();
   setTimeout(function() { document.getElementById('payNameInput').focus(); }, 300);
 }
 
 function payClose() {
   document.getElementById('payOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-  document.body.classList.remove('modal-open');
+  unlockBodyScroll();
 }
 
 function paySubmit() {
