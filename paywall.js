@@ -120,7 +120,7 @@ function payPay(method) {
     <div class="pay-pane active" id="payFormPane">
       <div class="pay-body">
         <div class="pay-who">
-          <div class="av"><img src="joe-bone-bust.svg" alt="Joe" /></div>
+          <div class="av"><img src="joe-bone-bust.svg" alt="Joe" width="480" height="600" /></div>
           <div class="bubble">&ldquo;Give me a name and a number, matey &mdash; I&rsquo;ll take it from here.&rdquo;</div>
         </div>
         <div class="pay-kicker">Get hired</div>
