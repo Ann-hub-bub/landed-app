@@ -4326,7 +4326,13 @@
     function openChatOverlay() {
       seed();
       overlay.classList.add('open');
+      lockBodyScroll();
       setTimeout(() => input.focus(), 280);
+    }
+    function closeChatOverlay() {
+      if(!overlay.classList.contains('open')) return;
+      overlay.classList.remove('open');
+      unlockBodyScroll();
     }
     document.getElementById('openChat').addEventListener('click', e => {
       e.preventDefault();
@@ -4336,13 +4342,13 @@
       openChatOverlay();
     });
     document.getElementById('closeChat').addEventListener('click', () => {
-      overlay.classList.remove('open');
+      closeChatOverlay();
     });
     overlay.addEventListener('click', e => {
-      if(e.target === overlay) overlay.classList.remove('open');
+      if(e.target === overlay) closeChatOverlay();
     });
     document.addEventListener('keydown', e => {
-      if(e.key === 'Escape' && overlay.classList.contains('open')) overlay.classList.remove('open');
+      if(e.key === 'Escape' && overlay.classList.contains('open')) closeChatOverlay();
     });
 
     input.addEventListener('input', () => { sendBtn.disabled = !input.value.trim(); });
