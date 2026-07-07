@@ -1761,6 +1761,17 @@
     .fm-jobs .fm-job:last-child{ border-bottom: 1px solid var(--line);}
     .fm-job:hover{ background: rgba(255,106,31,.04); border-color: var(--line);}
     .fm-job-logo{ background: var(--ink-3);}
+    .fm-job-head{
+      grid-template-columns: 40px 1fr;
+      grid-template-areas:
+        "logo tb"
+        "logo pin";
+      row-gap:8px;
+    }
+    .fm-job-logo{ grid-area: logo;}
+    .fm-job-tb{ grid-area: tb;}
+    .fm-job-match{ grid-area: pin; justify-self:start;}
+    .fm-job .fm-chev{ display:none;}
   }
 
   /* Stage 1 lock-target bar */
