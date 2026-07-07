@@ -2123,7 +2123,8 @@
       align-items:center; justify-content:center; font-size:0;
     }
     .cx-submit-bar .ar{ display:none; }
-    .cx-submit-bar .cx-send-ic{ display:block; width:19px; height:19px; stroke:#fff; flex:none; transform:translateX(-2px); }
+    .cx-submit-bar .cx-btn-label{ display:none; }
+    .cx-submit-bar .cx-send-ic{ display:block; width:19px; height:19px; stroke:#fff; flex:none; transform:translate(-2px,2px); }
     .cx-submit-block{ display:none; }
   }
 
@@ -2499,7 +2500,7 @@
                     <span class="cx-pill" data-act="filters"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="cx-chev">▾</span></span>
                     <div class="cx-bar-right">
                       <span class="cx-iconbtn cx-mic" data-act="mic" title="Speak it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4"/></svg></span>
-                      <button class="btn-primary cx-submit-bar" id="demoSubmitBar" type="button">Find live jobs <span class="ar">→</span><svg class="cx-send-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+                      <button class="btn-primary cx-submit-bar" id="demoSubmitBar" type="button" aria-label="Find live jobs"><span class="cx-btn-label">Find live jobs</span> <span class="ar">→</span><svg class="cx-send-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
                     </div>
                   </div>
 
