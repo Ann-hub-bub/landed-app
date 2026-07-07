@@ -3856,11 +3856,15 @@
         intern: 80, junior: 84, mid: 90, senior: 94, staff: 92, director: 88,
       };
 
-      // Build the level cycle (unchanged logic)
+      // Build the level cycle. A single picked chip pins every card to that
+      // level directly — it shouldn't take a back seat to the resume-detected
+      // seniority (that only matters when nothing specific was picked).
       let activeLevels;
-      if (levelsSet && levelsSet.size > 1) {
-        const mapped = [...new Set([...levelsSet].map(c => chipToLevel[c]).filter(Boolean))];
-        const sorted = mapped.sort((a,b) => LEVEL_ORDER.indexOf(b) - LEVEL_ORDER.indexOf(a));
+      const mappedLevels = levelsSet ? [...new Set([...levelsSet].map(c => chipToLevel[c]).filter(Boolean))] : [];
+      if (mappedLevels.length === 1) {
+        activeLevels = mappedLevels;
+      } else if (mappedLevels.length > 1) {
+        const sorted = mappedLevels.sort((a,b) => LEVEL_ORDER.indexOf(b) - LEVEL_ORDER.indexOf(a));
         const primary = sorted.includes(seniority) ? seniority : sorted[0];
         activeLevels = [primary, ...sorted.filter(l => l !== primary)];
       } else {
