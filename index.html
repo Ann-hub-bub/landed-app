@@ -2119,11 +2119,11 @@
        prefix matches the specificity of the ".cx-bar .cx-submit-bar" rule
        above so this actually wins instead of being silently overridden. */
     .cx-bar .cx-submit-bar{
-      display:inline-flex; width:46px; height:46px; padding:0; border-radius:50%;
+      display:flex; width:46px; height:46px; padding:0; border-radius:50%;
       align-items:center; justify-content:center; font-size:0;
     }
     .cx-submit-bar .ar{ display:none; }
-    .cx-submit-bar .cx-send-ic{ display:block; width:19px; height:19px; stroke:#fff; margin:0 auto; transform:translate(-3px,3px); }
+    .cx-submit-bar .cx-send-ic{ display:block; width:19px; height:19px; stroke:#fff; flex:none; }
     .cx-submit-block{ display:none; }
   }
 
