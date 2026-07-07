@@ -28,7 +28,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Get your US tech job in 30 days. We send the applications, chase recruiters, and rewrite your resume — you sign the offer. 30-day guarantee or full refund.">
 <title>Landed: Get your US Tech job in 30 days</title>
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -2731,7 +2730,7 @@
         </div>
 
         <div class="actions">
-          <a class="btn primary" href="javascript:void(0)" data-entry-cta="book_call" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step9_calendly_popup_open',popup_source:'booking_section'});Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;">Book a call →</a>
+          <a class="btn primary" href="javascript:void(0)" data-entry-cta="book_call" onclick="openCalendlyPopup('https://calendly.com/aboytsova9/coffee-break','step9_calendly_popup_open','booking_section');return false;">Book a call →</a>
         </div>
       </div>
 
@@ -2857,6 +2856,32 @@
   </div>
 </footer>
 
+<script>
+  // Calendly widget is only needed if someone clicks "Book a call",
+  // so its CSS/JS are fetched on demand instead of on every page load.
+  let calendlyLoadPromise = null;
+  function loadCalendly() {
+    if (!calendlyLoadPromise) {
+      calendlyLoadPromise = new Promise((resolve) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://assets.calendly.com/assets/external/widget.css';
+        document.head.appendChild(link);
+
+        const s = document.createElement('script');
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.onload = resolve;
+        document.body.appendChild(s);
+      });
+    }
+    return calendlyLoadPromise;
+  }
+  function openCalendlyPopup(url, eventName, popupSource) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: eventName, popup_source: popupSource });
+    loadCalendly().then(() => Calendly.initPopupWidget({ url: url }));
+  }
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
 <script>
@@ -4285,7 +4310,7 @@
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'chat_human_requested', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
         await wait(800);
-        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step9_calendly_popup_open',popup_source:'joe_chat'});Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'});return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
+        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="openCalendlyPopup('https://calendly.com/aboytsova9/coffee-break','step9_calendly_popup_open','joe_chat');return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
         conversationHistory.push({ role: 'user', content: text });
         conversationHistory.push({ role: 'assistant', content: humanReply });
         addMsg('joe', humanReply);
@@ -4625,7 +4650,6 @@
 </script>
 <script src="paywall.js"></script>
 <script src="buynow.js"></script>
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
 
