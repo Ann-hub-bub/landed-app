@@ -2094,13 +2094,14 @@
   /* dual CTA: bar version on desktop, full-width block below on mobile
      (overrides the generic ".demo-form .btn-primary{ width:100% }" rule for the bar button) */
   .cx-bar .cx-submit-bar{ width:auto; margin-top:0; padding:0 22px; height:46px; }
+  .cx-submit-bar .cx-send-ic{ display:none; }
   .cx-submit-block{ display:none; }
 
   @media (max-width: 760px){
-    /* Flatten the outer card — matches the site's normal 24px page margins
-       instead of stacking another bordered box + padding inside it, so the
-       whole step reads wider instead of a small square in the middle of the screen. */
-    .fm-stage[data-stage-num="1"] .card{ background:transparent; border:0; padding:20px 0 24px; }
+    /* Flatten the outer card and let it bleed past the site's usual 24px page
+       margins (down to 10px) — this step reads noticeably wider than the rest
+       of the page on purpose, instead of a small square in the middle of the screen. */
+    .fm-stage[data-stage-num="1"] .card{ background:transparent; border:0; padding:20px 0 24px; margin:0 -14px; }
 
     .cx-composer{ border:0; box-shadow:none; background: var(--ink-3); border-radius:16px; }
     .cx-composer:focus-within, .cx-composer.recording{ box-shadow: 0 0 0 3px rgba(255,106,31,.12); }
@@ -2111,15 +2112,18 @@
     .cx-filters-inner{ border:0; background: rgba(255,255,255,.035); }
     .cx-suggest{ border:0; background: rgba(255,255,255,.06); }
 
-    /* Keep "Find live jobs" inside the composer bar as a compact send-style
-       button (like a chat app), instead of a full-width button below the
-       suggestions — that placement was getting pushed off-screen under the
-       keyboard after typing or using voice input. */
-    .cx-submit-bar{
+    /* Keep "Find live jobs" inside the composer bar as a compact round send
+       button — same size/shape as the mic button, paper-airplane icon instead
+       of a text arrow — instead of a full-width button below the suggestions,
+       which was getting pushed off-screen under the keyboard. The ".cx-bar"
+       prefix matches the specificity of the ".cx-bar .cx-submit-bar" rule
+       above so this actually wins instead of being silently overridden. */
+    .cx-bar .cx-submit-bar{
       display:inline-flex; width:46px; height:46px; padding:0; border-radius:50%;
-      justify-content:center; font-size:0;
+      align-items:center; justify-content:center; font-size:0;
     }
-    .cx-submit-bar .ar{ font-size:17px; }
+    .cx-submit-bar .ar{ display:none; }
+    .cx-submit-bar .cx-send-ic{ display:block; width:19px; height:19px; }
     .cx-submit-block{ display:none; }
   }
 
@@ -2145,7 +2149,10 @@
   @media (max-width: 980px){
     .fm-shell{ max-width: 100%;}
     .fm-stage .card{ padding: 28px 24px;}
-    .fm-stage[data-stage-num="1"] .card{ padding: 28px 24px;}
+    /* Stage 1's own padding/margin is set in the 760px block below (as a more
+       specific selector) so it isn't silently overridden by this rule at
+       narrower widths — it used to be duplicated here with the same
+       specificity, which fought the mobile-wide fix via source order. */
     .fm-stage .cap-mini{ position:relative; top:0; right:0; margin: 0 0 18px; opacity:1; transform:none; justify-content:flex-start;}
     .fm-stage[data-state="locked"] .cap-mini{ display:none;}
     .fm-stage[data-state="done"] .cap-mini{ display:none;}
@@ -2492,7 +2499,7 @@
                     <span class="cx-pill" data-act="filters"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="cx-chev">▾</span></span>
                     <div class="cx-bar-right">
                       <span class="cx-iconbtn cx-mic" data-act="mic" title="Speak it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4"/></svg></span>
-                      <button class="btn-primary cx-submit-bar" id="demoSubmitBar" type="button">Find live jobs <span class="ar">→</span></button>
+                      <button class="btn-primary cx-submit-bar" id="demoSubmitBar" type="button">Find live jobs <span class="ar">→</span><svg class="cx-send-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
                     </div>
                   </div>
 
