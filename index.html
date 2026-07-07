@@ -1455,7 +1455,7 @@
   .pay-close:hover{ color:var(--bone); border-color:var(--line);}
   .pay-who{ display:flex; align-items:center; gap:14px; margin-bottom:24px; padding-bottom:22px; border-bottom:1px solid var(--line);}
   .pay-who .av{ width:52px; height:52px; flex:0 0 auto; border-radius:50%; overflow:hidden; background:#0c0c0f; border:1px solid var(--line); display:flex; align-items:flex-end; justify-content:center;}
-  .pay-who .av img{ width:52px; margin-bottom:-4px;}
+  .pay-who .av img{ width:52px; height:52px; object-fit:cover; object-position:top;}
   .pay-who .bubble{ background:var(--ink-3); border:1px solid var(--line); padding:10px 14px; font-family:'Instrument Serif',serif; font-style:italic; font-size:15px; color:var(--bone); line-height:1.35;}
   .pay-kicker{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--orange); font-weight:700;}
   .pay-box h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; letter-spacing:-.025em; color:var(--bone); line-height:1.05; margin:10px 0 26px;}
@@ -1908,7 +1908,7 @@
     border-left-color: var(--bone);
   }
   .fm-stage[data-stage-num="1"] .cap-mini .cap{
-    width: 220px;
+    width: 260px;
     filter: drop-shadow(0 16px 30px rgba(255,106,31,.5));
   }
   @media (max-width: 760px){
@@ -1999,27 +1999,115 @@
   .fm-criteria input[type=text]::placeholder{ color: var(--mute-2);}
   .fm-criteria input[type=text]:focus{ border-color: var(--orange);}
 
-  /* Animated placeholder for the merged search field */
   .fm-search-wrap{ position: relative; }
-  .fm-search-wrap input[type=text]::placeholder{ color: transparent; }
-  .fm-ph-cycle{
-    position: absolute; left: 14px; right: 14px; top: 50%; transform: translateY(-50%);
-    pointer-events: none; height: 1.4em;
-    overflow: hidden;
-    transition: opacity .2s;
-  }
-  .fm-ph-cycle.has-value{ opacity: 0; }
-  .fm-ph-item{
-    display: block; position: absolute; top: 0; left: 0; right: 0;
-    color: var(--mute-2); font-size: 14.5px; font-family: inherit; line-height: 1.4;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    opacity: 0; transform: translateY(8px);
-    transition: opacity .45s ease, transform .45s ease;
-  }
-  .fm-ph-item.ph-visible{ opacity: 1; transform: translateY(0); }
 
   /* Resume upload should sit inside the criteria grid cleanly */
   .fm-criteria .demo-upload{ margin:0;}
+
+  /* ─────────── Stage 1 · chat-style composer (search box + mic + filters drawer) ─────────── */
+  .cx-composer{
+    background: linear-gradient(180deg, var(--ink-3), var(--ink-2));
+    border: 1px solid var(--line-2); border-radius: 18px; padding: 6px;
+    box-shadow: 0 24px 60px -34px rgba(0,0,0,.7);
+    transition: border-color .18s, box-shadow .18s;
+  }
+  .cx-composer.recording, .cx-composer:focus-within{
+    border-color: var(--orange); box-shadow: 0 0 0 4px rgba(255,106,31,.12);
+  }
+  .cx-field{ padding: 16px 16px 4px; }
+  .cx-composer textarea{
+    width:100%; border:0; background:transparent; resize:none; outline:none;
+    color: var(--bone); font-family:'Inter',sans-serif; font-size:18px; line-height:1.5;
+  }
+  .cx-composer textarea::placeholder{ color: var(--mute-2); }
+  .cx-composer.recording .cx-field, .cx-composer.recording .cx-bar,
+  .cx-composer.transcribing .cx-field, .cx-composer.transcribing .cx-bar{ display:none; }
+
+  .cx-bar{ display:flex; align-items:center; gap:10px; padding:8px 10px 10px; }
+  .cx-bar-right{ margin-left:auto; display:flex; align-items:center; gap:10px; }
+
+  .cx-pill{
+    display:inline-flex; align-items:center; gap:8px; font-family:'Space Grotesk',sans-serif;
+    font-weight:600; font-size:13.5px; color: var(--bone-2); background: var(--ink-4);
+    border:1px solid var(--line-2); border-radius:22px; padding:9px 15px; cursor:pointer;
+    transition: all .15s; user-select:none;
+  }
+  .cx-pill:hover{ border-color: var(--mute); color: var(--bone); }
+  .cx-pill.active{ background: rgba(255,106,31,.14); border-color: var(--orange); color: var(--orange); }
+  .cx-chev{ transition: transform .2s; font-size:11px; display:inline-block; }
+  .cx-pill.active .cx-chev{ transform: rotate(180deg); }
+
+  .cx-iconbtn{
+    flex:none; width:46px; height:46px; border-radius:50%; border:1px solid var(--line-2);
+    background: var(--ink-4); color: var(--bone-2); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition: all .15s;
+  }
+  .cx-iconbtn:hover{ border-color: var(--mute); color: var(--bone); }
+  .cx-iconbtn svg{ width:20px; height:20px; }
+  .cx-composer.recording .cx-mic{
+    background: var(--orange); border-color: var(--orange); color: var(--ink);
+    animation: cxPulse 1.4s ease-out infinite;
+  }
+  @keyframes cxPulse{ 0%{ box-shadow: 0 0 0 0 rgba(255,106,31,.5);} 100%{ box-shadow: 0 0 0 16px rgba(255,106,31,0);} }
+
+  /* recording strip + transcribing status */
+  .cx-rec{ display:none; align-items:center; gap:14px; padding:14px 18px; }
+  .cx-composer.recording .cx-rec{ display:flex; }
+  .cx-live{
+    display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace;
+    font-size:12px; color: var(--orange); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;
+  }
+  .cx-live .d{ width:9px; height:9px; border-radius:50%; background: var(--orange); animation: cxBlink 1s steps(2) infinite; }
+  @keyframes cxBlink{ 50%{ opacity:.25; } }
+  .cx-wave{ display:flex; align-items:center; gap:3px; height:26px; flex:1; }
+  .cx-wave span{ flex:1; max-width:5px; background: var(--orange); border-radius:3px; height:20%; animation: cxWave 1s ease-in-out infinite; }
+  .cx-wave span:nth-child(2){ animation-delay:.1s;}
+  .cx-wave span:nth-child(3){ animation-delay:.2s;}
+  .cx-wave span:nth-child(4){ animation-delay:.3s;}
+  .cx-wave span:nth-child(5){ animation-delay:.15s;}
+  .cx-wave span:nth-child(6){ animation-delay:.25s;}
+  .cx-wave span:nth-child(7){ animation-delay:.05s;}
+  .cx-wave span:nth-child(8){ animation-delay:.35s;}
+  .cx-wave span:nth-child(9){ animation-delay:.2s;}
+  .cx-wave span:nth-child(10){ animation-delay:.1s;}
+  .cx-wave span:nth-child(11){ animation-delay:.3s;}
+  @keyframes cxWave{ 0%,100%{ height:20%; } 50%{ height:100%; } }
+  .cx-stop{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:12.5px; color: var(--mute); cursor:pointer; white-space:nowrap; }
+  .cx-rec-status{ display:none; font-family:'Space Grotesk',sans-serif; font-size:13.5px; color: var(--mute); padding: 18px; }
+  .cx-composer.transcribing .cx-rec-status{ display:block; }
+
+  /* filters drawer */
+  .cx-filters{ overflow:hidden; max-height:0; opacity:0; transition: max-height .34s ease, opacity .24s ease, margin .3s ease; margin-top:0; }
+  .cx-filters.open{ max-height:900px; opacity:1; margin-top:14px; }
+  .cx-filters-inner{ border:1px solid var(--line); border-radius:14px; background: rgba(0,0,0,.22); padding:20px 22px; }
+  .cx-filters .fm-criteria{ background:transparent; border:0; padding:0; margin:0; }
+
+  /* suggestion chips */
+  .cx-suggests{ display:flex; flex-wrap:wrap; gap:9px; margin-top:18px; }
+  .cx-suggest{
+    display:inline-flex; align-items:center; gap:8px; font-family:'Inter',sans-serif; font-size:13.5px;
+    color: var(--bone-2); background: var(--ink-3); border:1px solid var(--line); border-radius:22px;
+    padding:9px 15px; cursor:pointer; transition: all .15s;
+  }
+  .cx-suggest:hover{ border-color: var(--orange); color: var(--bone); }
+
+  /* dual CTA: bar version on desktop, full-width block below on mobile
+     (overrides the generic ".demo-form .btn-primary{ width:100% }" rule for the bar button) */
+  .cx-bar .cx-submit-bar{ width:auto; margin-top:0; padding:0 22px; height:46px; }
+  .cx-submit-block{ display:none; }
+
+  @media (max-width: 760px){
+    .cx-composer{ border:0; box-shadow:none; background: var(--ink-3); border-radius:16px; }
+    .cx-composer:focus-within, .cx-composer.recording{ box-shadow: 0 0 0 3px rgba(255,106,31,.12); }
+    .cx-composer textarea{ font-size:16px; }
+    .cx-pill, .cx-iconbtn{ border:0; background: rgba(255,255,255,.06); }
+    .cx-pill:hover, .cx-iconbtn:hover{ background: rgba(255,255,255,.1); }
+    .cx-pill.active{ background: rgba(255,106,31,.16); }
+    .cx-filters-inner{ border:0; background: rgba(255,255,255,.035); }
+    .cx-suggest{ border:0; background: rgba(255,255,255,.06); }
+    .cx-submit-bar{ display:none; }
+    .cx-submit-block{ display:flex; width:100%; justify-content:center; margin-top:18px; }
+  }
 
   .fm-stage .demo-loading{ padding: 8px 0 18px;}
 
@@ -2359,7 +2447,7 @@
         <article class="fm-stage" data-stage-num="1" data-state="active" data-pose="spyglass">
           <div class="card">
             <div class="cap-mini">
-              <div class="speech"><b>Drop the résumé.</b> I'll hunt the offer, matey.</div>
+              <div class="speech"><b>Just tell me what yer huntin'.</b> Type it or talk, and I'll comb the market.</div>
               <img class="cap" src="./joe-bone-salute.svg" alt="Cap'n Joe Bone" width="480" height="600" />
             </div>
             <div class="stage-head">
@@ -2372,77 +2460,96 @@
 
             <div class="demo-card">
               <div class="demo-form" id="demoForm">
-                <div class="fm-criteria">
-                  <div class="field span2">
-                    <label>What are you looking for?</label>
+                <div class="cx-composer" data-composer>
+                  <div class="cx-field">
                     <div class="fm-search-wrap">
-                      <input type="text" id="fmPosition" autocomplete="off" />
-                      <div class="fm-ph-cycle" id="fmPhCycle" aria-hidden="true">
-                        <span class="fm-ph-item">Product Manager at a fintech startup</span>
-                        <span class="fm-ph-item">Senior iOS Developer in crypto</span>
-                        <span class="fm-ph-item">Data Engineer with ML pipeline experience</span>
-                        <span class="fm-ph-item">Backend Developer at a B2B startup</span>
-                        <span class="fm-ph-item">UX Designer for SaaS products</span>
+                      <textarea id="fmPosition" rows="2" autocomplete="off" placeholder="e.g. Senior Product Manager in crypto, remote, $180k+…"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="cx-rec">
+                    <span class="cx-live"><span class="d"></span>Listening</span>
+                    <div class="cx-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                    <span class="cx-stop" data-act="mic">■ Stop</span>
+                  </div>
+                  <div class="cx-rec-status" data-transcribe-status>Transcribing…</div>
+
+                  <div class="cx-bar">
+                    <span class="cx-pill" data-act="filters"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="cx-chev">▾</span></span>
+                    <div class="cx-bar-right">
+                      <span class="cx-iconbtn cx-mic" data-act="mic" title="Speak it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4"/></svg></span>
+                      <button class="btn-primary cx-submit-bar" id="demoSubmitBar" type="button">Find live jobs <span class="ar">→</span></button>
+                    </div>
+                  </div>
+
+                  <div class="cx-filters" data-filters>
+                    <div class="cx-filters-inner">
+                      <div class="fm-criteria">
+                        <div class="field span2">
+                          <label>Resume <span style="color:var(--mute-2); text-transform:none; letter-spacing:.02em; font-weight:500;">— optional</span></label>
+                          <label class="demo-upload" id="demoUpload">
+                            <input type="file" id="demoFile" accept=".pdf,.doc,.docx" hidden />
+                            <div class="fn" id="demoFn">pdf, word, max 5mb</div>
+                            <div class="ok">✓</div>
+                          </label>
+                        </div>
+
+                        <div class="field">
+                          <label>Level</label>
+                          <div class="chips" id="fmLevel">
+                            <button type="button" class="fm-chip" data-v="intern">Intern</button>
+                            <button type="button" class="fm-chip" data-v="junior">Junior</button>
+                            <button type="button" class="fm-chip" data-v="mid">Mid</button>
+                            <button type="button" class="fm-chip" data-v="senior">Senior</button>
+                            <button type="button" class="fm-chip" data-v="staff">Staff</button>
+                            <button type="button" class="fm-chip" data-v="principal">Principal</button>
+                            <button type="button" class="fm-chip" data-v="lead">Lead</button>
+                            <button type="button" class="fm-chip" data-v="director">Director</button>
+                            <button type="button" class="fm-chip" data-v="volunteer">Volunteer</button>
+                          </div>
+                        </div>
+                        <div class="field">
+                          <label>Minimum base salary</label>
+                          <div class="fm-prefix-input">
+                            <span class="prefix">$</span>
+                            <input type="text" id="fmSalary" placeholder="e.g. 120,000" inputmode="numeric" autocomplete="off" />
+                            <span class="suffix">/ year</span>
+                          </div>
+                        </div>
+
+                        <div class="field span2">
+                          <label>Location</label>
+                          <div class="chips" id="fmLoc">
+                            <button type="button" class="fm-chip" data-v="worldwide">Worldwide</button>
+                            <button type="button" class="fm-chip" data-v="usa">USA</button>
+                            <button type="button" class="fm-chip" data-v="americas">Americas</button>
+                            <button type="button" class="fm-chip" data-v="canada">Canada</button>
+                            <button type="button" class="fm-chip" data-v="remote">Remote</button>
+                            <button type="button" class="fm-chip" data-v="hybrid">Hybrid</button>
+                            <button type="button" class="fm-chip" data-v="onsite">In-office</button>
+                          </div>
+                        </div>
+
+                        <div class="field span2">
+                          <label>Visa</label>
+                          <label class="fm-toggle">
+                            <input type="checkbox" id="fmVisa" />
+                            <span class="track"></span>
+                            <span><b>Need sponsorship</b><span style="display:block;font-size:10px;color:var(--mute);margin-top:2px;letter-spacing:.06em;">H1B · OPT · TN · L1</span></span>
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <div class="field span2">
-                    <label>Resume <span style="color:var(--mute-2); text-transform:none; letter-spacing:.02em; font-weight:500;">— optional</span></label>
-                    <label class="demo-upload" id="demoUpload">
-                      <input type="file" id="demoFile" accept=".pdf,.doc,.docx" hidden />
-                      <div class="fn" id="demoFn">pdf, word, max 5mb</div>
-                      <div class="ok">✓</div>
-                    </label>
-                  </div>
-
-                  <div class="field">
-                    <label>Level</label>
-                    <div class="chips" id="fmLevel">
-                      <button type="button" class="fm-chip" data-v="intern">Intern</button>
-                      <button type="button" class="fm-chip" data-v="junior">Junior</button>
-                      <button type="button" class="fm-chip" data-v="mid">Mid</button>
-                      <button type="button" class="fm-chip" data-v="senior">Senior</button>
-                      <button type="button" class="fm-chip" data-v="staff">Staff</button>
-                      <button type="button" class="fm-chip" data-v="principal">Principal</button>
-                      <button type="button" class="fm-chip" data-v="lead">Lead</button>
-                      <button type="button" class="fm-chip" data-v="director">Director</button>
-                      <button type="button" class="fm-chip" data-v="volunteer">Volunteer</button>
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label>Minimum base salary</label>
-                    <div class="fm-prefix-input">
-                      <span class="prefix">$</span>
-                      <input type="text" id="fmSalary" placeholder="e.g. 120,000" inputmode="numeric" autocomplete="off" />
-                      <span class="suffix">/ year</span>
-                    </div>
-                  </div>
-
-                  <div class="field span2">
-                    <label>Location</label>
-                    <div class="chips" id="fmLoc">
-                      <button type="button" class="fm-chip" data-v="worldwide">Worldwide</button>
-                      <button type="button" class="fm-chip" data-v="usa">USA</button>
-                      <button type="button" class="fm-chip" data-v="americas">Americas</button>
-                      <button type="button" class="fm-chip" data-v="canada">Canada</button>
-                      <button type="button" class="fm-chip" data-v="remote">Remote</button>
-                      <button type="button" class="fm-chip" data-v="hybrid">Hybrid</button>
-                      <button type="button" class="fm-chip" data-v="onsite">In-office</button>
-                    </div>
-                  </div>
-
-                  <div class="field span2">
-                    <label>Visa</label>
-                    <label class="fm-toggle">
-                      <input type="checkbox" id="fmVisa" />
-                      <span class="track"></span>
-                      <span><b>Need sponsorship</b><span style="display:block;font-size:10px;color:var(--mute);margin-top:2px;letter-spacing:.06em;">H1B · OPT · TN · L1</span></span>
-                    </label>
-                  </div>
                 </div>
 
-                <button class="btn-primary" id="demoSubmit" type="button">Find live jobs <span class="ar">→</span></button>
+                <div class="cx-suggests">
+                  <span class="cx-suggest" data-fill="Product Manager, remote, $160k+">Product Manager, remote</span>
+                  <span class="cx-suggest" data-fill="Senior iOS Developer in crypto">Senior iOS Dev in crypto</span>
+                  <span class="cx-suggest" data-fill="UX Designer for SaaS products, $150k+">UX Designer, SaaS</span>
+                </div>
+
+                <button class="btn-primary cx-submit-block" id="demoSubmitBlock" type="button">Find live jobs <span class="ar">→</span></button>
               </div>
             </div>
           </div>
@@ -2858,6 +2965,25 @@
 </footer>
 
 <script>
+  // pdf.js is only needed if someone uploads a PDF resume in the demo,
+  // so it's fetched on demand instead of on every page load.
+  let pdfJsLoadPromise = null;
+  function loadPdfJs() {
+    if (!pdfJsLoadPromise) {
+      pdfJsLoadPromise = new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        s.onload = () => {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          resolve();
+        };
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+    return pdfJsLoadPromise;
+  }
+
   // Calendly widget is only needed if someone clicks "Book a call",
   // so its CSS/JS are fetched on demand instead of on every page load.
   let calendlyLoadPromise = null;
@@ -2883,8 +3009,6 @@
     loadCalendly().then(() => Calendly.initPopupWidget({ url: url }));
   }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script>pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
 <script>
   // ── Demo reset (called by nav logo click) ─────────────────
   function demoReset() {
@@ -2931,11 +3055,11 @@
     const formEl    = document.getElementById('demoForm');
     const loadEl    = document.getElementById('demoLoading');
     const resEl     = document.getElementById('demoResults');
-    const submitBtn = document.getElementById('demoSubmit');
+    const submitBtns = [document.getElementById('demoSubmitBar'), document.getElementById('demoSubmitBlock')].filter(Boolean);
     const jobsEl    = document.getElementById('fmJobs');
     const resumeNameEl = document.getElementById('fmResumeName');
     const resumeMetaEl = document.getElementById('fmResumeMeta');
-    if (!fileInput || !submitBtn) return;
+    if (!fileInput || !submitBtns.length) return;
 
     // criteria state
     let position = '';
@@ -2952,24 +3076,8 @@
     const positionInput = document.getElementById('fmPosition');
     if (positionInput) positionInput.addEventListener('input', () => {
       position = positionInput.value.trim();
-      const phCycle = document.getElementById('fmPhCycle');
-      if (phCycle) phCycle.classList.toggle('has-value', position.length > 0);
     });
 
-    // Animated placeholder cycling
-    (function initPlaceholder(){
-      const cycle = document.getElementById('fmPhCycle');
-      if (!cycle) return;
-      const items = cycle.querySelectorAll('.fm-ph-item');
-      if (!items.length) return;
-      let idx = 0;
-      items[0].classList.add('ph-visible');
-      setInterval(() => {
-        items[idx].classList.remove('ph-visible');
-        idx = (idx + 1) % items.length;
-        items[idx].classList.add('ph-visible');
-      }, 2800);
-    })();
     const salaryInput = document.getElementById('fmSalary');
     if (salaryInput) salaryInput.addEventListener('input', () => {
       const n = parseInt(String(salaryInput.value).replace(/[^0-9]/g, ''), 10);
@@ -3022,6 +3130,7 @@
       }
       if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
         try {
+          await loadPdfJs();
           const buf = await file.arrayBuffer();
           const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
           let text = '';
@@ -3040,7 +3149,7 @@
     function detectDomain(resumeText, posText, kwText, filename) {
       // 1. Position field — strongest signal
       const pos = posText.toLowerCase();
-      if (/\b(product manager|product lead|group pm|staff pm|principal pm|head of product|associate pm|apm\b|vp of product|director of product)\b/.test(pos)) return 'pm';
+      if (/\b(product manager|project manager|product lead|group pm|staff pm|principal pm|head of product|associate pm|apm\b|vp of product|director of product)\b/.test(pos)) return 'pm';
       if (/\b(pm)\b/.test(pos) && !/program manager/.test(pos)) return 'pm';
       if (/\b(software engineer|frontend engineer|backend engineer|full.?stack|developer|devops|mobile engineer)\b/.test(pos)) return 'swe';
       if (/\b(marketing manager|growth manager|demand gen|content strateg|seo specialist|brand manager|cmo)\b/.test(pos)) return 'marketing';
@@ -3052,7 +3161,7 @@
       // 2. Filename — reliable when position is blank or file can't be read
       const fn = (filename || '').toLowerCase().replace(/[_\-().\d]/g, ' ');
       if (/\b(engineer|developer|software|backend|frontend|fullstack|full stack|devops|mobile)\b/.test(fn)) return 'swe';
-      if (/\b(product manager|pm\b|product lead)\b/.test(fn)) return 'pm';
+      if (/\b(product manager|project manager|pm\b|product lead)\b/.test(fn)) return 'pm';
       if (/\b(market|growth|seo|content marketing)\b/.test(fn)) return 'marketing';
       if (/\b(data scientist|data analyst|analytics|machine learning)\b/.test(fn)) return 'data';
       if (/\b(designer|ux|ui design)\b/.test(fn)) return 'design';
@@ -3063,7 +3172,7 @@
       const t = (resumeText + ' ' + posText + ' ' + kwText).toLowerCase();
       const scores = {
         swe:       (t.match(/\b(engineer|developer|software|frontend|backend|full.?stack|react|vue|angular|javascript|typescript|python|java|golang|rust|node\.?js|kubernetes|aws|gcp|devops|ios|android|flutter)\b/g)||[]).length,
-        pm:        (t.match(/\b(product manager|product lead|product owner|roadmap|sprint|user stor|okr|go.to.market|product strateg|head of product|apm\b|associate pm|backlog|stakeholder|epics|feature flag)\b/g)||[]).length,
+        pm:        (t.match(/\b(product manager|project manager|product lead|product owner|roadmap|sprint|user stor|okr|go.to.market|product strateg|head of product|apm\b|associate pm|backlog|stakeholder|epics|feature flag)\b/g)||[]).length,
         marketing: (t.match(/\b(marketing|seo|sem|social media|campaign|brand|demand gen|paid|acquisition|copywriting|influencer|growth hacker|cmo)\b/g)||[]).length,
         data:      (t.match(/\b(data scientist|data analyst|analytics|sql\b|tableau|looker|machine learning|\bml\b|statistics|pandas|spark|dbt\b|bigquery|snowflake|jupyter)\b/g)||[]).length,
         design:    (t.match(/\b(ux\b|ui\b|wireframe|interaction design|visual design|design system|motion design|ux designer|ui designer|product designer|design thinking)\b/g)||[]).length,
@@ -3095,8 +3204,29 @@
       return 'mid';
     }
 
-    function extractKeywords(resumeText, kwText, domain) {
+    // Industry/vertical words typed alongside a role ("developer, edtech") are a
+    // separate signal from the role itself — they shouldn't affect domain detection,
+    // but they should surface as matched keywords instead of being silently dropped.
+    const INDUSTRY_TERMS = [
+      [/\bed[\s-]?tech\b/i, 'EdTech'], [/\bfin[\s-]?tech\b/i, 'FinTech'],
+      [/\bhealth[\s-]?tech\b/i, 'HealthTech'], [/\bhealthcare\b/i, 'Healthcare'],
+      [/\bcrypto(?:currency)?\b/i, 'Crypto'], [/\bweb3\b/i, 'Web3'], [/\bblockchain\b/i, 'Blockchain'],
+      [/\be[\s-]?commerce\b/i, 'E-commerce'], [/\bgaming\b/i, 'Gaming'], [/\bbiotech\b/i, 'Biotech'],
+      [/\binsur[\s-]?tech\b/i, 'InsurTech'], [/\bprop[\s-]?tech\b/i, 'PropTech'], [/\bad[\s-]?tech\b/i, 'AdTech'],
+      [/\bcyber[\s-]?security\b/i, 'Cybersecurity'], [/\bsaas\b/i, 'SaaS'], [/\bb2b\b/i, 'B2B'], [/\bb2c\b/i, 'B2C'],
+      [/\bclimate[\s-]?tech\b/i, 'Climate Tech'], [/\bmar[\s-]?tech\b/i, 'MarTech'], [/\bhr[\s-]?tech\b/i, 'HRTech'],
+      [/\blegal[\s-]?tech\b/i, 'LegalTech'], [/\bfood[\s-]?tech\b/i, 'FoodTech'],
+      [/\bnonprofit\b/i, 'Nonprofit'], [/\bgov[\s-]?tech\b/i, 'GovTech'],
+    ];
+    function detectIndustryTerms(text) {
+      const found = [];
+      INDUSTRY_TERMS.forEach(([re, label]) => { if (re.test(text) && !found.includes(label)) found.push(label); });
+      return found;
+    }
+
+    function extractKeywords(resumeText, posText, kwText, domain) {
       const manual = kwText.split(/[\s,;|\/]+/).map(s=>s.trim()).filter(s=>s.length>2);
+      const industry = detectIndustryTerms((posText || '') + ' ' + (resumeText || ''));
       const pools = {
         swe:       ['React','TypeScript','Python','Node.js','AWS','GraphQL','Docker','Kubernetes','PostgreSQL','Redis','Next.js','Go','Terraform','CI/CD'],
         pm:        ['0→1','A/B testing','OKRs','growth','B2B SaaS','API','activation','retention','PLG','fintech','marketplace','SQL','Figma'],
@@ -3108,7 +3238,7 @@
       };
       const tl = resumeText.toLowerCase();
       const found = (pools[domain]||pools.pm).filter(k => tl.includes(k.toLowerCase())).slice(0,5);
-      return [...new Set([...manual, ...found])].filter(k => k.length > 1).slice(0,6);
+      return [...new Set([...industry, ...manual, ...found])].filter(k => k.length > 1).slice(0,6);
     }
 
     // ── Domain data ───────────────────────────────────────────
@@ -3862,6 +3992,24 @@
            : jobs.slice(0, 6);
     }
 
+    // ── Mixed results — used when someone hits "Find live jobs" with no role and no résumé,
+    // so they see a spread across fields instead of one silently-guessed domain. ──
+    function generateMixedJobs(seniority, levelsSet, kws, visaRequired, salaryMin, locSet) {
+      const mixed = Object.keys(DOMAIN_DATA)
+        .flatMap(dom => generateJobs(dom, seniority, levelsSet, kws, visaRequired, salaryMin, locSet).slice(0, 1));
+      const seed = (Date.now() % 97) + 1;
+      mixed.sort((a, b) => ((a.co.charCodeAt(0) * seed) % 97) - ((b.co.charCodeAt(0) * seed) % 97));
+      return mixed.slice(0, 6);
+    }
+    function getScanCount(domain) {
+      if (domain === 'mixed') {
+        const total = Object.values(DOMAIN_DATA)
+          .reduce((sum, d) => sum + (parseInt(String(d.scanCount).replace(/[^0-9]/g, ''), 10) || 0), 0);
+        return total.toLocaleString('en-US');
+      }
+      return (DOMAIN_DATA[domain] || DOMAIN_DATA.pm).scanCount;
+    }
+
     const CHEV = '<span class="fm-chev"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5 8 6l-4 3.5"/></svg></span>';
     const LVL_MAP = {intern:'Intern', junior:'Junior', mid:'Mid', senior:'Senior', staff:'Staff', principal:'Principal', lead:'Lead', director:'Director', volunteer:'Volunteer'};
     const LOC_LABELS = {worldwide:'Worldwide', usa:'USA', americas:'Americas', canada:'Canada', remote:'Remote', hybrid:'Hybrid', onsite:'In-office'};
@@ -3898,7 +4046,9 @@
 
     function refreshResults() {
       if (!lastDomain) return;
-      const final = generateJobs(lastDomain, lastSeniority, levels, lastKws, visa, salary, loc);
+      const final = lastDomain === 'mixed'
+        ? generateMixedJobs(lastSeniority, levels, lastKws, visa, salary, loc)
+        : generateJobs(lastDomain, lastSeniority, levels, lastKws, visa, salary, loc);
       renderJobs(final);
       updateFunnel(final);
       renderSetupSummary();
@@ -3957,11 +4107,12 @@
     function onRoleInput(v){
       position = v.trim();
       if (lastDomain){
-        const newDomain = detectDomain(lastResumeText || '', position, keywords, lastFilename);
+        const noInput = !(lastResumeText || '').trim() && !position;
+        const newDomain = noInput ? 'mixed' : detectDomain(lastResumeText || '', position, keywords, lastFilename);
         lastSeniority = detectSeniority(lastResumeText || '', position, levels);
-        lastKws = extractKeywords(lastResumeText || '', keywords, newDomain);
+        lastKws = extractKeywords(lastResumeText || '', position, keywords, newDomain);
         lastDomain = newDomain;
-        const dc = (DOMAIN_DATA[lastDomain]||DOMAIN_DATA.pm).scanCount;
+        const dc = getScanCount(lastDomain);
         const scanEl2 = document.getElementById('fmTotalScanned');
         if (scanEl2) scanEl2.textContent = dc;
       }
@@ -4042,15 +4193,18 @@
 
     function renderJobs(jobs){
       lastRenderedJobs = jobs;
+      // Match % is a claim about fit to a résumé — without one uploaded there's
+      // nothing to match against, so show the salary range instead.
+      const hasResume = !!lastFilename;
       jobsEl.innerHTML = jobs.map((j, idx) => `
-        <a class="fm-job${j.match >= 95 ? ' top-match' : ''}" href="/job.html" data-idx="${idx}">
+        <a class="fm-job${hasResume && j.match >= 95 ? ' top-match' : ''}" href="/job.html" data-idx="${idx}">
           <span class="fm-job-head">
             <span class="fm-job-logo">${escapeHtml(j.logo)}</span>
             <span class="fm-job-tb">
               <span class="role">${escapeHtml(j.role)}</span>
               <span class="co">${escapeHtml(j.co)} · ${escapeHtml(j.loc)}</span>
             </span>
-            <span class="fm-job-match">${j.match}% MATCH</span>
+            <span class="fm-job-match">${hasResume ? j.match + '% MATCH' : escapeHtml(j.pay)}</span>
             ${CHEV}
           </span>
         </a>`).join('');
@@ -4069,19 +4223,22 @@
     // ── Resume parsing pipeline — shared by first submit + "Change" re-upload ──
     async function runMatchPipeline(file){
       const resumeText = await extractResumeText(file);
-      const domain    = detectDomain(resumeText, position, keywords, file ? file.name : '');
+      const noInput   = !resumeText.trim() && !position.trim();
+      const domain    = noInput ? 'mixed' : detectDomain(resumeText, position, keywords, file ? file.name : '');
       const seniority = detectSeniority(resumeText, position, levels);
-      const kws       = extractKeywords(resumeText, keywords, domain);
+      const kws       = extractKeywords(resumeText, position, keywords, domain);
       lastDomain = domain; lastSeniority = seniority; lastKws = kws;
       lastResumeText = resumeText; lastFilename = file ? file.name : '';
 
-      const domainScanCount = (DOMAIN_DATA[domain]||DOMAIN_DATA.pm).scanCount;
+      const domainScanCount = getScanCount(domain);
       const scanEl  = document.getElementById('fmScanCount');
       const scanEl2 = document.getElementById('fmTotalScanned');
       if (scanEl)  scanEl.textContent  = domainScanCount;
       if (scanEl2) scanEl2.textContent = domainScanCount;
 
-      const final = generateJobs(domain, seniority, levels, kws, visa, salary, loc);
+      const final = domain === 'mixed'
+        ? generateMixedJobs(seniority, levels, kws, visa, salary, loc)
+        : generateJobs(domain, seniority, levels, kws, visa, salary, loc);
       renderJobs(final);
       updateFunnel(final);
       renderSetupSummary();
@@ -4098,7 +4255,7 @@
       if (resEl.classList.contains('active')) runMatchPipeline(f);
     });
 
-    submitBtn.addEventListener('click', async () => {
+    async function handleFindLiveJobs(){
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'step2_demo_find_jobs', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
       const f = fileInput.files[0];
@@ -4129,13 +4286,8 @@
       if (stagesWrap) stagesWrap.classList.add('fm-revealed');
       if (stage2) stage2.dataset.state = 'active';
 
-      // Scroll to Stage 2 (now at the top of fm-stages)
-      if (stage2){
-        setTimeout(() => {
-          const y = stage2.getBoundingClientRect().top + window.scrollY - 80;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }, 60);
-      }
+      // No auto-scroll here — Stage 2 replaces Stage 1 in place, and the page
+      // should stay exactly where the person already is.
 
       const check = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="5 13 9 17 19 7"/></svg>';
       for (let i = 0; i < steps.length; i++){
@@ -4160,7 +4312,124 @@
         const funnel = document.getElementById('fmFunnel');
         if (funnel) funnel.classList.add('show');
       });
-    });
+    }
+    submitBtns.forEach(function(btn){ btn.addEventListener('click', handleFindLiveJobs); });
+
+    // ── Filters drawer, suggestion chips, and voice input (mic → OpenAI transcription) ──
+    (function stage1Composer(){
+      const composer = document.querySelector('.fm-stage[data-stage-num="1"] [data-composer]');
+      if (!composer) return;
+      const filtersPanel = composer.querySelector('[data-filters]');
+      const filtersPill  = composer.querySelector('[data-act="filters"]');
+      const micBtn       = composer.querySelector('.cx-mic');
+      const stopBtn       = composer.querySelector('.cx-stop');
+      const statusEl      = composer.querySelector('[data-transcribe-status]');
+      const textarea      = document.getElementById('fmPosition');
+
+      if (filtersPill && filtersPanel) {
+        filtersPill.addEventListener('click', () => {
+          const open = filtersPanel.classList.toggle('open');
+          filtersPill.classList.toggle('active', open);
+          const chev = filtersPill.querySelector('.cx-chev');
+          if (chev) chev.textContent = open ? '▴' : '▾';
+        });
+      }
+
+      document.querySelectorAll('.fm-stage[data-stage-num="1"] .cx-suggest').forEach(function(chip){
+        chip.addEventListener('click', () => {
+          if (!textarea) return;
+          textarea.value = chip.dataset.fill || '';
+          textarea.dispatchEvent(new Event('input'));
+          textarea.focus();
+        });
+      });
+
+      // ── Voice input: record → send to /api/transcribe → fill the textarea ──
+      let mediaRecorder = null;
+      let chunks = [];
+      let stream = null;
+
+      function stopStream(){
+        if (stream) { stream.getTracks().forEach(function(t){ t.stop(); }); stream = null; }
+      }
+
+      function showTranscribeError(msg){
+        composer.classList.remove('recording');
+        composer.classList.add('transcribing');
+        if (statusEl) statusEl.textContent = msg;
+        setTimeout(() => { composer.classList.remove('transcribing'); }, 2400);
+      }
+
+      async function startRecording(){
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        } catch (e) {
+          showTranscribeError("Couldn't access the mic — try typing instead.");
+          return;
+        }
+        chunks = [];
+        const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : '';
+        mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+        mediaRecorder.addEventListener('dataavailable', function(e){ if (e.data.size > 0) chunks.push(e.data); });
+        mediaRecorder.addEventListener('stop', onRecordingStopped);
+        mediaRecorder.start();
+        composer.classList.add('recording');
+      }
+
+      async function onRecordingStopped(){
+        stopStream();
+        composer.classList.remove('recording');
+        const blob = chunks.length ? new Blob(chunks, { type: chunks[0].type || 'audio/webm' }) : null;
+        if (!blob || !blob.size) return;
+
+        composer.classList.add('transcribing');
+        if (statusEl) statusEl.textContent = 'Transcribing…';
+
+        try {
+          const base64 = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+
+          const resp = await fetch('/api/transcribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ audio: base64, mimeType: blob.type })
+          });
+          const data = await resp.json();
+
+          if (data.transcript && textarea) {
+            const existing = textarea.value.trim();
+            textarea.value = existing ? existing + ' ' + data.transcript : data.transcript;
+            textarea.dispatchEvent(new Event('input'));
+            composer.classList.remove('transcribing');
+            textarea.focus();
+          } else {
+            showTranscribeError(data.error || "Didn't catch that — try again.");
+          }
+        } catch (e) {
+          showTranscribeError("Couldn't reach the mic service — try typing instead.");
+        }
+      }
+
+      function toggleMic(){
+        if (composer.classList.contains('transcribing')) return;
+        if (composer.classList.contains('recording')) {
+          if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+        } else {
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            showTranscribeError("This browser can't record audio — try typing instead.");
+            return;
+          }
+          startRecording();
+        }
+      }
+
+      if (micBtn) micBtn.addEventListener('click', toggleMic);
+      if (stopBtn) stopBtn.addEventListener('click', toggleMic);
+    })();
 
     /* Stage 1 starts active; Stage 2 stays locked until submit succeeds.
        The submit handler flips Stage 2 to active and reveals it inline. */
@@ -4649,8 +4918,8 @@
   })();
 
 </script>
-<script src="paywall.js"></script>
-<script src="buynow.js"></script>
+<script src="paywall.js" defer></script>
+<script src="buynow.js" defer></script>
 </body>
 </html>
 
