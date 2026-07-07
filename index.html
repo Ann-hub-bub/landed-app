@@ -8,21 +8,21 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-MWVWW2F5');</script>
     <!-- End Google Tag Manager -->
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QN2NL0W57G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QN2NL0W57G');
-    </script>
-    <!-- Microsoft Clarity -->
+    <!-- Google Analytics is fired by the "Ga4" tag inside GTM (GTM-MWVWW2F5) — do not duplicate it here. -->
+    <!-- Microsoft Clarity: deferred to after the page has painted, so it doesn't compete with initial render -->
     <script type="text/javascript">
+      function loadClarity(){
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "v86k1myfni");
+      }
+      if (document.readyState === 'complete') {
+        setTimeout(loadClarity, 2000);
+      } else {
+        window.addEventListener('load', function(){ setTimeout(loadClarity, 2000); });
+      }
     </script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -2097,6 +2097,11 @@
   .cx-submit-block{ display:none; }
 
   @media (max-width: 760px){
+    /* Flatten the outer card — matches the site's normal 24px page margins
+       instead of stacking another bordered box + padding inside it, so the
+       whole step reads wider instead of a small square in the middle of the screen. */
+    .fm-stage[data-stage-num="1"] .card{ background:transparent; border:0; padding:20px 0 24px; }
+
     .cx-composer{ border:0; box-shadow:none; background: var(--ink-3); border-radius:16px; }
     .cx-composer:focus-within, .cx-composer.recording{ box-shadow: 0 0 0 3px rgba(255,106,31,.12); }
     .cx-composer textarea{ font-size:16px; }
@@ -2105,8 +2110,17 @@
     .cx-pill.active{ background: rgba(255,106,31,.16); }
     .cx-filters-inner{ border:0; background: rgba(255,255,255,.035); }
     .cx-suggest{ border:0; background: rgba(255,255,255,.06); }
-    .cx-submit-bar{ display:none; }
-    .cx-submit-block{ display:flex; width:100%; justify-content:center; margin-top:18px; }
+
+    /* Keep "Find live jobs" inside the composer bar as a compact send-style
+       button (like a chat app), instead of a full-width button below the
+       suggestions — that placement was getting pushed off-screen under the
+       keyboard after typing or using voice input. */
+    .cx-submit-bar{
+      display:inline-flex; width:46px; height:46px; padding:0; border-radius:50%;
+      justify-content:center; font-size:0;
+    }
+    .cx-submit-bar .ar{ font-size:17px; }
+    .cx-submit-block{ display:none; }
   }
 
   .fm-stage .demo-loading{ padding: 8px 0 18px;}
