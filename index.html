@@ -4273,6 +4273,7 @@
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'step3_demo_view_job', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
       sessionStorage.setItem('landed_job_detail', JSON.stringify(j));
+      sessionStorage.setItem('landed_resume_filename', lastFilename || '');
     });
 
     // ── Resume parsing pipeline — shared by first submit + "Change" re-upload ──

@@ -208,6 +208,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .apply .upload-paper .ic { width:46px; height:46px; background:#3a1a0a; color:var(--orange); display:flex; align-items:center; justify-content:center; font-size:20px; flex:0 0 auto; }
   .apply .upload-paper .cap { font-size:14px; color:var(--mute-2); line-height:1.5; }
   .apply .upload-paper .cap b { color:var(--ink); display:block; font-size:15.5px; font-weight:600; margin-bottom:2px; }
+  .apply .upload-paper.empty { border:1px dashed var(--paper-2); cursor:pointer; transition:border-color .15s ease, background .15s ease; }
+  .apply .upload-paper.empty:hover { border-color:var(--orange-deep); background:var(--paper-2); }
+  .apply .upload-paper.empty .ic { background:var(--paper-2); color:var(--mute-2); }
 
   .apply .question-block { border-left:3px solid var(--orange); padding-left:24px; }
   .apply .question-block .qp { font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:22px; line-height:1.4; color:var(--ink); margin-bottom:18px; max-width:780px; }
@@ -814,6 +817,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   const screenQ  = SCREEN_Q[domain] || SCREEN_Q.default;
 
+  // Résumé state carried over from the demo funnel — only show "on file" if one was actually uploaded
+  const resumeFilename = sessionStorage.getItem('landed_resume_filename') || '';
+  const hasResume = !!resumeFilename;
+
   const score      = job.match || 85;
   const scoreLabel = score >= 88 ? 'Strong match' : score >= 75 ? 'Soft match' : 'Stretch';
   const scoreGreen = score >= 88;
@@ -1069,15 +1076,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="form-paper">
 
-        <div>
+        <div id="resumeField">
+          ${hasResume ? `
           <div class="field-lab">
             <span>Resume <span class="on-file">✓ on file</span></span>
-            <span class="hint"><a class="action" href="#">Replace</a> · <a class="action" href="#">View</a></span>
+            <span class="hint"><a class="action" id="resumeReplace" href="#">Replace</a></span>
           </div>
           <div class="upload-paper">
             <div class="ic">✓</div>
-            <div class="cap"><b>resume.pdf</b>Uploaded · auto-attached to your application</div>
+            <div class="cap"><b>${esc(resumeFilename)}</b>Uploaded · auto-attached to your application</div>
           </div>
+          ` : `
+          <div class="field-lab">
+            <span>Resume</span>
+            <span class="hint">PDF or Word · required to apply</span>
+          </div>
+          <div class="upload-paper empty" id="resumeUploadPrompt">
+            <div class="ic">↑</div>
+            <div class="cap"><b>Upload your résumé</b>No résumé on file yet — click to add one</div>
+          </div>
+          `}
+          <input type="file" id="jdResumeInput" accept=".pdf,.doc,.docx" style="display:none">
         </div>
 
         <div>
@@ -1109,6 +1128,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   document.getElementById('jdMain').innerHTML = sectionsHtml;
   document.title = `${job.role} at ${job.co} — Landed`;
+
+  // ── Résumé upload (mirrors the demo funnel's forward-to-Drive behavior) ──
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function markResumeUploaded(filename) {
+    sessionStorage.setItem('landed_resume_filename', filename);
+    const field = document.getElementById('resumeField');
+    if (!field) return;
+    field.innerHTML = `
+      <div class="field-lab">
+        <span>Resume <span class="on-file">✓ on file</span></span>
+        <span class="hint"><a class="action" id="resumeReplace" href="#">Replace</a></span>
+      </div>
+      <div class="upload-paper">
+        <div class="ic">✓</div>
+        <div class="cap"><b>${esc(filename)}</b>Uploaded · auto-attached to your application</div>
+      </div>
+      <input type="file" id="jdResumeInput" accept=".pdf,.doc,.docx" style="display:none">
+    `;
+    wireResumeInput();
+  }
+
+  function wireResumeInput() {
+    const input = document.getElementById('jdResumeInput');
+    const prompt = document.getElementById('resumeUploadPrompt');
+    const replace = document.getElementById('resumeReplace');
+    if (prompt) prompt.addEventListener('click', () => input.click());
+    if (replace) replace.addEventListener('click', (e) => { e.preventDefault(); input.click(); });
+    if (input) input.addEventListener('change', async (e) => {
+      const f = e.target.files[0];
+      if (!f) return;
+      markResumeUploaded(f.name);
+      try {
+        const base64 = await fileToBase64(f);
+        fetch('/api/save-resume', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filename: f.name,
+            mimeType: f.type || 'application/octet-stream',
+            base64,
+            timestamp: new Date().toISOString()
+          })
+        }).catch(err => console.error('save-resume request failed:', err));
+      } catch (err) {
+        console.error('save-resume read failed:', err);
+      }
+    });
+  }
+  wireResumeInput();
 
   // ── Sticky Bottom Bar ────────────────────────────────────────
   document.getElementById('stickyBar').innerHTML = `
