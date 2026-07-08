@@ -1129,14 +1129,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   `;
 
-  // ── IntersectionObserver: show sticky bar when hero leaves view ──
-  const hero = document.getElementById('hero');
-  const bar  = document.getElementById('stickyBar');
-  if (hero && bar) {
-    new IntersectionObserver((entries) => {
-      entries.forEach(e => bar.classList.toggle('show', !e.isIntersecting));
-    }, { rootMargin:'-120px 0px 0px 0px', threshold:0 }).observe(hero);
-  }
+  // ── Sticky bottom bar: always visible, pinned from page load ──
+  document.getElementById('stickyBar').classList.add('show');
 
 })();
 
