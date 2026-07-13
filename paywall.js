@@ -67,8 +67,6 @@ function payBookOnboardingCall() {
 
 function payOpen(e) {
   if (e) e.preventDefault();
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'step5_contact_form_open', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen' });
   var overlay = document.getElementById('payOverlay');
   document.getElementById('payFormPane').classList.add('active');
   document.getElementById('payPaymentPane').classList.remove('active');
@@ -132,8 +130,6 @@ function payPay(method) {
     document.getElementById('payPaymentPane').classList.remove('active');
     document.getElementById('payProcessing').classList.remove('show');
     document.getElementById('paySuccessPane').classList.add('active');
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'step8_trial_success_shown', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen' });
   }, 1600);
 }
 

@@ -1,7 +1,5 @@
 function buyNowOpen(e) {
   if (e) e.preventDefault();
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'step5_contact_form_open', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'buyNowOpen' });
   var overlay = document.getElementById('chOverlay');
   document.getElementById('chCheckout').style.display = '';
   document.getElementById('chProcessing').classList.remove('show');
@@ -45,8 +43,6 @@ function buyNowPay(method) {
   setTimeout(function() {
     document.getElementById('chProcessing').classList.remove('show');
     document.getElementById('chSuccess').classList.add('show');
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'step8_trial_success_shown', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'buyNowOpen' });
   }, 1600);
 }
 

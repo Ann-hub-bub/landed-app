@@ -2669,7 +2669,7 @@
               <!-- Final CTA -->
               <div class="stage-cta">
                 <div class="l"><b>30 days to first offer, or full refund.</b> Cap'n Jack runs the whole flow on yer behalf — every weekday, until yer signed.</div>
-                <a href="#pricing" class="btn-primary" onclick="payOpen(event)">Plunder the market — $<span data-tweak-price>20</span>/mo <span class="ar">→</span></a>
+                <a href="#pricing" class="btn-primary" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({ event: 'demo_step4_plunder_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });payOpen(event)">Plunder the market — $<span data-tweak-price>20</span>/mo <span class="ar">→</span></a>
               </div>
             </div>
           </div>
@@ -4271,7 +4271,7 @@
       const j = lastRenderedJobs[Number(a.dataset.idx)];
       if (!j) return;
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'step3_demo_view_job', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
+      window.dataLayer.push({ event: 'demo_step3_position_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
       sessionStorage.setItem('landed_job_detail', JSON.stringify(j));
       sessionStorage.setItem('landed_resume_filename', lastFilename || '');
     });
@@ -4317,7 +4317,7 @@
         sessionStorage.setItem('landed_entry_type', 'find_live_jobs');
         window.dataLayer.push({ event: 'step1_entry_click', entry_type: 'find_live_jobs' });
       }
-      window.dataLayer.push({ event: 'step2_demo_find_jobs', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
+      window.dataLayer.push({ event: 'demo_step2_find_jobs_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
       const f = fileInput.files[0];
       if (f) {
         if (resumeNameEl) resumeNameEl.textContent = f.name;
@@ -4691,9 +4691,13 @@
     }
     document.getElementById('openChat').addEventListener('click', e => {
       e.preventDefault();
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'chat_open' });
       openChatOverlay();
     });
     document.getElementById('chatFab').addEventListener('click', () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'chat_open' });
       openChatOverlay();
     });
     document.getElementById('closeChat').addEventListener('click', () => {
