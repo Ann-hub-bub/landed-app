@@ -2860,11 +2860,11 @@
         </div>
 
         <div class="actions">
-          <a class="btn primary" href="javascript:void(0)" data-entry-cta="book_call" onclick="openCalendlyPopup('https://calendly.com/aboytsova9/coffee-break','step9_calendly_popup_open','booking_section');return false;">Book a call →</a>
+          <a class="btn primary" href="javascript:void(0)" data-entry-cta="book_call" onclick="openCalendlyPopup('https://calendly.com/aboytsova9/coffee-break','step4_book_call_click','booking_section');return false;">Book a call →</a>
         </div>
       </div>
 
-      <a class="choice bot chatWithJoe" href="#" id="openChat" data-entry-cta="chat_open">
+      <a class="choice bot chatWithJoe" href="#" id="openChat">
         <div class="person">
           <div class="av joe"><img src="./joe-bone-bust-scarlet.svg" alt="Capt. Joe Bone" /></div>
           <div>
@@ -2909,7 +2909,7 @@
 </div>
 
 <!-- Floating chat button -->
-<button class="chat-fab chatWithJoe" id="chatFab" aria-label="Chat with Joe Bones" data-entry-cta="chat_open">
+<button class="chat-fab chatWithJoe" id="chatFab" aria-label="Chat with Joe Bones">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3l3 3 3-3h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
   <span class="fab-dot" aria-hidden="true"></span>
 </button>
@@ -4313,6 +4313,10 @@
 
     async function handleFindLiveJobs(){
       window.dataLayer = window.dataLayer || [];
+      if (!sessionStorage.getItem('landed_entry_type')) {
+        sessionStorage.setItem('landed_entry_type', 'find_live_jobs');
+        window.dataLayer.push({ event: 'step1_entry_click', entry_type: 'find_live_jobs' });
+      }
       window.dataLayer.push({ event: 'step2_demo_find_jobs', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
       const f = fileInput.files[0];
       if (f) {
@@ -4636,7 +4640,7 @@
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'chat_human_requested', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
         await wait(800);
-        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="openCalendlyPopup('https://calendly.com/aboytsova9/coffee-break','step9_calendly_popup_open','joe_chat');return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
+        const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="openCalendlyPopup('https://calendly.com/aboytsova9/coffee-break','step4_book_call_click','joe_chat');return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
         conversationHistory.push({ role: 'user', content: text });
         conversationHistory.push({ role: 'assistant', content: humanReply });
         addMsg('joe', humanReply);

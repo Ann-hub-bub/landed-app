@@ -27,7 +27,8 @@ function buyNowPay(method) {
   document.getElementById('chPhoneInput').classList.remove('err');
 
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'step6_lead_contact_submitted', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'buyNowOpen', method: method });
+  window.dataLayer.push({ event: 'step2_sign_up_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'buyNowOpen', method: method });
+  window.dataLayer.push({ event: 'step3_payment_method_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'buyNowOpen', method: method });
 
   fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
     method: 'POST',

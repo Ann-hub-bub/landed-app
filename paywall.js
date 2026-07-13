@@ -70,7 +70,7 @@ function paySubmit() {
   document.getElementById('payPhoneErr').classList.remove('show');
 
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'step6_lead_contact_submitted', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen' });
+  window.dataLayer.push({ event: 'step2_sign_up_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen' });
 
   fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
     method: 'POST',
@@ -88,7 +88,7 @@ function paySubmit() {
 
 function payPay(method) {
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'step7_payment_method_selected', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen', method: method });
+  window.dataLayer.push({ event: 'step3_payment_method_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen', method: method });
   document.getElementById('payPtext').textContent = method === 'card'
     ? 'Taking you to secure checkout…'
     : 'Confirming payment…';
@@ -171,7 +171,7 @@ function payPay(method) {
           <div class="row"><span class="n">2</span><span class="t"><b>We build your shortlist</b> &mdash; roles matched to your profile.</span></div>
           <div class="row"><span class="n">3</span><span class="t"><b>You start applying</b> &mdash; one tap per role.</span></div>
         </div>
-        <button class="pay-submit" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step9_calendly_popup_open',popup_source:'onboarding'});Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'})">Book your onboarding call &nbsp;&rarr;</button>
+        <button class="pay-submit" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step4_book_call_click',popup_source:'onboarding'});Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'})">Book your onboarding call &nbsp;&rarr;</button>
       </div>
     </div>
   </div>
