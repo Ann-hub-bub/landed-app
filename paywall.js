@@ -38,6 +38,33 @@ new MutationObserver(function(mutations) {
   }
 }).observe(document.body, { childList: true });
 
+// Calendly is lazy-loaded site-wide, so this button can't assume the widget
+// exists yet (job.html has no loader at all) — load it here on first click.
+var payCalendlyLoading = null;
+function payBookOnboardingCall() {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'step4_book_call_click', popup_source: 'onboarding' });
+  if (window.Calendly) {
+    Calendly.initPopupWidget({ url: 'https://calendly.com/aboytsova9/coffee-break' });
+    return;
+  }
+  if (!payCalendlyLoading) {
+    payCalendlyLoading = new Promise(function(resolve) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      document.head.appendChild(link);
+      var s = document.createElement('script');
+      s.src = 'https://assets.calendly.com/assets/external/widget.js';
+      s.onload = resolve;
+      document.body.appendChild(s);
+    });
+  }
+  payCalendlyLoading.then(function() {
+    Calendly.initPopupWidget({ url: 'https://calendly.com/aboytsova9/coffee-break' });
+  });
+}
+
 function payOpen(e) {
   if (e) e.preventDefault();
   window.dataLayer = window.dataLayer || [];
@@ -171,7 +198,7 @@ function payPay(method) {
           <div class="row"><span class="n">2</span><span class="t"><b>We build your shortlist</b> &mdash; roles matched to your profile.</span></div>
           <div class="row"><span class="n">3</span><span class="t"><b>You start applying</b> &mdash; one tap per role.</span></div>
         </div>
-        <button class="pay-submit" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'step4_book_call_click',popup_source:'onboarding'});Calendly.initPopupWidget({url:'https://calendly.com/aboytsova9/coffee-break'})">Book your onboarding call &nbsp;&rarr;</button>
+        <button class="pay-submit" onclick="payBookOnboardingCall()">Book your onboarding call &nbsp;&rarr;</button>
       </div>
     </div>
   </div>
