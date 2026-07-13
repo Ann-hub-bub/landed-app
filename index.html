@@ -4630,6 +4630,8 @@
     }
 
     async function handleUser(text){
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'chat_step2_message_sent' });
       addMsg('me', escapeHtml(text));
       quickEl.classList.add('hidden');
       input.disabled = true;
@@ -4638,7 +4640,7 @@
       // Handle "I just want a human" locally — no API call needed
       if (text.trim() === "I just want a human →") {
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'chat_human_requested', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
+        window.dataLayer.push({ event: 'chat_step3_human_request_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
         await wait(800);
         const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="openCalendlyPopup('https://calendly.com/aboytsova9/coffee-break','step4_book_call_click','joe_chat');return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
         conversationHistory.push({ role: 'user', content: text });
@@ -4692,12 +4694,12 @@
     document.getElementById('openChat').addEventListener('click', e => {
       e.preventDefault();
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'chat_open' });
+      window.dataLayer.push({ event: 'chat_step1_open_click' });
       openChatOverlay();
     });
     document.getElementById('chatFab').addEventListener('click', () => {
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'chat_open' });
+      window.dataLayer.push({ event: 'chat_step1_open_click' });
       openChatOverlay();
     });
     document.getElementById('closeChat').addEventListener('click', () => {
