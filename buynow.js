@@ -34,13 +34,15 @@ function buyNowPay(method) {
     body: JSON.stringify({ email: name, phone: phone, plan: 'landed_monthly', amount: 2000 })
   }).catch(function() {});
 
-  document.getElementById('chCheckout').style.display = 'none';
+  // Keep the checkout visible so the modal keeps its height — the processing
+  // overlay sits on top of it; hiding it early collapses the box to a 2px line.
   document.getElementById('chPtext').textContent = method === 'card'
     ? 'Taking you to secure checkout…'
     : 'Confirming payment…';
   document.getElementById('chProcessing').classList.add('show');
 
   setTimeout(function() {
+    document.getElementById('chCheckout').style.display = 'none';
     document.getElementById('chProcessing').classList.remove('show');
     document.getElementById('chSuccess').classList.add('show');
   }, 1600);
