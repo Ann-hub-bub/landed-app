@@ -1344,10 +1344,11 @@
   .quick button:hover{border-color:var(--orange);color:var(--orange);background:rgba(255,106,31,.06);}
   .quick.hidden{display:none;}
   .chat-input{display:flex;align-items:center;gap:10px;padding:14px 16px 16px;border-top:1px solid var(--line);background:var(--ink-2);}
-  .chat-input input{flex:1;background:var(--ink);border:1px solid var(--line);color:var(--bone);padding:13px 16px;font-family:inherit;font-size:14.5px;outline:none;transition:border-color .15s;}
+  .chat-input input{flex:1;min-width:0;background:var(--ink);border:1px solid var(--line);color:var(--bone);padding:13px 16px;font-family:inherit;font-size:14.5px;outline:none;transition:border-color .15s;}
   .chat-input input:focus{border-color:var(--orange);}
   .chat-input input::placeholder{color:var(--mute-2);}
-  .chat-input button.send{background:var(--orange);color:var(--ink);border:none;padding:13px 18px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:background .15s,transform .15s;display:flex;align-items:center;gap:6px;}
+  .chat-input button.send{flex:none;width:44px;height:44px;border-radius:50%;padding:0;background:var(--orange);color:var(--ink);border:none;cursor:pointer;transition:background .15s,transform .15s;display:flex;align-items:center;justify-content:center;}
+  .chat-input button.send svg{width:19px;height:19px;flex:none;transform:translate(-1px,1px);}
   .chat-input button.send:hover{background:var(--orange-soft);}
   .chat-input button.send:disabled{background:var(--ink-4);color:var(--mute-2);cursor:not-allowed;}
   /* voice input — same look as the Find-live-jobs composer (reuses .cx-rec/.cx-live/.cx-wave/.cx-stop/.cx-rec-status + cxPulse) */
@@ -2917,7 +2918,7 @@
       <div class="cx-rec-status" id="chatMicStatus">Transcribing…</div>
       <input type="text" id="chatInput" placeholder="Say somethin', matey…" maxlength="240" />
       <button class="mic-btn" type="button" id="chatMic" title="Speak it" aria-label="Record a voice message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4"/></svg></button>
-      <button class="send" type="submit" id="sendBtn" disabled>Send →</button>
+      <button class="send" type="submit" id="sendBtn" disabled aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </form>
 
     <div class="chat-foot">A bot in a tricorn. <b>Real human?</b> Book the call instead.</div>
