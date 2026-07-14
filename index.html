@@ -1350,6 +1350,16 @@
   .chat-input button.send{background:var(--orange);color:var(--ink);border:none;padding:13px 18px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:background .15s,transform .15s;display:flex;align-items:center;gap:6px;}
   .chat-input button.send:hover{background:var(--orange-soft);}
   .chat-input button.send:disabled{background:var(--ink-4);color:var(--mute-2);cursor:not-allowed;}
+  /* voice input — same look as the Find-live-jobs composer (reuses .cx-rec/.cx-live/.cx-wave/.cx-stop/.cx-rec-status + cxPulse) */
+  .chat-input .mic-btn{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--ink);color:var(--bone-2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;padding:0;}
+  .chat-input .mic-btn:hover{border-color:var(--mute);color:var(--bone);}
+  .chat-input .mic-btn svg{width:19px;height:19px;}
+  .chat-input.recording input,.chat-input.recording .mic-btn,.chat-input.recording button.send,
+  .chat-input.transcribing input,.chat-input.transcribing .mic-btn,.chat-input.transcribing button.send{display:none;}
+  .chat-input .cx-rec{flex:1;padding:9px 4px;}
+  .chat-input.recording .cx-rec{display:flex;}
+  .chat-input .cx-rec-status{flex:1;padding:13px 4px;}
+  .chat-input.transcribing .cx-rec-status{display:block;}
   .chat-foot{padding:6px 20px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mute-2);letter-spacing:.12em;text-transform:uppercase;}
   .chat-foot b{color:var(--mute);font-weight:500;}
   @media(max-width:720px){
@@ -2899,7 +2909,14 @@
     <div class="quick" id="quickReplies"></div>
 
     <form class="chat-input" id="chatForm" autocomplete="off">
+      <div class="cx-rec">
+        <span class="cx-live"><span class="d"></span>Listening</span>
+        <div class="cx-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="cx-stop" id="chatMicStop">■ Stop</span>
+      </div>
+      <div class="cx-rec-status" id="chatMicStatus">Transcribing…</div>
       <input type="text" id="chatInput" placeholder="Say somethin', matey…" maxlength="240" />
+      <button class="mic-btn" type="button" id="chatMic" title="Speak it" aria-label="Record a voice message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4"/></svg></button>
       <button class="send" type="submit" id="sendBtn" disabled>Send →</button>
     </form>
 
@@ -4688,6 +4705,8 @@
     }
     function closeChatOverlay() {
       if(!overlay.classList.contains('open')) return;
+      // Never leave the mic running behind a closed chat
+      if (form.classList.contains('recording') && chatRecorder && chatRecorder.state !== 'inactive') chatRecorder.stop();
       overlay.classList.remove('open');
       unlockBodyScroll();
     }
@@ -4721,6 +4740,95 @@
       sendBtn.disabled = true;
       handleUser(v);
     });
+
+    // ── Voice input: record → send to /api/transcribe → fill the input (same flow as the Find-live-jobs composer) ──
+    const chatMic     = document.getElementById('chatMic');
+    const chatMicStop = document.getElementById('chatMicStop');
+    const chatMicStatus = document.getElementById('chatMicStatus');
+    let chatRecorder = null;
+    let chatChunks = [];
+    let chatStream = null;
+
+    function stopChatStream(){
+      if (chatStream) { chatStream.getTracks().forEach(function(t){ t.stop(); }); chatStream = null; }
+    }
+
+    function showChatMicError(msg){
+      form.classList.remove('recording');
+      form.classList.add('transcribing');
+      if (chatMicStatus) chatMicStatus.textContent = msg;
+      setTimeout(() => { form.classList.remove('transcribing'); }, 2400);
+    }
+
+    async function startChatRecording(){
+      try {
+        chatStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      } catch (e) {
+        showChatMicError("Couldn't access the mic — try typing instead.");
+        return;
+      }
+      chatChunks = [];
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : '';
+      chatRecorder = mimeType ? new MediaRecorder(chatStream, { mimeType }) : new MediaRecorder(chatStream);
+      chatRecorder.addEventListener('dataavailable', function(e){ if (e.data.size > 0) chatChunks.push(e.data); });
+      chatRecorder.addEventListener('stop', onChatRecordingStopped);
+      chatRecorder.start();
+      form.classList.add('recording');
+    }
+
+    async function onChatRecordingStopped(){
+      stopChatStream();
+      form.classList.remove('recording');
+      const blob = chatChunks.length ? new Blob(chatChunks, { type: chatChunks[0].type || 'audio/webm' }) : null;
+      if (!blob || !blob.size) return;
+
+      form.classList.add('transcribing');
+      if (chatMicStatus) chatMicStatus.textContent = 'Transcribing…';
+
+      try {
+        const base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+
+        const resp = await fetch('/api/transcribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ audio: base64, mimeType: blob.type })
+        });
+        const data = await resp.json();
+
+        if (data.transcript) {
+          const existing = input.value.trim();
+          input.value = existing ? existing + ' ' + data.transcript : data.transcript;
+          sendBtn.disabled = !input.value.trim();
+          form.classList.remove('transcribing');
+          input.focus();
+        } else {
+          showChatMicError(data.error || "Didn't catch that — try again.");
+        }
+      } catch (e) {
+        showChatMicError("Couldn't reach the mic service — try typing instead.");
+      }
+    }
+
+    function toggleChatMic(){
+      if (form.classList.contains('transcribing')) return;
+      if (form.classList.contains('recording')) {
+        if (chatRecorder && chatRecorder.state !== 'inactive') chatRecorder.stop();
+      } else {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          showChatMicError("This browser can't record audio — try typing instead.");
+          return;
+        }
+        startChatRecording();
+      }
+    }
+
+    if (chatMic) chatMic.addEventListener('click', toggleChatMic);
+    if (chatMicStop) chatMicStop.addEventListener('click', toggleChatMic);
   })();
 
   // ── Tweaks bridge (cross-iframe) ─────────────────────────
