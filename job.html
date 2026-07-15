@@ -17,6 +17,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "v86k1myfni");
   }
+  // Queue stub: funnel events fired before the deferred Clarity tag loads are queued and replayed on load
+  window.clarity = window.clarity || function(){ (window.clarity.q = window.clarity.q || []).push(arguments); };
+  // Mirrors GA4 funnel events into Clarity (Smart Events, type API) — call next to every funnel dataLayer.push
+  window.clarityEvent = function(name){ try { window.clarity('event', name); } catch(e) {} };
   if (document.readyState === 'complete') {
     setTimeout(loadClarity, 2000);
   } else {
@@ -1129,7 +1133,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="guarantee">
             <b>30-day Landed guarantee.</b> No offer = full refund. We read every answer within 48 hours.
           </div>
-          <a class="apply-big" id="applySubmit" href="#" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'demo_step4_apply_click',entry_type:sessionStorage.getItem('landed_entry_type')||'unknown'});payOpen(event)">
+          <a class="apply-big" id="applySubmit" href="#" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'demo_step4_apply_click',entry_type:sessionStorage.getItem('landed_entry_type')||'unknown'});clarityEvent('demo_step4_apply_click');payOpen(event)">
             Apply for ${esc(roleCta)} · ${esc(job.co)} →
           </a>
         </div>
@@ -1216,7 +1220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="r">
       <button class="save-s">★ Save</button>
-      <a class="apply-s" href="#" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'demo_step4_apply_click',entry_type:sessionStorage.getItem('landed_entry_type')||'unknown'});payOpen(event)">Apply for ${esc(roleCta)} →</a>
+      <a class="apply-s" href="#" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'demo_step4_apply_click',entry_type:sessionStorage.getItem('landed_entry_type')||'unknown'});clarityEvent('demo_step4_apply_click');payOpen(event)">Apply for ${esc(roleCta)} →</a>
     </div>
   `;
 
@@ -1233,6 +1237,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       sessionStorage.setItem('landed_entry_type', entryType);
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'step1_entry_click', entry_type: entryType });
+      clarityEvent('step1_entry_click');
     });
   });
 })();

@@ -44,6 +44,7 @@ var payCalendlyLoading = null;
 function payBookOnboardingCall() {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: 'step4_book_call_click', popup_source: 'onboarding' });
+  window.clarityEvent && window.clarityEvent('step4_book_call_click');
   if (window.Calendly) {
     Calendly.initPopupWidget({ url: 'https://calendly.com/aboytsova9/coffee-break' });
     return;
@@ -96,6 +97,7 @@ function paySubmit() {
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: 'step2_sign_up_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen' });
+  window.clarityEvent && window.clarityEvent('step2_sign_up_click');
 
   fetch('https://script.google.com/macros/s/AKfycbyP0O7xn4wW_ii3INRgC60uvZtjPPuyxwOL-5fYIIZ2iu7e_laQ0AiIJyxdTaDdQE7KOg/exec', {
     method: 'POST',
@@ -114,6 +116,7 @@ function paySubmit() {
 function payPay(method) {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: 'step3_payment_method_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown', form_type: 'payOpen', method: method });
+  window.clarityEvent && window.clarityEvent('step3_payment_method_click');
   document.getElementById('payPtext').textContent = method === 'card'
     ? 'Taking you to secure checkout…'
     : 'Confirming payment…';

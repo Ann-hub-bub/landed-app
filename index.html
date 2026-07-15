@@ -18,6 +18,10 @@
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "v86k1myfni");
       }
+      // Queue stub: funnel events fired before the deferred Clarity tag loads are queued and replayed on load
+      window.clarity = window.clarity || function(){ (window.clarity.q = window.clarity.q || []).push(arguments); };
+      // Mirrors GA4 funnel events into Clarity (Smart Events, type API) — call next to every funnel dataLayer.push
+      window.clarityEvent = function(name){ try { window.clarity('event', name); } catch(e) {} };
       if (document.readyState === 'complete') {
         setTimeout(loadClarity, 2000);
       } else {
@@ -2680,7 +2684,7 @@
               <!-- Final CTA -->
               <div class="stage-cta">
                 <div class="l"><b>30 days to first offer, or full refund.</b> Cap'n Jack runs the whole flow on yer behalf — every weekday, until yer signed.</div>
-                <a href="#pricing" class="btn-primary" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({ event: 'demo_step4_plunder_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });payOpen(event)">Plunder the market — $<span data-tweak-price>20</span>/mo <span class="ar">→</span></a>
+                <a href="#pricing" class="btn-primary" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({ event: 'demo_step4_plunder_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });clarityEvent('demo_step4_plunder_click');payOpen(event)">Plunder the market — $<span data-tweak-price>20</span>/mo <span class="ar">→</span></a>
               </div>
             </div>
           </div>
@@ -3046,6 +3050,7 @@
   function openCalendlyPopup(url, eventName, popupSource) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: eventName, popup_source: popupSource });
+    clarityEvent(eventName);
     loadCalendly().then(() => Calendly.initPopupWidget({ url: url }));
   }
 </script>
@@ -4290,6 +4295,7 @@
       if (!j) return;
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'demo_step3_position_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
+      clarityEvent('demo_step3_position_click');
       sessionStorage.setItem('landed_job_detail', JSON.stringify(j));
       sessionStorage.setItem('landed_resume_filename', lastFilename || '');
     });
@@ -4334,8 +4340,10 @@
       if (!sessionStorage.getItem('landed_entry_type')) {
         sessionStorage.setItem('landed_entry_type', 'find_live_jobs');
         window.dataLayer.push({ event: 'step1_entry_click', entry_type: 'find_live_jobs' });
+        clarityEvent('step1_entry_click');
       }
       window.dataLayer.push({ event: 'demo_step2_find_jobs_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
+      clarityEvent('demo_step2_find_jobs_click');
       const f = fileInput.files[0];
       if (f) {
         if (resumeNameEl) resumeNameEl.textContent = f.name;
@@ -4650,6 +4658,7 @@
     async function handleUser(text){
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'chat_step2_message_sent' });
+      clarityEvent('chat_step2_message_sent');
       addMsg('me', escapeHtml(text));
       quickEl.classList.add('hidden');
       input.disabled = true;
@@ -4659,6 +4668,7 @@
       if (text.trim() === "I just want a human →") {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'chat_step3_human_request_click', entry_type: sessionStorage.getItem('landed_entry_type') || 'unknown' });
+        clarityEvent('chat_step3_human_request_click');
         await wait(800);
         const humanReply = `Oh, I get it — robots just can't relate to your pain, can they? If you want to talk to a real person, you can book a call with Anna.<br><br><a href="javascript:void(0)" onclick="openCalendlyPopup('https://calendly.com/aboytsova9/coffee-break','step4_book_call_click','joe_chat');return false;" class="bookCallAnna" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;text-decoration:none;border-radius:2px;">Book a call with Anna &nbsp;→</a>`;
         conversationHistory.push({ role: 'user', content: text });
@@ -4715,11 +4725,13 @@
       e.preventDefault();
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'chat_step1_open_click' });
+      clarityEvent('chat_step1_open_click');
       openChatOverlay();
     });
     document.getElementById('chatFab').addEventListener('click', () => {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'chat_step1_open_click' });
+      clarityEvent('chat_step1_open_click');
       openChatOverlay();
     });
     document.getElementById('closeChat').addEventListener('click', () => {
@@ -5088,6 +5100,7 @@
         sessionStorage.setItem('landed_entry_type', entryType);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'step1_entry_click', entry_type: entryType });
+        clarityEvent('step1_entry_click');
       });
     });
   })();
